@@ -132,14 +132,14 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
           </div>
 
           {/* Chinese Zodiac */}
-          <div className="glass-card" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
               <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '8px',
-                background: '#fef3c7',
-                color: '#b45309',
+                width: '38px',
+                height: '38px',
+                borderRadius: '10px',
+                background: 'rgba(245, 158, 11, 0.15)',
+                color: 'var(--accent-amber)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
@@ -164,7 +164,7 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
           </div>
 
           {/* Birthstone & Flower */}
-          <div className="glass-card" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{ marginBottom: '0.85rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--accent-purple)', fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.25rem' }}>
                 <Gem size={16} />
@@ -192,37 +192,38 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
       {activeTab === 'planets' && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-          gap: '0.85rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))',
+          gap: '0.9rem'
         }}>
           {planetaryAges.map(p => (
             <div
               key={p.planet}
               className="glass-card"
               style={{
-                padding: '1.1rem 0.75rem',
+                padding: '1.25rem 0.75rem',
                 textAlign: 'center',
                 background: p.planet === 'Earth' ? 'var(--md-sys-color-primary-container)' : 'var(--surface-solid)',
-                border: p.planet === 'Earth' ? '2px solid var(--primary-500)' : '1.5px solid var(--border-subtle)'
+                border: p.planet === 'Earth' ? '2px solid var(--md-sys-color-primary)' : '1.5px solid var(--border-subtle)',
+                borderRadius: '16px'
               }}
             >
-              <div style={{ fontSize: '1.75rem', marginBottom: '0.35rem' }}>{p.emoji}</div>
-              <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontSize: '1.85rem', marginBottom: '0.35rem' }}>{p.emoji}</div>
+              <div style={{ fontSize: '0.925rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {p.planet}
               </div>
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '1.35rem',
+                fontSize: '1.4rem',
                 fontWeight: 800,
-                color: 'var(--primary-500)',
+                color: 'var(--md-sys-color-primary)',
                 margin: '0.3rem 0'
               }}>
                 {p.ageInPlanetYears}
               </div>
-              <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
                 {p.planet} yrs old
               </div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', marginTop: '0.35rem' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '0.35rem' }}>
                 Orbit: {p.orbitalPeriodDays}d
               </div>
             </div>
@@ -234,90 +235,94 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
       {activeTab === 'bio' && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
           gap: '1rem'
         }}>
-          <div className="glass-card" style={{ padding: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: '#ffe4e6',
-              color: '#be123c',
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: 'rgba(244, 63, 94, 0.15)',
+              color: 'var(--accent-rose)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
               <Heart size={22} />
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {formatNumber(bioStats.estimatedHeartbeats)}
               </div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Estimated Heartbeats (~80 bpm)</div>
+              <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Estimated Heartbeats (~80 bpm)</div>
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: '#e0f2fe',
-              color: '#0284c7',
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: 'rgba(56, 189, 248, 0.15)',
+              color: 'var(--accent-cyan)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
               <Wind size={22} />
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {formatNumber(bioStats.estimatedBreaths)}
               </div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Breaths Taken (~16/min)</div>
+              <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Breaths Taken (~16/min)</div>
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: '#ede9fe',
-              color: '#6750a4',
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: 'rgba(192, 132, 252, 0.15)',
+              color: 'var(--accent-purple)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
               <Moon size={22} />
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {formatNumber(bioStats.estimatedSleepHours)} hrs
               </div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Hours of Peaceful Sleep</div>
+              <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Hours of Peaceful Sleep</div>
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+          <div className="glass-card" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: '#fef3c7',
-              color: '#b45309',
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: 'rgba(245, 158, 11, 0.15)',
+              color: 'var(--accent-amber)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
               <Utensils size={22} />
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {formatNumber(bioStats.estimatedMealsEaten)}
               </div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Delicious Meals Eaten</div>
+              <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Delicious Meals Eaten</div>
             </div>
           </div>
         </div>

@@ -35,9 +35,16 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
     customArticle || getCalculatorArticle(calculatorId, calculatorName, categoryName);
 
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [copiedFormula, setCopiedFormula] = useState<boolean>(false);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(prev => (prev === index ? null : index));
+  };
+
+  const handleCopyFormula = (formulaText: string) => {
+    navigator.clipboard.writeText(formulaText);
+    setCopiedFormula(true);
+    setTimeout(() => setCopiedFormula(false), 2000);
   };
 
   // Google Rich Snippet FAQ Schema
@@ -84,6 +91,11 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
 
       {/* Header & Title Section */}
       <header className="m3-article-header">
+        <div className="m3-article-eyebrow">
+          <BookOpen size={13} />
+          <span>Scientific Guide & Reference</span>
+        </div>
+
         <h2 className="m3-article-title">{article.title}</h2>
         <p className="m3-article-subtitle">{article.subtitle}</p>
 
@@ -98,8 +110,8 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
           </div>
 
           <div className="m3-meta-item">
-            <ShieldCheck size={16} color="#146c2e" />
-            <span style={{ color: '#146c2e', fontWeight: 700 }}>
+            <ShieldCheck size={16} color="#10b981" />
+            <span style={{ color: '#10b981', fontWeight: 700 }}>
               ✓ Fact-Checked & Verified
             </span>
           </div>
@@ -113,7 +125,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
 
           {article.author?.lastUpdated && (
             <div className="m3-meta-item">
-              <span>Updated: {article.author.lastUpdated}</span>
+              <span>Updated: <strong>{article.author.lastUpdated}</strong></span>
             </div>
           )}
         </div>
@@ -167,34 +179,69 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
         {article.formulaCard && (
           <section id="formula">
             <div className="m3-formula-box">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--md-sys-color-primary)', fontWeight: 800, fontSize: '0.95rem' }}>
-                <Calculator size={18} />
-                <span>{article.formulaCard.title}</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--md-sys-color-primary)', fontWeight: 800, fontSize: '1rem' }}>
+                  <Calculator size={20} />
+                  <span>{article.formulaCard.title}</span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => article.formulaCard && handleCopyFormula(article.formulaCard.formula)}
+                  className="glass-pill"
+                  style={{ cursor: 'pointer', fontSize: '0.75rem', padding: '0.35rem 0.75rem' }}
+                  title="Copy Formula"
+                >
+                  {copiedFormula ? <CheckCircle2 size={13} color="#10b981" /> : <Bookmark size={13} />}
+                  <span>{copiedFormula ? '✓ Copied Formula' : 'Copy Formula'}</span>
+                </button>
               </div>
 
               <div className="m3-formula-badge">
                 {article.formulaCard.formula}
               </div>
 
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: article.formulaCard.variables ? '1rem' : 0 }}>
+              <p style={{ fontSize: '0.96rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: article.formulaCard.variables ? '1.25rem' : 0 }}>
                 {article.formulaCard.explanation}
               </p>
 
               {article.formulaCard.variables && article.formulaCard.variables.length > 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.85rem' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.15rem' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
                     Variable Definitions:
                   </span>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.65rem' }}>
                     {article.formulaCard.variables.map(v => (
-                      <span
+                      <div
                         key={v.symbol}
-                        className="m3-card-filled"
-                        style={{ padding: '0.3rem 0.65rem', fontSize: '0.8rem', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'baseline',
+                          gap: '0.6rem',
+                          padding: '0.55rem 0.85rem',
+                          borderRadius: '10px',
+                          background: 'var(--surface-subtle)',
+                          border: '1px solid var(--border-subtle)',
+                          fontSize: '0.86rem',
+                          lineHeight: 1.5
+                        }}
                       >
-                        <strong style={{ color: 'var(--md-sys-color-primary)', fontFamily: 'var(--font-mono)' }}>{v.symbol}:</strong>{' '}
-                        {v.meaning}
-                      </span>
+                        <span style={{
+                          padding: '0.15rem 0.45rem',
+                          borderRadius: '6px',
+                          background: 'var(--md-sys-color-primary-container)',
+                          color: 'var(--md-sys-color-primary)',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 800,
+                          fontSize: '0.8rem',
+                          flexShrink: 0
+                        }}>
+                          {v.symbol}
+                        </span>
+                        <span style={{ color: 'var(--text-secondary)' }}>
+                          {v.meaning}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -207,14 +254,16 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
         {article.howToSteps && (
           <section id="how-to-use">
             <h3 className="m3-article-h2">
-              <CheckCircle2 size={22} color="var(--md-sys-color-primary)" />
+              <CheckCircle2 size={24} color="var(--md-sys-color-primary)" />
               <span>{article.howToSteps.title}</span>
             </h3>
 
             <div className="m3-steps-grid">
               {article.howToSteps.steps.map(step => (
                 <div key={step.stepNumber} className="m3-step-card">
-                  <div className="m3-step-badge">{step.stepNumber}</div>
+                  <div className="m3-step-badge">
+                    Step 0{step.stepNumber}
+                  </div>
                   <div className="m3-step-title">{step.title}</div>
                   <div className="m3-step-desc">{step.description}</div>
                 </div>
@@ -227,76 +276,126 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
         {article.workedExample && (
           <section id="worked-example">
             <div className="m3-example-box">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--md-sys-color-primary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--md-sys-color-primary)' }}>
                   Case Study Walkthrough
                 </span>
-                <span className="glass-pill" style={{ fontSize: '0.75rem', fontWeight: 700 }}>
+                <span className="glass-pill" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
                   Real-World Calculation
                 </span>
               </div>
 
-              <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.65rem' }}>
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.015em' }}>
                 {article.workedExample.title}
               </h4>
 
-              <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.98rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
                 {article.workedExample.scenario}
               </p>
 
-              {/* Given Inputs */}
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+              {/* Given Inputs Table / Cards */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '0.75rem',
+                marginBottom: '1.5rem',
+                background: 'var(--surface-subtle)',
+                padding: '1rem 1.25rem',
+                borderRadius: '14px',
+                border: '1px solid var(--border-subtle)'
+              }}>
                 {article.workedExample.inputs.map(inp => (
-                  <div
-                    key={inp.label}
-                    style={{
-                      padding: '0.4rem 0.75rem',
-                      borderRadius: 'var(--md-sys-shape-xs)',
-                      background: 'var(--surface-subtle)',
-                      border: '1px solid var(--border-subtle)',
-                      fontSize: '0.8rem'
-                    }}
-                  >
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{inp.label}:</span>{' '}
-                    <strong style={{ color: 'var(--text-primary)' }}>{inp.value}</strong>
+                  <div key={inp.label}>
+                    <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '0.2rem' }}>
+                      {inp.label}
+                    </div>
+                    <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      {inp.value}
+                    </div>
                   </div>
                 ))}
               </div>
 
               {/* Step by step calculation */}
-              <div style={{ marginBottom: '1.25rem' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--text-primary)', display: 'block', marginBottom: '0.5rem' }}>
-                  Calculation Steps:
-                </strong>
-                <ol style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.45rem', margin: 0 }}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-primary)', marginBottom: '0.85rem' }}>
+                  Stepped Mathematical Execution:
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   {article.workedExample.steps.map((st, i) => (
-                    <li key={i} style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                      {st}
-                    </li>
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '0.85rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '12px',
+                        background: 'var(--surface-subtle)',
+                        border: '1px solid var(--border-subtle)'
+                      }}
+                    >
+                      <span style={{
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '50%',
+                        background: 'var(--md-sys-color-primary-container)',
+                        color: 'var(--md-sys-color-primary)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontWeight: 800,
+                        fontSize: '0.78rem',
+                        flexShrink: 0,
+                        marginTop: '0.15rem'
+                      }}>
+                        {i + 1}
+                      </span>
+                      <span style={{ fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.65 }}>
+                        {st}
+                      </span>
+                    </div>
                   ))}
-                </ol>
+                </div>
               </div>
 
-              {/* Result Pill */}
+              {/* Result Banner */}
               <div style={{
-                padding: '0.85rem 1.15rem',
-                borderRadius: 'var(--md-sys-shape-md)',
+                padding: '1.15rem 1.4rem',
+                borderRadius: '14px',
                 background: 'var(--md-sys-color-primary-container)',
                 color: 'var(--md-sys-color-on-primary-container)',
                 fontWeight: 800,
-                fontSize: '0.95rem',
+                fontSize: '1.05rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.75rem',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)'
               }}>
-                <CheckCircle2 size={18} />
-                <span>Result: {article.workedExample.result}</span>
+                <CheckCircle2 size={22} color="var(--md-sys-color-primary)" />
+                <span>Calculated Result: <strong>{article.workedExample.result}</strong></span>
               </div>
 
               {article.workedExample.takeaway && (
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', marginTop: '0.75rem', marginBottom: 0 }}>
-                  💡 {article.workedExample.takeaway}
-                </p>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.65rem',
+                  padding: '1rem 1.25rem',
+                  borderRadius: '12px',
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  border: '1px solid rgba(16, 185, 129, 0.2)',
+                  marginTop: '1rem',
+                  fontSize: '0.92rem',
+                  lineHeight: 1.65,
+                  color: 'var(--text-primary)'
+                }}>
+                  <Lightbulb size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '0.15rem' }} />
+                  <div>
+                    <strong style={{ color: '#10b981' }}>Key Insight: </strong>
+                    {article.workedExample.takeaway}
+                  </div>
+                </div>
               )}
             </div>
           </section>
@@ -314,9 +413,9 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
             {section.callout && (
               <div className={`m3-callout-card ${section.callout.type}`}>
                 <div className="m3-callout-title">
-                  {section.callout.type === 'tip' && <Lightbulb size={17} />}
-                  {section.callout.type === 'warning' && <AlertTriangle size={17} />}
-                  {section.callout.type === 'info' && <Info size={17} />}
+                  {section.callout.type === 'tip' && <Lightbulb size={18} />}
+                  {section.callout.type === 'warning' && <AlertTriangle size={18} />}
+                  {section.callout.type === 'info' && <Info size={18} />}
                   <span>{section.callout.title}</span>
                 </div>
                 <div className="m3-callout-text">{section.callout.text}</div>
@@ -324,9 +423,9 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
             )}
 
             {section.bullets && (
-              <ul style={{ paddingLeft: '1.35rem', display: 'flex', flexDirection: 'column', gap: '0.45rem', marginBottom: '1.25rem' }}>
+              <ul style={{ paddingLeft: '1.4rem', display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1.5rem' }}>
                 {section.bullets.map((b, i) => (
-                  <li key={i} style={{ fontSize: '0.925rem', color: 'var(--text-secondary)' }}>
+                  <li key={i} style={{ fontSize: '0.975rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>
                     {b}
                   </li>
                 ))}
@@ -338,15 +437,15 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
         {/* 6. Frequently Asked Questions (FAQ) Accordion */}
         <section id="faqs">
           <h3 className="m3-article-h2">
-            <HelpCircle size={22} color="var(--md-sys-color-primary)" />
+            <HelpCircle size={24} color="var(--md-sys-color-primary)" />
             <span>Frequently Asked Questions</span>
           </h3>
 
-          <div style={{ marginTop: '1rem', marginBottom: '2rem' }}>
+          <div style={{ marginTop: '1.25rem', marginBottom: '2.5rem' }}>
             {article.faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className="m3-faq-card">
+                <div key={idx} className={`m3-faq-card ${isOpen ? 'open' : ''}`}>
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
@@ -354,7 +453,11 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                     aria-expanded={isOpen}
                   >
                     <span>{faq.question}</span>
-                    {isOpen ? <ChevronUp size={18} color="var(--md-sys-color-primary)" /> : <ChevronDown size={18} color="var(--text-muted)" />}
+                    {isOpen ? (
+                      <ChevronUp size={20} color="var(--md-sys-color-primary)" />
+                    ) : (
+                      <ChevronDown size={20} color="var(--text-muted)" />
+                    )}
                   </button>
 
                   {isOpen && (

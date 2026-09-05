@@ -89,29 +89,31 @@ export const AgeCalculator: React.FC = () => {
   return (
     <div>
       {/* Title & Short Description */}
-      <div style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+      <div style={{ marginBottom: '1.75rem', textAlign: 'center' }}>
         <h1 style={{
-          fontSize: '2.25rem',
+          fontSize: 'clamp(1.85rem, 4vw, 2.4rem)',
           fontWeight: 800,
           letterSpacing: '-0.03em',
-          marginBottom: '0.45rem',
-          color: 'var(--text-primary)'
+          marginBottom: '0.5rem',
+          color: 'var(--text-primary)',
+          lineHeight: 1.2
         }}>
           Chronological Age Calculator
         </h1>
 
         <p style={{
-          fontSize: '0.95rem',
+          fontSize: '1.025rem',
           color: 'var(--text-secondary)',
-          maxWidth: '640px',
-          margin: '0 auto'
+          maxWidth: '680px',
+          margin: '0 auto',
+          lineHeight: 1.65
         }}>
           Calculate your exact age in years, months, days, hours, and seconds with birthday countdown, zodiac sign, and planetary orbital ages.
         </p>
       </div>
 
       {/* Mode Switcher Tabs with M3 Segmented Control */}
-      <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ marginBottom: '1.75rem', display: 'flex', justifyContent: 'center' }}>
         <div className="m3-segmented-control" style={{ maxWidth: '680px', width: '100%', overflowX: 'auto' }}>
           <button
             type="button"
@@ -158,27 +160,30 @@ export const AgeCalculator: React.FC = () => {
       {/* Standard Modes (Today & Specific Date) Inputs Card */}
       {(mode === 'today' || mode === 'specific') && (
         <div
-          className="glass-panel"
+          className="m3-card-elevated"
           style={{
-            padding: '1.5rem',
+            padding: '1.75rem',
             marginBottom: '1.75rem',
-            background: 'var(--surface-solid)'
+            background: 'var(--surface-solid)',
+            borderRadius: '20px',
+            border: '1.5px solid var(--border-subtle)',
+            boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.04)'
           }}
         >
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '1.25rem',
             marginBottom: '1.25rem'
           }}>
             {/* DOB Picker */}
             <div>
               <label style={{
-                fontSize: '0.825rem',
+                fontSize: '0.85rem',
                 fontWeight: 700,
                 color: 'var(--text-primary)',
                 display: 'block',
-                marginBottom: '0.4rem'
+                marginBottom: '0.45rem'
               }}>
                 Date of Birth
               </label>
@@ -187,7 +192,14 @@ export const AgeCalculator: React.FC = () => {
                 value={birthDateStr}
                 onChange={e => setBirthDateStr(e.target.value)}
                 className="input-field"
-                style={{ fontSize: '1rem', fontWeight: 600 }}
+                style={{
+                  fontSize: '1.05rem',
+                  fontWeight: 600,
+                  padding: '0.75rem 1rem',
+                  borderRadius: '12px',
+                  border: '1.5px solid var(--border-subtle)',
+                  background: 'var(--surface-subtle)'
+                }}
               />
             </div>
 
@@ -195,11 +207,11 @@ export const AgeCalculator: React.FC = () => {
             {mode === 'specific' ? (
               <div>
                 <label style={{
-                  fontSize: '0.825rem',
+                  fontSize: '0.85rem',
                   fontWeight: 700,
                   color: 'var(--text-primary)',
                   display: 'block',
-                  marginBottom: '0.4rem'
+                  marginBottom: '0.45rem'
                 }}>
                   Age as of Target Date
                 </label>
@@ -208,90 +220,104 @@ export const AgeCalculator: React.FC = () => {
                   value={targetDateStr}
                   onChange={e => setTargetDateStr(e.target.value)}
                   className="input-field"
-                  style={{ fontSize: '1rem', fontWeight: 600 }}
+                  style={{
+                    fontSize: '1.05rem',
+                    fontWeight: 600,
+                    padding: '0.75rem 1rem',
+                    borderRadius: '12px',
+                    border: '1.5px solid var(--border-subtle)',
+                    background: 'var(--surface-subtle)'
+                  }}
                 />
               </div>
             ) : (
               <div>
                 <label style={{
-                  fontSize: '0.825rem',
+                  fontSize: '0.85rem',
                   fontWeight: 700,
                   color: 'var(--text-secondary)',
                   display: 'block',
-                  marginBottom: '0.4rem'
+                  marginBottom: '0.45rem'
                 }}>
                   Age as of Reference Date
                 </label>
                 <div style={{
                   background: 'var(--surface-subtle)',
-                  padding: '0.7rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  fontSize: '0.95rem',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '12px',
+                  fontSize: '1rem',
                   fontWeight: 600,
                   color: 'var(--text-primary)',
                   border: '1.5px solid var(--border-subtle)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem'
+                  gap: '0.6rem',
+                  minHeight: '48px'
                 }}>
-                  <Calendar size={16} color="var(--primary-500)" />
+                  <Calendar size={18} color="var(--md-sys-color-primary)" />
                   <span>Today ({formatFriendlyDate(currentTime)})</span>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Quick Presets & Precision Time Toggle */}
+          {/* Quick Presets & Action Bar */}
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '0.75rem',
+            gap: '0.85rem',
             borderTop: '1px solid var(--border-subtle)',
-            paddingTop: '1rem'
+            paddingTop: '1.15rem'
           }}>
             {/* Quick Age Shortcuts */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginRight: '0.2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', marginRight: '0.2rem' }}>
                 Quick Presets:
               </span>
-              <button onClick={() => setQuickPreset(18)} className="glass-pill" style={{ cursor: 'pointer' }}>
-                18 yrs
-              </button>
-              <button onClick={() => setQuickPreset(21)} className="glass-pill" style={{ cursor: 'pointer' }}>
-                21 yrs
-              </button>
-              <button onClick={() => setQuickPreset(25)} className="glass-pill" style={{ cursor: 'pointer' }}>
-                25 yrs
-              </button>
-              <button onClick={() => setQuickPreset(30)} className="glass-pill" style={{ cursor: 'pointer' }}>
-                30 yrs
-              </button>
-              <button onClick={() => setQuickPreset(50)} className="glass-pill" style={{ cursor: 'pointer' }}>
-                50 yrs
-              </button>
+              {[18, 21, 25, 30, 40, 50].map(yrs => (
+                <button
+                  key={yrs}
+                  type="button"
+                  onClick={() => setQuickPreset(yrs)}
+                  className="glass-pill"
+                  style={{
+                    cursor: 'pointer',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    padding: '0.35rem 0.75rem',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-subtle)',
+                    background: 'var(--surface-subtle)'
+                  }}
+                >
+                  {yrs} yrs
+                </button>
+              ))}
             </div>
 
             {/* Action Bar (Share Card, Reset) */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <button
+                type="button"
                 onClick={() => setIsShareModalOpen(true)}
                 className="btn-secondary"
-                style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
+                style={{ padding: '0.45rem 0.95rem', fontSize: '0.825rem', borderRadius: '10px' }}
               >
-                <Share2 size={14} color="var(--primary-500)" />
-                <span>Share Card</span>
+                <Share2 size={14} color="var(--md-sys-color-primary)" />
+                <span style={{ fontWeight: 600 }}>Share Card</span>
               </button>
 
               <button
+                type="button"
                 onClick={handleReset}
                 className="btn-secondary"
-                style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
+                style={{ padding: '0.45rem 0.95rem', fontSize: '0.825rem', borderRadius: '10px' }}
                 title="Reset to default"
               >
                 <RotateCcw size={14} />
-                <span>Reset</span>
+                <span style={{ fontWeight: 600 }}>Reset</span>
               </button>
             </div>
           </div>
