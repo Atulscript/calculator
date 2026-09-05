@@ -3,7 +3,7 @@ import { Moon, Sun, Search, ArrowLeft } from 'lucide-react';
 import { CalculatorCategory } from '../../types/calculator';
 import { Logo } from './Logo';
 import { useLocalization } from '../../context/LocalizationContext';
-import { LocaleSelector } from './LocaleSelector';
+import { CurrencyModal } from './CurrencyModal';
 
 interface HeaderProps {
   currentTheme: 'light' | 'dark';
@@ -22,8 +22,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch,
   onNavigateHome
 }) => {
-  const [isLocaleOpen, setIsLocaleOpen] = useState(false);
-  const { currentLanguage, currentCurrency, t } = useLocalization();
+  const [isCurrencyModalOpen, setIsCurrencyModalOpen] = useState(false);
+  const { currentCurrency, t } = useLocalization();
   const isInnerRoute = currentPath !== '/' && currentPath !== '';
 
   return (
@@ -118,12 +118,12 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Right Action Icons: Locale Picker + Theme Toggle */}
+        {/* Right Action Icons: Currency Selector + Theme Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <button
-            onClick={() => setIsLocaleOpen(true)}
-            aria-label="Change Language and Currency"
-            title="Change Language & Currency"
+            onClick={() => setIsCurrencyModalOpen(true)}
+            aria-label="Select Currency"
+            title="Change Currency"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -148,10 +148,9 @@ export const Header: React.FC<HeaderProps> = ({
               e.currentTarget.style.backgroundColor = 'var(--surface-solid)';
             }}
           >
-            <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{currentLanguage.flag}</span>
-            <span>{currentLanguage.name}</span>
-            <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>|</span>
-            <span style={{ color: 'var(--primary-600)', fontWeight: 800 }}>{currentCurrency.symbol} {currentCurrency.code}</span>
+            <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{currentCurrency.flag}</span>
+            <span style={{ color: 'var(--primary-600)', fontWeight: 800 }}>{currentCurrency.symbol}</span>
+            <span>{currentCurrency.code}</span>
           </button>
 
           <button
@@ -186,7 +185,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      <LocaleSelector isOpen={isLocaleOpen} onClose={() => setIsLocaleOpen(false)} />
+      <CurrencyModal isOpen={isCurrencyModalOpen} onClose={() => setIsCurrencyModalOpen(false)} />
     </header>
   );
 };

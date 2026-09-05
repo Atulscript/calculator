@@ -62,16 +62,17 @@ export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfil
 export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [detectedGeo] = useState<GeoProfile>(() => detectGeoProfile());
 
-  const [language, setLanguageState] = useState<string>(() => {
-    const saved = localStorage.getItem(STORAGE_LANG_KEY);
-    if (saved && SUPPORTED_LANGUAGES.some(l => l.code === saved)) {
-      return saved;
-    }
-    // Default to English as requested by user
-    return 'en';
-  });
+  // Language is strictly English across the entire application as requested
+  const language = 'en';
 
   const [currency, setCurrencyState] = useState<string>(() => {
+    // Purge any legacy saved language to avoid persistent Hindi/other languages
+    try {
+      localStorage.removeItem(STORAGE_LANG_KEY);
+    } catch {
+      // Ignore storage errors
+    }
+
     const saved = localStorage.getItem(STORAGE_CURR_KEY);
     if (saved && SUPPORTED_CURRENCIES.some(c => c.code === saved)) {
       return saved;
@@ -79,37 +80,31 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     return detectedGeo.detectedCurrency;
   });
 
-  const currentLanguage = getLanguage(language);
+  const currentLanguage = getLanguage('en');
   const currentCurrency = getCurrency(currency);
 
-  const setLanguage = (newLang: string) => {
-    if (SUPPORTED_LANGUAGES.some(l => l.code === newLang)) {
-      setLanguageState(newLang);
-      localStorage.setItem(STORAGE_LANG_KEY, newLang);
-
-      // Automatically change corresponding currency with language selection
-      const matchedCurrency = getCurrencyForLanguage(newLang, detectedGeo);
-      if (matchedCurrency && SUPPORTED_CURRENCIES.some(c => c.code === matchedCurrency)) {
-        setCurrencyState(matchedCurrency);
-        localStorage.setItem(STORAGE_CURR_KEY, matchedCurrency);
-      }
-    }
+  const setLanguage = (_newLang: string) => {
+    // Front-end language selection has been removed, app strictly stays in English
   };
 
   const setCurrency = (newCurr: string) => {
     if (SUPPORTED_CURRENCIES.some(c => c.code === newCurr)) {
       setCurrencyState(newCurr);
-      localStorage.setItem(STORAGE_CURR_KEY, newCurr);
+      try {
+        localStorage.setItem(STORAGE_CURR_KEY, newCurr);
+      } catch {
+        // Ignore storage errors
+      }
     }
   };
 
   useEffect(() => {
-    document.documentElement.lang = currentLanguage.code;
-    document.documentElement.dir = currentLanguage.dir;
-  }, [currentLanguage]);
+    document.documentElement.lang = 'en';
+    document.documentElement.dir = 'ltr';
+  }, []);
 
   const t = (key: TranslationKey): string => {
-    return getTranslation(language, key);
+    return getTranslation('en', key);
   };
 
   const formatMoney = (amount: number): string => {
