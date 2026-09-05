@@ -33,6 +33,34 @@ const LocalizationContext = createContext<LocalizationContextType | undefined>(u
 const STORAGE_LANG_KEY = 'calc360_language';
 const STORAGE_CURR_KEY = 'calc360_currency';
 
+export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfile): string {
+  switch (langCode.toLowerCase()) {
+    case 'hi':
+      return 'INR';
+    case 'ja':
+      return 'JPY';
+    case 'zh':
+      return 'CNY';
+    case 'de':
+      return 'EUR';
+    case 'fr':
+      return 'EUR';
+    case 'es':
+      return detectedGeo?.detectedCurrency === 'USD' ? 'USD' : 'EUR';
+    case 'pt':
+      return 'BRL';
+    case 'ar':
+      return 'AED';
+    case 'en':
+      if (detectedGeo?.detectedCurrency && ['INR', 'GBP', 'CAD', 'AUD'].includes(detectedGeo.detectedCurrency)) {
+        return detectedGeo.detectedCurrency;
+      }
+      return 'USD';
+    default:
+      return 'USD';
+  }
+}
+
 export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [detectedGeo] = useState<GeoProfile>(() => detectGeoProfile());
 
@@ -60,6 +88,13 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     if (SUPPORTED_LANGUAGES.some(l => l.code === newLang)) {
       setLanguageState(newLang);
       localStorage.setItem(STORAGE_LANG_KEY, newLang);
+
+      // Automatically change corresponding currency with language selection
+      const matchedCurrency = getCurrencyForLanguage(newLang, detectedGeo);
+      if (matchedCurrency && SUPPORTED_CURRENCIES.some(c => c.code === matchedCurrency)) {
+        setCurrencyState(matchedCurrency);
+        localStorage.setItem(STORAGE_CURR_KEY, matchedCurrency);
+      }
     }
   };
 

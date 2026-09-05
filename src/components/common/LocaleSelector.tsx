@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useLocalization } from '../../context/LocalizationContext';
+import { useLocalization, getCurrencyForLanguage } from '../../context/LocalizationContext';
 import { X, Check, Globe, Coins, Sparkles } from 'lucide-react';
 
 interface LocaleSelectorProps {
@@ -298,7 +298,7 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
                         <div>
                           <div style={{ fontSize: '0.9rem', fontWeight: 800 }}>{lang.nativeName}</div>
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                            {lang.name}
+                            {lang.name} · <strong style={{ color: 'var(--primary-600)' }}>{getCurrencyForLanguage(lang.code, detectedGeo)}</strong>
                           </div>
                         </div>
                       </div>
