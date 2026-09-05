@@ -1,5 +1,6 @@
 import React from 'react';
 import { Home, Layers, Search, Flame } from 'lucide-react';
+import { useLocalization } from '../../context/LocalizationContext';
 
 interface BottomNavProps {
   currentPath: string;
@@ -12,6 +13,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onNavigate,
   onOpenSearch
 }) => {
+  const { t } = useLocalization();
   const isHome = currentPath === '/' || currentPath === '';
 
   const scrollToSection = (sectionId: string) => {
@@ -53,48 +55,48 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         className={`bottom-nav-item ${isHome ? 'active' : ''}`}
-        aria-label="Home"
+        aria-label={t('home')}
       >
         <div className="nav-icon-pill">
           <Home size={20} />
         </div>
-        <span className="nav-label">Home</span>
+        <span className="nav-label">{t('home')}</span>
       </button>
 
       {/* 2. Categories */}
       <button
         onClick={() => scrollToSection('featured-categories')}
         className="bottom-nav-item"
-        aria-label="Categories"
+        aria-label={t('categories')}
       >
         <div className="nav-icon-pill">
           <Layers size={20} />
         </div>
-        <span className="nav-label">Categories</span>
+        <span className="nav-label">{t('categories')}</span>
       </button>
 
       {/* 3. Search (Central Action) */}
       <button
         onClick={onOpenSearch}
         className="bottom-nav-item search-item"
-        aria-label="Search Calculators"
+        aria-label={t('search')}
       >
         <div className="nav-icon-pill search-pill">
           <Search size={20} />
         </div>
-        <span className="nav-label">Search</span>
+        <span className="nav-label">{t('search')}</span>
       </button>
 
       {/* 4. Popular / Trending Calculators */}
       <button
         onClick={() => scrollToSection('featured-calculators')}
         className="bottom-nav-item"
-        aria-label="Popular Calculators"
+        aria-label={t('popular')}
       >
         <div className="nav-icon-pill">
           <Flame size={20} />
         </div>
-        <span className="nav-label">Popular</span>
+        <span className="nav-label">{t('popular')}</span>
       </button>
     </nav>
   );

@@ -41,7 +41,8 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     if (saved && SUPPORTED_LANGUAGES.some(l => l.code === saved)) {
       return saved;
     }
-    return detectedGeo.detectedLanguage;
+    // Default to English as requested by user
+    return 'en';
   });
 
   const [currency, setCurrencyState] = useState<string>(() => {

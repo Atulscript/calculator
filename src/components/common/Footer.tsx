@@ -3,6 +3,7 @@ import { Shield, Sparkles, CheckCircle2, Heart } from 'lucide-react';
 import { CATEGORIES } from '../../data/categories';
 import { CalculatorCategory } from '../../types/calculator';
 import { Logo } from './Logo';
+import { useLocalization } from '../../context/LocalizationContext';
 
 interface FooterProps {
   onSelectCategory: (cat: CalculatorCategory) => void;
@@ -10,6 +11,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
+  const { t } = useLocalization();
   return (
     <footer style={{
       background: 'var(--surface-solid)',
@@ -38,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             color: 'var(--text-secondary)',
             maxWidth: '340px'
           }}>
-            Precision online computational tools designed for everyday life, health, finance, and science. Clean, verified, and completely free to use.
+            {t('footer_desc')}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
@@ -51,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               fontWeight: 600
             }}>
               <Shield size={15} />
-              <span>100% Client-Side Privacy Guarantee</span>
+              <span>{t('privacy_guarantee')}</span>
             </div>
 
             <div style={{
@@ -62,7 +64,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               color: 'var(--text-muted)'
             }}>
               <CheckCircle2 size={15} color="var(--md-sys-color-primary)" />
-              <span>Zero tracking & zero external database logging</span>
+              <span>{t('zero_tracking')}</span>
             </div>
           </div>
         </div>
@@ -80,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             alignItems: 'center',
             gap: '0.45rem'
           }}>
-            <span>Categories</span>
+            <span>{t('categories')}</span>
             <span style={{
               fontSize: '0.7rem',
               fontWeight: 700,
@@ -98,37 +100,30 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, minmax(130px, 1fr))',
-            gap: '0.65rem 1rem'
+            gap: '0.5rem 1rem'
           }}>
             {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
               <button
                 key={cat.id}
-                onClick={() => {
-                  onSelectCategory(cat.id);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="footer-category-link"
+                onClick={() => onSelectCategory(cat.id)}
                 style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  padding: '0.35rem 0',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  textAlign: 'left',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  transition: 'color 0.15s ease, transform 0.15s ease'
+                  gap: '0.45rem',
+                  fontSize: '0.825rem',
+                  color: 'var(--text-secondary)',
+                  background: 'none',
+                  border: 'none',
+                  padding: '0.35rem 0',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'color 0.15s ease'
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.color = 'var(--md-sys-color-primary)';
-                  e.currentTarget.style.transform = 'translateX(3px)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.color = 'var(--text-secondary)';
-                  e.currentTarget.style.transform = 'translateX(0)';
                 }}
               >
                 <span style={{
@@ -155,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             color: 'var(--text-primary)',
             marginBottom: '1.25rem'
           }}>
-            Standards & Accuracy
+            {t('standards_title')}
           </h4>
 
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.7rem', fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -176,7 +171,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           <div style={{ marginTop: '1.2rem' }}>
             <div className="glass-pill" style={{ fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
               <Sparkles size={13} color="var(--md-sys-color-primary)" />
-              <span>Open Computational Architecture</span>
+              <span>{t('standards_accuracy')}</span>
             </div>
           </div>
         </div>
@@ -196,7 +191,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         fontSize: '0.825rem',
         color: 'var(--text-muted)'
       }}>
-        <p>© 2026 Calculator360. All rights reserved.</p>
+        <p>© 2026 Calculator360. {t('all_rights_reserved')}</p>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
