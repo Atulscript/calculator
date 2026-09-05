@@ -904,3 +904,221 @@ strong, b {
   }
 }
 
+/* =========================================================
+   MATERIAL DESIGN 3 (M3) MODERN MOTION & INTERACTIVE POLISH
+   ========================================================= */
+
+@keyframes m3-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes m3-value-pop {
+  0% { transform: scale(0.96); opacity: 0.8; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes m3-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(11, 87, 208, 0); }
+}
+
+/* Modern Segmented Tab Bar */
+.m3-segmented-control {
+  display: flex;
+  background: var(--surface-subtle);
+  padding: 0.35rem;
+  border-radius: var(--md-sys-shape-lg);
+  border: 1.5px solid var(--border-subtle);
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.m3-segmented-control::-webkit-scrollbar {
+  display: none;
+}
+
+.m3-segmented-tab {
+  flex: 1;
+  min-width: 130px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: var(--md-sys-shape-md);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  user-select: none;
+}
+
+.m3-segmented-tab:active {
+  transform: scale(0.97);
+}
+
+.m3-segmented-tab.active {
+  background: var(--surface-solid);
+  color: var(--primary-600);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1), 0 1px 2px rgba(15, 23, 42, 0.06);
+  font-weight: 800;
+}
+
+/* Modern Input Groups with Embedded Unit Badges */
+.m3-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--md-sys-shape-md);
+  background: var(--surface-solid);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.m3-input-wrapper:focus-within {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.m3-input-field {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 800;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+.m3-input-unit {
+  padding: 0.35rem 0.85rem;
+  margin-right: 0.35rem;
+  background: var(--surface-subtle);
+  border-radius: var(--md-sys-shape-xs);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1px solid var(--border-subtle);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Synchronized Smooth Sliders */
+.m3-slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--surface-subtle);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  margin: 0.65rem 0;
+  border: 1px solid var(--border-subtle);
+}
+
+.m3-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.m3-slider::-webkit-slider-thumb:active {
+  transform: scale(1.18);
+  cursor: grabbing;
+}
+
+.m3-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+}
+
+/* Quick Preset Chips */
+.m3-preset-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.45rem;
+}
+
+.m3-preset-pill {
+  min-height: 32px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: var(--md-sys-shape-xs);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.m3-preset-pill:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--primary-500);
+}
+
+.m3-preset-pill.active {
+  background: var(--md-sys-color-primary-container);
+  color: var(--primary-600);
+  border-color: var(--primary-600);
+  font-weight: 800;
+}
+
+/* Proportional Visual Bar */
+.m3-proportion-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--surface-subtle);
+  overflow: hidden;
+  display: flex;
+  border: 1px solid var(--border-subtle);
+  margin: 0.75rem 0;
+}
+
+.m3-proportion-fill {
+  height: 100%;
+  background: var(--primary-500);
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1);
+  border-radius: 999px;
+}
+
+/* Value update pop animation */
+.value-pop {
+  animation: m3-value-pop 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+
