@@ -7,11 +7,26 @@ import { AgeCalculatorPage } from './pages/AgeCalculatorPage';
 import { BMICalculatorPage } from './pages/BMICalculatorPage';
 import { PercentageCalculatorPage } from './pages/PercentageCalculatorPage';
 import { LoanCalculatorPage } from './pages/LoanCalculatorPage';
+import { CompoundInterestPage } from './pages/CompoundInterestPage';
+import { DateDifferencePage } from './pages/DateDifferencePage';
+import { CalorieCalculatorPage } from './pages/CalorieCalculatorPage';
+import { UnitConverterPage } from './pages/UnitConverterPage';
 import { GenericCalculatorPage } from './pages/GenericCalculatorPage';
 import { BottomNav } from './components/common/BottomNav';
 import { CALCULATORS_REGISTRY } from './data/calculators';
 import { CalculatorCategory } from './types/calculator';
 import { LocalizationProvider } from './context/LocalizationContext';
+
+const CALCULATOR_PAGES: Record<string, React.FC<{ onNavigate: (path: string) => void }>> = {
+  'age-calculator': AgeCalculatorPage,
+  'bmi-calculator': BMICalculatorPage,
+  'percentage-calculator': PercentageCalculatorPage,
+  'loan-calculator': LoanCalculatorPage,
+  'compound-interest-calculator': CompoundInterestPage,
+  'date-difference-calculator': DateDifferencePage,
+  'calorie-calculator': CalorieCalculatorPage,
+  'unit-converter': UnitConverterPage
+};
 
 export const App: React.FC = () => {
   // Theme Management
@@ -79,54 +94,15 @@ export const App: React.FC = () => {
       );
     }
 
-    if (cleanPath === '/age-calculator') {
-      return (
-        <AgeCalculatorPage
-          onNavigate={navigate}
-        />
-      );
-    }
-
-    if (cleanPath === '/bmi-calculator') {
-      return (
-        <BMICalculatorPage
-          onNavigate={navigate}
-        />
-      );
-    }
-
-    if (cleanPath === '/percentage-calculator') {
-      return (
-        <PercentageCalculatorPage
-          onNavigate={navigate}
-        />
-      );
-    }
-
-    if (cleanPath === '/loan-calculator') {
-      return (
-        <LoanCalculatorPage
-          onNavigate={navigate}
-        />
-      );
-    }
-
-    // Slug match
+    // Dynamic Calculator Page lookup
     const slug = cleanPath.replace(/^\//, '');
+    const MatchedComponent = CALCULATOR_PAGES[slug];
+    if (MatchedComponent) {
+      return <MatchedComponent onNavigate={navigate} />;
+    }
+
     const matchedCalc = CALCULATORS_REGISTRY.find(c => c.slug === slug);
     if (matchedCalc) {
-      if (matchedCalc.id === 'age-calculator') {
-        return <AgeCalculatorPage onNavigate={navigate} />;
-      }
-      if (matchedCalc.id === 'bmi-calculator') {
-        return <BMICalculatorPage onNavigate={navigate} />;
-      }
-      if (matchedCalc.id === 'percentage-calculator') {
-        return <PercentageCalculatorPage onNavigate={navigate} />;
-      }
-      if (matchedCalc.id === 'loan-calculator') {
-        return <LoanCalculatorPage onNavigate={navigate} />;
-      }
       return <GenericCalculatorPage slug={slug} onNavigate={navigate} />;
     }
 

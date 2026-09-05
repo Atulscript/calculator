@@ -1,7 +1,7 @@
 import React from 'react';
 import { CATEGORIES } from '../../data/categories';
 import { CalculatorCategory } from '../../types/calculator';
-import { Layers, Sparkles, HeartPulse, CircleDollarSign, Calculator, ArrowRightLeft } from 'lucide-react';
+import { Layers, Sparkles, HeartPulse, CircleDollarSign, Calculator, ArrowRightLeft, Atom, UtensilsCrossed, HardHat } from 'lucide-react';
 
 interface CategoryNavProps {
   activeCategory: CalculatorCategory;
@@ -20,6 +20,9 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
       case 'finance': return <CircleDollarSign size={15} />;
       case 'math': return <Calculator size={15} />;
       case 'conversion': return <ArrowRightLeft size={15} />;
+      case 'science': return <Atom size={15} />;
+      case 'food': return <UtensilsCrossed size={15} />;
+      case 'construction': return <HardHat size={15} />;
       default: return <Calculator size={15} />;
     }
   };

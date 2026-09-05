@@ -86,8 +86,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
     return calc.category === selectedCategory;
   });
 
-  // Limit homepage calculators to only 6 important calculators (strictly 2 rows of 3 columns)
-  const displayedCalculators = searchQuery.trim()
+  // Display all calculators for selected category/search, or top 6 on All Categories
+  const displayedCalculators = searchQuery.trim() || selectedCategory !== 'all'
     ? filteredCalculators
     : filteredCalculators.slice(0, 6);
 
