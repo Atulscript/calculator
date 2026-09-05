@@ -127,29 +127,31 @@ export const Header: React.FC<HeaderProps> = ({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.4rem 0.7rem',
+              gap: '0.45rem',
+              padding: '0.45rem 0.85rem',
               borderRadius: 'var(--md-sys-shape-full)',
-              background: 'var(--md-sys-color-surface-container-low)',
-              border: '1px solid var(--md-sys-color-outline-variant)',
+              background: 'var(--surface-solid)',
+              border: '1.5px solid var(--border-subtle)',
               color: 'var(--text-primary)',
-              fontSize: '0.8rem',
-              fontWeight: 600,
+              fontSize: '0.825rem',
+              fontWeight: 700,
               cursor: 'pointer',
-              transition: 'background-color 0.15s ease'
+              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+              transition: 'all 0.15s ease'
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.backgroundColor = 'var(--md-sys-color-surface-container-high)';
+              e.currentTarget.style.borderColor = 'var(--primary-500)';
+              e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.backgroundColor = 'var(--md-sys-color-surface-container-low)';
+              e.currentTarget.style.borderColor = 'var(--border-subtle)';
+              e.currentTarget.style.backgroundColor = 'var(--surface-solid)';
             }}
           >
-            <span style={{ fontSize: '0.95rem' }}>{currentLanguage.flag}</span>
-            <span style={{ textTransform: 'uppercase' }}>{currentLanguage.code}</span>
-            <span style={{ color: 'var(--text-tertiary)', margin: '0 1px' }}>·</span>
-            <span style={{ color: 'var(--primary-600)', fontWeight: 700 }}>{currentCurrency.symbol}</span>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{currentCurrency.code}</span>
+            <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{currentLanguage.flag}</span>
+            <span>{currentLanguage.name}</span>
+            <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>|</span>
+            <span style={{ color: 'var(--primary-600)', fontWeight: 800 }}>{currentCurrency.symbol} {currentCurrency.code}</span>
           </button>
 
           <button

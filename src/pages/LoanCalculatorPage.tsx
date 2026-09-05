@@ -132,8 +132,8 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
                 </label>
                 
                 {/* In-tool Currency Selector */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface-subtle)', padding: '0.35rem 0.65rem', borderRadius: 'var(--md-sys-shape-md)', border: '1px solid var(--border-subtle)' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
                     {t('currency_option')}:
                   </span>
                   <select
@@ -141,20 +141,19 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
                     onChange={e => {
                       const newCurrCode = e.target.value;
                       setCurrency(newCurrCode);
-                      // Auto-adjust default principal to the new currency's mid preset if current is far off
                       const newInfo = supportedCurrencies.find(c => c.code === newCurrCode);
                       if (newInfo && newInfo.defaultPresets && newInfo.defaultPresets.length >= 2) {
                         setInput(prev => ({ ...prev, principal: newInfo.defaultPresets[2] || newInfo.defaultPresets[0] }));
                       }
                     }}
                     style={{
-                      padding: '0.25rem 0.6rem',
-                      fontSize: '0.8rem',
-                      fontWeight: 700,
+                      padding: '0.3rem 0.65rem',
+                      fontSize: '0.825rem',
+                      fontWeight: 800,
                       borderRadius: 'var(--md-sys-shape-full)',
-                      border: '1.5px solid var(--md-sys-color-primary)',
-                      background: 'var(--md-sys-color-primary-container)',
-                      color: 'var(--md-sys-color-on-primary-container)',
+                      border: '1.5px solid var(--primary-600)',
+                      background: 'var(--surface-solid)',
+                      color: 'var(--text-primary)',
                       cursor: 'pointer'
                     }}
                   >

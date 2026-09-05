@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocalization } from '../../context/LocalizationContext';
+import { X, Check, Globe, Coins, Sparkles } from 'lucide-react';
 
 interface LocaleSelectorProps {
   isOpen: boolean;
@@ -19,7 +21,6 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
     currency,
     currentCurrency,
     setCurrency,
-    t,
     detectedGeo,
     supportedLanguages,
     supportedCurrencies
@@ -33,7 +34,6 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
     }
   }, [isOpen, initialTab]);
 
-  // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -44,163 +44,422 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === 'undefined') return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      {/* Backdrop click handler */}
-      <div className="absolute inset-0" onClick={onClose} />
-
-      <div 
-        role="dialog" 
+  return createPortal(
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        background: 'rgba(0, 0, 0, 0.72)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1.25rem',
+        animation: 'fadeIn 0.2s ease-out'
+      }}
+      onClick={e => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        role="dialog"
         aria-modal="true"
-        aria-labelledby="locale-modal-title"
-        className="relative w-full max-w-lg bg-surface border border-outline-variant/30 rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[85vh] animate-scale-in"
+        aria-labelledby="locale-selector-title"
+        style={{
+          width: '100%',
+          maxWidth: '560px',
+          maxHeight: '88vh',
+          background: 'var(--surface-solid)',
+          border: '1.5px solid var(--border-subtle)',
+          borderRadius: 'var(--md-sys-shape-xl)',
+          boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.45)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          animation: 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
       >
         {/* Header */}
-        <div className="p-5 pb-3 border-b border-outline-variant/15 flex items-center justify-between">
+        <div
+          style={{
+            padding: '1.25rem 1.5rem',
+            borderBottom: '1px solid var(--border-subtle)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            background: 'var(--surface-subtle)'
+          }}
+        >
           <div>
-            <h2 id="locale-modal-title" className="text-xl font-bold text-on-surface flex items-center gap-2">
-              <span className="text-2xl">🌐</span>
-              <span>{activeTab === 'language' ? t('select_language') : t('select_currency')}</span>
+            <h2
+              id="locale-selector-title"
+              style={{
+                fontSize: '1.25rem',
+                fontWeight: 800,
+                color: 'var(--text-primary)',
+                margin: 0,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              <Globe size={20} color="var(--md-sys-color-primary)" />
+              <span>Language & Currency Settings</span>
             </h2>
-            <p className="text-xs text-on-surface-variant mt-0.5">
-              Customize language preferences and regional currency
+            <p
+              style={{
+                fontSize: '0.8rem',
+                color: 'var(--text-secondary)',
+                margin: '0.2rem 0 0 0'
+              }}
+            >
+              Choose your preferred language and monetary currency for calculations
             </p>
           </div>
+
           <button
             onClick={onClose}
-            aria-label="Close dialog"
-            className="w-9 h-9 rounded-full bg-surface-variant/30 hover:bg-surface-variant/60 text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors"
+            aria-label="Close"
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              border: '1px solid var(--border-subtle)',
+              background: 'var(--surface-solid)',
+              color: 'var(--text-secondary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+              e.currentTarget.style.color = 'var(--text-primary)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-solid)';
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X size={18} />
           </button>
         </div>
 
-        {/* Auto-detected Geography Pill */}
-        <div className="px-5 pt-3">
-          <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-primary/10 border border-primary/20 text-xs text-primary font-medium">
-            <span className="text-sm">{detectedGeo.flag}</span>
-            <div className="flex-1">
-              <span className="font-semibold">{t('auto_detected')}:</span>{' '}
-              <span>{detectedGeo.countryName} ({detectedGeo.detectedCurrency} · {detectedGeo.detectedLanguage.toUpperCase()})</span>
+        {/* Auto-detected geography notification */}
+        <div style={{ padding: '0.85rem 1.5rem 0' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.65rem',
+              padding: '0.65rem 0.9rem',
+              borderRadius: 'var(--md-sys-shape-md)',
+              background: 'var(--md-sys-color-primary-container)',
+              border: '1px solid var(--border-subtle)',
+              fontSize: '0.8rem',
+              color: 'var(--md-sys-color-on-primary-container)'
+            }}
+          >
+            <span style={{ fontSize: '1.25rem' }}>{detectedGeo.flag}</span>
+            <div style={{ flex: 1, lineHeight: 1.35 }}>
+              <strong style={{ fontWeight: 700 }}>Auto-detected Region: </strong>
+              <span>
+                {detectedGeo.countryName} ({detectedGeo.detectedCurrency} · {detectedGeo.detectedLanguage.toUpperCase()})
+              </span>
             </div>
+            <Sparkles size={16} style={{ opacity: 0.75 }} />
           </div>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="px-5 pt-3">
-          <div className="flex p-1 bg-surface-variant/30 rounded-2xl border border-outline-variant/20">
+        {/* Tab Switcher (Language vs Currency) */}
+        <div style={{ padding: '1rem 1.5rem 0.5rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              background: 'var(--surface-subtle)',
+              padding: '0.3rem',
+              borderRadius: 'var(--md-sys-shape-full)',
+              border: '1.5px solid var(--border-subtle)',
+              gap: '0.35rem'
+            }}
+          >
             <button
               onClick={() => setActiveTab('language')}
-              className={`flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-2 ${
-                activeTab === 'language'
-                  ? 'bg-primary text-on-primary shadow-sm'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.6rem 1rem',
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                borderRadius: 'var(--md-sys-shape-full)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                background: activeTab === 'language' ? 'var(--primary-600)' : 'transparent',
+                color: activeTab === 'language' ? '#ffffff' : 'var(--text-secondary)'
+              }}
             >
-              <span>{currentLanguage.flag}</span>
-              <span>{t('select_language')}</span>
+              <Globe size={16} />
+              <span>Language ({currentLanguage.nativeName})</span>
             </button>
+
             <button
               onClick={() => setActiveTab('currency')}
-              className={`flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-2 ${
-                activeTab === 'currency'
-                  ? 'bg-primary text-on-primary shadow-sm'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.6rem 1rem',
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                borderRadius: 'var(--md-sys-shape-full)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                background: activeTab === 'currency' ? 'var(--primary-600)' : 'transparent',
+                color: activeTab === 'currency' ? '#ffffff' : 'var(--text-secondary)'
+              }}
             >
-              <span>{currentCurrency.symbol}</span>
-              <span>{t('select_currency')}</span>
+              <Coins size={16} />
+              <span>Currency ({currentCurrency.symbol} {currentCurrency.code})</span>
             </button>
           </div>
         </div>
 
         {/* Tab Content List */}
-        <div className="p-5 overflow-y-auto flex-1 space-y-2">
+        <div
+          style={{
+            padding: '1rem 1.5rem',
+            overflowY: 'auto',
+            flex: 1,
+            maxHeight: '420px'
+          }}
+        >
           {activeTab === 'language' ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {supportedLanguages.map((lang) => {
-                const isSelected = lang.code === language;
-                return (
-                  <button
-                    key={lang.code}
-                    onClick={() => {
-                      setLanguage(lang.code);
-                    }}
-                    className={`flex items-center justify-between p-3 rounded-2xl text-left border transition-all ${
-                      isSelected
-                        ? 'bg-primary/15 border-primary text-primary font-semibold shadow-sm'
-                        : 'bg-surface-container-low/60 hover:bg-surface-variant/30 border-outline-variant/20 text-on-surface'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">{lang.flag}</span>
-                      <div>
-                        <div className="text-sm font-medium">{lang.nativeName}</div>
-                        <div className="text-xs text-on-surface-variant">{lang.name}</div>
+            <div>
+              <div
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'var(--text-tertiary)',
+                  marginBottom: '0.65rem',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                Select Interface Language (9 Supported)
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gap: '0.6rem'
+                }}
+              >
+                {supportedLanguages.map(lang => {
+                  const isSelected = lang.code === language;
+                  return (
+                    <button
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.75rem 1rem',
+                        borderRadius: 'var(--md-sys-shape-md)',
+                        border: isSelected
+                          ? '2px solid var(--primary-600)'
+                          : '1.5px solid var(--border-subtle)',
+                        background: isSelected
+                          ? 'var(--md-sys-color-primary-container)'
+                          : 'var(--surface-solid)',
+                        color: isSelected
+                          ? 'var(--md-sys-color-on-primary-container)'
+                          : 'var(--text-primary)',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{lang.flag}</span>
+                        <div>
+                          <div style={{ fontSize: '0.9rem', fontWeight: 800 }}>{lang.nativeName}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                            {lang.name}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    {isSelected && (
-                      <span className="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs">
-                        ✓
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+
+                      {isSelected && (
+                        <div
+                          style={{
+                            width: '24px',
+                            height: '24px',
+                            borderRadius: '50%',
+                            background: 'var(--primary-600)',
+                            color: '#ffffff',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          <Check size={14} strokeWidth={3} />
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {supportedCurrencies.map((curr) => {
-                const isSelected = curr.code === currency;
-                return (
-                  <button
-                    key={curr.code}
-                    onClick={() => {
-                      setCurrency(curr.code);
-                    }}
-                    className={`flex items-center justify-between p-3 rounded-2xl text-left border transition-all ${
-                      isSelected
-                        ? 'bg-primary/15 border-primary text-primary font-semibold shadow-sm'
-                        : 'bg-surface-container-low/60 hover:bg-surface-variant/30 border-outline-variant/20 text-on-surface'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-xl">{curr.flag}</span>
-                      <div>
-                        <div className="text-sm font-medium flex items-center gap-1.5">
-                          <span className="font-mono font-bold text-primary">{curr.symbol}</span>
-                          <span>{curr.code}</span>
+            <div>
+              <div
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'var(--text-tertiary)',
+                  marginBottom: '0.65rem',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                Select Calculation Currency (10 Supported)
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gap: '0.6rem'
+                }}
+              >
+                {supportedCurrencies.map(curr => {
+                  const isSelected = curr.code === currency;
+                  return (
+                    <button
+                      key={curr.code}
+                      onClick={() => setCurrency(curr.code)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.75rem 1rem',
+                        borderRadius: 'var(--md-sys-shape-md)',
+                        border: isSelected
+                          ? '2px solid var(--primary-600)'
+                          : '1.5px solid var(--border-subtle)',
+                        background: isSelected
+                          ? 'var(--md-sys-color-primary-container)'
+                          : 'var(--surface-solid)',
+                        color: isSelected
+                          ? 'var(--md-sys-color-on-primary-container)'
+                          : 'var(--text-primary)',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{curr.flag}</span>
+                        <div>
+                          <div
+                            style={{
+                              fontSize: '0.9rem',
+                              fontWeight: 800,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.35rem'
+                            }}
+                          >
+                            <span
+                              style={{
+                                color: isSelected ? 'var(--primary-600)' : 'var(--text-primary)',
+                                fontWeight: 900
+                              }}
+                            >
+                              {curr.symbol}
+                            </span>
+                            <span>{curr.code}</span>
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                            {curr.name}
+                          </div>
                         </div>
-                        <div className="text-xs text-on-surface-variant">{curr.name}</div>
                       </div>
-                    </div>
-                    {isSelected && (
-                      <span className="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs">
-                        ✓
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+
+                      {isSelected && (
+                        <div
+                          style={{
+                            width: '24px',
+                            height: '24px',
+                            borderRadius: '50%',
+                            background: 'var(--primary-600)',
+                            color: '#ffffff',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          <Check size={14} strokeWidth={3} />
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Footer info */}
-        <div className="p-4 bg-surface-container-low/40 border-t border-outline-variant/15 flex items-center justify-between text-xs text-on-surface-variant">
-          <span>Active: {currentLanguage.nativeName} · {currentCurrency.code} ({currentCurrency.symbol})</span>
+        {/* Modal Footer */}
+        <div
+          style={{
+            padding: '1rem 1.5rem',
+            borderTop: '1px solid var(--border-subtle)',
+            background: 'var(--surface-subtle)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            Active:{' '}
+            <strong style={{ color: 'var(--text-primary)', fontWeight: 700 }}>
+              {currentLanguage.nativeName} ({currentLanguage.name})
+            </strong>{' '}
+            ·{' '}
+            <strong style={{ color: 'var(--text-primary)', fontWeight: 700 }}>
+              {currentCurrency.code} ({currentCurrency.symbol})
+            </strong>
+          </div>
+
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-primary text-on-primary font-medium rounded-xl hover:opacity-90 transition-opacity"
+            className="btn-primary"
+            style={{
+              padding: '0.55rem 1.4rem',
+              fontSize: '0.875rem',
+              fontWeight: 700
+            }}
           >
             Done
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
