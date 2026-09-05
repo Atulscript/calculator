@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AgeCalculationResult } from '../../../types/age';
-import { Sparkles, Play, Pause } from 'lucide-react';
+import { Sparkles, Play, Pause, Copy, Check } from 'lucide-react';
 import { formatNumber } from '../../../utils/dateUtils';
 
 interface PrimaryResultCardProps {
@@ -21,6 +21,14 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
   liveHours
 }) => {
   const { exactAge, dayOfWeekBorn, isLeapYearBorn, totals } = result;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopySummary = () => {
+    const text = `Chronological Age: ${exactAge.years} Years, ${exactAge.months} Months, ${exactAge.days} Days (${totals.totalDays.toLocaleString()} days lived)\nBorn on a ${dayOfWeekBorn}${isLeapYearBorn ? ' (Leap Year)' : ''}\nCalculated via Calculator360.app`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div
@@ -33,7 +41,7 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
         position: 'relative'
       }}
     >
-      {/* Top Header Badge & Live Ticker Toggle */}
+      {/* Top Header Badge & Controllers */}
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -42,7 +50,7 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
         gap: '0.75rem',
         marginBottom: '1.25rem'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <div className="glass-pill" style={{
             background: 'var(--md-sys-color-primary-container)',
             color: 'var(--md-sys-color-on-primary-container)',
@@ -63,28 +71,41 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
           </span>
         </div>
 
-        {/* Live Ticker Controller */}
-        <button
-          onClick={onToggleLiveTicker}
-          className="glass-pill"
-          style={{
-            cursor: 'pointer',
-            border: isLiveTickerActive ? '1.5px solid #146c2e' : '1.5px solid var(--border-subtle)',
-            background: isLiveTickerActive ? '#c4eed0' : 'var(--surface-subtle)',
-            color: isLiveTickerActive ? '#072711' : 'var(--text-muted)'
-          }}
-        >
-          <span className={isLiveTickerActive ? 'pulse-dot' : ''} style={{
-            background: isLiveTickerActive ? '#146c2e' : 'var(--border-subtle)'
-          }} />
-          <span style={{ fontWeight: 700 }}>
-            {isLiveTickerActive ? 'Live Ticking' : 'Ticker Paused'}
-          </span>
-          {isLiveTickerActive ? <Pause size={13} /> : <Play size={13} />}
-        </button>
+        {/* Live Ticker & Copy Controllers */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={handleCopySummary}
+            className="btn-secondary"
+            style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}
+            aria-label="Copy age summary"
+          >
+            {copied ? <Check size={13} color="#146c2e" /> : <Copy size={13} />}
+            <span>{copied ? '✓ Copied!' : 'Copy Summary'}</span>
+          </button>
+
+          <button
+            onClick={onToggleLiveTicker}
+            className="glass-pill"
+            style={{
+              cursor: 'pointer',
+              border: isLiveTickerActive ? '1.5px solid #146c2e' : '1.5px solid var(--border-subtle)',
+              background: isLiveTickerActive ? '#c4eed0' : 'var(--surface-subtle)',
+              color: isLiveTickerActive ? '#072711' : 'var(--text-muted)'
+            }}
+          >
+            <span className={isLiveTickerActive ? 'pulse-dot' : ''} style={{
+              background: isLiveTickerActive ? '#146c2e' : 'var(--border-subtle)'
+            }} />
+            <span style={{ fontWeight: 700 }}>
+              {isLiveTickerActive ? 'Live Ticking' : 'Ticker Paused'}
+            </span>
+            {isLiveTickerActive ? <Pause size={13} /> : <Play size={13} />}
+          </button>
+        </div>
       </div>
 
-      {/* Main Age Stat Display: Big High-Contrast Y / M / D Numbers */}
+      {/* Main Age Stat Display: Big High-Contrast Y / M / D Numbers with Value-Pop */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
@@ -98,14 +119,18 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
           background: 'var(--surface-solid)',
           borderTop: '4px solid var(--md-sys-color-primary)'
         }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '3rem',
-            fontWeight: 900,
-            lineHeight: 1,
-            color: 'var(--md-sys-color-primary)',
-            marginBottom: '0.35rem'
-          }}>
+          <div
+            key={exactAge.years}
+            className="value-pop"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '3rem',
+              fontWeight: 900,
+              lineHeight: 1,
+              color: 'var(--md-sys-color-primary)',
+              marginBottom: '0.35rem'
+            }}
+          >
             {exactAge.years}
           </div>
           <div style={{

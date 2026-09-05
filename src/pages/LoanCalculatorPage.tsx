@@ -167,7 +167,7 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
               </div>
 
               {/* Dynamic Currency Presets */}
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.65rem' }}>
+              <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
                 {currentCurrency.defaultPresets.map((amt, idx) => {
                   const label = currentCurrency.presetLabels?.[idx] || `${currentCurrency.symbol}${amt.toLocaleString()}`;
                   return (
@@ -175,15 +175,7 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
                       key={amt}
                       type="button"
                       onClick={() => setInput(prev => ({ ...prev, principal: amt }))}
-                      className="glass-pill"
-                      style={{
-                        cursor: 'pointer',
-                        fontSize: '0.78rem',
-                        fontWeight: input.principal === amt ? 800 : 600,
-                        borderColor: input.principal === amt ? 'var(--md-sys-color-primary)' : 'var(--border-subtle)',
-                        background: input.principal === amt ? 'var(--md-sys-color-primary-container)' : 'var(--surface-hover)',
-                        color: input.principal === amt ? 'var(--md-sys-color-on-primary-container)' : 'var(--text-primary)'
-                      }}
+                      className={`m3-preset-pill ${input.principal === amt ? 'active' : ''}`}
                     >
                       {label}
                     </button>
@@ -191,115 +183,179 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
                 })}
               </div>
 
-              <div style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontWeight: 800, color: 'var(--text-muted)' }}>
-                  {currentCurrency.symbol}
-                </span>
+              {/* Loan Amount Input & Synchronized Slider */}
+              <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
                 <input
+                  id="loan-amount-input"
                   type="number"
                   min="100"
                   max="1000000000"
                   step="1000"
-                  value={input.principal}
+                  value={input.principal || ''}
                   onChange={e => setInput(prev => ({ ...prev, principal: Number(e.target.value) || 0 }))}
-                  style={{
-                    width: '100%',
-                    padding: '0.7rem 0.85rem 0.7rem 2.2rem',
-                    borderRadius: 'var(--md-sys-shape-sm)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '1.05rem'
-                  }}
+                  className="m3-input-field"
+                  placeholder="250000"
+                  aria-label="Loan principal amount"
                 />
+                <span className="m3-input-unit">{currentCurrency.symbol}</span>
               </div>
+
+              <input
+                type="range"
+                min={currentCurrency.defaultPresets[0] || 10000}
+                max={(currentCurrency.defaultPresets[currentCurrency.defaultPresets.length - 1] || 1000000) * 2}
+                step={currentCurrency.code === 'INR' ? 25000 : 1000}
+                value={Math.min((currentCurrency.defaultPresets[currentCurrency.defaultPresets.length - 1] || 1000000) * 2, Math.max(currentCurrency.defaultPresets[0] || 10000, input.principal))}
+                onChange={e => setInput(prev => ({ ...prev, principal: Number(e.target.value) }))}
+                className="m3-slider"
+                aria-label="Loan amount range slider"
+              />
             </div>
 
             {/* Interest Rate & Tenure Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
-              {/* Annual Interest Rate */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+              {/* Annual Interest Rate with Synchronized Slider */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
-                  {t('interest_rate')}
-                </label>
-                <div style={{ position: 'relative' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                  <label htmlFor="interest-rate-input" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {t('interest_rate')}
+                  </label>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                    {input.annualInterestRate}% p.a.
+                  </span>
+                </div>
+
+                <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
                   <input
+                    id="interest-rate-input"
                     type="number"
                     min="0.1"
-                    max="40"
+                    max="35"
                     step="0.1"
-                    value={input.annualInterestRate}
+                    value={input.annualInterestRate || ''}
                     onChange={e => setInput(prev => ({ ...prev, annualInterestRate: Number(e.target.value) || 0 }))}
-                    style={{
-                      width: '100%',
-                      padding: '0.7rem 2rem 0.7rem 0.85rem',
-                      borderRadius: 'var(--md-sys-shape-sm)',
-                      border: '1.5px solid var(--border-subtle)',
-                      background: 'var(--surface-solid)',
-                      color: 'var(--text-primary)',
-                      fontWeight: 700,
-                      fontSize: '1.05rem'
-                    }}
+                    className="m3-input-field"
+                    placeholder="7.5"
+                    aria-label="Annual interest rate percentage"
                   />
-                  <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', fontWeight: 800, color: 'var(--text-muted)' }}>%</span>
+                  <span className="m3-input-unit">%</span>
+                </div>
+
+                <input
+                  type="range"
+                  min="2"
+                  max="24"
+                  step="0.1"
+                  value={Math.min(24, Math.max(2, input.annualInterestRate))}
+                  onChange={e => setInput(prev => ({ ...prev, annualInterestRate: Number(e.target.value) }))}
+                  className="m3-slider"
+                  aria-label="Interest rate slider"
+                />
+
+                <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                  {[5.5, 7.5, 8.5, 10.5, 12.0].map(r => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => setInput(prev => ({ ...prev, annualInterestRate: r }))}
+                      className={`m3-preset-pill ${input.annualInterestRate === r ? 'active' : ''}`}
+                    >
+                      {r}%
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Loan Tenure */}
+              {/* Loan Tenure with Segmented Control & Slider */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <label htmlFor="tenure-input" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {t('loan_tenure')}
                   </label>
-                  <div style={{ display: 'flex', gap: '0.25rem' }}>
+                  
+                  {/* Material 3 Segmented Control */}
+                  <div className="m3-segmented-control" style={{ maxWidth: '140px' }}>
                     <button
                       type="button"
                       onClick={() => setInput(prev => ({ ...prev, tenureType: 'years' }))}
-                      className={`tab-btn ${input.tenureType === 'years' ? 'active' : ''}`}
-                      style={{ padding: '0.15rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px' }}
+                      className={`m3-segmented-tab ${input.tenureType === 'years' ? 'active' : ''}`}
+                      style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem' }}
                     >
                       Years
                     </button>
                     <button
                       type="button"
                       onClick={() => setInput(prev => ({ ...prev, tenureType: 'months' }))}
-                      className={`tab-btn ${input.tenureType === 'months' ? 'active' : ''}`}
-                      style={{ padding: '0.15rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px' }}
+                      className={`m3-segmented-tab ${input.tenureType === 'months' ? 'active' : ''}`}
+                      style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem' }}
                     >
                       Months
                     </button>
                   </div>
                 </div>
 
+                <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
+                  <input
+                    id="tenure-input"
+                    type="number"
+                    min="1"
+                    max={input.tenureType === 'years' ? 40 : 480}
+                    value={input.tenureType === 'years' ? (input.tenureYears || '') : (input.tenureMonths || '')}
+                    onChange={e => {
+                      const val = Number(e.target.value) || 1;
+                      if (input.tenureType === 'years') {
+                        setInput(prev => ({ ...prev, tenureYears: val, tenureMonths: val * 12 }));
+                      } else {
+                        setInput(prev => ({ ...prev, tenureMonths: val, tenureYears: Math.round(val / 12) }));
+                      }
+                    }}
+                    className="m3-input-field"
+                    placeholder={input.tenureType === 'years' ? '15' : '180'}
+                    aria-label={`Loan tenure in ${input.tenureType}`}
+                  />
+                  <span className="m3-input-unit">{input.tenureType}</span>
+                </div>
+
                 <input
-                  type="number"
-                  min="1"
-                  max={input.tenureType === 'years' ? 50 : 600}
-                  value={input.tenureType === 'years' ? input.tenureYears : input.tenureMonths}
+                  type="range"
+                  min={input.tenureType === 'years' ? 1 : 12}
+                  max={input.tenureType === 'years' ? 30 : 360}
+                  step={input.tenureType === 'years' ? 1 : 6}
+                  value={input.tenureType === 'years' ? Math.min(30, Math.max(1, input.tenureYears)) : Math.min(360, Math.max(12, input.tenureMonths))}
                   onChange={e => {
-                    const val = Number(e.target.value) || 1;
+                    const val = Number(e.target.value);
                     if (input.tenureType === 'years') {
                       setInput(prev => ({ ...prev, tenureYears: val, tenureMonths: val * 12 }));
                     } else {
                       setInput(prev => ({ ...prev, tenureMonths: val, tenureYears: Math.round(val / 12) }));
                     }
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '0.7rem 0.85rem',
-                    borderRadius: 'var(--md-sys-shape-sm)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '1.05rem'
-                  }}
+                  className="m3-slider"
+                  aria-label="Tenure range slider"
                 />
+
+                <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                  {(input.tenureType === 'years' ? [5, 10, 15, 20, 25, 30] : [60, 120, 180, 240, 360]).map(tVal => (
+                    <button
+                      key={tVal}
+                      type="button"
+                      onClick={() => {
+                        if (input.tenureType === 'years') {
+                          setInput(prev => ({ ...prev, tenureYears: tVal, tenureMonths: tVal * 12 }));
+                        } else {
+                          setInput(prev => ({ ...prev, tenureMonths: tVal, tenureYears: Math.round(tVal / 12) }));
+                        }
+                      }}
+                      className={`m3-preset-pill ${(input.tenureType === 'years' ? input.tenureYears : input.tenureMonths) === tVal ? 'active' : ''}`}
+                    >
+                      {tVal} {input.tenureType === 'years' ? 'yr' : 'mo'}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Calculated Results Banner */}
+            {/* Calculated Results Banner with Value-Pop Micro-Animation */}
             <div style={{
               background: 'var(--surface-subtle)',
               borderRadius: 'var(--md-sys-shape-lg)',
@@ -312,95 +368,113 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
                 {t('monthly_emi')}
               </div>
 
-              <div style={{
-                fontSize: 'clamp(2.75rem, 6vw, 4rem)',
-                fontWeight: 900,
-                color: 'var(--md-sys-color-primary)',
-                lineHeight: 1.1,
-                marginBottom: '1.25rem'
-              }}>
+              {/* Reactive animated number display */}
+              <div
+                key={result.monthlyEmi}
+                className="value-pop"
+                style={{
+                  fontSize: 'clamp(2.75rem, 6vw, 4rem)',
+                  fontWeight: 900,
+                  color: 'var(--md-sys-color-primary)',
+                  lineHeight: 1.1,
+                  marginBottom: '1.25rem'
+                }}
+              >
                 {currentCurrency.symbol}{result.monthlyEmi.toLocaleString()} <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-muted)' }}>/ month</span>
               </div>
 
-              {/* Graphical Principal vs Interest Bar */}
+              {/* Enhanced Graphical Principal vs Interest Bar */}
               <div style={{ marginBottom: '1.5rem', padding: '0 0.5rem' }}>
-                <div style={{
-                  height: '16px',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  overflow: 'hidden',
-                  boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.15)'
-                }}>
-                  <div style={{ width: `${result.principalPercentage}%`, background: '#0b57d0', transition: 'width 0.3s ease' }} title={`Principal: ${result.principalPercentage}%`} />
-                  <div style={{ width: `${result.interestPercentage}%`, background: '#b45309', transition: 'width 0.3s ease' }} title={`Interest: ${result.interestPercentage}%`} />
+                <div className="m3-proportion-bar" style={{ height: '16px', marginBottom: '0.65rem' }}>
+                  <div
+                    style={{ width: `${result.principalPercentage}%`, background: '#0b57d0' }}
+                    title={`Principal: ${result.principalPercentage}%`}
+                  />
+                  <div
+                    style={{ width: `${result.interestPercentage}%`, background: '#b45309' }}
+                    title={`Interest: ${result.interestPercentage}%`}
+                  />
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginTop: '0.5rem', fontWeight: 700 }}>
-                  <span style={{ color: '#0b57d0', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#0b57d0' }} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.825rem', fontWeight: 700, flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <span style={{ color: '#0b57d0', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#0b57d0' }} />
                     {t('principal')}: {currentCurrency.symbol}{result.principal.toLocaleString()} ({result.principalPercentage}%)
                   </span>
-                  <span style={{ color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#b45309' }} />
+                  <span style={{ color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#b45309' }} />
                     {t('interest')}: {currentCurrency.symbol}{result.totalInterest.toLocaleString()} ({result.interestPercentage}%)
                   </span>
                 </div>
               </div>
 
-              {/* Total Payment Breakdown Grid */}
+              {/* Total Payment Breakdown Key Metrics Grid */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                 gap: '1rem',
                 textAlign: 'left'
               }}>
-                <div className="m3-card-filled" style={{ padding: '0.9rem 1.1rem', background: 'var(--surface-solid)', border: '1px solid var(--border-subtle)' }}>
+                <div className="m3-card-filled" style={{ padding: '0.9rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
                     {t('total_interest')}
                   </div>
                   <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#b45309' }}>
                     {currentCurrency.symbol}{result.totalInterest.toLocaleString()}
                   </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '0.2rem' }}>
+                    {result.interestPercentage}% of total
+                  </div>
                 </div>
 
-                <div className="m3-card-filled" style={{ padding: '0.9rem 1.1rem', background: 'var(--surface-solid)', border: '1px solid var(--border-subtle)' }}>
+                <div className="m3-card-filled" style={{ padding: '0.9rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
                     {t('total_amount')}
                   </div>
                   <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                     {currentCurrency.symbol}{result.totalPayment.toLocaleString()}
                   </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '0.2rem' }}>
+                    Principal + Interest
+                  </div>
                 </div>
 
-                <div className="m3-card-filled" style={{ padding: '0.9rem 1.1rem', background: 'var(--surface-solid)', border: '1px solid var(--border-subtle)' }}>
+                <div className="m3-card-filled" style={{ padding: '0.9rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
                     Total Duration
                   </div>
                   <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                     {result.totalMonths} months
                   </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '0.2rem' }}>
+                    ({(result.totalMonths / 12).toFixed(1)} years)
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Copy / Share Actions */}
-            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+            {/* Instant One-Click Copy / Share Actions */}
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
               <button
+                type="button"
                 onClick={handleCopy}
                 className="btn-secondary"
-                style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
+                style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
+                aria-label="Copy loan calculation summary"
               >
-                {copied ? <Check size={15} color="#146c2e" /> : <Copy size={15} />}
-                <span>{copied ? 'Copied Summary' : 'Copy Summary'}</span>
+                {copied ? <Check size={16} color="#146c2e" /> : <Copy size={16} />}
+                <span>{copied ? '✓ Copied Summary!' : 'Copy Summary'}</span>
               </button>
 
               <button
+                type="button"
                 onClick={handleShare}
                 className="btn-primary"
-                style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
+                style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
+                aria-label="Share loan calculation"
               >
-                <Share2 size={15} />
-                <span>Share Results</span>
+                <Share2 size={16} />
+                <span>Share Result</span>
               </button>
             </div>
           </div>

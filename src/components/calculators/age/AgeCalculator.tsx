@@ -110,36 +110,44 @@ export const AgeCalculator: React.FC = () => {
         </p>
       </div>
 
-      {/* Mode Switcher Tabs */}
+      {/* Mode Switcher Tabs with M3 Segmented Control */}
       <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
-        <div className="tabs-container" style={{ maxWidth: '640px', width: '100%' }}>
+        <div className="m3-segmented-control" style={{ maxWidth: '680px', width: '100%', overflowX: 'auto' }}>
           <button
+            type="button"
             onClick={() => setMode('today')}
-            className={`tab-btn ${mode === 'today' ? 'active' : ''}`}
+            className={`m3-segmented-tab ${mode === 'today' ? 'active' : ''}`}
+            aria-selected={mode === 'today'}
           >
             <Calendar size={15} />
             <span>Age Today</span>
           </button>
 
           <button
+            type="button"
             onClick={() => setMode('specific')}
-            className={`tab-btn ${mode === 'specific' ? 'active' : ''}`}
+            className={`m3-segmented-tab ${mode === 'specific' ? 'active' : ''}`}
+            aria-selected={mode === 'specific'}
           >
             <CalendarDays size={15} />
             <span>Age on Specific Date</span>
           </button>
 
           <button
+            type="button"
             onClick={() => setMode('reverse')}
-            className={`tab-btn ${mode === 'reverse' ? 'active' : ''}`}
+            className={`m3-segmented-tab ${mode === 'reverse' ? 'active' : ''}`}
+            aria-selected={mode === 'reverse'}
           >
             <Search size={15} />
             <span>Find DOB</span>
           </button>
 
           <button
+            type="button"
             onClick={() => setMode('compare')}
-            className={`tab-btn ${mode === 'compare' ? 'active' : ''}`}
+            className={`m3-segmented-tab ${mode === 'compare' ? 'active' : ''}`}
+            aria-selected={mode === 'compare'}
           >
             <Users size={15} />
             <span>Compare Ages</span>

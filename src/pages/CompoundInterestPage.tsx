@@ -173,28 +173,20 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
                 </div>
               </div>
 
-              <div style={{ position: 'relative', marginBottom: '0.75rem' }}>
-                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontWeight: 800, color: 'var(--primary-600)', fontSize: '1.15rem' }}>
-                  {currentCurrency.symbol}
-                </span>
+              {/* Principal Input with Unit and Presets */}
+              <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
                 <input
+                  id="compound-principal-input"
                   type="number"
                   min="0"
                   step="500"
                   value={input.principal || ''}
                   onChange={e => setInput({ ...input, principal: Math.max(0, Number(e.target.value)) })}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem 0.75rem 2.5rem',
-                    fontSize: '1.25rem',
-                    fontWeight: 800,
-                    borderRadius: 'var(--md-sys-shape-md)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    outline: 'none'
-                  }}
+                  className="m3-input-field"
+                  placeholder="10000"
+                  aria-label="Initial principal investment amount"
                 />
+                <span className="m3-input-unit">{currentCurrency.symbol}</span>
               </div>
 
               {/* Dynamic Currency Presets */}
@@ -204,16 +196,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
                     key={idx}
                     type="button"
                     onClick={() => setInput({ ...input, principal: presetVal })}
-                    style={{
-                      padding: '0.25rem 0.6rem',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      borderRadius: 'var(--md-sys-shape-xs)',
-                      background: input.principal === presetVal ? 'var(--md-sys-color-primary-container)' : 'var(--surface-subtle)',
-                      border: input.principal === presetVal ? '1px solid var(--primary-600)' : '1px solid var(--border-subtle)',
-                      color: input.principal === presetVal ? 'var(--primary-600)' : 'var(--text-secondary)',
-                      cursor: 'pointer'
-                    }}
+                    className={`m3-preset-pill ${input.principal === presetVal ? 'active' : ''}`}
                   >
                     {currentCurrency.presetLabels?.[idx] || `${currentCurrency.symbol}${presetVal.toLocaleString()}`}
                   </button>
@@ -221,41 +204,34 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
               </div>
             </div>
 
-            {/* Annual Return Rate */}
+            {/* Annual Return Rate with Synchronized Range Slider */}
             <div style={{ marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Estimated Annual Interest Rate (%)
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                <label htmlFor="compound-interest-slider" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Estimated Annual Interest Rate
                 </label>
-                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--primary-600)' }}>
-                  {input.annualInterestRate}%
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  {input.annualInterestRate}% p.a.
                 </span>
               </div>
               <input
+                id="compound-interest-slider"
                 type="range"
                 min="1"
                 max="30"
                 step="0.25"
                 value={input.annualInterestRate}
                 onChange={e => setInput({ ...input, annualInterestRate: Number(e.target.value) })}
-                style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
+                className="m3-slider"
+                aria-label="Annual interest rate slider"
               />
-              <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                 {[5, 7, 8, 10, 12, 15].map(rate => (
                   <button
                     key={rate}
                     type="button"
                     onClick={() => setInput({ ...input, annualInterestRate: rate })}
-                    style={{
-                      padding: '0.2rem 0.55rem',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      borderRadius: '4px',
-                      background: input.annualInterestRate === rate ? 'var(--md-sys-color-primary-container)' : 'var(--surface-subtle)',
-                      border: '1px solid var(--border-subtle)',
-                      color: input.annualInterestRate === rate ? 'var(--primary-600)' : 'var(--text-secondary)',
-                      cursor: 'pointer'
-                    }}
+                    className={`m3-preset-pill ${input.annualInterestRate === rate ? 'active' : ''}`}
                   >
                     {rate}%
                   </button>
@@ -263,40 +239,33 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
               </div>
             </div>
 
-            {/* Investment Tenure (Years) */}
+            {/* Investment Tenure (Years) with Synchronized Slider */}
             <div style={{ marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Investment Duration (Years)
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                <label htmlFor="compound-tenure-slider" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Investment Duration
                 </label>
-                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--primary-600)' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
                   {input.tenureYears} Years
                 </span>
               </div>
               <input
+                id="compound-tenure-slider"
                 type="range"
                 min="1"
-                max="50"
+                max="40"
                 value={input.tenureYears}
                 onChange={e => setInput({ ...input, tenureYears: Number(e.target.value) })}
-                style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
+                className="m3-slider"
+                aria-label="Investment tenure in years slider"
               />
-              <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                 {[3, 5, 10, 15, 20, 25, 30].map(yr => (
                   <button
                     key={yr}
                     type="button"
                     onClick={() => setInput({ ...input, tenureYears: yr })}
-                    style={{
-                      padding: '0.2rem 0.55rem',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      borderRadius: '4px',
-                      background: input.tenureYears === yr ? 'var(--md-sys-color-primary-container)' : 'var(--surface-subtle)',
-                      border: '1px solid var(--border-subtle)',
-                      color: input.tenureYears === yr ? 'var(--primary-600)' : 'var(--text-secondary)',
-                      cursor: 'pointer'
-                    }}
+                    className={`m3-preset-pill ${input.tenureYears === yr ? 'active' : ''}`}
                   >
                     {yr} yrs
                   </button>
@@ -305,62 +274,56 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
             </div>
 
             {/* Additional Regular Contribution & Frequency */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
-                  Regular Contribution ({currentCurrency.symbol})
+                <label htmlFor="additional-contrib-input" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
+                  Regular Periodic Deposit
                 </label>
-                <input
-                  type="number"
-                  min="0"
-                  step="50"
-                  value={input.additionalContribution}
-                  onChange={e => setInput({ ...input, additionalContribution: Math.max(0, Number(e.target.value)) })}
-                  style={{
-                    width: '100%',
-                    padding: '0.65rem 0.85rem',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    borderRadius: 'var(--md-sys-shape-md)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    outline: 'none'
-                  }}
-                />
+                <div className="m3-input-wrapper">
+                  <input
+                    id="additional-contrib-input"
+                    type="number"
+                    min="0"
+                    step="50"
+                    value={input.additionalContribution}
+                    onChange={e => setInput({ ...input, additionalContribution: Math.max(0, Number(e.target.value)) })}
+                    className="m3-input-field"
+                    placeholder="200"
+                    aria-label="Periodic deposit amount"
+                  />
+                  <span className="m3-input-unit">{currentCurrency.symbol}</span>
+                </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
+                <label htmlFor="contrib-frequency-select" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
                   Deposit Frequency
                 </label>
-                <select
-                  value={input.contributionFrequency}
-                  onChange={e => setInput({ ...input, contributionFrequency: e.target.value as 'monthly' | 'yearly' })}
-                  style={{
-                    width: '100%',
-                    padding: '0.65rem 0.85rem',
-                    fontSize: '0.925rem',
-                    fontWeight: 700,
-                    borderRadius: 'var(--md-sys-shape-md)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <option value="monthly">Monthly</option>
-                  <option value="yearly">Annually</option>
-                </select>
+                <div className="m3-segmented-control">
+                  <button
+                    type="button"
+                    onClick={() => setInput({ ...input, contributionFrequency: 'monthly' })}
+                    className={`m3-segmented-tab ${input.contributionFrequency === 'monthly' ? 'active' : ''}`}
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setInput({ ...input, contributionFrequency: 'yearly' })}
+                    className={`m3-segmented-tab ${input.contributionFrequency === 'yearly' ? 'active' : ''}`}
+                  >
+                    Annually
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Compounding Frequency */}
+            {/* Compounding Frequency Segmented Control */}
             <div>
               <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
-                Compound Frequency
+                Compounding Frequency
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.45rem' }}>
+              <div className="m3-segmented-control" style={{ overflowX: 'auto' }}>
                 {[
                   { id: 'annually', label: 'Annually' },
                   { id: 'semi-annually', label: 'Semi-Annual' },
@@ -372,17 +335,8 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
                     key={freq.id}
                     type="button"
                     onClick={() => setInput({ ...input, compoundFrequency: freq.id as any })}
-                    style={{
-                      padding: '0.5rem 0.4rem',
-                      fontSize: '0.8rem',
-                      fontWeight: 700,
-                      borderRadius: 'var(--md-sys-shape-xs)',
-                      background: input.compoundFrequency === freq.id ? 'var(--md-sys-color-primary-container)' : 'var(--surface-subtle)',
-                      border: input.compoundFrequency === freq.id ? '1.5px solid var(--primary-600)' : '1px solid var(--border-subtle)',
-                      color: input.compoundFrequency === freq.id ? 'var(--primary-600)' : 'var(--text-secondary)',
-                      cursor: 'pointer',
-                      textAlign: 'center'
-                    }}
+                    className={`m3-segmented-tab ${input.compoundFrequency === freq.id ? 'active' : ''}`}
+                    style={{ minWidth: '70px', padding: '0.45rem 0.6rem' }}
                   >
                     {freq.label}
                   </button>
@@ -402,98 +356,90 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
               </span>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button
+                  type="button"
                   onClick={handleCopy}
                   title="Copy calculation summary"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    padding: '0.35rem 0.65rem',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    borderRadius: 'var(--md-sys-shape-xs)',
-                    background: 'var(--surface-subtle)',
-                    border: '1px solid var(--border-subtle)',
-                    color: 'var(--text-primary)',
-                    cursor: 'pointer'
-                  }}
+                  className="btn-secondary"
+                  style={{ padding: '0.45rem 0.9rem', fontSize: '0.8rem' }}
+                  aria-label="Copy compound interest summary"
                 >
-                  {copied ? <Check size={13} color="var(--accent-emerald)" /> : <Copy size={13} />}
-                  <span>{copied ? 'Copied' : 'Copy'}</span>
+                  {copied ? <Check size={14} color="#146c2e" /> : <Copy size={14} />}
+                  <span>{copied ? '✓ Copied!' : 'Copy'}</span>
                 </button>
 
                 <button
+                  type="button"
                   onClick={handleShare}
                   title="Share calculation"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    padding: '0.35rem 0.65rem',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    borderRadius: 'var(--md-sys-shape-xs)',
-                    background: 'var(--surface-subtle)',
-                    border: '1px solid var(--border-subtle)',
-                    color: 'var(--text-primary)',
-                    cursor: 'pointer'
-                  }}
+                  className="btn-primary"
+                  style={{ padding: '0.45rem 0.9rem', fontSize: '0.8rem' }}
+                  aria-label="Share compound interest calculation"
                 >
-                  <Share2 size={13} />
+                  <Share2 size={14} />
                   <span>Share</span>
                 </button>
               </div>
             </div>
 
-            {/* Future Value Highlight */}
-            <div style={{ textAlign: 'center', padding: '1.25rem', borderRadius: 'var(--md-sys-shape-lg)', background: 'var(--md-sys-color-primary-container)', marginBottom: '1.5rem' }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--md-sys-color-on-primary-container)', marginBottom: '0.3rem' }}>
-                Total Future Investment Value
+            {/* Future Value Highlight with Value-Pop Micro-Animation */}
+            <div style={{ textAlign: 'center', padding: '1.5rem', borderRadius: 'var(--md-sys-shape-lg)', background: 'var(--md-sys-color-primary-container)', marginBottom: '1.5rem' }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--md-sys-color-on-primary-container)', marginBottom: '0.35rem' }}>
+                Total Future Portfolio Value
               </div>
-              <div style={{ fontSize: 'clamp(2rem, 4.5vw, 2.75rem)', fontWeight: 900, color: 'var(--md-sys-color-on-primary-container)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              <div
+                key={result.futureValue}
+                className="value-pop"
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 2.85rem)', fontWeight: 900, color: 'var(--md-sys-color-on-primary-container)', letterSpacing: '-0.02em', lineHeight: 1.1 }}
+              >
                 {currentCurrency.symbol}{result.futureValue.toLocaleString()}
               </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-primary-container)', opacity: 0.85, marginTop: '0.35rem' }}>
-                After {input.tenureYears} years @ {input.annualInterestRate}% annual rate
+              <div style={{ fontSize: '0.825rem', color: 'var(--md-sys-color-on-primary-container)', opacity: 0.9, marginTop: '0.45rem', fontWeight: 600 }}>
+                After {input.tenureYears} years @ {input.annualInterestRate}% annual rate ({input.compoundFrequency})
               </div>
             </div>
 
             {/* Key Metric Blocks */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
-              <div style={{ padding: '1rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
+              <div className="m3-card-filled" style={{ padding: '1rem', background: 'var(--surface-subtle)', border: '1.5px solid var(--border-subtle)' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
                   Total Principal Invested
                 </span>
                 <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
                   {currentCurrency.symbol}{result.totalPrincipal.toLocaleString()}
                 </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.725rem', color: 'var(--text-tertiary)', marginTop: '0.2rem', fontWeight: 600 }}>
                   {result.principalPercentage}% of total portfolio
                 </div>
               </div>
 
-              <div style={{ padding: '1rem', borderRadius: 'var(--md-sys-shape-md)', background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-emerald)' }}>
-                  Total Compound Interest
+              <div className="m3-card-filled" style={{ padding: '1rem', background: 'rgba(20, 108, 46, 0.08)', border: '1.5px solid rgba(20, 108, 46, 0.25)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#146c2e' }}>
+                  Total Compound Growth
                 </span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-emerald)', marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#146c2e', marginTop: '0.2rem' }}>
                   +{currentCurrency.symbol}{result.totalInterest.toLocaleString()}
                 </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--accent-emerald)', opacity: 0.9, marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.725rem', color: '#146c2e', opacity: 0.9, marginTop: '0.2rem', fontWeight: 700 }}>
                   {result.interestPercentage}% pure growth
                 </div>
               </div>
             </div>
 
-            {/* Proportional Growth Bar */}
+            {/* Enhanced Proportional Growth Bar */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
-                <span>Principal ({result.principalPercentage}%)</span>
-                <span>Interest Earned ({result.interestPercentage}%)</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--md-sys-color-primary)' }} />
+                  Principal ({result.principalPercentage}%)
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#146c2e' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#146c2e' }} />
+                  Interest ({result.interestPercentage}%)
+                </span>
               </div>
-              <div style={{ width: '100%', height: '14px', borderRadius: 'var(--md-sys-shape-full)', background: 'var(--surface-subtle)', overflow: 'hidden', display: 'flex' }}>
-                <div style={{ width: `${result.principalPercentage}%`, background: 'var(--primary-500)', transition: 'width 0.3s ease' }} />
-                <div style={{ width: `${result.interestPercentage}%`, background: 'var(--accent-emerald)', transition: 'width 0.3s ease' }} />
+              <div className="m3-proportion-bar" style={{ height: '14px' }}>
+                <div style={{ width: `${result.principalPercentage}%`, background: 'var(--md-sys-color-primary)' }} />
+                <div style={{ width: `${result.interestPercentage}%`, background: '#146c2e' }} />
               </div>
             </div>
           </div>

@@ -124,175 +124,241 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
       <div className="calculator-layout-grid">
         {/* Left Column: Form Inputs & Primary Results */}
         <div>
-          <div className="m3-card-elevated" style={{ padding: '1.5rem', marginBottom: '1.75rem' }}>
-            {/* Unit Toggle Buttons */}
-            <div style={{
-              display: 'flex',
-              background: 'var(--surface-hover)',
-              borderRadius: 'var(--md-sys-shape-full)',
-              padding: '0.3rem',
-              marginBottom: '1.5rem',
-              border: '1.5px solid var(--border-subtle)',
-              maxWidth: '300px'
-            }}>
-              <button
-                type="button"
-                onClick={() => setInput(prev => ({ ...prev, unit: 'metric' }))}
-                className={`tab-btn ${input.unit === 'metric' ? 'active' : ''}`}
-                style={{ flex: 1, padding: '0.45rem', borderRadius: 'var(--md-sys-shape-full)' }}
-              >
-                Metric (cm / kg)
-              </button>
-              <button
-                type="button"
-                onClick={() => setInput(prev => ({ ...prev, unit: 'imperial' }))}
-                className={`tab-btn ${input.unit === 'imperial' ? 'active' : ''}`}
-                style={{ flex: 1, padding: '0.45rem', borderRadius: 'var(--md-sys-shape-full)' }}
-              >
-                US Imperial (ft, in / lbs)
-              </button>
+          <div className="m3-card-elevated" style={{ padding: '1.75rem', marginBottom: '1.75rem' }}>
+            {/* UI/UX Enhancement: Material 3 Segmented Control for Unit Toggle */}
+            <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'flex-start' }}>
+              <div className="m3-segmented-control" style={{ maxWidth: '360px', width: '100%' }}>
+                <button
+                  type="button"
+                  id="metric-unit-tab"
+                  role="tab"
+                  aria-selected={input.unit === 'metric'}
+                  onClick={() => setInput(prev => ({ ...prev, unit: 'metric' }))}
+                  className={`m3-segmented-tab ${input.unit === 'metric' ? 'active' : ''}`}
+                >
+                  Metric (cm / kg)
+                </button>
+                <button
+                  type="button"
+                  id="imperial-unit-tab"
+                  role="tab"
+                  aria-selected={input.unit === 'imperial'}
+                  onClick={() => setInput(prev => ({ ...prev, unit: 'imperial' }))}
+                  className={`m3-segmented-tab ${input.unit === 'imperial' ? 'active' : ''}`}
+                >
+                  US Imperial (ft, in / lbs)
+                </button>
+              </div>
             </div>
 
             {/* Form Inputs Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
-              {/* Height Input */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+              {/* Height Input with Synchronized Range Slider */}
               {input.unit === 'metric' ? (
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                    Height (cm)
-                  </label>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                    <label htmlFor="height-cm-input" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                      Height
+                    </label>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                      {input.heightCm} cm
+                    </span>
+                  </div>
+                  
+                  <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
+                    <input
+                      id="height-cm-input"
+                      type="number"
+                      min="90"
+                      max="240"
+                      value={input.heightCm || ''}
+                      onChange={e => setInput(prev => ({ ...prev, heightCm: Number(e.target.value) || 0 }))}
+                      className="m3-input-field"
+                      placeholder="175"
+                      aria-label="Height in centimeters"
+                    />
+                    <span className="m3-input-unit">cm</span>
+                  </div>
+
                   <input
-                    type="number"
-                    min="50"
-                    max="260"
-                    value={input.heightCm}
-                    onChange={e => setInput(prev => ({ ...prev, heightCm: Number(e.target.value) || 0 }))}
-                    style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: 'var(--md-sys-shape-sm)',
-                      border: '1.5px solid var(--border-subtle)',
-                      background: 'var(--surface-solid)',
-                      color: 'var(--text-primary)',
-                      fontWeight: 600
-                    }}
+                    type="range"
+                    min="100"
+                    max="220"
+                    step="1"
+                    value={Math.min(220, Math.max(100, input.heightCm))}
+                    onChange={e => setInput(prev => ({ ...prev, heightCm: Number(e.target.value) }))}
+                    className="m3-slider"
+                    aria-label="Height range slider"
                   />
+                  
+                  <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                    {[160, 170, 175, 180, 185].map(val => (
+                      <button
+                        key={val}
+                        type="button"
+                        onClick={() => setInput(prev => ({ ...prev, heightCm: val }))}
+                        className={`m3-preset-pill ${input.heightCm === val ? 'active' : ''}`}
+                      >
+                        {val} cm
+                      </button>
+                    ))}
+                  </div>
                 </div>
               ) : (
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Feet
-                    </label>
-                    <input
-                      type="number"
-                      min="2"
-                      max="8"
-                      value={input.heightFt}
-                      onChange={e => setInput(prev => ({ ...prev, heightFt: Number(e.target.value) || 0 }))}
-                      style={{
-                        width: '100%',
-                        padding: '0.65rem 0.85rem',
-                        borderRadius: 'var(--md-sys-shape-sm)',
-                        border: '1.5px solid var(--border-subtle)',
-                        background: 'var(--surface-solid)',
-                        color: 'var(--text-primary)',
-                        fontWeight: 600
-                      }}
-                    />
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
+                    Height (ft & in)
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.65rem', marginBottom: '0.65rem' }}>
+                    <div className="m3-input-wrapper" style={{ flex: 1 }}>
+                      <input
+                        id="height-ft-input"
+                        type="number"
+                        min="2"
+                        max="8"
+                        value={input.heightFt || ''}
+                        onChange={e => setInput(prev => ({ ...prev, heightFt: Number(e.target.value) || 0 }))}
+                        className="m3-input-field"
+                        placeholder="5"
+                        aria-label="Height in feet"
+                      />
+                      <span className="m3-input-unit">ft</span>
+                    </div>
+                    <div className="m3-input-wrapper" style={{ flex: 1 }}>
+                      <input
+                        id="height-in-input"
+                        type="number"
+                        min="0"
+                        max="11"
+                        value={input.heightIn}
+                        onChange={e => setInput(prev => ({ ...prev, heightIn: Number(e.target.value) || 0 }))}
+                        className="m3-input-field"
+                        placeholder="9"
+                        aria-label="Height in inches"
+                      />
+                      <span className="m3-input-unit">in</span>
+                    </div>
                   </div>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Inches
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="11"
-                      value={input.heightIn}
-                      onChange={e => setInput(prev => ({ ...prev, heightIn: Number(e.target.value) || 0 }))}
-                      style={{
-                        width: '100%',
-                        padding: '0.65rem 0.85rem',
-                        borderRadius: 'var(--md-sys-shape-sm)',
-                        border: '1.5px solid var(--border-subtle)',
-                        background: 'var(--surface-solid)',
-                        color: 'var(--text-primary)',
-                        fontWeight: 600
-                      }}
-                    />
+                  <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                    {[[5, 4], [5, 7], [5, 9], [6, 0], [6, 2]].map(([f, i]) => (
+                      <button
+                        key={`${f}-${i}`}
+                        type="button"
+                        onClick={() => setInput(prev => ({ ...prev, heightFt: f, heightIn: i }))}
+                        className={`m3-preset-pill ${input.heightFt === f && input.heightIn === i ? 'active' : ''}`}
+                      >
+                        {f}&apos;{i}&quot;
+                      </button>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* Weight Input */}
+              {/* Weight Input with Synchronized Range Slider */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                  Weight ({input.unit === 'metric' ? 'kg' : 'lbs'})
-                </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                  <label htmlFor="weight-input" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    Weight
+                  </label>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                    {input.unit === 'metric' ? `${input.weightKg} kg` : `${input.weightLbs} lbs`}
+                  </span>
+                </div>
+
+                <div className="m3-input-wrapper" style={{ marginBottom: '0.65rem' }}>
+                  <input
+                    id="weight-input"
+                    type="number"
+                    min={input.unit === 'metric' ? '25' : '55'}
+                    max={input.unit === 'metric' ? '250' : '550'}
+                    value={input.unit === 'metric' ? (input.weightKg || '') : (input.weightLbs || '')}
+                    onChange={e => {
+                      const val = Number(e.target.value) || 0;
+                      if (input.unit === 'metric') {
+                        setInput(prev => ({ ...prev, weightKg: val }));
+                      } else {
+                        setInput(prev => ({ ...prev, weightLbs: val }));
+                      }
+                    }}
+                    className="m3-input-field"
+                    placeholder={input.unit === 'metric' ? '68' : '150'}
+                    aria-label={`Weight in ${input.unit === 'metric' ? 'kilograms' : 'pounds'}`}
+                  />
+                  <span className="m3-input-unit">{input.unit === 'metric' ? 'kg' : 'lbs'}</span>
+                </div>
+
                 <input
-                  type="number"
-                  min="20"
-                  max="400"
-                  value={input.unit === 'metric' ? input.weightKg : input.weightLbs}
+                  type="range"
+                  min={input.unit === 'metric' ? 40 : 90}
+                  max={input.unit === 'metric' ? 140 : 300}
+                  step="1"
+                  value={input.unit === 'metric' ? Math.min(140, Math.max(40, input.weightKg)) : Math.min(300, Math.max(90, input.weightLbs))}
                   onChange={e => {
-                    const val = Number(e.target.value) || 0;
+                    const val = Number(e.target.value);
                     if (input.unit === 'metric') {
                       setInput(prev => ({ ...prev, weightKg: val }));
                     } else {
                       setInput(prev => ({ ...prev, weightLbs: val }));
                     }
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '0.65rem 0.85rem',
-                    borderRadius: 'var(--md-sys-shape-sm)',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-solid)',
-                    color: 'var(--text-primary)',
-                    fontWeight: 600
-                  }}
+                  className="m3-slider"
+                  aria-label="Weight range slider"
                 />
+
+                <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                  {(input.unit === 'metric' ? [55, 65, 70, 75, 85] : [120, 140, 160, 180, 200]).map(val => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => {
+                        if (input.unit === 'metric') {
+                          setInput(prev => ({ ...prev, weightKg: val }));
+                        } else {
+                          setInput(prev => ({ ...prev, weightLbs: val }));
+                        }
+                      }}
+                      className={`m3-preset-pill ${(input.unit === 'metric' ? input.weightKg : input.weightLbs) === val ? 'active' : ''}`}
+                    >
+                      {val} {input.unit === 'metric' ? 'kg' : 'lbs'}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Age & Gender Input */}
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                    Age
-                  </label>
-                  <input
-                    type="number"
-                    min="2"
-                    max="120"
-                    value={input.age}
-                    onChange={e => setInput(prev => ({ ...prev, age: Number(e.target.value) || 18 }))}
-                    style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: 'var(--md-sys-shape-sm)',
-                      border: '1.5px solid var(--border-subtle)',
-                      background: 'var(--surface-solid)',
-                      color: 'var(--text-primary)',
-                      fontWeight: 600
-                    }}
-                  />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                    Gender
-                  </label>
+              {/* Age & Gender */}
+              <div>
+                <label htmlFor="age-input" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
+                  Age & Gender
+                </label>
+                <div style={{ display: 'flex', gap: '0.65rem' }}>
+                  <div className="m3-input-wrapper" style={{ flex: 1 }}>
+                    <input
+                      id="age-input"
+                      type="number"
+                      min="2"
+                      max="120"
+                      value={input.age || ''}
+                      onChange={e => setInput(prev => ({ ...prev, age: Number(e.target.value) || 18 }))}
+                      className="m3-input-field"
+                      placeholder="28"
+                      aria-label="Age in years"
+                    />
+                    <span className="m3-input-unit">yrs</span>
+                  </div>
                   <select
                     value={input.gender}
                     onChange={e => setInput(prev => ({ ...prev, gender: e.target.value as 'male' | 'female' }))}
+                    aria-label="Biological gender"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: 'var(--md-sys-shape-sm)',
+                      flex: 1,
+                      padding: '0.75rem 0.85rem',
+                      borderRadius: 'var(--md-sys-shape-md)',
                       border: '1.5px solid var(--border-subtle)',
                       background: 'var(--surface-solid)',
                       color: 'var(--text-primary)',
-                      fontWeight: 600
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      outline: 'none'
                     }}
                   >
                     <option value="male">Male</option>
@@ -302,7 +368,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
               </div>
             </div>
 
-            {/* Primary Calculated Result Display */}
+            {/* Primary Calculated Result Display with Value-Pop Micro-Animation */}
             <div style={{
               background: 'var(--surface-subtle)',
               borderRadius: 'var(--md-sys-shape-lg)',
@@ -315,19 +381,24 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                 Your Body Mass Index (BMI)
               </div>
 
-              <div style={{
-                fontSize: 'clamp(2.75rem, 6vw, 4rem)',
-                fontWeight: 900,
-                color: 'var(--md-sys-color-primary)',
-                lineHeight: 1.1,
-                marginBottom: '0.5rem'
-              }}>
+              {/* Reactive animated number display */}
+              <div
+                key={result.bmi}
+                className="value-pop"
+                style={{
+                  fontSize: 'clamp(2.75rem, 6vw, 4rem)',
+                  fontWeight: 900,
+                  color: 'var(--md-sys-color-primary)',
+                  lineHeight: 1.1,
+                  marginBottom: '0.5rem'
+                }}
+              >
                 {result.bmi} <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-muted)' }}>kg/m²</span>
               </div>
 
               <div style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
                 <span style={{
-                  padding: '0.4rem 1.15rem',
+                  padding: '0.4rem 1.25rem',
                   borderRadius: 'var(--md-sys-shape-full)',
                   background: `${result.categoryColor}20`,
                   color: result.categoryColor,
@@ -340,7 +411,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
               </div>
 
               {/* Graphical Visual Scale Gauge */}
-              <div style={{ position: 'relative', marginTop: '1rem', marginBottom: '1.75rem', padding: '0 0.5rem' }}>
+              <div style={{ position: 'relative', marginTop: '0.5rem', marginBottom: '1.75rem', padding: '0 0.5rem' }}>
                 <div style={{
                   height: '14px',
                   borderRadius: '7px',
@@ -348,7 +419,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                   boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.2)'
                 }} />
 
-                {/* Marker Needle */}
+                {/* Marker Needle with smooth transition */}
                 <div style={{
                   position: 'absolute',
                   top: '-5px',
@@ -359,14 +430,14 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                   borderRadius: '4px',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.35)',
                   border: '2px solid #fff',
-                  transition: 'left 0.3s ease'
+                  transition: 'left 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
                 }} />
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontWeight: 600 }}>
-                  <span>Underweight (&lt;18.5)</span>
-                  <span>Normal (18.5–24.9)</span>
-                  <span>Overweight (25–29.9)</span>
-                  <span>Obese (30+)</span>
+                  <span>&lt;18.5 Underweight</span>
+                  <span>18.5–24.9 Normal</span>
+                  <span>25–29.9 Overweight</span>
+                  <span>30+ Obese</span>
                 </div>
               </div>
 
@@ -376,60 +447,73 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
               </p>
             </div>
 
-            {/* Quick Metrics Grid */}
+            {/* Key Metrics Summary Card */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
               gap: '1rem',
               marginBottom: '1.5rem'
             }}>
-              <div className="m3-card-filled" style={{ padding: '1rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.2rem' }}>
+              <div className="m3-card-filled" style={{ padding: '1rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.25rem' }}>
                   Ideal Normal Weight
                 </div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {input.unit === 'metric'
                     ? `${result.idealWeightMinKg} – ${result.idealWeightMaxKg} kg`
                     : `${result.idealWeightMinLbs} – ${result.idealWeightMaxLbs} lbs`}
                 </div>
+                <div style={{ fontSize: '0.75rem', color: '#146c2e', fontWeight: 700, marginTop: '0.2rem' }}>
+                  WHO Healthy Range
+                </div>
               </div>
 
-              <div className="m3-card-filled" style={{ padding: '1rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.2rem' }}>
+              <div className="m3-card-filled" style={{ padding: '1rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.25rem' }}>
                   Ponderal Index
                 </div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {result.ponderalIndex} <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>kg/m³</span>
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '0.2rem' }}>
+                  Height-cube proportional
                 </div>
               </div>
 
-              <div className="m3-card-filled" style={{ padding: '1rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.2rem' }}>
+              <div className="m3-card-filled" style={{ padding: '1rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.25rem' }}>
                   BMI Prime
                 </div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {result.bmiPrime} <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>(&lt;1.0 optimal)</span>
+                </div>
+                <div style={{ fontSize: '0.75rem', color: result.bmiPrime <= 1.0 ? '#146c2e' : '#b45309', fontWeight: 700, marginTop: '0.2rem' }}>
+                  {result.bmiPrime <= 1.0 ? 'Optimal Ratio' : 'Elevated Ratio'}
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons: Copy / Share */}
-            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+            {/* Action Controls: Instant One-Click Copy Feedback & Share */}
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
               <button
+                type="button"
                 onClick={handleCopy}
                 className="btn-secondary"
-                style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
+                style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
+                aria-label="Copy BMI metrics summary"
               >
-                {copied ? <Check size={15} color="#146c2e" /> : <Copy size={15} />}
-                <span>{copied ? 'Copied to Clipboard' : 'Copy Metrics'}</span>
+                {copied ? <Check size={16} color="#146c2e" /> : <Copy size={16} />}
+                <span>{copied ? '✓ Copied Summary!' : 'Copy Summary'}</span>
               </button>
 
               <button
+                type="button"
                 onClick={handleShare}
                 className="btn-primary"
-                style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
+                style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
+                aria-label="Share BMI calculation"
               >
-                <Share2 size={15} />
+                <Share2 size={16} />
                 <span>Share Result</span>
               </button>
             </div>
