@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocalization, getCurrencyForLanguage } from '../../context/LocalizationContext';
+import { getCurrency } from '../../data/currencies';
 import { X, Check, Globe, Coins, Sparkles } from 'lucide-react';
 
 interface LocaleSelectorProps {
@@ -167,9 +168,9 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
           >
             <span style={{ fontSize: '1.25rem' }}>{detectedGeo.flag}</span>
             <div style={{ flex: 1, lineHeight: 1.35 }}>
-              <strong style={{ fontWeight: 700 }}>Auto-detected Region: </strong>
+              <strong style={{ fontWeight: 700 }}>Location Detected: </strong>
               <span>
-                {detectedGeo.countryName} ({detectedGeo.detectedCurrency} · {detectedGeo.detectedLanguage.toUpperCase()})
+                {detectedGeo.countryName} · Currency: <strong>{detectedGeo.detectedCurrency}</strong> ({getCurrency(detectedGeo.detectedCurrency).symbol}) · Default Language: <strong>English</strong>
               </span>
             </div>
             <Sparkles size={16} style={{ opacity: 0.75 }} />

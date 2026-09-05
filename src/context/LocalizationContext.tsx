@@ -46,18 +46,16 @@ export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfil
     case 'fr':
       return 'EUR';
     case 'es':
-      return detectedGeo?.detectedCurrency === 'USD' ? 'USD' : 'EUR';
+      return 'EUR';
     case 'pt':
       return 'BRL';
     case 'ar':
       return 'AED';
     case 'en':
-      if (detectedGeo?.detectedCurrency && ['INR', 'GBP', 'CAD', 'AUD'].includes(detectedGeo.detectedCurrency)) {
-        return detectedGeo.detectedCurrency;
-      }
-      return 'USD';
+      // For English, use the location-based currency
+      return detectedGeo?.detectedCurrency || 'USD';
     default:
-      return 'USD';
+      return detectedGeo?.detectedCurrency || 'USD';
   }
 }
 

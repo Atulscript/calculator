@@ -14,15 +14,15 @@ export function detectGeoProfile(): GeoProfile {
     timeZone = 'UTC';
   }
 
-  const navLang = (typeof navigator !== 'undefined' && (navigator.language || (navigator.languages && navigator.languages[0]))) || 'en';
-  const cleanLang = navLang.toLowerCase().slice(0, 2);
+  // Location mapping:
+  // - Language is ALWAYS strictly 'en' (English) by default for all geographies worldwide.
+  // - Currency is automatically detected based on the user's location.
 
-  // Timezone to Country & Currency mapping
   if (timeZone.includes('Kolkata') || timeZone.includes('Calcutta') || timeZone.includes('India')) {
     return {
       countryCode: 'IN',
       countryName: 'India',
-      detectedLanguage: cleanLang === 'hi' ? 'hi' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'INR',
       flag: '🇮🇳'
     };
@@ -42,7 +42,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'DE',
       countryName: 'Germany / Europe',
-      detectedLanguage: cleanLang === 'de' ? 'de' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'EUR',
       flag: '🇩🇪'
     };
@@ -52,7 +52,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'FR',
       countryName: 'France / Europe',
-      detectedLanguage: cleanLang === 'fr' ? 'fr' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'EUR',
       flag: '🇫🇷'
     };
@@ -62,7 +62,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'ES',
       countryName: 'Spain / Europe',
-      detectedLanguage: cleanLang === 'es' ? 'es' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'EUR',
       flag: '🇪🇸'
     };
@@ -72,7 +72,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'EU',
       countryName: 'European Union',
-      detectedLanguage: cleanLang === 'es' ? 'es' : cleanLang === 'fr' ? 'fr' : cleanLang === 'de' ? 'de' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'EUR',
       flag: '🇪🇺'
     };
@@ -82,7 +82,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'JP',
       countryName: 'Japan',
-      detectedLanguage: 'ja',
+      detectedLanguage: 'en',
       detectedCurrency: 'JPY',
       flag: '🇯🇵'
     };
@@ -92,7 +92,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'CN',
       countryName: 'China',
-      detectedLanguage: 'zh',
+      detectedLanguage: 'en',
       detectedCurrency: 'CNY',
       flag: '🇨🇳'
     };
@@ -102,7 +102,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'BR',
       countryName: 'Brazil',
-      detectedLanguage: 'pt',
+      detectedLanguage: 'en',
       detectedCurrency: 'BRL',
       flag: '🇧🇷'
     };
@@ -112,7 +112,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'AE',
       countryName: 'United Arab Emirates',
-      detectedLanguage: cleanLang === 'ar' ? 'ar' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'AED',
       flag: '🇦🇪'
     };
@@ -122,7 +122,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'CA',
       countryName: 'Canada',
-      detectedLanguage: cleanLang === 'fr' ? 'fr' : 'en',
+      detectedLanguage: 'en',
       detectedCurrency: 'CAD',
       flag: '🇨🇦'
     };
@@ -142,7 +142,7 @@ export function detectGeoProfile(): GeoProfile {
     return {
       countryCode: 'LATAM',
       countryName: 'Latin America',
-      detectedLanguage: 'es',
+      detectedLanguage: 'en',
       detectedCurrency: 'USD',
       flag: '🌎'
     };
@@ -152,7 +152,7 @@ export function detectGeoProfile(): GeoProfile {
   return {
     countryCode: 'US',
     countryName: 'United States',
-    detectedLanguage: cleanLang === 'es' ? 'es' : 'en',
+    detectedLanguage: 'en',
     detectedCurrency: 'USD',
     flag: '🇺🇸'
   };
