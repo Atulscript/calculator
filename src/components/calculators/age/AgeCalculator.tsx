@@ -9,7 +9,7 @@ import { FunInsightsSection } from './FunInsightsSection';
 import { AgeComparisonMode } from './AgeComparisonMode';
 import { ReverseDobMode } from './ReverseDobMode';
 import { ShareModal } from './ShareModal';
-import { SeoContentSection } from './SeoContentSection';
+import { CalculatorArticleView } from '../../common/CalculatorArticleView';
 import {
   Calendar,
   CalendarDays,
@@ -332,8 +332,12 @@ export const AgeCalculator: React.FC = () => {
       {/* Render Mode 4: Age Comparison */}
       {mode === 'compare' && <AgeComparisonMode />}
 
-      {/* Educational & SEO FAQ Guide */}
-      <SeoContentSection />
+      {/* Material Design 3 Educational Guide & Article */}
+      <CalculatorArticleView
+        calculatorId="age-calculator"
+        calculatorName="Age Calculator"
+        categoryName="Everyday Life"
+      />
 
       {/* Share Modal */}
       <ShareModal

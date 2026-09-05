@@ -1,6 +1,7 @@
 import React from 'react';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import { Sparkles, ArrowLeft, ArrowRight, Construction, CheckCircle2 } from 'lucide-react';
 
 interface GenericCalculatorPageProps {
@@ -115,6 +116,13 @@ export const GenericCalculatorPage: React.FC<GenericCalculatorPageProps> = ({ sl
           </button>
         </div>
       </div>
+
+      {/* Comprehensive Editorial & Explanatory Article for this Calculator */}
+      <CalculatorArticleView
+        calculatorId={calc.id}
+        calculatorName={calc.title}
+        categoryName={calc.category}
+      />
     </div>
   );
 };

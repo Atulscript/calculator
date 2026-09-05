@@ -3,13 +3,12 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateBMI, BMIInput } from '../utils/bmiEngine';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   HeartPulse,
   Share2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   ShieldCheck,
   ArrowRight
 } from 'lucide-react';
@@ -33,7 +32,6 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
   });
 
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'BMI Calculator - Accurate Body Mass Index & Healthy Weight Range | Calculator360';
@@ -66,25 +64,6 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
       handleCopy();
     }
   };
-
-  const faqs = [
-    {
-      q: 'What is Body Mass Index (BMI)?',
-      a: 'Body Mass Index (BMI) is a screening metric established by the World Health Organization (WHO) that compares an individual\'s weight relative to their height squared (kg/m²). It categorizes body weight status into underweight, normal, overweight, or obese ranges.'
-    },
-    {
-      q: 'What is considered a healthy BMI range?',
-      a: 'For adults aged 20 and older, a BMI between 18.5 and 24.9 is considered the normal, healthy weight range associated with lowest mortality and cardiovascular disease risk.'
-    },
-    {
-      q: 'Does BMI distinguish between muscle mass and fat?',
-      a: 'BMI is a general screening indicator and does not directly measure body fat percentage. Muscular athletes may have an elevated BMI while maintaining low body fat, while older adults may have normal BMI with reduced lean muscle.'
-    },
-    {
-      q: 'What is Ponderal Index and BMI Prime?',
-      a: 'Ponderal Index measures mass divided by height cubed (kg/m³), providing a more proportional evaluation for very tall or very short individuals. BMI Prime is the ratio of your BMI to the upper normal threshold (25.0); a BMI Prime between 0.74 and 1.0 indicates normal weight.'
-    }
-  ];
 
   // Gauge pointer position percentage (14 to 40 BMI scale)
   const gaugePercent = Math.min(100, Math.max(0, ((result.bmi - 14) / (40 - 14)) * 100));
@@ -569,57 +548,12 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
             </div>
           </div>
 
-          {/* Frequently Asked Questions */}
-          <div className="m3-card-elevated" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Frequently Asked Questions
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {faqs.map((faq, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    border: '1.5px solid var(--border-subtle)',
-                    borderRadius: 'var(--md-sys-shape-md)',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    style={{
-                      width: '100%',
-                      padding: '0.9rem 1.15rem',
-                      background: 'var(--surface-solid)',
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                      color: 'var(--text-primary)',
-                      fontWeight: 700,
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    <span>{faq.q}</span>
-                    {openFaq === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                  </button>
-                  {openFaq === idx && (
-                    <div style={{
-                      padding: '0.85rem 1.15rem 1.15rem',
-                      background: 'var(--surface-subtle)',
-                      fontSize: '0.875rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: 1.6,
-                      borderTop: '1px solid var(--border-subtle)'
-                    }}>
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Material Design 3 Comprehensive Educational Article & Guide */}
+          <CalculatorArticleView
+            calculatorId="bmi-calculator"
+            calculatorName="Body Mass Index (BMI) Calculator"
+            categoryName="Health & Fitness"
+          />
         </div>
 
         {/* Right Sidebar */}

@@ -3,14 +3,13 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { convertUnit, UNIT_CATEGORIES, UnitCategory } from '../utils/unitConverterEngine';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   Scale,
   ArrowRightLeft,
   Share2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   Ruler,
   Thermometer,
   Gauge,
@@ -30,7 +29,6 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
   const [toUnit, setToUnit] = useState<string>('ft');
   const [inputValue, setInputValue] = useState<number>(10);
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Universal Unit Converter - Metric & Imperial Units | Calculator360';
@@ -97,21 +95,6 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
     area: <Square size={16} />,
     digital: <HardDrive size={16} />
   };
-
-  const faqs = [
-    {
-      q: 'How accurate are the conversion constants?',
-      a: 'All constants conform strictly to National Institute of Standards and Technology (NIST) and International System of Units (SI) definitions. For instance, 1 international inch is exactly 0.0254 meters.'
-    },
-    {
-      q: 'What is the difference between decimal and binary digital storage units?',
-      a: 'In data storage, 1 Kilobyte (KB) in standard binary computing (IEC standard) equals 1,024 bytes (2^10). This calculator uses standard 1,024 byte multiples for operating systems and memory storage.'
-    },
-    {
-      q: 'Can I see all unit equivalents at the same time?',
-      a: 'Yes! The Full Category Conversion Matrix below the main calculator immediately displays the exact equivalent for all units within the selected category.'
-    }
-  ];
 
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
@@ -415,56 +398,12 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
       {/* Ad Banner */}
       <AdBanner slotType="leaderboard" adSlotId="unit-conv-bottom-native" />
 
-      {/* FAQ Accordion */}
-      <section style={{ marginTop: '3rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--surface-solid)',
-                  border: '1.5px solid var(--border-subtle)',
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  overflow: 'hidden'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  style={{
-                    width: '100%',
-                    padding: '1rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 1.25rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Comprehensive Editorial & Explanatory Article */}
+      <CalculatorArticleView
+        calculatorId="unit-converter"
+        calculatorName="Unit Converter"
+        categoryName="Everyday Life"
+      />
     </div>
   );
 };

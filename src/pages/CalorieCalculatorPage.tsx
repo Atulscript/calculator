@@ -3,13 +3,12 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateCalories, CalorieInput, ActivityLevel } from '../utils/calorieEngine';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   Flame,
   Share2,
   Copy,
-  Check,
-  ChevronDown,
-  ChevronUp
+  Check
 } from 'lucide-react';
 
 interface CalorieCalculatorPageProps {
@@ -34,7 +33,6 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
 
   const [selectedGoalKey, setSelectedGoalKey] = useState<'standardLoss' | 'maintenance' | 'mildLoss' | 'extremeLoss' | 'mildGain' | 'muscleGain'>('standardLoss');
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Calorie & TDEE Calculator - BMR, Weight Loss & Macros | Calculator360';
@@ -79,21 +77,6 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
     { id: 'moderate', title: 'Moderate Exercise', desc: '3 - 5 moderate gym/cardio sessions / week' },
     { id: 'active', title: 'Very Active', desc: '6 - 7 hard training sessions / week' },
     { id: 'very-active', title: 'Extra Active', desc: 'Heavy physical job or 2x daily training' }
-  ];
-
-  const faqs = [
-    {
-      q: 'What is the difference between BMR and TDEE?',
-      a: 'BMR (Basal Metabolic Rate) is the absolute minimum number of calories your body burns at rest just to keep organs functioning (breathing, pumping blood). TDEE (Total Daily Energy Expenditure) is your BMR plus all physical movement, exercise, and the thermic effect of food.'
-    },
-    {
-      q: 'Why is the Mifflin-St Jeor formula recommended over Harris-Benedict?',
-      a: 'Extensive clinical validation by the Academy of Nutrition and Dietetics demonstrated that the Mifflin-St Jeor equation predicts resting metabolic rate within 10% of measured values for a broader population than older formulas.'
-    },
-    {
-      q: 'How many calories do I need to cut to lose 1 pound of fat?',
-      a: 'One pound of body fat equals approximately 3,500 calories. A daily deficit of 500 kcal results in approximately 1 pound (0.45 kg) of fat loss per week (500 kcal × 7 days = 3,500 kcal).'
-    }
   ];
 
   return (
@@ -530,56 +513,12 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
       {/* Ad Banner */}
       <AdBanner slotType="leaderboard" adSlotId="calorie-calc-bottom-native" />
 
-      {/* FAQ Accordion */}
-      <section style={{ marginTop: '3rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--surface-solid)',
-                  border: '1.5px solid var(--border-subtle)',
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  overflow: 'hidden'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  style={{
-                    width: '100%',
-                    padding: '1rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 1.25rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Comprehensive Editorial & Explanatory Article */}
+      <CalculatorArticleView
+        calculatorId="calorie-calculator"
+        calculatorName="Calorie Calculator"
+        categoryName="Health"
+      />
     </div>
   );
 };

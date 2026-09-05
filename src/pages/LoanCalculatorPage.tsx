@@ -4,13 +4,12 @@ import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateLoanEMI, LoanInput } from '../utils/loanEngine';
 import { useLocalization } from '../context/LocalizationContext';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   Landmark,
   Share2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   ShieldCheck,
   ArrowRight
 } from 'lucide-react';
@@ -39,7 +38,6 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
   }));
 
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Loan & EMI Calculator - Monthly Payments & Amortization Schedule | Calculator360';
@@ -72,21 +70,6 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
       handleCopy();
     }
   };
-
-  const faqs = [
-    {
-      q: 'How is an EMI (Equated Monthly Installment) calculated?',
-      a: 'EMI is computed using standard amortization physics: EMI = [P × r × (1+r)ⁿ] / [(1+r)ⁿ - 1], where P is Principal loan amount, r is monthly interest rate (annual rate / 12 / 100), and n is total duration in months.'
-    },
-    {
-      q: 'Why does early loan repayment save significant interest?',
-      a: 'In standard amortization schedules, early monthly payments primarily cover accrued interest on the large remaining principal. Making extra payments or choosing a shorter tenure reduces the principal balance faster, drastically reducing compounded interest over the life of the loan.'
-    },
-    {
-      q: 'Does this calculator apply to both mortgages and personal/auto loans?',
-      a: 'Yes. Any fixed-rate loan that uses regular monthly amortizing payments follows this exact mathematical formulation.'
-    }
-  ];
 
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
@@ -525,50 +508,12 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
             </div>
           </div>
 
-          {/* FAQs */}
-          <div className="m3-card-elevated" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Frequently Asked Questions
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {faqs.map((faq, idx) => (
-                <div key={idx} style={{ border: '1.5px solid var(--border-subtle)', borderRadius: 'var(--md-sys-shape-md)', overflow: 'hidden' }}>
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    style={{
-                      width: '100%',
-                      padding: '0.9rem 1.15rem',
-                      background: 'var(--surface-solid)',
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                      color: 'var(--text-primary)',
-                      fontWeight: 700,
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    <span>{faq.q}</span>
-                    {openFaq === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                  </button>
-                  {openFaq === idx && (
-                    <div style={{
-                      padding: '0.85rem 1.15rem 1.15rem',
-                      background: 'var(--surface-subtle)',
-                      fontSize: '0.875rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: 1.6,
-                      borderTop: '1px solid var(--border-subtle)'
-                    }}>
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Material Design 3 Comprehensive Educational Article & Guide */}
+          <CalculatorArticleView
+            calculatorId="loan-calculator"
+            calculatorName="Loan & EMI Calculator"
+            categoryName="Finance"
+          />
         </div>
 
         {/* Right Sidebar */}

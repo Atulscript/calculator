@@ -3,13 +3,12 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateDateDifference, DateDifferenceInput } from '../utils/dateDifferenceEngine';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   CalendarRange,
   Share2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   Clock,
   Briefcase,
   Sun,
@@ -37,7 +36,6 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
   });
 
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Date Difference Calculator - Days Between Two Dates | Calculator360';
@@ -86,21 +84,6 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
     const endOfYear = new Date(d.getFullYear(), 11, 31);
     setInput(prev => ({ ...prev, endDate: endOfYear.toISOString().split('T')[0] }));
   };
-
-  const faqs = [
-    {
-      q: 'How does the calculator handle leap years and different month lengths?',
-      a: 'The calculator uses precise Gregorian calendar rules, taking into account 28, 29, 30, and 31-day months as well as quadrennial leap years to calculate the exact calendar delta.'
-    },
-    {
-      q: 'What is the "Include End Day" option?',
-      a: 'By standard convention, the duration between May 1st and May 2nd is 1 day. If you check "Include End Day", the count becomes inclusive of both the start and end dates (i.e. 2 days total).'
-    },
-    {
-      q: 'How are business working days calculated?',
-      a: 'Business days count all Mondays through Fridays between the two dates, excluding Saturdays and Sundays. Public bank holidays are not subtracted automatically because they vary by local jurisdiction.'
-    }
-  ];
 
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
@@ -449,56 +432,12 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
       {/* Ad Banner */}
       <AdBanner slotType="leaderboard" adSlotId="date-diff-bottom-native" />
 
-      {/* FAQ Accordion */}
-      <section style={{ marginTop: '3rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--surface-solid)',
-                  border: '1.5px solid var(--border-subtle)',
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  overflow: 'hidden'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  style={{
-                    width: '100%',
-                    padding: '1rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 1.25rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Comprehensive Editorial & Explanatory Article */}
+      <CalculatorArticleView
+        calculatorId="date-difference-calculator"
+        calculatorName="Date Difference Calculator"
+        categoryName="Everyday Life"
+      />
     </div>
   );
 };

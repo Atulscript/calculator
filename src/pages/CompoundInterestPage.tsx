@@ -4,13 +4,12 @@ import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateCompoundInterest, CompoundInterestInput } from '../utils/compoundInterestEngine';
 import { useLocalization } from '../context/LocalizationContext';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   TrendingUp,
   Share2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   Sparkles
 } from 'lucide-react';
 
@@ -38,7 +37,6 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
   }));
 
   const [copied, setCopied] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Compound Interest Calculator - Future Value & Growth Forecast | Calculator360';
@@ -75,25 +73,6 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
       handleCopy();
     }
   };
-
-  const faqs = [
-    {
-      q: 'What is compound interest and how does it differ from simple interest?',
-      a: 'Compound interest is interest earned on both your initial principal and on the interest accumulated over previous periods ("interest on interest"). Unlike simple interest, which grows linearly, compound interest grows exponentially over time.'
-    },
-    {
-      q: 'What is the Rule of 72 in compound interest?',
-      a: 'The Rule of 72 is a quick mental shortcut to estimate how many years it takes for an investment to double: divide 72 by the annual interest rate. For example, at an 8% annual return, your money doubles in approximately 72 / 8 = 9 years.'
-    },
-    {
-      q: 'Does compounding frequency make a significant difference?',
-      a: 'Yes. More frequent compounding (such as monthly or daily versus annually) generates slightly higher returns because your interest is calculated and reinvested earlier and more frequently.'
-    },
-    {
-      q: 'Are regular monthly contributions factored into this calculator?',
-      a: 'Yes! You can specify optional monthly or annual deposits. Each deposit begins earning compound interest from the time it is contributed, substantially compounding your terminal wealth.'
-    }
-  ];
 
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
@@ -512,58 +491,12 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
 
       {/* Ad Banner */}
       <AdBanner slotType="leaderboard" adSlotId="compound-calc-bottom-native" />
-
-      {/* FAQ Accordion */}
-      <section style={{ marginTop: '3rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--surface-solid)',
-                  border: '1.5px solid var(--border-subtle)',
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  overflow: 'hidden',
-                  transition: 'border-color 0.15s ease'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  style={{
-                    width: '100%',
-                    padding: '1rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 1.25rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Comprehensive Editorial & Explanatory Article */}
+      <CalculatorArticleView
+        calculatorId="compound-interest-calculator"
+        calculatorName="Compound Interest Calculator"
+        categoryName="Finance"
+      />
     </div>
   );
 };

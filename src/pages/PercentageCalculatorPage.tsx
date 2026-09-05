@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
+import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   calculatePercentOfNumber,
   calculateNumberIsWhatPercentOfTotal,
@@ -14,8 +15,6 @@ import {
   TrendingDown,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   PieChart,
   SlidersHorizontal,
   Info
@@ -51,7 +50,6 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
   const [isAdd, setIsAdd] = useState<boolean>(true);
 
   const [copied, setCopied] = useState<string | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Percentage Calculator - Instant Percentage Increase, Decrease & Ratio | Calculator360';
@@ -83,25 +81,6 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
     const factor = gcd(Math.abs(Math.round(numerator)), Math.abs(Math.round(denominator)));
     return `${Math.round(numerator / factor)} / ${Math.round(denominator / factor)}`;
   };
-
-  const faqs = [
-    {
-      q: 'How do you calculate the percentage of a number?',
-      a: 'To calculate P% of X, convert the percentage to a decimal by dividing by 100 (P / 100), and then multiply by X. For example, 15% of 200 is (15 / 100) × 200 = 30.'
-    },
-    {
-      q: 'How do you calculate percentage increase or decrease?',
-      a: 'Subtract the initial value from the final value to find the change: (New - Old). Divide that difference by the original value, and multiply by 100: ((New - Old) / |Old|) × 100.'
-    },
-    {
-      q: 'How do you add sales tax or tip percentage?',
-      a: 'Multiply the base price by the percentage rate as a decimal (e.g. 10% = 0.10), then add the result to the base price. Example: $120 + ($120 × 0.10) = $132.'
-    },
-    {
-      q: 'What is the fastest way to calculate 15% or 20% mentally?',
-      a: 'To find 10%, move the decimal point one place to the left. For 20%, double that amount. For 15%, take 10% and add half of it (5%).'
-    }
-  ];
 
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
@@ -712,56 +691,12 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
       {/* Ad Banner */}
       <AdBanner slotType="leaderboard" adSlotId="percentage-calc-bottom-native" />
 
-      {/* FAQ Section */}
-      <section style={{ marginTop: '3rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--surface-solid)',
-                  border: '1.5px solid var(--border-subtle)',
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  overflow: 'hidden'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  style={{
-                    width: '100%',
-                    padding: '1rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 1.25rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Material Design 3 Comprehensive Educational Article & Guide */}
+      <CalculatorArticleView
+        calculatorId="percentage-calculator"
+        calculatorName="Percentage Calculator"
+        categoryName="Mathematics"
+      />
     </div>
   );
 };
