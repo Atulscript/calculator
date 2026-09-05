@@ -30,10 +30,19 @@ export const App: React.FC = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
+  // Helper to normalize route path relative to app base URL
+  const getNormalizedPath = (fullPath: string) => {
+    let p = fullPath || '/';
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+    if (base && p.startsWith(base)) {
+      p = p.slice(base.length);
+    }
+    return p || '/';
+  };
+
   // Routing State based on window.location.pathname
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    const p = window.location.pathname;
-    return p ? p : '/';
+    return getNormalizedPath(window.location.pathname);
   });
 
   const [activeCategory, setActiveCategory] = useState<CalculatorCategory>('all');
@@ -42,15 +51,18 @@ export const App: React.FC = () => {
   // Handle Browser Back / Forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+      setCurrentPath(getNormalizedPath(window.location.pathname));
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const navigate = (path: string) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+    const cleanTarget = path.startsWith('/') ? path : '/' + path;
+    const fullTarget = base + cleanTarget;
+    window.history.pushState({}, '', fullTarget);
+    setCurrentPath(getNormalizedPath(fullTarget));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
