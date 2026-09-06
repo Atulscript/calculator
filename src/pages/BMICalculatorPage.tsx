@@ -377,13 +377,16 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
 
               <div style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
                 <span style={{
-                  padding: '0.4rem 1.25rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: '0.45rem 1.35rem',
                   borderRadius: 'var(--md-sys-shape-full)',
-                  background: `${result.categoryColor}20`,
-                  color: result.categoryColor,
+                  background: `color-mix(in srgb, ${result.colorToken || result.categoryColor} 16%, transparent)`,
+                  color: result.colorToken || result.categoryColor,
                   fontWeight: 800,
                   fontSize: '0.95rem',
-                  border: `1.5px solid ${result.categoryColor}`
+                  border: `1.5px solid ${result.colorToken || result.categoryColor}`,
+                  boxShadow: `0 2px 8px color-mix(in srgb, ${result.colorToken || result.categoryColor} 20%, transparent)`
                 }}>
                   {result.categoryLabel}
                 </span>

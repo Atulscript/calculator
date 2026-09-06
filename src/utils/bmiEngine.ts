@@ -23,6 +23,7 @@ export interface BMIResult {
   category: BMICategory;
   categoryLabel: string;
   categoryColor: string;
+  colorToken: string;
   idealWeightMinKg: number;
   idealWeightMaxKg: number;
   idealWeightMinLbs: number;
@@ -65,7 +66,8 @@ export function calculateBMI(input: BMIInput): BMIResult {
 
   let category: BMICategory = 'normal';
   let categoryLabel = 'Normal Weight';
-  let categoryColor = '#146c2e'; // M3 Tertiary Green
+  let categoryColor = '#047857'; // M3 Tertiary Green
+  let colorToken = 'var(--accent-emerald)';
   let summaryText = 'You have a healthy body weight for your height according to WHO standards.';
   let weightDiffKg = 0;
   let weightDiffLbs = 0;
@@ -73,7 +75,8 @@ export function calculateBMI(input: BMIInput): BMIResult {
   if (bmi < 16.0) {
     category = 'severe_underweight';
     categoryLabel = 'Severe Thinness';
-    categoryColor = '#b3261e';
+    categoryColor = '#0284c7';
+    colorToken = 'var(--accent-cyan)';
     weightDiffKg = Number((idealWeightMinKg - weightKg).toFixed(1));
     weightDiffLbs = Number((idealWeightMinLbs - (weightKg * 2.20462)).toFixed(1));
     summaryText = `You are below the recommended healthy weight range by approximately ${weightDiffKg} kg.`;
@@ -81,13 +84,15 @@ export function calculateBMI(input: BMIInput): BMIResult {
     category = 'underweight';
     categoryLabel = 'Underweight';
     categoryColor = '#0284c7';
+    colorToken = 'var(--accent-cyan)';
     weightDiffKg = Number((idealWeightMinKg - weightKg).toFixed(1));
     weightDiffLbs = Number((idealWeightMinLbs - (weightKg * 2.20462)).toFixed(1));
     summaryText = `You are slightly below the healthy weight range by about ${weightDiffKg} kg.`;
   } else if (bmi < 25.0) {
     category = 'normal';
     categoryLabel = 'Healthy Weight';
-    categoryColor = '#146c2e';
+    categoryColor = '#047857';
+    colorToken = 'var(--accent-emerald)';
     weightDiffKg = 0;
     weightDiffLbs = 0;
     summaryText = 'Your BMI is in the optimal healthy zone associated with lowest health risks.';
@@ -95,6 +100,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
     category = 'overweight';
     categoryLabel = 'Overweight';
     categoryColor = '#b45309';
+    colorToken = 'var(--accent-amber)';
     weightDiffKg = Number((weightKg - idealWeightMaxKg).toFixed(1));
     weightDiffLbs = Number(((weightKg * 2.20462) - idealWeightMaxLbs).toFixed(1));
     summaryText = `You are approximately ${weightDiffKg} kg above the recommended upper healthy weight boundary.`;
@@ -102,20 +108,23 @@ export function calculateBMI(input: BMIInput): BMIResult {
     category = 'obese_class_1';
     categoryLabel = 'Obesity Class I';
     categoryColor = '#be123c';
+    colorToken = 'var(--accent-rose)';
     weightDiffKg = Number((weightKg - idealWeightMaxKg).toFixed(1));
     weightDiffLbs = Number(((weightKg * 2.20462) - idealWeightMaxLbs).toFixed(1));
     summaryText = `Your BMI falls into Obesity Class I. Adopting a calorie-controlled diet and exercise is recommended.`;
   } else if (bmi < 40.0) {
     category = 'obese_class_2';
     categoryLabel = 'Obesity Class II';
-    categoryColor = '#b3261e';
+    categoryColor = '#be123c';
+    colorToken = 'var(--accent-rose)';
     weightDiffKg = Number((weightKg - idealWeightMaxKg).toFixed(1));
     weightDiffLbs = Number(((weightKg * 2.20462) - idealWeightMaxLbs).toFixed(1));
     summaryText = `Your BMI falls into Obesity Class II. Consulting a healthcare provider for guided weight loss is advised.`;
   } else {
     category = 'obese_class_3';
     categoryLabel = 'Obesity Class III';
-    categoryColor = '#7f1d1d';
+    categoryColor = '#be123c';
+    colorToken = 'var(--accent-rose)';
     weightDiffKg = Number((weightKg - idealWeightMaxKg).toFixed(1));
     weightDiffLbs = Number(((weightKg * 2.20462) - idealWeightMaxLbs).toFixed(1));
     summaryText = `Your BMI falls into severe Obesity Class III. Professional medical evaluation is strongly recommended.`;
@@ -126,6 +135,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
     category,
     categoryLabel,
     categoryColor,
+    colorToken,
     idealWeightMinKg,
     idealWeightMaxKg,
     idealWeightMinLbs,

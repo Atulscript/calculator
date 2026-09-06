@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { compareAges } from '../../../utils/ageEngine';
-import { formatDateToInput, formatNumber } from '../../../utils/dateUtils';
+import { formatDateToInput, formatNumber, parseLocalDate } from '../../../utils/dateUtils';
 import { Users, Sparkles } from 'lucide-react';
 
 export const AgeComparisonMode: React.FC = () => {
@@ -14,10 +14,10 @@ export const AgeComparisonMode: React.FC = () => {
 
   const comparison = compareAges(
     p1Name,
-    new Date(p1Dob),
+    parseLocalDate(p1Dob),
     p2Name,
-    new Date(p2Dob),
-    new Date(targetDate)
+    parseLocalDate(p2Dob),
+    parseLocalDate(targetDate)
   );
 
   return (

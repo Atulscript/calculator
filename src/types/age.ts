@@ -30,6 +30,7 @@ export interface NextBirthdayInfo {
   turningAge: number;
   progressPercentage: number;
   halfBirthdayDate: Date;
+  isToday?: boolean;
   upcomingBirthdays: Array<{
     year: number;
     age: number;

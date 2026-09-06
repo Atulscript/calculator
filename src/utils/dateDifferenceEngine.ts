@@ -1,3 +1,5 @@
+import { parseLocalDate } from './dateUtils';
+
 export interface DateDifferenceInput {
   startDate: string; // YYYY-MM-DD
   endDate: string;   // YYYY-MM-DD
@@ -24,8 +26,8 @@ export interface DateDifferenceResult {
 export function calculateDateDifference(input: DateDifferenceInput): DateDifferenceResult {
   const { startDate, endDate, includeEndDay } = input;
 
-  const d1 = new Date(startDate + 'T00:00:00');
-  const d2 = new Date(endDate + 'T00:00:00');
+  const d1 = parseLocalDate(startDate);
+  const d2 = parseLocalDate(endDate);
 
   if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
     return {
@@ -51,17 +53,19 @@ export function calculateDateDifference(input: DateDifferenceInput): DateDiffere
   const end = isNegative ? d1 : d2;
 
   // Exact calendar difference in years, months, days
-  let y1 = start.getFullYear();
-  let m1 = start.getMonth();
-  let day1 = start.getDate();
+  const y1 = start.getFullYear();
+  const m1 = start.getMonth();
+  const day1 = start.getDate();
 
-  let y2 = end.getFullYear();
-  let m2 = end.getMonth();
-  let day2 = end.getDate();
-
+  // Safely advance end date by 1 day when includeEndDay is checked to avoid day2 = 32 overflow
+  const effectiveEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate(), 0, 0, 0, 0);
   if (includeEndDay) {
-    day2 += 1;
+    effectiveEnd.setDate(effectiveEnd.getDate() + 1);
   }
+
+  const y2 = effectiveEnd.getFullYear();
+  const m2 = effectiveEnd.getMonth();
+  const day2 = effectiveEnd.getDate();
 
   let years = y2 - y1;
   let months = m2 - m1;

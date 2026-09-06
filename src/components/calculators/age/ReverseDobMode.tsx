@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { findReverseDob } from '../../../utils/ageEngine';
-import { formatDateToInput, formatFriendlyDate } from '../../../utils/dateUtils';
+import { formatDateToInput, formatFriendlyDate, parseLocalDate } from '../../../utils/dateUtils';
 import { Sparkles } from 'lucide-react';
 
 export const ReverseDobMode: React.FC = () => {
@@ -11,7 +11,7 @@ export const ReverseDobMode: React.FC = () => {
   const [days, setDays] = useState(15);
   const [asOfDate, setAsOfDate] = useState(todayStr);
 
-  const result = findReverseDob(Number(years), Number(months), Number(days), new Date(asOfDate));
+  const result = findReverseDob(Number(years), Number(months), Number(days), parseLocalDate(asOfDate));
 
   return (
     <div style={{ marginTop: '1rem' }}>

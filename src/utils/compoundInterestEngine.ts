@@ -105,7 +105,7 @@ export function calculateCompoundInterest(input: CompoundInterestInput): Compoun
       contributions: Math.round(yearContributions),
       interestEarned: Math.round(yearInterest),
       endingBalance: Math.round(currentBalance),
-      totalContributions: Math.round(principal + totalContribAcc),
+      totalContributions: Math.round(totalContribAcc),
       totalInterest: Math.round(totalInterestAcc)
     });
   }

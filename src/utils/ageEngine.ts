@@ -7,6 +7,7 @@ import {
   TotalTimeBreakdown,
   ZodiacInfo
 } from '../types/age';
+import { parseLocalDate } from './dateUtils';
 
 const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -363,24 +364,75 @@ export function calculateNextBirthday(birthDate: Date, targetDate: Date) {
   const birthMonth = birthDate.getMonth();
   const birthDay = birthDate.getDate();
 
-  // Test if birthday happened this year yet
+  // Test if today is the birthday
+  const isToday =
+    (targetDate.getMonth() === birthMonth && targetDate.getDate() === birthDay) ||
+    (birthMonth === 1 && birthDay === 29 && !isLeapYear(targetYear) && targetDate.getMonth() === 1 && targetDate.getDate() === 28);
+
   let nextBdayYear = targetYear;
-  let nextBday = new Date(nextBdayYear, birthMonth, birthDay);
+  let nextBday: Date;
 
-  // Handle Feb 29 in non-leap year: defaults to Feb 28 or Mar 1
-  if (birthMonth === 1 && birthDay === 29 && !isLeapYear(nextBdayYear)) {
-    nextBday = new Date(nextBdayYear, 1, 28);
-  }
-
-  if (nextBday.getTime() < targetDate.getTime()) {
-    nextBdayYear += 1;
+  if (isToday) {
+    nextBdayYear = targetYear;
     nextBday = new Date(nextBdayYear, birthMonth, birthDay);
     if (birthMonth === 1 && birthDay === 29 && !isLeapYear(nextBdayYear)) {
       nextBday = new Date(nextBdayYear, 1, 28);
     }
+
+    const turningAge = nextBdayYear - birthDate.getFullYear();
+    const dayOfWeek = DAYS_OF_WEEK[nextBday.getDay()];
+
+    const upcomingBirthdays = [];
+    for (let i = 1; i <= 5; i++) {
+      const year = nextBdayYear + i;
+      let bDate = new Date(year, birthMonth, birthDay);
+      if (birthMonth === 1 && birthDay === 29 && !isLeapYear(year)) {
+        bDate = new Date(year, 1, 28);
+      }
+      const dow = DAYS_OF_WEEK[bDate.getDay()];
+      upcomingBirthdays.push({
+        year,
+        age: year - birthDate.getFullYear(),
+        dayOfWeek: dow,
+        isWeekend: bDate.getDay() === 0 || bDate.getDay() === 6
+      });
+    }
+
+    const halfBirthdayDate = new Date(nextBday);
+    halfBirthdayDate.setMonth(halfBirthdayDate.getMonth() + 6);
+
+    return {
+      nextBirthdayDate: nextBday,
+      daysRemaining: 0,
+      hoursRemaining: 0,
+      minutesRemaining: 0,
+      secondsRemaining: 0,
+      dayOfWeek,
+      turningAge,
+      progressPercentage: 100,
+      halfBirthdayDate,
+      isToday: true,
+      upcomingBirthdays
+    };
   }
 
-  const diffMs = nextBday.getTime() - targetDate.getTime();
+  // Not today: compare calendar dates at midnight to avoid time-of-day discrepancy
+  const thisYearBday = new Date(targetYear, birthMonth, birthDay, 0, 0, 0, 0);
+  if (birthMonth === 1 && birthDay === 29 && !isLeapYear(targetYear)) {
+    thisYearBday.setDate(28);
+  }
+  const targetMidnight = new Date(targetYear, targetDate.getMonth(), targetDate.getDate(), 0, 0, 0, 0);
+
+  if (thisYearBday.getTime() < targetMidnight.getTime()) {
+    nextBdayYear += 1;
+  }
+
+  nextBday = new Date(nextBdayYear, birthMonth, birthDay);
+  if (birthMonth === 1 && birthDay === 29 && !isLeapYear(nextBdayYear)) {
+    nextBday = new Date(nextBdayYear, 1, 28);
+  }
+
+  const diffMs = Math.max(0, nextBday.getTime() - targetDate.getTime());
   const totalSeconds = Math.max(0, Math.floor(diffMs / 1000));
   const daysRemaining = Math.floor(totalSeconds / 86400);
   const hoursRemaining = Math.floor((totalSeconds % 86400) / 3600);
@@ -432,6 +484,7 @@ export function calculateNextBirthday(birthDate: Date, targetDate: Date) {
     turningAge,
     progressPercentage,
     halfBirthdayDate,
+    isToday: false,
     upcomingBirthdays
   };
 }
@@ -440,8 +493,8 @@ export function calculateNextBirthday(birthDate: Date, targetDate: Date) {
  * Main Full Age Calculation Engine
  */
 export function computeFullAge(birthDateInput: Date | string, targetDateInput: Date | string = new Date()): AgeCalculationResult {
-  const birthDate = typeof birthDateInput === 'string' ? new Date(birthDateInput) : birthDateInput;
-  const targetDate = typeof targetDateInput === 'string' ? new Date(targetDateInput) : targetDateInput;
+  const birthDate = typeof birthDateInput === 'string' ? parseLocalDate(birthDateInput) : birthDateInput;
+  const targetDate = typeof targetDateInput === 'string' ? parseLocalDate(targetDateInput) : targetDateInput;
 
   const exactAge = calculateExactAge(birthDate, targetDate);
   const totals = calculateTotals(birthDate, targetDate);
@@ -549,13 +602,47 @@ export function findReverseDob(
   years: number,
   months: number,
   days: number,
-  targetDate: Date = new Date()
+  targetDateInput: Date | string = new Date()
 ): ReverseDobResult {
-  const d = new Date(targetDate);
-  d.setFullYear(d.getFullYear() - years);
-  d.setMonth(d.getMonth() - months);
-  d.setDate(d.getDate() - days);
+  const targetDate = typeof targetDateInput === 'string' ? parseLocalDate(targetDateInput) : new Date(targetDateInput.getTime());
 
+  // Step 1: subtract days with borrowing from previous month
+  let resYear = targetDate.getFullYear();
+  let resMonth = targetDate.getMonth();
+  let resDay = targetDate.getDate() - days;
+
+  while (resDay <= 0) {
+    resMonth -= 1;
+    if (resMonth < 0) {
+      resMonth = 11;
+      resYear -= 1;
+    }
+    const daysInPrevMonth = getDaysInMonth(resYear, resMonth);
+    resDay += daysInPrevMonth;
+  }
+
+  // Step 2: subtract months with borrowing from years
+  resMonth -= months;
+  while (resMonth < 0) {
+    resMonth += 12;
+    resYear -= 1;
+  }
+
+  // Clamp day of month to prevent overflow past end of month
+  const maxDayInMonth = getDaysInMonth(resYear, resMonth);
+  if (resDay > maxDayInMonth) {
+    resDay = maxDayInMonth;
+  }
+
+  // Step 3: subtract years
+  resYear -= years;
+
+  // Leap year safety check for Feb 29
+  if (resMonth === 1 && resDay === 29 && !isLeapYear(resYear)) {
+    resDay = 28;
+  }
+
+  const d = new Date(resYear, resMonth, resDay, 0, 0, 0, 0);
   const dayOfWeek = DAYS_OF_WEEK[d.getDay()];
 
   return {

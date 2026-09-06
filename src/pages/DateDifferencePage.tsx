@@ -3,6 +3,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateDateDifference, DateDifferenceInput } from '../utils/dateDifferenceEngine';
+import { formatDateToInput } from '../utils/dateUtils';
 import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
   CalendarRange,
@@ -22,11 +23,11 @@ interface DateDifferencePageProps {
 export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNavigate }) => {
   const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'date-difference-calculator') || CALCULATORS_REGISTRY[4];
 
-  const todayStr = useMemo(() => new Date().toISOString().split('T')[0], []);
+  const todayStr = useMemo(() => formatDateToInput(new Date()), []);
   const nextMonthStr = useMemo(() => {
     const d = new Date();
     d.setMonth(d.getMonth() + 1);
-    return d.toISOString().split('T')[0];
+    return formatDateToInput(d);
   }, []);
 
   const [input, setInput] = useState<DateDifferenceInput>({
