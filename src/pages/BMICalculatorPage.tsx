@@ -34,12 +34,12 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = 'BMI Calculator - Accurate Body Mass Index & Healthy Weight Range | Calculator360';
+    document.title = 'BMI Calculator – Check Your Body Mass Index (kg, cm, ft)';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculate your Body Mass Index (BMI), ideal healthy weight range, body category, and health metrics using World Health Organization (WHO) standards. Free, instant, and private.'
+        'Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.'
       );
     }
   }, []);
@@ -375,20 +375,35 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                 {result.bmi} <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-muted)' }}>kg/m²</span>
               </div>
 
-              <div style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', gap: '0.65rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
                 <span style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  padding: '0.45rem 1.35rem',
+                  padding: '0.45rem 1.15rem',
                   borderRadius: 'var(--md-sys-shape-full)',
                   background: `color-mix(in srgb, ${result.colorToken || result.categoryColor} 16%, transparent)`,
                   color: result.colorToken || result.categoryColor,
                   fontWeight: 800,
-                  fontSize: '0.95rem',
+                  fontSize: '0.9rem',
                   border: `1.5px solid ${result.colorToken || result.categoryColor}`,
                   boxShadow: `0 2px 8px color-mix(in srgb, ${result.colorToken || result.categoryColor} 20%, transparent)`
                 }}>
-                  {result.categoryLabel}
+                  WHO: {result.categoryLabel}
+                </span>
+
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: '0.45rem 1.15rem',
+                  borderRadius: 'var(--md-sys-shape-full)',
+                  background: `color-mix(in srgb, ${result.asianColorToken || result.asianCategoryColor} 16%, transparent)`,
+                  color: result.asianColorToken || result.asianCategoryColor,
+                  fontWeight: 800,
+                  fontSize: '0.9rem',
+                  border: `1.5px solid ${result.asianColorToken || result.asianCategoryColor}`,
+                  boxShadow: `0 2px 8px color-mix(in srgb, ${result.asianColorToken || result.asianCategoryColor} 20%, transparent)`
+                }}>
+                  Asian Cut-off: {result.asianCategoryLabel}
                 </span>
               </div>
 
@@ -438,15 +453,29 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
             }}>
               <div className="m3-card-filled" style={{ padding: '1rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.25rem' }}>
-                  Ideal Normal Weight
+                  WHO Healthy Range
                 </div>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {input.unit === 'metric'
                     ? `${result.idealWeightMinKg} – ${result.idealWeightMaxKg} kg`
                     : `${result.idealWeightMinLbs} – ${result.idealWeightMaxLbs} lbs`}
                 </div>
                 <div style={{ fontSize: '0.75rem', color: '#146c2e', fontWeight: 700, marginTop: '0.2rem' }}>
-                  WHO Healthy Range
+                  BMI 18.5 – 24.9
+                </div>
+              </div>
+
+              <div className="m3-card-filled" style={{ padding: '1rem 1.15rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '0.25rem' }}>
+                  Asian Indian Healthy Range
+                </div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                  {input.unit === 'metric'
+                    ? `${result.idealWeightMinKg} – ${result.asianIdealWeightMaxKg} kg`
+                    : `${result.idealWeightMinLbs} – ${result.asianIdealWeightMaxLbs} lbs`}
+                </div>
+                <div style={{ fontSize: '0.75rem', color: '#b45309', fontWeight: 700, marginTop: '0.2rem' }}>
+                  Upper Limit: 22.9 BMI
                 </div>
               </div>
 
@@ -543,6 +572,68 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                       </td>
                       <td style={{ padding: '0.65rem 0.75rem', color: 'var(--text-secondary)' }}>
                         {row.risk}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Asian Indian Consensus Standards Comparison Card */}
+          <div className="m3-card-elevated" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                WHO vs Asian Indian Cut-offs Comparison
+              </h3>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.2rem 0.65rem', borderRadius: '12px', background: 'color-mix(in srgb, var(--accent-amber, #b45309) 15%, transparent)', color: 'var(--accent-amber, #b45309)' }}>
+                Misra et al. / WHO Expert Consultation
+              </span>
+            </div>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>
+              South Asians often carry higher visceral adiposity and face cardiometabolic risks at lower BMIs. Health guidelines in India define overweight starting at <strong>23.0</strong> and obesity at <strong>25.0</strong>.
+            </p>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--border-subtle)', textAlign: 'left', color: 'var(--text-primary)' }}>
+                    <th style={{ padding: '0.65rem 0.75rem' }}>Category</th>
+                    <th style={{ padding: '0.65rem 0.75rem' }}>WHO (Global)</th>
+                    <th style={{ padding: '0.65rem 0.75rem' }}>Asian Indian Cut-offs</th>
+                    <th style={{ padding: '0.65rem 0.75rem' }}>Your Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { cat: 'Underweight', who: 'Below 18.5', asian: 'Below 18.5', isAsianMatch: result.bmi < 18.5 },
+                    { cat: 'Normal', who: '18.5 – 24.9', asian: '18.5 – 22.9', isAsianMatch: result.bmi >= 18.5 && result.bmi < 23.0 },
+                    { cat: 'Overweight', who: '25.0 – 29.9', asian: '23.0 – 24.9', isAsianMatch: result.bmi >= 23.0 && result.bmi < 25.0 },
+                    { cat: 'Obese', who: '30.0 and above', asian: '25.0 and above', isAsianMatch: result.bmi >= 25.0 }
+                  ].map((row, i) => (
+                    <tr
+                      key={i}
+                      style={{
+                        borderBottom: '1px solid var(--border-subtle)',
+                        background: row.isAsianMatch ? 'var(--surface-hover)' : 'transparent',
+                        fontWeight: row.isAsianMatch ? 700 : 500
+                      }}
+                    >
+                      <td style={{ padding: '0.65rem 0.75rem', color: 'var(--text-primary)' }}>
+                        {row.cat}
+                      </td>
+                      <td style={{ padding: '0.65rem 0.75rem', color: 'var(--text-muted)' }}>
+                        {row.who}
+                      </td>
+                      <td style={{ padding: '0.65rem 0.75rem', color: row.isAsianMatch ? 'var(--md-sys-color-primary)' : 'var(--text-primary)' }}>
+                        {row.asian}
+                      </td>
+                      <td style={{ padding: '0.65rem 0.75rem' }}>
+                        {row.isAsianMatch ? (
+                          <span style={{ fontSize: '0.78rem', color: '#146c2e', fontWeight: 800, padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'color-mix(in srgb, #146c2e 14%, transparent)' }}>
+                            Active Category
+                          </span>
+                        ) : '—'}
                       </td>
                     </tr>
                   ))}

@@ -39,12 +39,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = 'Calculator360 - Free Online Calculators for Everyday Life, Health, Finance & Math';
+    document.title = 'Calculator360: Free EMI, BMI, Age & Percentage Calculators';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculator360 provides clean, free online calculators for exact age, BMI, loan EMI, percentages, food scaling, construction, and everyday problem solving. Built with Google Material Design principles.'
+        'Fast, free calculators for EMI, SIP, BMI, age, percentages and unit conversions. Clear formulas, worked examples and no sign-up. Works on any phone.'
       );
     }
   }, []);

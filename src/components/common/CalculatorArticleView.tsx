@@ -47,34 +47,93 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
     setTimeout(() => setCopiedFormula(false), 2000);
   };
 
-  // Google Rich Snippet FAQ Schema
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: article.faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer
-      }
-    }))
-  };
+  // Google JSON-LD Structured Data Schema per Calculator360 SEO Specification
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://atulscript.github.io/calculator';
+  const pageUrl = article.canonicalUrl || `${siteUrl}/${calculatorId}/`;
 
-  const articleSchema = {
+  const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.subtitle,
-    author: {
-      '@type': 'Person',
-      name: article.author?.name || 'Calculator360 Scientific Editorial Board'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Calculator360',
-      url: window.location.origin
-    }
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: article.title,
+        description: article.subtitle,
+        isPartOf: {
+          '@type': 'WebSite',
+          '@id': `${siteUrl}/#website`,
+          name: 'Calculator360',
+          url: `${siteUrl}/`
+        },
+        breadcrumb: {
+          '@id': `${pageUrl}#breadcrumb`
+        },
+        mainEntity: {
+          '@id': `${pageUrl}#app`
+        },
+        inLanguage: 'en-IN'
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': `${pageUrl}#app`,
+        name: calculatorName,
+        url: pageUrl,
+        applicationCategory: categoryName.toLowerCase().includes('health')
+          ? 'HealthApplication'
+          : categoryName.toLowerCase().includes('finance')
+          ? 'FinanceApplication'
+          : 'UtilitiesApplication',
+        operatingSystem: 'Any',
+        browserRequirements: 'Requires JavaScript',
+        isAccessibleForFree: true,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR'
+        },
+        provider: {
+          '@type': 'Organization',
+          name: 'Calculator360',
+          url: `${siteUrl}/`
+        }
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: `${siteUrl}/`
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: categoryName,
+            item: `${siteUrl}/${categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-calculators/`
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: calculatorName
+          }
+        ]
+      },
+      ...(article.faqs && article.faqs.length > 0 ? [{
+        '@type': 'FAQPage',
+        '@id': `${pageUrl}#faq`,
+        mainEntity: article.faqs.map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer
+          }
+        }))
+      }] : [])
+    ]
   };
 
   return (
@@ -82,11 +141,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
       {/* Schema Injection for Google SEO */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
       {/* Header & Title Section */}
@@ -130,6 +185,28 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
           )}
         </div>
       </header>
+
+      {/* YMYL Regulatory / Medical / Financial Disclaimer */}
+      {article.disclaimer && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '0.85rem',
+          padding: '1rem 1.25rem',
+          borderRadius: 'var(--md-sys-shape-corner-medium, 12px)',
+          background: 'color-mix(in srgb, var(--accent-amber, #b45309) 12%, transparent)',
+          border: '1.5px solid color-mix(in srgb, var(--accent-amber, #b45309) 35%, transparent)',
+          margin: '1.25rem 0 1.75rem 0'
+        }}>
+          <AlertTriangle size={20} color="var(--accent-amber, #b45309)" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.2rem' }}>
+              Important Disclaimer
+            </strong>
+            {article.disclaimer}
+          </div>
+        </div>
+      )}
 
       {/* Quick Jump Table of Contents Pills */}
       <nav className="m3-toc-scroll-bar" aria-label="Table of contents">

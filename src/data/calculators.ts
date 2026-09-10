@@ -5,22 +5,31 @@ export const CALCULATORS_REGISTRY: CalculatorMeta[] = [
   // 1. FINANCE & MONEY (8 Calculators)
   // ==========================================
   {
-    id: 'loan-calculator',
-    slug: 'loan-calculator',
-    title: 'Loan & EMI Calculator',
-    shortDescription: 'Calculate monthly loan EMI payments, total interest payable, loan amortization schedules, and prepayment savings.',
+    id: 'emi-calculator',
+    slug: 'emi-calculator',
+    title: 'Loan EMI Calculator',
+    shortDescription: 'Calculate monthly loan EMI payments, total interest, principal split, and month-by-month amortization schedule.',
     category: 'finance',
-    tags: ['loan', 'emi', 'mortgage', 'interest', 'amortization', 'bank', 'money', 'finance'],
+    tags: ['emi', 'loan emi', 'home loan', 'car loan', 'personal loan', 'interest', 'amortization', 'finance'],
     icon: 'Landmark',
     badge: 'Flagship'
+  },
+  {
+    id: 'loan-calculator',
+    slug: 'loan-calculator',
+    title: 'Loan Calculator',
+    shortDescription: 'Find how much you can borrow for an affordable EMI, or calculate loan tenure and effective interest rate.',
+    category: 'finance',
+    tags: ['loan', 'loan amount', 'tenure', 'rate', 'eligibility', 'compare loans'],
+    icon: 'Calculator'
   },
   {
     id: 'compound-interest-calculator',
     slug: 'compound-interest-calculator',
     title: 'Compound Interest Calculator',
-    shortDescription: 'Forecast investment growth over time with compound interest, regular monthly deposits, and inflation adjustment.',
+    shortDescription: 'See how your money grows with compound interest, regular deposits, and quarterly compounding.',
     category: 'finance',
-    tags: ['compound interest', 'investing', 'savings', 'future value', 'stocks', 'returns', '401k', 'wealth'],
+    tags: ['compound interest', 'investing', 'savings', 'future value', 'stocks', 'returns', 'wealth', 'fd'],
     icon: 'TrendingUp',
     badge: 'Popular'
   },
@@ -171,12 +180,12 @@ export const CALCULATORS_REGISTRY: CalculatorMeta[] = [
     badge: 'Flagship'
   },
   {
-    id: 'date-difference-calculator',
-    slug: 'date-difference-calculator',
-    title: 'Date Difference Calculator',
-    shortDescription: 'Calculate the exact number of days, weeks, months, and business/working days between any two calendar dates.',
+    id: 'date-calculator',
+    slug: 'date-calculator',
+    title: 'Date Calculator',
+    shortDescription: 'Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date.',
     category: 'everyday',
-    tags: ['date', 'duration', 'days between', 'working days', 'business days', 'calendar'],
+    tags: ['date', 'days between dates', 'date difference', 'day counter', 'calendar', 'working days'],
     icon: 'CalendarRange',
     badge: 'Popular'
   },

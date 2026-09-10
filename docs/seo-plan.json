@@ -1,0 +1,5095 @@
+{
+  "meta": {
+    "name": "Calculator360 SEO plan and page specifications",
+    "version": "1.0",
+    "generated": "2026-09-11",
+    "purpose": "Single source of truth for SEO, content and schema. Designed to be given to AI tools as context.",
+    "how_to_use": [
+      "Give the whole file (or site + writing_rules + seo_rules + one page object) to an AI tool as context.",
+      "Use prompt_templates, replacing {{page.*}} with fields from one page object.",
+      "Pages with status.content = 'full_draft' already have content; ask the AI to review, not rewrite.",
+      "Replace yourdomain.com and all YYYY-MM-DD / real-name placeholders before publishing."
+    ]
+  },
+  "site": {
+    "brand": "Calculator360",
+    "domain": "https://yourdomain.com",
+    "current_url": "https://atulscript.github.io/calculator/",
+    "stack": "React 18 + Vite; to add React Router + vite-react-ssg pre-rendering",
+    "primary_market": "India, English (en-IN); US intent pages: mortgage, tip, gravel-and-mulch",
+    "future_languages": [
+      "hi-IN under /hi/"
+    ],
+    "audience": "Indian adults and students on mobile, checking money, health, exam and everyday numbers; many arrive from Google or WhatsApp shares",
+    "positioning": "Fast, free calculators with clear formulas, checked Indian examples and honest limits. No sign-up."
+  },
+  "architecture": {
+    "calculators": "Flat at root: /{slug}/",
+    "hubs": [
+      "/finance-calculators/",
+      "/health-calculators/",
+      "/date-time-calculators/",
+      "/math-calculators/",
+      "/unit-converter/",
+      "/construction-calculators/",
+      "/cooking-calculators/",
+      "/science-calculators/"
+    ],
+    "guides": "/guides/{slug}/",
+    "trust": [
+      "/about/",
+      "/editorial-policy/",
+      "/authors/{name}/",
+      "/contact/",
+      "/privacy-policy/",
+      "/terms/",
+      "/disclaimer/"
+    ],
+    "slug_changes": {
+      "/loan-calculator/ (current EMI tool)": "/emi-calculator/; /loan-calculator/ becomes a solve-for-amount/tenure/rate tool",
+      "/date-difference-calculator/": "/date-calculator/",
+      "/time-duration-calculator/": "/time-calculator/",
+      "/salary-calculator/": "/in-hand-salary-calculator/",
+      "/gpa-calculator/": "/cgpa-calculator/",
+      "/baking-conversion-calculator/": "/cups-to-grams-converter/",
+      "/hours-and-minutes-calculator/": "/work-hours-calculator/"
+    }
+  },
+  "writing_rules": {
+    "voice": [
+      "Talk to one person: 'you', not 'users'.",
+      "Indian English; rupees in lakh and crore; Indian examples first.",
+      "Short sentences, one idea each.",
+      "Plain verbs: shows, counts, works out.",
+      "No hype or superlatives.",
+      "Admit what the calculator can't do.",
+      "Give a reasoned opinion where useful."
+    ],
+    "must_include": [
+      "At least two worked examples with numbers calculated and cross-checked",
+      "The page's unique angle",
+      "A structure that fits the topic (don't reuse one template for every page)",
+      "Only features the live tool actually has",
+      "Linked primary sources for formulas, cut-offs, rates and rules",
+      "Real byline, real updated date; disclaimer on health and money pages",
+      "4\u20138 FAQs from real searches, answered in 2\u20134 sentences"
+    ],
+    "avoid_phrases": [
+      "In today's fast-paced world",
+      "Whether you're a... or a...",
+      "Look no further",
+      "delve",
+      "dive into",
+      "unlock",
+      "unleash",
+      "seamless",
+      "comprehensive guide",
+      "robust",
+      "powerful tool",
+      "navigate the complexities",
+      "it's important to note",
+      "game-changer",
+      "empower",
+      "elevate",
+      "100% accurate",
+      "clinically validated",
+      "cutting-edge",
+      "ultimate",
+      "effortlessly",
+      "in conclusion"
+    ],
+    "length": "Answer the searcher's questions, then stop. Launch drafts are 400\u2013700 words; simple converters can be shorter, salary and pregnancy pages will be longer.",
+    "ymyl": [
+      "Health and money pages need a disclaimer.",
+      "Name a qualified reviewer only if one actually reviewed the page.",
+      "Tax, GST and RBI-rule content must be checked against official sources on the publishing day and after every rule change."
+    ],
+    "honesty": "Drafts may be AI-assisted, but a real person must verify every number, edit the voice, add experience and sign the page. Never label a page 'human-written' or invent authors, credentials or reviewers.",
+    "final_check": [
+      "Read it aloud",
+      "Recalculate every number",
+      "Check every claim against the live tool",
+      "Search for avoid_phrases",
+      "Check title, meta and H1 against the spec",
+      "Validate schema in Rich Results Test"
+    ]
+  },
+  "seo_rules": {
+    "title": {
+      "max_chars": 60,
+      "rules": [
+        "Primary keyword first",
+        "No brand suffix on calculator pages (Google shows site name separately); keep brand on home and trust pages",
+        "Unique per page",
+        "Match the H1 in meaning",
+        "No 'Best', '#1', '100% accurate', ALL CAPS"
+      ]
+    },
+    "meta_description": {
+      "min_chars": 120,
+      "max_chars": 155,
+      "hard_max": 160,
+      "rules": [
+        "Say what the user gets",
+        "Name 2\u20133 specific outputs",
+        "End with a small reason to click",
+        "Specifics beat adjectives"
+      ]
+    },
+    "h1": {
+      "rules": [
+        "One per page",
+        "Plain primary keyword"
+      ]
+    },
+    "url": {
+      "rules": [
+        "Lowercase, hyphenated, trailing slash",
+        "Calculators at root level",
+        "Guides under /guides/",
+        "Never change a slug after launch without a 301"
+      ]
+    },
+    "head_tags": [
+      "title",
+      "meta description",
+      "canonical (absolute, self-referencing)",
+      "robots: index, follow, max-image-preview:large, max-snippet:-1",
+      "og:type, og:site_name, og:title, og:description, og:url, og:image (1200x630), og:locale",
+      "twitter:card summary_large_image",
+      "favicon links"
+    ],
+    "schema": {
+      "calculator": [
+        "WebPage",
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage (only when FAQs are visible on the page)"
+      ],
+      "hub": [
+        "CollectionPage",
+        "ItemList",
+        "BreadcrumbList"
+      ],
+      "guide": [
+        "Article (real author)",
+        "BreadcrumbList"
+      ],
+      "about": [
+        "AboutPage"
+      ],
+      "contact": [
+        "ContactPage"
+      ],
+      "sitewide": [
+        "Organization",
+        "WebSite"
+      ],
+      "never": [
+        "aggregateRating without real on-page ratings",
+        "Article on calculator pages",
+        "SearchAction (sitelinks search box retired)",
+        "Invented Person authors"
+      ]
+    },
+    "rich_results_reality": "FAQ rich results were removed for most sites in May 2026 and How-to rich results no longer show. Expect title, description, site name, favicon and (desktop) breadcrumbs."
+  },
+  "page_template": [
+    "Breadcrumb (linked)",
+    "H1 = primary keyword",
+    "1\u20132 sentence intro",
+    "Calculator widget above the fold with sensible defaults",
+    "Result with a plain-English interpretation",
+    "How to use (3\u20135 tool-specific steps)",
+    "Formula with variables explained and sourced",
+    "2\u20133 worked examples with checked numbers",
+    "Reading your result (ranges/tables)",
+    "2\u20134 topic sections answering follow-up questions",
+    "FAQs",
+    "Related calculators",
+    "Sources",
+    "Byline, updated date, disclaimer (YMYL)"
+  ],
+  "sitewide_schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://yourdomain.com/#organization",
+        "name": "Calculator360",
+        "url": "https://yourdomain.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/logo-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "sameAs": [
+          "(real social profile URLs only)"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://yourdomain.com/#website",
+        "name": "Calculator360",
+        "alternateName": [
+          "Calculator 360"
+        ],
+        "url": "https://yourdomain.com/",
+        "publisher": {
+          "@id": "https://yourdomain.com/#organization"
+        },
+        "inLanguage": "en-IN"
+      }
+    ]
+  },
+  "prompt_templates": {
+    "write_calculator_page": "You are writing the landing page content for {{page.seo.h1}} on Calculator360 ({{page.seo.canonical}}). Follow site.audience, writing_rules and seo_rules exactly. Primary keyword: {{page.keywords.primary}}. Use these secondary keywords naturally: {{page.keywords.secondary}}. Answer these questions: {{page.keywords.long_tail}}. Unique angle: {{page.content.unique_angle}}. Use this H2 outline as a starting point, adjusting it if the topic needs: {{page.content.outline}}. Write FAQs for: {{page.content.faq_questions}}. Link to: {{page.content.related}}. Only describe features the live tool actually has; if unsure, list the features you assumed so a person can confirm them. Show your working for every number and list any number you could not verify. Output HTML using h2, h3, p, ul, ol and table only, starting with the intro paragraph (the H1 is added separately).",
+    "review_page": "Review this Calculator360 page draft against writing_rules and seo_rules. List: (1) any number that is wrong, with the correct calculation; (2) any claim the tool can't support; (3) any avoid_phrases found; (4) sentences that sound generic or padded, with rewrites; (5) missing items from writing_rules.must_include; (6) whether title, meta description and H1 match page.seo exactly.",
+    "write_meta_variants": "Write 3 alternative title tags (max 60 characters) and 3 meta descriptions (120\u2013155 characters) for {{page.url}} targeting {{page.keywords.primary}}, following seo_rules. Count characters and show the count for each.",
+    "fill_schema": "Take page.schema_jsonld, replace YYYY-MM-DD with the real publish and modified dates, replace the author @id with the real author's page, and if FAQs are on the page, make the FAQPage entries match the visible questions and answers word for word. Return valid JSON-LD only."
+  },
+  "pages": [
+    {
+      "id": "home",
+      "url": "/",
+      "type": "home",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Calculator360: Free EMI, BMI, Age & Percentage Calculators",
+        "title_chars": 58,
+        "meta_description": "Fast, free calculators for EMI, SIP, BMI, age, percentages and unit conversions. Clear formulas, worked examples and no sign-up. Works on any phone.",
+        "meta_chars": 148,
+        "h1": "Free online calculators for money, health, dates and maths",
+        "canonical": "https://yourdomain.com/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Link every live calculator in plain HTML. Keep the brand in this title."
+    },
+    {
+      "id": "finance-calculators",
+      "url": "/finance-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Finance Calculators \u2013 EMI, SIP, Interest & Salary",
+        "title_chars": 49,
+        "meta_description": "Free money calculators for loan EMIs, SIPs, compound and simple interest, in-hand salary and discounts, each with formulas and worked examples.",
+        "meta_chars": 143,
+        "h1": "Finance calculators",
+        "canonical": "https://yourdomain.com/finance-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. CollectionPage + ItemList."
+    },
+    {
+      "id": "health-calculators",
+      "url": "/health-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Health & Fitness Calculators \u2013 BMI, Calories, Body Fat",
+        "title_chars": 54,
+        "meta_description": "Check your BMI, daily calories, body fat, ideal weight, macros and heart rate zones. Simple tools with the formulas and sources explained.",
+        "meta_chars": 138,
+        "h1": "Health and fitness calculators",
+        "canonical": "https://yourdomain.com/health-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. Add a medical disclaimer block."
+    },
+    {
+      "id": "date-time-calculators",
+      "url": "/date-time-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Date & Time Calculators \u2013 Age, Days Between Dates & More",
+        "title_chars": 56,
+        "meta_description": "Calculate exact age, days between dates, countdowns, time durations, work hours and the day of the week for any date. Free and instant.",
+        "meta_chars": 135,
+        "h1": "Date and time calculators",
+        "canonical": "https://yourdomain.com/date-time-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. Replaces the 'Everyday' category."
+    },
+    {
+      "id": "math-calculators",
+      "url": "/math-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Batch 1",
+        "target_date": "2026-11-02"
+      },
+      "seo": {
+        "title": "Math Calculators \u2013 Percentage, Fraction, Average & More",
+        "title_chars": 55,
+        "meta_description": "Free maths tools for percentages, fractions, ratios, averages, CGPA and scientific calculations, with step-by-step working for students.",
+        "meta_chars": 136,
+        "h1": "Math calculators",
+        "canonical": "https://yourdomain.com/math-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure."
+    },
+    {
+      "id": "construction-calculators",
+      "url": "/construction-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Batch 5",
+        "target_date": "2027-01-11"
+      },
+      "seo": {
+        "title": "Construction Calculators \u2013 Area, Paint, Concrete & Tiles",
+        "title_chars": 56,
+        "meta_description": "Estimate square footage, paint, concrete, cement bags, tiles and wallpaper for your home project, with wastage included. Metric and imperial.",
+        "meta_chars": 141,
+        "h1": "Construction and DIY calculators",
+        "canonical": "https://yourdomain.com/construction-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. Launch once 2\u20133 tools are built."
+    },
+    {
+      "id": "cooking-calculators",
+      "url": "/cooking-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Batch 6",
+        "target_date": "2027-01-25"
+      },
+      "seo": {
+        "title": "Cooking Calculators \u2013 Recipe Scaling & Cups to Grams",
+        "title_chars": 52,
+        "meta_description": "Scale recipes up or down, convert cups to grams by ingredient, get roasting times and nail your coffee-to-water ratio. Simple kitchen maths.",
+        "meta_chars": 140,
+        "h1": "Cooking and kitchen calculators",
+        "canonical": "https://yourdomain.com/cooking-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. Launch once 2\u20133 tools are built."
+    },
+    {
+      "id": "science-calculators",
+      "url": "/science-calculators/",
+      "type": "hub",
+      "category": "Home & hubs",
+      "publish": {
+        "phase": "Batch 7",
+        "target_date": "2027-02-08"
+      },
+      "seo": {
+        "title": "Physics Calculators \u2013 Speed, Force, Density & Ohm's Law",
+        "title_chars": 55,
+        "meta_description": "Solve speed-distance-time, force, density and Ohm's law problems with units handled for you and every step shown. Built for students.",
+        "meta_chars": 133,
+        "h1": "Physics and science calculators",
+        "canonical": "https://yourdomain.com/science-calculators/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1"
+      },
+      "notes": "Recommended addition to your structure. Launch once 2\u20133 tools are built."
+    },
+    {
+      "id": "emi-calculator",
+      "url": "/emi-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "EMI Calculator \u2013 Loan EMI, Interest & Amortization Schedule",
+        "title_chars": 59,
+        "meta_description": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
+        "meta_chars": 142,
+        "h1": "Loan EMI Calculator",
+        "canonical": "https://yourdomain.com/emi-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/emi-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Loan EMI Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Current /loan-calculator/ code moves here. Default \u20b9 and lakh presets in the HTML. Add prepayment section.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "emi calculator",
+        "secondary": [
+          "loan emi calculator",
+          "home loan emi calculator",
+          "car loan emi calculator",
+          "personal loan emi calculator",
+          "emi calculation formula"
+        ],
+        "long_tail": [
+          "emi for 25 lakh home loan",
+          "how is emi calculated",
+          "emi calculator with prepayment",
+          "emi for 10 lakh for 5 years"
+        ]
+      },
+      "content": {
+        "unique_angle": "Shows why early EMIs are mostly interest and the real cost of tenure and rate choices, with checked \u20b9 examples.",
+        "intro": "Enter the loan amount, interest rate and tenure to see your monthly EMI, the total interest you'll pay, and how each payment splits between principal and interest. It works for home, car, education and personal loans.",
+        "outline": [
+          "How to use the EMI calculator",
+          "EMI formula",
+          "EMI examples",
+          "Why your first EMIs are mostly interest",
+          "Shorter tenure or smaller EMI?",
+          "What this calculator doesn't include"
+        ],
+        "faq_questions": [
+          "Does my EMI change when interest rates change?",
+          "Should I prepay my loan or invest the money?",
+          "Will my bank charge me for prepaying?",
+          "What's the difference between a flat rate and a reducing rate?",
+          "Why is my bank's EMI slightly different from this?"
+        ],
+        "faqs": [
+          {
+            "q": "Does my EMI change when interest rates change?",
+            "a": "On a floating-rate loan, yes. Many lenders keep the EMI the same and change the tenure first, so ask yours how it handles rate changes. On a fixed-rate loan, the EMI stays the same."
+          },
+          {
+            "q": "Should I prepay my loan or invest the money?",
+            "a": "If your loan rate is higher than the after-tax return you can reliably earn, prepaying usually comes out ahead. Home loan tax deductions under the old tax regime change the maths, so check your own situation or ask a financial adviser."
+          },
+          {
+            "q": "Will my bank charge me for prepaying?",
+            "a": "RBI rules don't allow banks to charge foreclosure or prepayment penalties on floating-rate loans taken by individuals for non-business purposes. Fixed-rate loans can carry a charge, so read your loan agreement."
+          },
+          {
+            "q": "What's the difference between a flat rate and a reducing rate?",
+            "a": "A flat rate charges interest on the full original amount for the whole tenure, so a 10% flat loan costs much more than a 10% reducing-balance loan. Always ask for the reducing-balance rate or APR before comparing offers."
+          },
+          {
+            "q": "Why is my bank's EMI slightly different from this?",
+            "a": "Usually because of rounding, broken-period interest before the first EMI, or fees added to the loan amount."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How to use the EMI calculator",
+            "blocks": [
+              {
+                "type": "ol",
+                "items": [
+                  "Enter the loan amount, meaning the amount you'll borrow, not the full property or car price.",
+                  "Enter the annual interest rate from your sanction letter or the lender's website.",
+                  "Choose the tenure in years or months.",
+                  "Check the EMI, total interest and total payment, then open the schedule to see the month-by-month breakdown."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "EMI formula",
+            "blocks": [
+              {
+                "type": "formula",
+                "text": "EMI = P \u00d7 r \u00d7 (1 + r)^n \u00f7 ((1 + r)^n \u2212 1)"
+              },
+              {
+                "type": "ul",
+                "items": [
+                  "P is the loan amount.",
+                  "r is the monthly interest rate: the annual rate \u00f7 12 \u00f7 100. At 8.5% a year, r = 0.007083.",
+                  "n is the number of monthly instalments: 20 years is 240."
+                ]
+              },
+              {
+                "type": "p",
+                "text": "This is the reducing-balance method that Indian banks and NBFCs use. Each month you pay interest only on the principal still outstanding. Our guide on how EMI is calculated walks through the maths step by step."
+              }
+            ]
+          },
+          {
+            "h2": "EMI examples",
+            "blocks": [
+              {
+                "type": "table",
+                "head": [
+                  "Loan",
+                  "Amount",
+                  "Rate",
+                  "Tenure",
+                  "EMI",
+                  "Total interest"
+                ],
+                "rows": [
+                  [
+                    "Home loan",
+                    "\u20b925,00,000",
+                    "8.5%",
+                    "20 years",
+                    "\u20b921,696",
+                    "\u20b927,06,939"
+                  ],
+                  [
+                    "Car loan",
+                    "\u20b98,00,000",
+                    "9.5%",
+                    "5 years",
+                    "\u20b916,801",
+                    "\u20b92,08,089"
+                  ],
+                  [
+                    "Personal loan",
+                    "\u20b93,00,000",
+                    "13%",
+                    "3 years",
+                    "\u20b910,108",
+                    "\u20b963,895"
+                  ]
+                ]
+              },
+              {
+                "type": "p",
+                "text": "These rates are only examples. The rate you're offered depends on your credit score, income, the lender and the type of loan."
+              }
+            ]
+          },
+          {
+            "h2": "Why your first EMIs are mostly interest",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "In the home loan example above, the first EMI of \u20b921,696 is made up of \u20b917,708 of interest and only \u20b93,988 of principal. That's about 82% interest. The balance shifts slowly, and by the last few years most of each EMI goes towards the principal."
+              },
+              {
+                "type": "p",
+                "text": "This is why a prepayment in the early years saves much more interest than the same prepayment near the end of the loan."
+              }
+            ]
+          },
+          {
+            "h2": "Shorter tenure or smaller EMI?",
+            "blocks": [
+              {
+                "type": "table",
+                "head": [
+                  "\u20b925 lakh at 8.5%",
+                  "EMI",
+                  "Total interest"
+                ],
+                "rows": [
+                  [
+                    "15 years",
+                    "\u20b924,618",
+                    "\u20b919,31,328"
+                  ],
+                  [
+                    "20 years",
+                    "\u20b921,696",
+                    "\u20b927,06,939"
+                  ]
+                ]
+              },
+              {
+                "type": "p",
+                "text": "Paying \u20b92,922 more each month saves about \u20b97.76 lakh in interest. Before you pick the shorter tenure, check it fits your budget: many lenders want your total EMIs to stay within roughly 40\u201350% of your monthly take-home pay."
+              },
+              {
+                "type": "p",
+                "text": "The rate matters too. At 9% instead of 8.5%, the EMI on the same loan goes up by \u20b9797 a month, and you pay about \u20b91.91 lakh more over 20 years. Half a percent is worth negotiating."
+              }
+            ]
+          },
+          {
+            "h2": "What this calculator doesn't include",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "Processing fees, GST on fees and any insurance bundled into the loan.",
+                  "Rate changes on floating-rate loans. When your lender's rate changes, your EMI or tenure changes with it.",
+                  "Pre-EMI interest on under-construction property, and broken-period interest before your first EMI."
+                ]
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "title": "Reserve Bank of India: circulars on foreclosure charges and prepayment penalties on floating-rate loans",
+            "url": "https://www.rbi.org.in"
+          }
+        ],
+        "related": [
+          {
+            "url": "/loan-calculator/",
+            "name": "Loan Calculator"
+          },
+          {
+            "url": "/compound-interest-calculator/",
+            "name": "Compound Interest Calculator"
+          },
+          {
+            "url": "/sip-calculator/",
+            "name": "SIP Calculator"
+          },
+          {
+            "url": "/in-hand-salary-calculator/",
+            "name": "In-Hand Salary Calculator"
+          },
+          {
+            "url": "/guides/how-is-emi-calculated/",
+            "name": "How is EMI calculated?"
+          }
+        ],
+        "word_count": 646
+      },
+      "dev_notes": [
+        "Default currency INR and lakh presets must be in the pre-rendered HTML.",
+        "Before publishing, re-check the RBI prepayment rule wording against the latest RBI directions."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/emi-calculator/#webpage",
+            "url": "https://yourdomain.com/emi-calculator/",
+            "name": "EMI Calculator \u2013 Loan EMI, Interest & Amortization Schedule",
+            "description": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/emi-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/emi-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/emi-calculator/#app",
+            "name": "Loan EMI Calculator",
+            "url": "https://yourdomain.com/emi-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/emi-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Loan EMI Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/emi-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does my EMI change when interest rates change?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "On a floating-rate loan, yes. Many lenders keep the EMI the same and change the tenure first, so ask yours how it handles rate changes. On a fixed-rate loan, the EMI stays the same."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Should I prepay my loan or invest the money?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "If your loan rate is higher than the after-tax return you can reliably earn, prepaying usually comes out ahead. Home loan tax deductions under the old tax regime change the maths, so check your own situation or ask a financial adviser."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will my bank charge me for prepaying?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "RBI rules don't allow banks to charge foreclosure or prepayment penalties on floating-rate loans taken by individuals for non-business purposes. Fixed-rate loans can carry a charge, so read your loan agreement."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the difference between a flat rate and a reducing rate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A flat rate charges interest on the full original amount for the whole tenure, so a 10% flat loan costs much more than a 10% reducing-balance loan. Always ask for the reducing-balance rate or APR before comparing offers."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why is my bank's EMI slightly different from this?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Usually because of rounding, broken-period interest before the first EMI, or fees added to the loan amount."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "loan-calculator",
+      "url": "/loan-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 2",
+        "target_date": "2026-11-16"
+      },
+      "seo": {
+        "title": "Loan Calculator \u2013 Find Loan Amount, Tenure or Interest Rate",
+        "title_chars": 59,
+        "meta_description": "Know the EMI you can afford? Find how much you can borrow, how long you'll take to repay or the real interest rate, and compare two loan offers.",
+        "meta_chars": 144,
+        "h1": "Loan Calculator",
+        "canonical": "https://yourdomain.com/loan-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/loan-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Loan Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Must be a different tool from EMI (solve for any variable), or merge it.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "loan calculator",
+        "secondary": [
+          "loan amount calculator",
+          "loan eligibility by emi",
+          "loan tenure calculator",
+          "loan interest rate calculator",
+          "compare loans"
+        ],
+        "long_tail": [
+          "how much loan can i get for 20000 emi",
+          "how many years to repay a loan",
+          "what interest rate am i paying",
+          "which loan offer is cheaper"
+        ]
+      },
+      "content": {
+        "unique_angle": "Solves for the unknown other than EMI (amount, tenure or rate) and compares two offers, so it doesn't duplicate the EMI page.",
+        "intro": null,
+        "outline": [
+          "How to use the loan calculator",
+          "Find how much you can borrow for a given EMI",
+          "Find the tenure or the real interest rate",
+          "Comparing two loan offers: EMI, total cost and fees",
+          "Flat rate vs reducing rate: spotting an expensive offer",
+          "What lenders look at besides the numbers"
+        ],
+        "faq_questions": [
+          "How much loan can I get on a \u20b950,000 salary?",
+          "How do I find the actual interest rate on my loan?",
+          "Is a lower EMI always the better offer?",
+          "What is FOIR?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          },
+          {
+            "url": "/in-hand-salary-calculator/",
+            "name": "In-Hand Salary Calculator"
+          },
+          {
+            "url": "/compound-interest-calculator/",
+            "name": "Compound Interest Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/loan-calculator/#webpage",
+            "url": "https://yourdomain.com/loan-calculator/",
+            "name": "Loan Calculator \u2013 Find Loan Amount, Tenure or Interest Rate",
+            "description": "Know the EMI you can afford? Find how much you can borrow, how long you'll take to repay or the real interest rate, and compare two loan offers.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/loan-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/loan-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/loan-calculator/#app",
+            "name": "Loan Calculator",
+            "url": "https://yourdomain.com/loan-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/loan-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Loan Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gst-calculator",
+      "url": "/gst-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 1",
+        "target_date": "2026-11-02"
+      },
+      "seo": {
+        "title": "GST Calculator \u2013 Add or Remove GST, CGST, SGST & IGST",
+        "title_chars": 53,
+        "meta_description": "Add GST to a price or remove it from a GST-inclusive amount. See the CGST and SGST or IGST split for each current slab, with the formula shown.",
+        "meta_chars": 143,
+        "h1": "GST Calculator",
+        "canonical": "https://yourdomain.com/gst-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/gst-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "GST Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Verify current slabs on cbic-gst.gov.in before launch and after every GST Council change.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "gst calculator",
+        "secondary": [
+          "gst calculation",
+          "gst inclusive calculator",
+          "reverse gst calculator",
+          "cgst sgst calculator",
+          "igst calculator"
+        ],
+        "long_tail": [
+          "how to remove gst from total",
+          "gst on 1000 rupees",
+          "how to calculate 18% gst",
+          "gst formula"
+        ]
+      },
+      "content": {
+        "unique_angle": "Handles adding and removing GST correctly, with the CGST/SGST vs IGST split and the divide-don't-subtract mistake.",
+        "intro": null,
+        "outline": [
+          "How to use the GST calculator",
+          "Adding GST to a price",
+          "Removing GST from a GST-inclusive price",
+          "CGST, SGST and IGST: which applies",
+          "Current GST slabs (with date checked)",
+          "Worked invoice examples"
+        ],
+        "faq_questions": [
+          "How do I calculate GST from the total amount?",
+          "What's the difference between CGST, SGST and IGST?",
+          "Why can't I just subtract 18% to remove GST?",
+          "Which GST rate applies to my product?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/percentage-calculator/",
+            "name": "Percentage Calculator"
+          },
+          {
+            "url": "/discount-calculator/",
+            "name": "Discount Calculator"
+          },
+          {
+            "url": "/in-hand-salary-calculator/",
+            "name": "In-Hand Salary Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/gst-calculator/#webpage",
+            "url": "https://yourdomain.com/gst-calculator/",
+            "name": "GST Calculator \u2013 Add or Remove GST, CGST, SGST & IGST",
+            "description": "Add GST to a price or remove it from a GST-inclusive amount. See the CGST and SGST or IGST split for each current slab, with the formula shown.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/gst-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/gst-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/gst-calculator/#app",
+            "name": "GST Calculator",
+            "url": "https://yourdomain.com/gst-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/gst-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "GST Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "compound-interest-calculator",
+      "url": "/compound-interest-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Compound Interest Calculator \u2013 With Monthly Deposits",
+        "title_chars": 52,
+        "meta_description": "See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.",
+        "meta_chars": 143,
+        "h1": "Compound Interest Calculator",
+        "canonical": "https://yourdomain.com/compound-interest-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/compound-interest-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Compound Interest Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Include FD comparison example in \u20b9. Remove '401k' tag.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "compound interest calculator",
+        "secondary": [
+          "compound interest formula",
+          "compounding calculator",
+          "fd compound interest calculator",
+          "monthly compound interest calculator",
+          "investment growth calculator"
+        ],
+        "long_tail": [
+          "how to calculate compound interest",
+          "compound interest quarterly",
+          "rule of 72",
+          "compound interest vs simple interest"
+        ]
+      },
+      "content": {
+        "unique_angle": "Side-by-side yearly vs monthly compounding, FD quarterly example, tax and inflation reality check.",
+        "intro": "See how a lump sum or regular savings grow when your interest starts earning interest. Choose how often it compounds, from yearly to daily, add monthly or yearly deposits, and view the growth year by year.",
+        "outline": [
+          "How to use the compound interest calculator",
+          "Compound interest formula",
+          "Examples",
+          "Simple interest vs compound interest",
+          "The rule of 72",
+          "Before you rely on the result"
+        ],
+        "faq_questions": [
+          "How often do bank FDs compound in India?",
+          "What's the difference between compounding frequency and deposit frequency?",
+          "Is this the same as a SIP calculator?",
+          "Does compounding more often always earn more?"
+        ],
+        "faqs": [
+          {
+            "q": "How often do bank FDs compound in India?",
+            "a": "Most banks compound fixed deposit interest quarterly. Check your bank's terms, because some FD options pay out the interest instead of adding it back."
+          },
+          {
+            "q": "What's the difference between compounding frequency and deposit frequency?",
+            "a": "Compounding frequency is how often interest is added to your balance. Deposit frequency is how often you add your own money. They can be different, for example monthly deposits into an account that compounds quarterly."
+          },
+          {
+            "q": "Is this the same as a SIP calculator?",
+            "a": "The maths is similar. A SIP calculator is set up for monthly mutual fund investments at an expected return, so use that one for SIPs."
+          },
+          {
+            "q": "Does compounding more often always earn more?",
+            "a": "Yes, but the extra gets smaller. Monthly compounding beats yearly by a noticeable amount; daily beats monthly by very little."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How to use the compound interest calculator",
+            "blocks": [
+              {
+                "type": "ol",
+                "items": [
+                  "Enter your starting amount.",
+                  "Enter the annual interest rate and the number of years.",
+                  "Choose the compounding frequency. Bank fixed deposits in India usually compound quarterly.",
+                  "Add a regular monthly or yearly deposit if you plan to keep saving.",
+                  "Read the final amount, the total you put in, the interest earned and the year-by-year table."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Compound interest formula",
+            "blocks": [
+              {
+                "type": "formula",
+                "text": "A = P \u00d7 (1 + r \u00f7 n)^(n \u00d7 t)"
+              },
+              {
+                "type": "ul",
+                "items": [
+                  "A is the final amount.",
+                  "P is the starting amount.",
+                  "r is the annual rate as a decimal (7% = 0.07).",
+                  "n is how many times interest is added per year (4 for quarterly, 12 for monthly).",
+                  "t is the number of years."
+                ]
+              },
+              {
+                "type": "p",
+                "text": "With regular deposits, each deposit compounds for a shorter time than the first one. The calculator adds them all up for you."
+              }
+            ]
+          },
+          {
+            "h2": "Examples",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "\u20b91,00,000 at 7% for 10 years, compounded yearly, grows to \u20b91,96,715. Compounded monthly, it grows to \u20b92,00,966. Same rate, \u20b94,251 more, just from compounding more often.",
+                  "A fixed deposit of \u20b95,00,000 at 7% for 5 years with quarterly compounding grows to about \u20b97,07,389 before tax.",
+                  "Saving \u20b95,000 a month for 15 years at 12% a year, compounded monthly, grows to about \u20b924.98 lakh. You put in \u20b99 lakh; the rest is growth. The exact figure shifts slightly depending on whether you deposit at the start or end of each month."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Simple interest vs compound interest",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "Take \u20b91 lakh at 7% for 10 years. Simple interest pays 7% of the original amount every year, so you end with \u20b91,70,000. Compound interest, added yearly, gives \u20b91,96,715. The gap keeps widening the longer the money stays invested."
+              }
+            ]
+          },
+          {
+            "h2": "The rule of 72",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "Divide 72 by the annual rate to estimate how long your money takes to double. At 8% it's about 9 years; at 12% it's about 6. It's a quick estimate for comparing options in your head, not an exact figure."
+              }
+            ]
+          },
+          {
+            "h2": "Before you rely on the result",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "Interest on fixed deposits is taxed at your income tax slab, so what reaches your account is lower than the pre-tax figure.",
+                  "Market-linked returns, like equity mutual funds, aren't guaranteed and change every year. The calculator assumes a steady rate.",
+                  "Inflation reduces what your money can buy. At 6% inflation, \u20b92 lakh in 10 years buys roughly what \u20b91.12 lakh buys today."
+                ]
+              }
+            ]
+          }
+        ],
+        "sources": [],
+        "related": [
+          {
+            "url": "/sip-calculator/",
+            "name": "SIP Calculator"
+          },
+          {
+            "url": "/simple-interest-calculator/",
+            "name": "Simple Interest Calculator"
+          },
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          },
+          {
+            "url": "/percentage-increase-calculator/",
+            "name": "Percentage Increase Calculator"
+          }
+        ],
+        "word_count": 560
+      },
+      "dev_notes": [
+        "The registry description promises 'inflation adjustment' but the page doesn't have it. Either build it or remove the claim.",
+        "Remove the '401k' tag for an India-first page."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/compound-interest-calculator/#webpage",
+            "url": "https://yourdomain.com/compound-interest-calculator/",
+            "name": "Compound Interest Calculator \u2013 With Monthly Deposits",
+            "description": "See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/compound-interest-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/compound-interest-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/compound-interest-calculator/#app",
+            "name": "Compound Interest Calculator",
+            "url": "https://yourdomain.com/compound-interest-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/compound-interest-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Compound Interest Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/compound-interest-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How often do bank FDs compound in India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most banks compound fixed deposit interest quarterly. Check your bank's terms, because some FD options pay out the interest instead of adding it back."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the difference between compounding frequency and deposit frequency?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Compounding frequency is how often interest is added to your balance. Deposit frequency is how often you add your own money. They can be different, for example monthly deposits into an account that compounds quarterly."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is this the same as a SIP calculator?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The maths is similar. A SIP calculator is set up for monthly mutual fund investments at an expected return, so use that one for SIPs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does compounding more often always earn more?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, but the extra gets smaller. Monthly compounding beats yearly by a noticeable amount; daily beats monthly by very little."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "simple-interest-calculator",
+      "url": "/simple-interest-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 1",
+        "target_date": "2026-11-02"
+      },
+      "seo": {
+        "title": "Simple Interest Calculator \u2013 SI Formula (P \u00d7 R \u00d7 T / 100)",
+        "title_chars": 57,
+        "meta_description": "Find simple interest and total amount in seconds. Enter principal, rate and time in years, months or days, and see the formula worked out.",
+        "meta_chars": 138,
+        "h1": "Simple Interest Calculator",
+        "canonical": "https://yourdomain.com/simple-interest-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/simple-interest-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Simple Interest Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Student homework plus short personal loans between friends and family.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "simple interest calculator",
+        "secondary": [
+          "simple interest formula",
+          "si calculator",
+          "interest calculator",
+          "simple interest per month",
+          "principal rate time calculator"
+        ],
+        "long_tail": [
+          "how to calculate simple interest",
+          "simple interest for 1 lakh",
+          "simple interest in months",
+          "simple interest vs compound interest"
+        ]
+      },
+      "content": {
+        "unique_angle": "Accepts time in days, months or years and shows P \u00d7 R \u00d7 T / 100 worked out, for students and informal loans.",
+        "intro": null,
+        "outline": [
+          "How to use the simple interest calculator",
+          "Simple interest formula",
+          "Examples in years, months and days",
+          "Finding principal, rate or time instead",
+          "Simple vs compound interest on the same money"
+        ],
+        "faq_questions": [
+          "How do I calculate simple interest for months?",
+          "What is the formula for simple interest?",
+          "How do I find the rate if I know the interest?",
+          "When is simple interest used in real life?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/compound-interest-calculator/",
+            "name": "Compound Interest Calculator"
+          },
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          },
+          {
+            "url": "/percentage-calculator/",
+            "name": "Percentage Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/simple-interest-calculator/#webpage",
+            "url": "https://yourdomain.com/simple-interest-calculator/",
+            "name": "Simple Interest Calculator \u2013 SI Formula (P \u00d7 R \u00d7 T / 100)",
+            "description": "Find simple interest and total amount in seconds. Enter principal, rate and time in years, months or days, and see the formula worked out.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/simple-interest-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/simple-interest-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/simple-interest-calculator/#app",
+            "name": "Simple Interest Calculator",
+            "url": "https://yourdomain.com/simple-interest-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/simple-interest-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Simple Interest Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sip-calculator",
+      "url": "/sip-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 1",
+        "target_date": "2026-11-02"
+      },
+      "seo": {
+        "title": "SIP Calculator \u2013 Mutual Fund Returns & Maturity Value",
+        "title_chars": 53,
+        "meta_description": "Estimate the future value of your monthly SIP. Enter amount, expected return and years to see invested amount, estimated gains and maturity.",
+        "meta_chars": 140,
+        "h1": "SIP Calculator",
+        "canonical": "https://yourdomain.com/sip-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/sip-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "SIP Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Add step-up SIP and lumpsum tabs. Returns-not-guaranteed wording.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "sip calculator",
+        "secondary": [
+          "mutual fund sip calculator",
+          "sip return calculator",
+          "step up sip calculator",
+          "sip maturity calculator",
+          "monthly investment calculator"
+        ],
+        "long_tail": [
+          "sip of 5000 for 10 years",
+          "how much sip for 1 crore",
+          "sip vs lumpsum",
+          "sip calculator with inflation"
+        ]
+      },
+      "content": {
+        "unique_angle": "Includes step-up SIP and an honest note on return assumptions and market risk.",
+        "intro": null,
+        "outline": [
+          "How to use the SIP calculator",
+          "How SIP returns are calculated",
+          "What \u20b95,000 a month can grow to",
+          "Step-up SIP: raising your SIP each year",
+          "SIP vs lumpsum",
+          "Why real returns will differ"
+        ],
+        "faq_questions": [
+          "How much should I invest to reach \u20b91 crore?",
+          "Are SIP returns guaranteed?",
+          "What return should I assume?",
+          "Is SIP better than an FD?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/compound-interest-calculator/",
+            "name": "Compound Interest Calculator"
+          },
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          },
+          {
+            "url": "/in-hand-salary-calculator/",
+            "name": "In-Hand Salary Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/sip-calculator/#webpage",
+            "url": "https://yourdomain.com/sip-calculator/",
+            "name": "SIP Calculator \u2013 Mutual Fund Returns & Maturity Value",
+            "description": "Estimate the future value of your monthly SIP. Enter amount, expected return and years to see invested amount, estimated gains and maturity.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/sip-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/sip-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/sip-calculator/#app",
+            "name": "SIP Calculator",
+            "url": "https://yourdomain.com/sip-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/sip-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "SIP Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "in-hand-salary-calculator",
+      "url": "/in-hand-salary-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 2",
+        "target_date": "2026-11-16"
+      },
+      "seo": {
+        "title": "In-Hand Salary Calculator: CTC to Take-Home (FY 2026-27)",
+        "title_chars": 56,
+        "meta_description": "Convert your CTC to monthly in-hand salary under the new tax regime. See PF, professional tax and income tax deductions for FY 2026-27.",
+        "meta_chars": 135,
+        "h1": "In-Hand Salary Calculator (CTC to Take-Home)",
+        "canonical": "https://yourdomain.com/in-hand-salary-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/in-hand-salary-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "In-Hand Salary Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Rename from /salary-calculator/. Update every Budget. YMYL.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "in hand salary calculator",
+        "secondary": [
+          "ctc to in hand salary",
+          "take home salary calculator",
+          "salary calculator india",
+          "net salary calculator",
+          "monthly salary calculator"
+        ],
+        "long_tail": [
+          "in hand salary for 10 lpa",
+          "ctc vs in hand",
+          "salary after tax new regime",
+          "how much pf is deducted from salary"
+        ]
+      },
+      "content": {
+        "unique_angle": "CTC to in-hand for the current financial year's new tax regime, with every deduction shown line by line.",
+        "intro": null,
+        "outline": [
+          "How to use the in-hand salary calculator",
+          "CTC vs gross vs in-hand salary",
+          "Deductions explained: PF, professional tax, income tax",
+          "Examples: 6, 10 and 20 LPA",
+          "New vs old tax regime",
+          "Updated for FY 2026-27 (date checked)"
+        ],
+        "faq_questions": [
+          "What is the in-hand salary for 10 LPA?",
+          "Why is my in-hand salary so much lower than my CTC?",
+          "How much PF is deducted?",
+          "Which tax regime should I choose?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/percentage-calculator/",
+            "name": "Percentage Calculator"
+          },
+          {
+            "url": "/sip-calculator/",
+            "name": "SIP Calculator"
+          },
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/in-hand-salary-calculator/#webpage",
+            "url": "https://yourdomain.com/in-hand-salary-calculator/",
+            "name": "In-Hand Salary Calculator: CTC to Take-Home (FY 2026-27)",
+            "description": "Convert your CTC to monthly in-hand salary under the new tax regime. See PF, professional tax and income tax deductions for FY 2026-27.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/in-hand-salary-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/in-hand-salary-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/in-hand-salary-calculator/#app",
+            "name": "In-Hand Salary Calculator",
+            "url": "https://yourdomain.com/in-hand-salary-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/in-hand-salary-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "In-Hand Salary Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mortgage-calculator",
+      "url": "/mortgage-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 8",
+        "target_date": "2027-02-22"
+      },
+      "seo": {
+        "title": "Mortgage Calculator \u2013 Monthly Payment with Tax & PMI",
+        "title_chars": 52,
+        "meta_description": "Estimate your monthly mortgage payment including principal, interest, property tax, insurance and PMI. Compare 15- and 30-year terms.",
+        "meta_chars": 133,
+        "h1": "Mortgage Calculator",
+        "canonical": "https://yourdomain.com/mortgage-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/mortgage-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Mortgage Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en"
+      },
+      "notes": "US/global intent, default USD, html lang 'en'. Keep distinct from EMI page.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "mortgage calculator",
+        "secondary": [
+          "mortgage payment calculator",
+          "home mortgage calculator",
+          "mortgage calculator with taxes",
+          "mortgage calculator with pmi",
+          "monthly mortgage payment"
+        ],
+        "long_tail": [
+          "how much house can i afford",
+          "15 vs 30 year mortgage",
+          "what is pmi",
+          "mortgage amortization schedule"
+        ]
+      },
+      "content": {
+        "unique_angle": "US-style mortgage with tax, insurance and PMI; kept separate from the Indian EMI page.",
+        "intro": null,
+        "outline": [
+          "How to use the mortgage calculator",
+          "What's in a monthly mortgage payment",
+          "PMI and when it goes away",
+          "15-year vs 30-year mortgage",
+          "How much house you can afford"
+        ],
+        "faq_questions": [
+          "What is PMI?",
+          "Is a 15-year mortgage worth it?",
+          "How much should my down payment be?",
+          "Does the calculator include HOA fees?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/emi-calculator/",
+            "name": "Loan EMI Calculator"
+          },
+          {
+            "url": "/compound-interest-calculator/",
+            "name": "Compound Interest Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/mortgage-calculator/#webpage",
+            "url": "https://yourdomain.com/mortgage-calculator/",
+            "name": "Mortgage Calculator \u2013 Monthly Payment with Tax & PMI",
+            "description": "Estimate your monthly mortgage payment including principal, interest, property tax, insurance and PMI. Compare 15- and 30-year terms.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/mortgage-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/mortgage-calculator/#app"
+            },
+            "inLanguage": "en-US",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/mortgage-calculator/#app",
+            "name": "Mortgage Calculator",
+            "url": "https://yourdomain.com/mortgage-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/mortgage-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Mortgage Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "discount-calculator",
+      "url": "/discount-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 1",
+        "target_date": "2026-11-02"
+      },
+      "seo": {
+        "title": "Discount Calculator \u2013 Sale Price After % Off",
+        "title_chars": 44,
+        "meta_description": "Find the final price after a discount and how much you save, including stacked offers like 50% + 20% off and flat discounts during sales.",
+        "meta_chars": 137,
+        "h1": "Discount Calculator",
+        "canonical": "https://yourdomain.com/discount-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/discount-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Discount Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Sale-season content (Diwali, Big Billion Days).",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "discount calculator",
+        "secondary": [
+          "discount price calculator",
+          "sale price calculator",
+          "percent off calculator",
+          "discount percentage calculator",
+          "double discount calculator"
+        ],
+        "long_tail": [
+          "50% + 20% off meaning",
+          "how to calculate discount percentage",
+          "price after discount",
+          "flat discount vs percentage"
+        ]
+      },
+      "content": {
+        "unique_angle": "Stacked offers (50% + 20%) and flat-vs-percentage comparisons for Indian sale seasons.",
+        "intro": null,
+        "outline": [
+          "How to use the discount calculator",
+          "Price after a discount",
+          "Finding the discount percentage",
+          "Stacked discounts: why 50% + 20% isn't 70%",
+          "Flat \u20b9 off vs % off: which is better",
+          "Watch out for inflated MRPs"
+        ],
+        "faq_questions": [
+          "What does 50% + 20% off mean?",
+          "How do I calculate the discount percentage?",
+          "Is GST charged before or after the discount?",
+          "Is a flat \u20b9500 off better than 10% off?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/percentage-calculator/",
+            "name": "Percentage Calculator"
+          },
+          {
+            "url": "/gst-calculator/",
+            "name": "GST Calculator"
+          },
+          {
+            "url": "/percentage-decrease-calculator/",
+            "name": "Percentage Decrease Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/discount-calculator/#webpage",
+            "url": "https://yourdomain.com/discount-calculator/",
+            "name": "Discount Calculator \u2013 Sale Price After % Off",
+            "description": "Find the final price after a discount and how much you save, including stacked offers like 50% + 20% off and flat discounts during sales.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/discount-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/discount-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/discount-calculator/#app",
+            "name": "Discount Calculator",
+            "url": "https://yourdomain.com/discount-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/discount-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Discount Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "tip-calculator",
+      "url": "/tip-calculator/",
+      "type": "calculator",
+      "category": "Finance",
+      "publish": {
+        "phase": "Batch 7",
+        "target_date": "2027-02-08"
+      },
+      "seo": {
+        "title": "Tip Calculator \u2013 Split the Bill and Tip Per Person",
+        "title_chars": 50,
+        "meta_description": "Work out the tip and split any bill between friends. Choose a tip percentage, round up, and see exactly what each person pays.",
+        "meta_chars": 126,
+        "h1": "Tip and Bill Split Calculator",
+        "canonical": "https://yourdomain.com/tip-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/tip-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Finance Calculators",
+          "Tip and Bill Split Calculator"
+        ],
+        "hub": {
+          "name": "Finance Calculators",
+          "url": "/finance-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Global intent. Mention service charge in India.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "tip calculator",
+        "secondary": [
+          "bill split calculator",
+          "tip per person",
+          "restaurant tip calculator",
+          "gratuity calculator",
+          "split bill calculator"
+        ],
+        "long_tail": [
+          "how much to tip",
+          "15 percent tip",
+          "how to split a bill",
+          "service charge vs tip"
+        ]
+      },
+      "content": {
+        "unique_angle": "Split and round a bill fairly, with a note on service charge vs tip in India.",
+        "intro": null,
+        "outline": [
+          "How to use the tip calculator",
+          "How much to tip",
+          "Splitting the bill evenly or by what each person had",
+          "Service charge vs tip in India"
+        ],
+        "faq_questions": [
+          "How much should I tip?",
+          "Is service charge mandatory in India?",
+          "How do I split a bill unevenly?",
+          "Should I tip on the amount before or after tax?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/percentage-calculator/",
+            "name": "Percentage Calculator"
+          },
+          {
+            "url": "/discount-calculator/",
+            "name": "Discount Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/tip-calculator/#webpage",
+            "url": "https://yourdomain.com/tip-calculator/",
+            "name": "Tip Calculator \u2013 Split the Bill and Tip Per Person",
+            "description": "Work out the tip and split any bill between friends. Choose a tip percentage, round up, and see exactly what each person pays.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/tip-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/tip-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/tip-calculator/#app",
+            "name": "Tip and Bill Split Calculator",
+            "url": "https://yourdomain.com/tip-calculator/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/tip-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Finance Calculators",
+                "item": "https://yourdomain.com/finance-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Tip and Bill Split Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bmi-calculator",
+      "url": "/bmi-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "BMI Calculator \u2013 Check Your Body Mass Index (kg, cm, ft)",
+        "title_chars": 56,
+        "meta_description": "Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.",
+        "meta_chars": 134,
+        "h1": "BMI Calculator",
+        "canonical": "https://yourdomain.com/bmi-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/bmi-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "BMI Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Add Asian cut-offs (overweight from 23). Differentiator.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "bmi calculator",
+        "secondary": [
+          "body mass index calculator",
+          "bmi calculator for men",
+          "bmi calculator for women",
+          "bmi calculator in feet",
+          "healthy weight calculator"
+        ],
+        "long_tail": [
+          "bmi for indian adults",
+          "normal bmi range",
+          "asian bmi chart",
+          "ideal weight for 5 feet 6 inches"
+        ]
+      },
+      "content": {
+        "unique_angle": "Shows WHO and Asian Indian cut-offs side by side, with a healthy-weight-by-height table.",
+        "intro": "Enter your height and weight in cm and kg, or feet and pounds, to get your body mass index, your category and a healthy weight range for your height. We also show the lower cut-offs that many Indian doctors use.",
+        "outline": [
+          "How to use the BMI calculator",
+          "BMI formula",
+          "BMI categories: WHO and Asian Indian cut-offs",
+          "Healthy weight for your height",
+          "Where BMI falls short"
+        ],
+        "faq_questions": [
+          "What is a healthy BMI for Indian adults?",
+          "Is BMI calculated differently for men and women?",
+          "Can I use this calculator for my child?",
+          "My BMI says overweight, but I'm fit. Is it wrong?",
+          "How often should I check my BMI?"
+        ],
+        "faqs": [
+          {
+            "q": "What is a healthy BMI for Indian adults?",
+            "a": "Indian guidelines treat 18.5 to 22.9 as normal. The global WHO range is 18.5 to 24.9. If you're between 23 and 24.9, it's worth discussing with your doctor, especially if diabetes or heart disease runs in your family."
+          },
+          {
+            "q": "Is BMI calculated differently for men and women?",
+            "a": "No, the formula is the same for adults. At the same BMI, women usually carry more body fat than men, which is one reason BMI is only a starting point."
+          },
+          {
+            "q": "Can I use this calculator for my child?",
+            "a": "No. Children and teenagers need BMI-for-age percentile charts, which your paediatrician can check."
+          },
+          {
+            "q": "My BMI says overweight, but I'm fit. Is it wrong?",
+            "a": "It may be. If you carry a lot of muscle, BMI overestimates fat. Check your waist-to-height ratio or body fat percentage for a better picture."
+          },
+          {
+            "q": "How often should I check my BMI?",
+            "a": "Once a month is plenty. Body weight moves up and down by a kilo or more from day to day, mostly from water and food."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How to use the BMI calculator",
+            "blocks": [
+              {
+                "type": "ol",
+                "items": [
+                  "Choose metric (cm, kg) or imperial (feet and inches, pounds).",
+                  "Enter your height and weight. Weigh yourself in the morning for the most consistent number.",
+                  "Read your BMI, your category and the healthy weight range for your height."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "BMI formula",
+            "blocks": [
+              {
+                "type": "formula",
+                "text": "BMI = weight (kg) \u00f7 height (m)\u00b2"
+              },
+              {
+                "type": "p",
+                "text": "In pounds and inches: BMI = 703 \u00d7 weight (lb) \u00f7 height (in)\u00b2."
+              },
+              {
+                "type": "p",
+                "text": "Example: 70 kg and 170 cm. 1.70 \u00d7 1.70 = 2.89, and 70 \u00f7 2.89 = 24.2."
+              }
+            ]
+          },
+          {
+            "h2": "BMI categories: WHO and Asian Indian cut-offs",
+            "blocks": [
+              {
+                "type": "table",
+                "head": [
+                  "Category",
+                  "WHO (global)",
+                  "Asian Indian cut-offs"
+                ],
+                "rows": [
+                  [
+                    "Underweight",
+                    "Below 18.5",
+                    "Below 18.5"
+                  ],
+                  [
+                    "Normal",
+                    "18.5 \u2013 24.9",
+                    "18.5 \u2013 22.9"
+                  ],
+                  [
+                    "Overweight",
+                    "25.0 \u2013 29.9",
+                    "23.0 \u2013 24.9"
+                  ],
+                  [
+                    "Obese",
+                    "30 and above",
+                    "25 and above"
+                  ]
+                ]
+              },
+              {
+                "type": "p",
+                "text": "South Asians tend to carry more body fat, and develop diabetes and heart disease, at a lower BMI than Europeans. That's why a WHO expert group and an Indian consensus statement recommend lower cut-offs for Asian Indians."
+              },
+              {
+                "type": "p",
+                "text": "It makes a real difference. The BMI of 24.2 in the example above counts as normal by the WHO table but overweight by the Asian Indian cut-offs."
+              }
+            ]
+          },
+          {
+            "h2": "Healthy weight for your height",
+            "blocks": [
+              {
+                "type": "table",
+                "head": [
+                  "Height",
+                  "WHO healthy range",
+                  "Using Asian upper limit (22.9)"
+                ],
+                "rows": [
+                  [
+                    "150 cm (4 ft 11 in)",
+                    "41.6 \u2013 56.0 kg",
+                    "41.6 \u2013 51.5 kg"
+                  ],
+                  [
+                    "155 cm (5 ft 1 in)",
+                    "44.4 \u2013 59.8 kg",
+                    "44.4 \u2013 55.0 kg"
+                  ],
+                  [
+                    "160 cm (5 ft 3 in)",
+                    "47.4 \u2013 63.7 kg",
+                    "47.4 \u2013 58.6 kg"
+                  ],
+                  [
+                    "165 cm (5 ft 5 in)",
+                    "50.4 \u2013 67.8 kg",
+                    "50.4 \u2013 62.3 kg"
+                  ],
+                  [
+                    "170 cm (5 ft 7 in)",
+                    "53.5 \u2013 72.0 kg",
+                    "53.5 \u2013 66.2 kg"
+                  ],
+                  [
+                    "175 cm (5 ft 9 in)",
+                    "56.7 \u2013 76.3 kg",
+                    "56.7 \u2013 70.1 kg"
+                  ],
+                  [
+                    "180 cm (5 ft 11 in)",
+                    "59.9 \u2013 80.7 kg",
+                    "59.9 \u2013 74.2 kg"
+                  ]
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Where BMI falls short",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "It can't tell muscle from fat. People who lift weights often show as overweight while being lean.",
+                  "It doesn't show where fat sits. Fat around the waist carries more health risk. A simple extra check: your waist should be less than half your height.",
+                  "It isn't meant for children and teenagers. They need BMI-for-age charts that account for growth.",
+                  "It isn't valid during pregnancy.",
+                  "In older adults, muscle loss can hide extra body fat behind a normal-looking BMI."
+                ]
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "title": "World Health Organization: BMI classification",
+            "url": "https://www.who.int"
+          },
+          {
+            "title": "WHO Expert Consultation (2004): Appropriate BMI for Asian populations, The Lancet",
+            "url": null
+          },
+          {
+            "title": "Misra A. et al. (2009): Consensus statement for diagnosis of obesity in Asian Indians, JAPI",
+            "url": null
+          },
+          {
+            "title": "NICE (2022): Waist-to-height ratio guidance",
+            "url": "https://www.nice.org.uk"
+          }
+        ],
+        "related": [
+          {
+            "url": "/ideal-weight-calculator/",
+            "name": "Ideal Weight Calculator"
+          },
+          {
+            "url": "/bmr-calculator/",
+            "name": "BMR Calculator"
+          },
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          },
+          {
+            "url": "/body-fat-calculator/",
+            "name": "Body Fat Percentage Calculator"
+          }
+        ],
+        "word_count": 577
+      },
+      "dev_notes": [
+        "Show the Asian Indian category alongside the WHO category in the result, to match this content.",
+        "Add a waist-to-height input as an optional extra.",
+        "Needs a real, named medical reviewer or a clear disclaimer block."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/bmi-calculator/#webpage",
+            "url": "https://yourdomain.com/bmi-calculator/",
+            "name": "BMI Calculator \u2013 Check Your Body Mass Index (kg, cm, ft)",
+            "description": "Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/bmi-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/bmi-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/bmi-calculator/#app",
+            "name": "BMI Calculator",
+            "url": "https://yourdomain.com/bmi-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/bmi-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "BMI Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/bmi-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is a healthy BMI for Indian adults?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Indian guidelines treat 18.5 to 22.9 as normal. The global WHO range is 18.5 to 24.9. If you're between 23 and 24.9, it's worth discussing with your doctor, especially if diabetes or heart disease runs in your family."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is BMI calculated differently for men and women?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No, the formula is the same for adults. At the same BMI, women usually carry more body fat than men, which is one reason BMI is only a starting point."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use this calculator for my child?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Children and teenagers need BMI-for-age percentile charts, which your paediatrician can check."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "My BMI says overweight, but I'm fit. Is it wrong?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It may be. If you carry a lot of muscle, BMI overestimates fat. Check your waist-to-height ratio or body fat percentage for a better picture."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How often should I check my BMI?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Once a month is plenty. Body weight moves up and down by a kilo or more from day to day, mostly from water and food."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "calorie-calculator",
+      "url": "/calorie-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Calorie Calculator \u2013 Daily Calories, BMR & TDEE",
+        "title_chars": 47,
+        "meta_description": "Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.",
+        "meta_chars": 140,
+        "h1": "Calorie Calculator (BMR & TDEE)",
+        "canonical": "https://yourdomain.com/calorie-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/calorie-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Calorie Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "TDEE and goals. Link to BMR page for resting calories only.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "calorie calculator",
+        "secondary": [
+          "tdee calculator",
+          "maintenance calorie calculator",
+          "calorie deficit calculator",
+          "daily calorie calculator",
+          "calories to lose weight"
+        ],
+        "long_tail": [
+          "how many calories should i eat to lose weight",
+          "calories per day for female",
+          "calorie intake for weight gain",
+          "calories in roti"
+        ]
+      },
+      "content": {
+        "unique_angle": "Explains TDEE plainly, gives realistic pacing and connects the target to Indian meals and cooking oil.",
+        "intro": "Find out roughly how many calories your body uses in a day, and how much to eat to maintain, lose or gain weight. You'll need your age, sex, height, weight and a rough idea of how active you are.",
+        "outline": [
+          "How the calculator works",
+          "Two examples",
+          "Choosing your goal",
+          "Using the number with Indian meals",
+          "How accurate is it?"
+        ],
+        "faq_questions": [
+          "How many calories should I eat to lose weight?",
+          "Why has my weight loss stopped?",
+          "Which BMR formula should I pick?",
+          "Should I add calories burned during exercise?",
+          "How much protein do I need?"
+        ],
+        "faqs": [
+          {
+            "q": "How many calories should I eat to lose weight?",
+            "a": "Start with your TDEE and subtract 250 to 500 calories a day. That usually gives steady loss you can keep up."
+          },
+          {
+            "q": "Why has my weight loss stopped?",
+            "a": "As you get lighter, you burn fewer calories. Recalculate with your new weight, and check whether portion sizes or cooking oil have crept up."
+          },
+          {
+            "q": "Which BMR formula should I pick?",
+            "a": "Mifflin-St Jeor is the default because it's the most accurate for most adults. Harris-Benedict is included if you want to compare."
+          },
+          {
+            "q": "Should I add calories burned during exercise?",
+            "a": "No. Your activity level already accounts for regular exercise, so adding workout calories on top double counts them."
+          },
+          {
+            "q": "How much protein do I need?",
+            "a": "It depends on your goal and activity. Use the macro calculator to split your calories into protein, carbs and fat."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How the calculator works",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "It works in two steps. First it estimates your basal metabolic rate (BMR), the energy your body uses at complete rest, with the Mifflin-St Jeor equation. Then it multiplies that by an activity factor to get your total daily energy expenditure (TDEE)."
+              },
+              {
+                "type": "formula",
+                "text": "Men: BMR = 10 \u00d7 weight (kg) + 6.25 \u00d7 height (cm) \u2212 5 \u00d7 age + 5"
+              },
+              {
+                "type": "formula",
+                "text": "Women: BMR = 10 \u00d7 weight (kg) + 6.25 \u00d7 height (cm) \u2212 5 \u00d7 age \u2212 161"
+              },
+              {
+                "type": "table",
+                "head": [
+                  "Activity level",
+                  "Multiply BMR by",
+                  "What it looks like"
+                ],
+                "rows": [
+                  [
+                    "Sedentary",
+                    "1.2",
+                    "Desk job, little or no exercise"
+                  ],
+                  [
+                    "Lightly active",
+                    "1.375",
+                    "Light exercise 1\u20133 days a week"
+                  ],
+                  [
+                    "Moderately active",
+                    "1.55",
+                    "Exercise 3\u20135 days a week"
+                  ],
+                  [
+                    "Very active",
+                    "1.725",
+                    "Hard exercise 6\u20137 days a week"
+                  ],
+                  [
+                    "Extra active",
+                    "1.9",
+                    "Physical job plus training"
+                  ]
+                ]
+              },
+              {
+                "type": "p",
+                "text": "Most people overestimate how active they are. If you're unsure, pick the lower level."
+              }
+            ]
+          },
+          {
+            "h2": "Two examples",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "Priya is 30, 160 cm tall, weighs 62 kg and is lightly active. Her BMR is 1,309 calories and her TDEE is about 1,800. Cutting 250 calories a day puts her at about 1,550; cutting 500 puts her at about 1,300.",
+                  "Rahul is 35, 175 cm tall, weighs 80 kg and is moderately active. His BMR is about 1,724 calories and his TDEE is about 2,672. To lose weight he'd aim for about 2,170; to gain slowly, about 2,920."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Choosing your goal",
+            "blocks": [
+              {
+                "type": "table",
+                "head": [
+                  "Goal",
+                  "Daily adjustment",
+                  "Rough pace"
+                ],
+                "rows": [
+                  [
+                    "Maintain",
+                    "Eat your TDEE",
+                    "\u2014"
+                  ],
+                  [
+                    "Mild weight loss",
+                    "\u2212250 calories",
+                    "About 0.25 kg a week"
+                  ],
+                  [
+                    "Weight loss",
+                    "\u2212500 calories",
+                    "About 0.5 kg a week"
+                  ],
+                  [
+                    "Fast weight loss",
+                    "\u22121,000 calories",
+                    "Up to about 1 kg a week; short term only"
+                  ],
+                  [
+                    "Mild weight gain",
+                    "+250 calories",
+                    "Slow, mostly lean gain with training"
+                  ],
+                  [
+                    "Muscle gain",
+                    "+500 calories",
+                    "Faster gain, some of it fat"
+                  ]
+                ]
+              },
+              {
+                "type": "p",
+                "text": "These weekly rates are rough. Your body adapts as you lose weight, so progress usually slows over time. The calculator never suggests less than 1,200 calories a day; going lower should only happen under a doctor's supervision."
+              }
+            ]
+          },
+          {
+            "h2": "Using the number with Indian meals",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "A calorie target only helps if you can estimate what's on your plate. Rough values for common foods, which vary with size and recipe:"
+              },
+              {
+                "type": "ul",
+                "items": [
+                  "One medium roti without ghee: about 100\u2013120 calories.",
+                  "One katori (about 150 g) of cooked rice: about 180\u2013200 calories.",
+                  "One katori of dal: about 120\u2013150 calories.",
+                  "One tablespoon of ghee or oil: about 110\u2013120 calories."
+                ]
+              },
+              {
+                "type": "p",
+                "text": "Cooking fat is where most people lose track. Two extra spoons of oil in a sabzi add over 200 calories without changing how the dish looks."
+              }
+            ]
+          },
+          {
+            "h2": "How accurate is it?",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "For most healthy adults, Mifflin-St Jeor lands within about 10% of their measured BMR, but some people are further off. Treat the result as a starting point: eat to the target for two to three weeks, track your weight, and adjust by 100\u2013200 calories if it isn't moving the way you expect."
+              },
+              {
+                "type": "p",
+                "text": "This calculator isn't designed for pregnancy, breastfeeding, people under 18, or anyone managing a medical condition. Talk to a doctor or registered dietitian in those cases."
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "title": "Mifflin M.D. et al. (1990): A new predictive equation for resting energy expenditure, American Journal of Clinical Nutrition",
+            "url": null
+          },
+          {
+            "title": "Frankenfield D. et al. (2005): Comparison of predictive equations for resting metabolic rate, Journal of the American Dietetic Association",
+            "url": null
+          },
+          {
+            "title": "ICMR-NIN (2024): Dietary Guidelines for Indians",
+            "url": "https://www.nin.res.in"
+          }
+        ],
+        "related": [
+          {
+            "url": "/bmr-calculator/",
+            "name": "BMR Calculator"
+          },
+          {
+            "url": "/macro-calculator/",
+            "name": "Macro Calculator"
+          },
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          },
+          {
+            "url": "/ideal-weight-calculator/",
+            "name": "Ideal Weight Calculator"
+          }
+        ],
+        "word_count": 668
+      },
+      "dev_notes": [
+        "A 1,200 kcal floor is low for many men; consider a sex-specific floor (often 1,500 for men).",
+        "Needs a named dietitian reviewer or a clear disclaimer block.",
+        "Food calorie values are ranges; have a dietitian check them against IFCT/NIN data before launch."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/calorie-calculator/#webpage",
+            "url": "https://yourdomain.com/calorie-calculator/",
+            "name": "Calorie Calculator \u2013 Daily Calories, BMR & TDEE",
+            "description": "Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/calorie-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/calorie-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/calorie-calculator/#app",
+            "name": "Calorie Calculator",
+            "url": "https://yourdomain.com/calorie-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/calorie-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Calorie Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/calorie-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How many calories should I eat to lose weight?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Start with your TDEE and subtract 250 to 500 calories a day. That usually gives steady loss you can keep up."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why has my weight loss stopped?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "As you get lighter, you burn fewer calories. Recalculate with your new weight, and check whether portion sizes or cooking oil have crept up."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which BMR formula should I pick?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mifflin-St Jeor is the default because it's the most accurate for most adults. Harris-Benedict is included if you want to compare."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Should I add calories burned during exercise?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Your activity level already accounts for regular exercise, so adding workout calories on top double counts them."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much protein do I need?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on your goal and activity. Use the macro calculator to split your calories into protein, carbs and fat."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bmr-calculator",
+      "url": "/bmr-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 2",
+        "target_date": "2026-11-16"
+      },
+      "seo": {
+        "title": "BMR Calculator \u2013 Basal Metabolic Rate (Mifflin-St Jeor)",
+        "title_chars": 55,
+        "meta_description": "Calculate your basal metabolic rate, the calories your body burns at complete rest, comparing the Mifflin-St Jeor, Harris-Benedict and Katch-McArdle formulas.",
+        "meta_chars": 158,
+        "h1": "BMR Calculator",
+        "canonical": "https://yourdomain.com/bmr-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/bmr-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "BMR Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Resting calories only; TDEE stays on the calorie page.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "bmr calculator",
+        "secondary": [
+          "basal metabolic rate calculator",
+          "bmr formula",
+          "resting metabolic rate",
+          "mifflin st jeor calculator",
+          "katch mcardle calculator"
+        ],
+        "long_tail": [
+          "what is a good bmr",
+          "bmr for female",
+          "how to calculate bmr",
+          "bmr vs tdee"
+        ]
+      },
+      "content": {
+        "unique_angle": "Resting calories only, three formulas compared side by side; TDEE and goals stay on the calorie page.",
+        "intro": null,
+        "outline": [
+          "How to use the BMR calculator",
+          "What BMR is (and isn't)",
+          "Three formulas compared on the same person",
+          "BMR vs TDEE",
+          "Why two people of the same weight differ"
+        ],
+        "faq_questions": [
+          "What is a normal BMR?",
+          "Which BMR formula is most accurate?",
+          "Can I increase my BMR?",
+          "Should I eat my BMR to lose weight?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          },
+          {
+            "url": "/macro-calculator/",
+            "name": "Macro Calculator"
+          },
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/bmr-calculator/#webpage",
+            "url": "https://yourdomain.com/bmr-calculator/",
+            "name": "BMR Calculator \u2013 Basal Metabolic Rate (Mifflin-St Jeor)",
+            "description": "Calculate your basal metabolic rate, the calories your body burns at complete rest, comparing the Mifflin-St Jeor, Harris-Benedict and Katch-McArdle formulas.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/bmr-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/bmr-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/bmr-calculator/#app",
+            "name": "BMR Calculator",
+            "url": "https://yourdomain.com/bmr-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/bmr-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "BMR Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "body-fat-calculator",
+      "url": "/body-fat-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 4",
+        "target_date": "2026-12-14"
+      },
+      "seo": {
+        "title": "Body Fat Calculator \u2013 US Navy Tape Measure Method",
+        "title_chars": 49,
+        "meta_description": "Estimate your body fat percentage with just a measuring tape, using the US Navy formula with neck, waist and hip measurements.",
+        "meta_chars": 126,
+        "h1": "Body Fat Percentage Calculator",
+        "canonical": "https://yourdomain.com/body-fat-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/body-fat-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Body Fat Percentage Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "body fat calculator",
+        "secondary": [
+          "body fat percentage calculator",
+          "navy body fat calculator",
+          "body fat calculator for men",
+          "body fat calculator for women",
+          "body fat chart"
+        ],
+        "long_tail": [
+          "how to measure body fat at home",
+          "healthy body fat percentage",
+          "body fat vs bmi",
+          "how to measure waist for body fat"
+        ]
+      },
+      "content": {
+        "unique_angle": "Tape-measure method with clear measuring instructions and healthy ranges by age and sex.",
+        "intro": null,
+        "outline": [
+          "How to use the body fat calculator",
+          "How to take the measurements correctly",
+          "US Navy formula",
+          "Healthy body fat ranges",
+          "Body fat vs BMI",
+          "Limits of tape-measure methods"
+        ],
+        "faq_questions": [
+          "How accurate is the Navy method?",
+          "What is a healthy body fat percentage?",
+          "Where exactly do I measure my waist?",
+          "Is body fat better than BMI?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          },
+          {
+            "url": "/ideal-weight-calculator/",
+            "name": "Ideal Weight Calculator"
+          },
+          {
+            "url": "/macro-calculator/",
+            "name": "Macro Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/body-fat-calculator/#webpage",
+            "url": "https://yourdomain.com/body-fat-calculator/",
+            "name": "Body Fat Calculator \u2013 US Navy Tape Measure Method",
+            "description": "Estimate your body fat percentage with just a measuring tape, using the US Navy formula with neck, waist and hip measurements.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/body-fat-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/body-fat-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/body-fat-calculator/#app",
+            "name": "Body Fat Percentage Calculator",
+            "url": "https://yourdomain.com/body-fat-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/body-fat-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Body Fat Percentage Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ideal-weight-calculator",
+      "url": "/ideal-weight-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 2",
+        "target_date": "2026-11-16"
+      },
+      "seo": {
+        "title": "Ideal Weight Calculator \u2013 By Height, Age & Sex",
+        "title_chars": 46,
+        "meta_description": "Compare your ideal body weight for your height using the Devine, Robinson, Miller and Hamwi formulas alongside the healthy BMI range.",
+        "meta_chars": 133,
+        "h1": "Ideal Weight Calculator",
+        "canonical": "https://yourdomain.com/ideal-weight-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/ideal-weight-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Ideal Weight Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Height tables in feet/inches (Indian search pattern).",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "ideal weight calculator",
+        "secondary": [
+          "ideal body weight calculator",
+          "ideal weight for height",
+          "healthy weight for height",
+          "ideal weight chart",
+          "devine formula"
+        ],
+        "long_tail": [
+          "ideal weight for 5 feet 5 inches female",
+          "ideal weight for 170 cm male",
+          "ideal weight by age",
+          "height weight chart india"
+        ]
+      },
+      "content": {
+        "unique_angle": "Four formulas compared with the healthy BMI range, plus a feet-and-inches height table.",
+        "intro": null,
+        "outline": [
+          "How to use the ideal weight calculator",
+          "Four ideal weight formulas compared",
+          "Ideal weight chart by height",
+          "Ideal weight vs healthy BMI range",
+          "Why age and frame size matter"
+        ],
+        "faq_questions": [
+          "What is the ideal weight for my height?",
+          "Which formula is most accurate?",
+          "Does ideal weight change with age?",
+          "Is ideal weight the same as healthy weight?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          },
+          {
+            "url": "/body-fat-calculator/",
+            "name": "Body Fat Percentage Calculator"
+          },
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/ideal-weight-calculator/#webpage",
+            "url": "https://yourdomain.com/ideal-weight-calculator/",
+            "name": "Ideal Weight Calculator \u2013 By Height, Age & Sex",
+            "description": "Compare your ideal body weight for your height using the Devine, Robinson, Miller and Hamwi formulas alongside the healthy BMI range.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/ideal-weight-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/ideal-weight-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/ideal-weight-calculator/#app",
+            "name": "Ideal Weight Calculator",
+            "url": "https://yourdomain.com/ideal-weight-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/ideal-weight-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Ideal Weight Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "macro-calculator",
+      "url": "/macro-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 3",
+        "target_date": "2026-11-30"
+      },
+      "seo": {
+        "title": "Macro Calculator \u2013 Protein, Carbs & Fat Per Day",
+        "title_chars": 47,
+        "meta_description": "Split your daily calories into protein, carbs and fat for fat loss, maintenance or muscle gain, in grams per day, with vegetarian protein examples.",
+        "meta_chars": 147,
+        "h1": "Macro Calculator",
+        "canonical": "https://yourdomain.com/macro-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/macro-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Macro Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Vegetarian examples as a real differentiator.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "macro calculator",
+        "secondary": [
+          "macronutrient calculator",
+          "protein intake calculator",
+          "macros for weight loss",
+          "macro calculator for muscle gain",
+          "iifym calculator"
+        ],
+        "long_tail": [
+          "how much protein per day",
+          "macros for fat loss female",
+          "vegetarian high protein diet",
+          "protein per kg body weight"
+        ]
+      },
+      "content": {
+        "unique_angle": "Macro targets with vegetarian protein examples that fit an Indian diet.",
+        "intro": null,
+        "outline": [
+          "How to use the macro calculator",
+          "How macros are calculated",
+          "Protein targets by goal",
+          "Hitting protein on a vegetarian diet",
+          "Carbs and fats: finding a balance you'll stick to"
+        ],
+        "faq_questions": [
+          "How much protein do I need a day?",
+          "What macros should I use for fat loss?",
+          "Can vegetarians get enough protein?",
+          "Do I need to track macros exactly?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          },
+          {
+            "url": "/bmr-calculator/",
+            "name": "BMR Calculator"
+          },
+          {
+            "url": "/body-fat-calculator/",
+            "name": "Body Fat Percentage Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/macro-calculator/#webpage",
+            "url": "https://yourdomain.com/macro-calculator/",
+            "name": "Macro Calculator \u2013 Protein, Carbs & Fat Per Day",
+            "description": "Split your daily calories into protein, carbs and fat for fat loss, maintenance or muscle gain, in grams per day, with vegetarian protein examples.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/macro-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/macro-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/macro-calculator/#app",
+            "name": "Macro Calculator",
+            "url": "https://yourdomain.com/macro-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/macro-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Macro Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "water-intake-calculator",
+      "url": "/water-intake-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 4",
+        "target_date": "2026-12-14"
+      },
+      "seo": {
+        "title": "Water Intake Calculator \u2013 How Much Water to Drink a Day",
+        "title_chars": 55,
+        "meta_description": "Get a daily water target based on your weight, activity and climate, in litres or glasses, plus what counts toward your intake.",
+        "meta_chars": 127,
+        "h1": "Daily Water Intake Calculator",
+        "canonical": "https://yourdomain.com/water-intake-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/water-intake-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Daily Water Intake Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Hot-climate adjustment for India.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "water intake calculator",
+        "secondary": [
+          "daily water intake",
+          "how much water should i drink",
+          "water intake by weight",
+          "hydration calculator",
+          "water per day"
+        ],
+        "long_tail": [
+          "how many litres of water per day",
+          "water intake in summer",
+          "how many glasses of water a day",
+          "signs of dehydration"
+        ]
+      },
+      "content": {
+        "unique_angle": "Adjusts for hot Indian summers and activity, and explains that food and other drinks count too.",
+        "intro": null,
+        "outline": [
+          "How to use the water intake calculator",
+          "How your target is worked out",
+          "Hot weather and exercise",
+          "What counts towards your intake",
+          "Signs you need more (or less)"
+        ],
+        "faq_questions": [
+          "How many litres of water should I drink a day?",
+          "Do tea and coffee count?",
+          "Can you drink too much water?",
+          "Should I drink more in summer?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          },
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/water-intake-calculator/#webpage",
+            "url": "https://yourdomain.com/water-intake-calculator/",
+            "name": "Water Intake Calculator \u2013 How Much Water to Drink a Day",
+            "description": "Get a daily water target based on your weight, activity and climate, in litres or glasses, plus what counts toward your intake.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/water-intake-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/water-intake-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/water-intake-calculator/#app",
+            "name": "Daily Water Intake Calculator",
+            "url": "https://yourdomain.com/water-intake-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/water-intake-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Daily Water Intake Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "target-heart-rate-calculator",
+      "url": "/target-heart-rate-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 7",
+        "target_date": "2027-02-08"
+      },
+      "seo": {
+        "title": "Target Heart Rate Calculator \u2013 Heart Rate Zones by Age",
+        "title_chars": 54,
+        "meta_description": "Find your maximum heart rate and five training zones by age, or use the Karvonen method with your resting heart rate for fat burn and cardio.",
+        "meta_chars": 141,
+        "h1": "Target Heart Rate Calculator",
+        "canonical": "https://yourdomain.com/target-heart-rate-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/target-heart-rate-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Target Heart Rate Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "target heart rate calculator",
+        "secondary": [
+          "heart rate zone calculator",
+          "max heart rate calculator",
+          "karvonen formula",
+          "fat burning heart rate",
+          "training zones"
+        ],
+        "long_tail": [
+          "target heart rate by age",
+          "what is a normal heart rate during exercise",
+          "zone 2 heart rate",
+          "220 minus age"
+        ]
+      },
+      "content": {
+        "unique_angle": "Age-based and Karvonen zones, with Zone 2 explained for everyday runners and walkers.",
+        "intro": null,
+        "outline": [
+          "How to use the heart rate calculator",
+          "Maximum heart rate: the 220 \u2212 age estimate and its limits",
+          "The Karvonen method with resting heart rate",
+          "Five training zones explained",
+          "Zone 2 training"
+        ],
+        "faq_questions": [
+          "What is my target heart rate?",
+          "Is 220 minus age accurate?",
+          "What is Zone 2?",
+          "How do I measure resting heart rate?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/calorie-calculator/",
+            "name": "Calorie Calculator"
+          },
+          {
+            "url": "/bmi-calculator/",
+            "name": "BMI Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/target-heart-rate-calculator/#webpage",
+            "url": "https://yourdomain.com/target-heart-rate-calculator/",
+            "name": "Target Heart Rate Calculator \u2013 Heart Rate Zones by Age",
+            "description": "Find your maximum heart rate and five training zones by age, or use the Karvonen method with your resting heart rate for fat burn and cardio.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/target-heart-rate-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/target-heart-rate-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/target-heart-rate-calculator/#app",
+            "name": "Target Heart Rate Calculator",
+            "url": "https://yourdomain.com/target-heart-rate-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/target-heart-rate-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Target Heart Rate Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pregnancy-due-date-calculator",
+      "url": "/pregnancy-due-date-calculator/",
+      "type": "calculator",
+      "category": "Health (YMYL: real reviewer or clear disclaimer)",
+      "publish": {
+        "phase": "Batch 8",
+        "target_date": "2027-02-22"
+      },
+      "seo": {
+        "title": "Pregnancy Due Date Calculator \u2013 EDD by LMP or Conception",
+        "title_chars": 56,
+        "meta_description": "Estimate your due date from your last period, conception date or IVF transfer. See how many weeks pregnant you are and key trimester dates.",
+        "meta_chars": 139,
+        "h1": "Pregnancy Due Date Calculator",
+        "canonical": "https://yourdomain.com/pregnancy-due-date-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/pregnancy-due-date-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Health Calculators",
+          "Pregnancy Due Date Calculator"
+        ],
+        "hub": {
+          "name": "Health Calculators",
+          "url": "/health-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Highest-risk page. Needs a real medical reviewer before launch.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": true,
+      "keywords": {
+        "primary": "due date calculator",
+        "secondary": [
+          "due date calculator",
+          "pregnancy calculator",
+          "edd calculator",
+          "pregnancy week calculator",
+          "conception date calculator"
+        ],
+        "long_tail": [
+          "how many weeks pregnant am i",
+          "due date by lmp",
+          "ivf due date calculator",
+          "trimester dates"
+        ]
+      },
+      "content": {
+        "unique_angle": "LMP, conception and IVF methods with a week-by-week and trimester timeline; must be medically reviewed.",
+        "intro": null,
+        "outline": [
+          "How to use the due date calculator",
+          "How your due date is estimated (Naegele's rule)",
+          "Due date from conception or IVF transfer",
+          "Your trimester dates",
+          "Why only a few babies arrive on the due date",
+          "When your doctor may change the date"
+        ],
+        "faq_questions": [
+          "How accurate is a due date?",
+          "How many weeks pregnant am I?",
+          "What if my cycles are irregular?",
+          "Is the ultrasound date more accurate?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/date-calculator/",
+            "name": "Date Calculator"
+          },
+          {
+            "url": "/days-until-calculator/",
+            "name": "Days Until Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/pregnancy-due-date-calculator/#webpage",
+            "url": "https://yourdomain.com/pregnancy-due-date-calculator/",
+            "name": "Pregnancy Due Date Calculator \u2013 EDD by LMP or Conception",
+            "description": "Estimate your due date from your last period, conception date or IVF transfer. See how many weeks pregnant you are and key trimester dates.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/pregnancy-due-date-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/pregnancy-due-date-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/pregnancy-due-date-calculator/#app",
+            "name": "Pregnancy Due Date Calculator",
+            "url": "https://yourdomain.com/pregnancy-due-date-calculator/",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/pregnancy-due-date-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Health Calculators",
+                "item": "https://yourdomain.com/health-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Pregnancy Due Date Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "age-calculator",
+      "url": "/age-calculator/",
+      "type": "calculator",
+      "category": "Date & time",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Age Calculator \u2013 Exact Age in Years, Months & Days",
+        "title_chars": 50,
+        "meta_description": "Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.",
+        "meta_chars": 145,
+        "h1": "Age Calculator",
+        "canonical": "https://yourdomain.com/age-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/age-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Date & Time Calculators",
+          "Age Calculator"
+        ],
+        "hub": {
+          "name": "Date & Time Calculators",
+          "url": "/date-time-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Promote 'age as on date' for govt exam eligibility. Canonical strips ?dob= params.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": false,
+      "keywords": {
+        "primary": "age calculator",
+        "secondary": [
+          "age calculator by date of birth",
+          "age calculator as on date",
+          "exact age calculator",
+          "dob calculator",
+          "birthday calculator"
+        ],
+        "long_tail": [
+          "how old am i",
+          "age as on 01-01-2027",
+          "age calculator for government exam",
+          "how to calculate age from date of birth"
+        ]
+      },
+      "content": {
+        "unique_angle": "Built for Indian exam and job eligibility: age as on a cut-off date, explained with a real one-day-short example.",
+        "intro": "Enter your date of birth to see your exact age in years, months and days. You can also check your age on any other date, which is usually what exam and job forms ask for.",
+        "outline": [
+          "How to use the age calculator",
+          "Checking your age for exams and government jobs",
+          "How your age is worked out",
+          "Born on 29 February?",
+          "What else the result shows"
+        ],
+        "faq_questions": [
+          "How do I calculate my age as on a specific date?",
+          "On my 18th birthday, am I 18 or 17?",
+          "Why does another website give a different number of days?",
+          "Can I find a date of birth from an age?",
+          "Is my date of birth saved anywhere?"
+        ],
+        "faqs": [
+          {
+            "q": "How do I calculate my age as on a specific date?",
+            "a": "Change the second date from today to the cut-off date in your notification. The result shows your exact age on that day in years, months and days."
+          },
+          {
+            "q": "On my 18th birthday, am I 18 or 17?",
+            "a": "You complete a year on your birthday, so on your 18th birthday you are exactly 18 years, 0 months and 0 days old."
+          },
+          {
+            "q": "Why does another website give a different number of days?",
+            "a": "Usually one tool counts the end date and the other doesn't, or it uses an average month length. This calculator uses real calendar months and doesn't count the end date twice."
+          },
+          {
+            "q": "Can I find a date of birth from an age?",
+            "a": "Yes. Use reverse mode: enter the age and the date it applies to, and the calculator works back to the date of birth."
+          },
+          {
+            "q": "Is my date of birth saved anywhere?",
+            "a": "No. The calculation runs in your browser, and your date of birth isn't sent to our servers."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How to use the age calculator",
+            "blocks": [
+              {
+                "type": "ol",
+                "items": [
+                  "Enter your date of birth.",
+                  "Leave the second date as today, or change it to the date your form asks about, for example \u201cage as on 1 January 2027\u201d.",
+                  "Add your time of birth if you want the answer down to hours and minutes.",
+                  "Read your age in years, months and days, along with total days lived and the countdown to your next birthday."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Checking your age for exams and government jobs",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "Recruitment notices from UPSC, SSC, state PSCs and banks set age limits as on a fixed cut-off date, not as on the day you apply. Being even one day over the upper limit makes you ineligible, so a rough estimate isn't good enough."
+              },
+              {
+                "type": "p",
+                "text": "Say you were born on 2 January 2000 and the cut-off date is 1 January 2027. The calculator shows 26 years, 11 months and 30 days. If the upper age limit is 27, you're eligible, by a single day."
+              },
+              {
+                "type": "p",
+                "text": "Age relaxations for reserved categories, ex-servicemen and other groups are added on top of the upper limit. They vary by notification, so check the one you're applying for; the calculator only gives your actual age."
+              }
+            ]
+          },
+          {
+            "h2": "How your age is worked out",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "The calculator counts complete years first, then complete months, then the days left over. It uses real month lengths. If the day of the month hasn't arrived yet, it borrows the number of days in the previous month (28, 29, 30 or 31), exactly as you would on paper."
+              },
+              {
+                "type": "p",
+                "text": "Here's a worked example for someone born on 25 March 1998, checking their age on 10 September 2026:"
+              },
+              {
+                "type": "ul",
+                "items": [
+                  "Days: 10 is smaller than 25, so borrow August's 31 days. 10 + 31 \u2212 25 = 16 days.",
+                  "Months: after borrowing, September becomes August. 8 \u2212 3 = 5 months.",
+                  "Years: 2026 \u2212 1998 = 28 years."
+                ]
+              },
+              {
+                "type": "p",
+                "text": "Answer: 28 years, 5 months and 16 days, or 10,396 days in total. Shortcuts that divide total days by 365.25 get close, but they can be a day off around birthdays, which is exactly when it matters for a cut-off date."
+              }
+            ]
+          },
+          {
+            "h2": "Born on 29 February?",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "In a non-leap year there's no 29 February, so the question is whether you complete another year on 28 February or 1 March. Countries and institutions don't all follow the same rule. For an Indian form, go with what the notification or issuing office says, and if it's silent, ask them in writing before you rely on it."
+              }
+            ]
+          },
+          {
+            "h2": "What else the result shows",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "Your age in total months, weeks, days, hours and minutes, handy for a baby's milestones or a fun birthday post.",
+                  "A countdown to your next birthday and the weekday it falls on.",
+                  "Compare mode, to see the exact age gap between two people.",
+                  "Reverse mode: enter an age and a reference date to work back to the date of birth.",
+                  "Your zodiac sign and your age on other planets, just for fun."
+                ]
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "title": "Gregorian calendar leap-year rule",
+            "url": null
+          },
+          {
+            "title": "Check the age criteria in the specific recruitment notification you're applying for",
+            "url": null
+          }
+        ],
+        "related": [
+          {
+            "url": "/date-calculator/",
+            "name": "Date Calculator"
+          },
+          {
+            "url": "/days-until-calculator/",
+            "name": "Days Until Calculator"
+          },
+          {
+            "url": "/chronological-age-calculator/",
+            "name": "Chronological Age Calculator for Assessments"
+          },
+          {
+            "url": "/day-of-the-week-calculator/",
+            "name": "Day of the Week Calculator"
+          }
+        ],
+        "word_count": 689
+      },
+      "dev_notes": [
+        "Only keep the 'isn't saved' FAQ if it stays true after analytics are added (inputs must not go into analytics events).",
+        "Canonical must strip ?dob= and other query parameters."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/age-calculator/#webpage",
+            "url": "https://yourdomain.com/age-calculator/",
+            "name": "Age Calculator \u2013 Exact Age in Years, Months & Days",
+            "description": "Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/age-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/age-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/age-calculator/#app",
+            "name": "Age Calculator",
+            "url": "https://yourdomain.com/age-calculator/",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/age-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Date & Time Calculators",
+                "item": "https://yourdomain.com/date-time-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Age Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/age-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How do I calculate my age as on a specific date?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Change the second date from today to the cut-off date in your notification. The result shows your exact age on that day in years, months and days."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "On my 18th birthday, am I 18 or 17?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You complete a year on your birthday, so on your 18th birthday you are exactly 18 years, 0 months and 0 days old."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does another website give a different number of days?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Usually one tool counts the end date and the other doesn't, or it uses an average month length. This calculator uses real calendar months and doesn't count the end date twice."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I find a date of birth from an age?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Use reverse mode: enter the age and the date it applies to, and the calculator works back to the date of birth."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my date of birth saved anywhere?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The calculation runs in your browser, and your date of birth isn't sent to our servers."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "date-calculator",
+      "url": "/date-calculator/",
+      "type": "calculator",
+      "category": "Date & time",
+      "publish": {
+        "phase": "Launch",
+        "target_date": "2026-10-19"
+      },
+      "seo": {
+        "title": "Date Calculator \u2013 Days Between Dates, Add or Subtract Days",
+        "title_chars": 58,
+        "meta_description": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
+        "meta_chars": 136,
+        "h1": "Date Calculator",
+        "canonical": "https://yourdomain.com/date-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/date-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Date & Time Calculators",
+          "Date Calculator"
+        ],
+        "hub": {
+          "name": "Date & Time Calculators",
+          "url": "/date-time-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Current date-difference tool moves here; add an add/subtract mode.",
+      "status": {
+        "tool_built": true,
+        "content": "full_draft"
+      },
+      "ymyl": false,
+      "keywords": {
+        "primary": "date calculator",
+        "secondary": [
+          "days between dates",
+          "date difference calculator",
+          "day counter",
+          "days calculator",
+          "add days to date"
+        ],
+        "long_tail": [
+          "how many days between two dates",
+          "how many days from today",
+          "90 days from today",
+          "weeks between dates"
+        ]
+      },
+      "content": {
+        "unique_angle": "Clears up the include-the-end-date confusion with leave, hotel and notice-period examples.",
+        "intro": "Count the exact number of days between two dates, and see the same gap in weeks, months and years. You can choose whether to include the end date and see how many of those days are weekdays.",
+        "outline": [
+          "How to use the date calculator",
+          "Should you include the end date?",
+          "Examples",
+          "Weekdays and holidays",
+          "Why months are tricky"
+        ],
+        "faq_questions": [
+          "How do I count the days between two dates?",
+          "Does it account for leap years?",
+          "Can it exclude public holidays?",
+          "How many weeks are there between two dates?",
+          "How do I count days from today?"
+        ],
+        "faqs": [
+          {
+            "q": "How do I count the days between two dates?",
+            "a": "Enter both dates and the calculator gives you the total. Decide first whether the end date should count; it changes the answer by one day."
+          },
+          {
+            "q": "Does it account for leap years?",
+            "a": "Yes. 29 February is counted whenever it falls between your two dates."
+          },
+          {
+            "q": "Can it exclude public holidays?",
+            "a": "Not automatically, because holidays vary by state and employer. Use the weekday count and subtract your holidays."
+          },
+          {
+            "q": "How many weeks are there between two dates?",
+            "a": "The result shows the gap in weeks and days as well as total days. 105 days, for example, is exactly 15 weeks."
+          },
+          {
+            "q": "How do I count days from today?",
+            "a": "Leave the start date as today and pick the end date. For a countdown to an event, the days until calculator is simpler."
+          }
+        ],
+        "sections": [
+          {
+            "h2": "How to use the date calculator",
+            "blocks": [
+              {
+                "type": "ol",
+                "items": [
+                  "Pick the start date and the end date.",
+                  "Tick \u201cinclude end date\u201d if the last day should count, for example for leave or a booking.",
+                  "Read the total days, the same period in weeks, months and years, and the split between weekdays and weekends."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Should you include the end date?",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "This causes most of the confusion. From 1 March to 5 March is 4 days if you count the gap between the dates, and 5 days if you count both the first and last day."
+              },
+              {
+                "type": "ul",
+                "items": [
+                  "Leave from 1 to 5 March covers 5 days, so include the end date.",
+                  "A hotel stay from 1 to 5 March is 4 nights, so don't.",
+                  "For notice periods, contracts and legal deadlines, check how the document defines the period before relying on either number."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Examples",
+            "blocks": [
+              {
+                "type": "ul",
+                "items": [
+                  "From 11 September 2026 to 25 December 2026 is 105 days, exactly 15 weeks.",
+                  "From 15 August 1995 to 11 September 2026 is 11,350 days.",
+                  "90 days after 1 October 2026 is 30 December 2026."
+                ]
+              }
+            ]
+          },
+          {
+            "h2": "Weekdays and holidays",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "The weekday count leaves out Saturdays and Sundays. It doesn't know about public holidays, which differ from state to state, or the second and fourth Saturdays when banks are closed. Subtract those yourself if they matter."
+              }
+            ]
+          },
+          {
+            "h2": "Why months are tricky",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "Months have 28 to 31 days, so there's no perfect answer to \u201cone month after 31 January\u201d. The calculator shows complete calendar months and then the days left over. That's why the years-months-days answer and the total days can look like they don't match, even though both are correct."
+              }
+            ]
+          }
+        ],
+        "sources": [],
+        "related": [
+          {
+            "url": "/age-calculator/",
+            "name": "Age Calculator"
+          },
+          {
+            "url": "/days-until-calculator/",
+            "name": "Days Until Calculator"
+          },
+          {
+            "url": "/time-calculator/",
+            "name": "Time Calculator"
+          },
+          {
+            "url": "/work-hours-calculator/",
+            "name": "Work Hours Calculator"
+          }
+        ],
+        "word_count": 436
+      },
+      "dev_notes": [
+        "The '90 days after' example needs the new add/subtract mode. Don't publish that line until the mode exists."
+      ],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/date-calculator/#webpage",
+            "url": "https://yourdomain.com/date-calculator/",
+            "name": "Date Calculator \u2013 Days Between Dates, Add or Subtract Days",
+            "description": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/date-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/date-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/date-calculator/#app",
+            "name": "Date Calculator",
+            "url": "https://yourdomain.com/date-calculator/",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/date-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Date & Time Calculators",
+                "item": "https://yourdomain.com/date-time-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Date Calculator"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yourdomain.com/date-calculator/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How do I count the days between two dates?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Enter both dates and the calculator gives you the total. Decide first whether the end date should count; it changes the answer by one day."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does it account for leap years?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. 29 February is counted whenever it falls between your two dates."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can it exclude public holidays?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not automatically, because holidays vary by state and employer. Use the weekday count and subtract your holidays."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many weeks are there between two dates?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The result shows the gap in weeks and days as well as total days. 105 days, for example, is exactly 15 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I count days from today?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Leave the start date as today and pick the end date. For a countdown to an event, the days until calculator is simpler."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "days-until-calculator",
+      "url": "/days-until-calculator/",
+      "type": "calculator",
+      "category": "Date & time",
+      "publish": {
+        "phase": "Batch 3",
+        "target_date": "2026-11-30"
+      },
+      "seo": {
+        "title": "Days Until Calculator \u2013 Countdown to Any Date",
+        "title_chars": 45,
+        "meta_description": "How many days until your birthday, Diwali, exams or any date? Get a countdown in days, weeks and working days, and share it.",
+        "meta_chars": 124,
+        "h1": "Days Until Calculator",
+        "canonical": "https://yourdomain.com/days-until-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/days-until-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Date & Time Calculators",
+          "Days Until Calculator"
+        ],
+        "hub": {
+          "name": "Date & Time Calculators",
+          "url": "/date-time-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Event sub-pages only for big events with unique content.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": false,
+      "keywords": {
+        "primary": "days until",
+        "secondary": [
+          "countdown calculator",
+          "days left until",
+          "days to go",
+          "countdown to date",
+          "how many days until"
+        ],
+        "long_tail": [
+          "how many days until diwali",
+          "days until my birthday",
+          "days until exam",
+          "days left in the year"
+        ]
+      },
+      "content": {
+        "unique_angle": "Countdown from today to a named event, with shareable countdowns and working-day counts.",
+        "intro": null,
+        "outline": [
+          "How to use the countdown",
+          "Days, weeks and working days left",
+          "Counting down to exams and deadlines",
+          "Popular countdowns this year"
+        ],
+        "faq_questions": [
+          "How many days are left until my birthday?",
+          "Does the count include today?",
+          "Can I count only working days?",
+          "How many days are left in the year?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/date-calculator/",
+            "name": "Date Calculator"
+          },
+          {
+            "url": "/age-calculator/",
+            "name": "Age Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/days-until-calculator/#webpage",
+            "url": "https://yourdomain.com/days-until-calculator/",
+            "name": "Days Until Calculator \u2013 Countdown to Any Date",
+            "description": "How many days until your birthday, Diwali, exams or any date? Get a countdown in days, weeks and working days, and share it.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/days-until-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/days-until-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/days-until-calculator/#app",
+            "name": "Days Until Calculator",
+            "url": "https://yourdomain.com/days-until-calculator/",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "provider": {
+              "@id": "https://yourdomain.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yourdomain.com/days-until-calculator/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Date & Time Calculators",
+                "item": "https://yourdomain.com/date-time-calculators/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Days Until Calculator"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "time-calculator",
+      "url": "/time-calculator/",
+      "type": "calculator",
+      "category": "Date & time",
+      "publish": {
+        "phase": "Batch 3",
+        "target_date": "2026-11-30"
+      },
+      "seo": {
+        "title": "Time Calculator \u2013 Add, Subtract & Time Between Two Times",
+        "title_chars": 56,
+        "meta_description": "Add or subtract hours, minutes and seconds, or find the time between two clock times, even across midnight. Results in h:m:s and decimal hours.",
+        "meta_chars": 143,
+        "h1": "Time Calculator",
+        "canonical": "https://yourdomain.com/time-calculator/",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+        "og_image": "https://yourdomain.com/og/time-calculator.png",
+        "breadcrumb": [
+          "Home",
+          "Date & Time Calculators",
+          "Time Calculator"
+        ],
+        "hub": {
+          "name": "Date & Time Calculators",
+          "url": "/date-time-calculators/"
+        },
+        "lang": "en-IN"
+      },
+      "notes": "Replaces time-duration-calculator.",
+      "status": {
+        "tool_built": false,
+        "content": "brief"
+      },
+      "ymyl": false,
+      "keywords": {
+        "primary": "time calculator",
+        "secondary": [
+          "time duration calculator",
+          "hours between two times",
+          "add time calculator",
+          "hours and minutes calculator",
+          "time difference calculator"
+        ],
+        "long_tail": [
+          "time between 9am and 5pm",
+          "add hours to time",
+          "time calculator across midnight",
+          "convert minutes to decimal hours"
+        ]
+      },
+      "content": {
+        "unique_angle": "Add and subtract times, and find durations across midnight, with decimal hours for timesheets.",
+        "intro": null,
+        "outline": [
+          "How to use the time calculator",
+          "Time between two clock times",
+          "Adding and subtracting hours and minutes",
+          "Crossing midnight",
+          "Converting to decimal hours"
+        ],
+        "faq_questions": [
+          "How many hours are there between two times?",
+          "How do I add hours and minutes?",
+          "How do I convert minutes to decimal hours?",
+          "What if the end time is after midnight?"
+        ],
+        "faqs": null,
+        "sections": null,
+        "sources": null,
+        "related": [
+          {
+            "url": "/work-hours-calculator/",
+            "name": "Work Hours Calculator"
+          },
+          {
+            "url": "/date-calculator/",
+            "name": "Date Calculator"
+          }
+        ],
+        "word_count": null
+      },
+      "dev_notes": [],
+      "schema_jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/time-calculator/#webpage",
+            "url": "https://yourdomain.com/time-calculator/",
+            "name": "Time Calculator \u2013 Add, Subtract & Time Between Two Times",
+            "description": "Add or subtract hours, minutes and seconds, or find the time between two clock times, even across midnight. Results in h:m:s and decimal hours.",
+            "isPartOf": {
+              "@id": "https://yourdomain.com/#website"
+            },
+            "breadcrumb": {
+              "@id": "https://yourdomain.com/time-calculator/#breadcrumb"
+            },
+            "mainEntity": {
+              "@id": "https://yourdomain.com/time-calculator/#app"
+            },
+            "inLanguage": "en-IN",
+            "datePublished": "YYYY-MM-DD",
+            "dateModified": "YYYY-MM-DD",
+            "author": {
+              "@id": "https://yourdomain.com/authors/real-name/#person"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://yourdomain.com/time-calculator/#app",
+            "name": "Time Calculator",
+            "url": "https://yourdomain.com/time-calculator/",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "isAccessibleForFree": true
+          }
+        ]
+      }
+    }
+  ]
+}

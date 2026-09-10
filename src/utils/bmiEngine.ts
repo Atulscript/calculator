@@ -18,12 +18,20 @@ export type BMICategory =
   | 'obese_class_2'
   | 'obese_class_3';
 
+export type AsianBMICategory = 'underweight' | 'normal' | 'overweight' | 'obese';
+
 export interface BMIResult {
   bmi: number;
   category: BMICategory;
   categoryLabel: string;
   categoryColor: string;
   colorToken: string;
+  asianCategory: AsianBMICategory;
+  asianCategoryLabel: string;
+  asianCategoryColor: string;
+  asianColorToken: string;
+  asianIdealWeightMaxKg: number;
+  asianIdealWeightMaxLbs: number;
   idealWeightMinKg: number;
   idealWeightMaxKg: number;
   idealWeightMinLbs: number;
@@ -130,12 +138,49 @@ export function calculateBMI(input: BMIInput): BMIResult {
     summaryText = `Your BMI falls into severe Obesity Class III. Professional medical evaluation is strongly recommended.`;
   }
 
+  // Asian Indian cut-offs: <18.5 Underweight, 18.5-22.9 Normal, 23.0-24.9 Overweight, >=25.0 Obese
+  let asianCategory: AsianBMICategory = 'normal';
+  let asianCategoryLabel = 'Normal (Asian Cut-off)';
+  let asianCategoryColor = '#047857';
+  let asianColorToken = 'var(--accent-emerald)';
+
+  if (bmi < 18.5) {
+    asianCategory = 'underweight';
+    asianCategoryLabel = 'Underweight';
+    asianCategoryColor = '#0284c7';
+    asianColorToken = 'var(--accent-cyan)';
+  } else if (bmi < 23.0) {
+    asianCategory = 'normal';
+    asianCategoryLabel = 'Normal Weight';
+    asianCategoryColor = '#047857';
+    asianColorToken = 'var(--accent-emerald)';
+  } else if (bmi < 25.0) {
+    asianCategory = 'overweight';
+    asianCategoryLabel = 'Overweight (Asian Criteria)';
+    asianCategoryColor = '#b45309';
+    asianColorToken = 'var(--accent-amber)';
+  } else {
+    asianCategory = 'obese';
+    asianCategoryLabel = 'Obese (Asian Criteria)';
+    asianCategoryColor = '#be123c';
+    asianColorToken = 'var(--accent-rose)';
+  }
+
+  const asianIdealWeightMaxKg = Number((22.9 * heightMeters * heightMeters).toFixed(1));
+  const asianIdealWeightMaxLbs = Number((asianIdealWeightMaxKg * 2.20462).toFixed(1));
+
   return {
     bmi,
     category,
     categoryLabel,
     categoryColor,
     colorToken,
+    asianCategory,
+    asianCategoryLabel,
+    asianCategoryColor,
+    asianColorToken,
+    asianIdealWeightMaxKg,
+    asianIdealWeightMaxLbs,
     idealWeightMinKg,
     idealWeightMaxKg,
     idealWeightMinLbs,

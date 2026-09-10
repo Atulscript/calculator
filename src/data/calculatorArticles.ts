@@ -1,856 +1,1325 @@
 import { CalculatorArticle } from '../types/article';
 
 export const CALCULATOR_ARTICLES: Record<string, CalculatorArticle> = {
-  'age-calculator': {
-    calculatorId: 'age-calculator',
-    title: 'How Chronological Age Is Calculated: Complete Calendrical Guide',
-    subtitle: 'Understand the exact calendar subtraction algorithm, leap year rules, time-unit conversions, and administrative standards.',
-    readTimeMinutes: 5,
-    author: {
-      name: 'Dr. Evelyn Reed',
-      role: 'Staff Metrologist & Chronometry Specialist',
-      reviewedBy: 'Academic Editorial Board',
-      lastUpdated: 'September 2026'
+  "emi-calculator": {
+    "calculatorId": "emi-calculator",
+    "title": "Loan EMI Calculator",
+    "subtitle": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Financial Lending & Credit Desk",
+      "reviewedBy": "Chartered Banking Analyst",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'Chronological age measures the exact amount of time that has elapsed from an individual’s moment of birth to a designated reference date. While everyday usage rounds age down to completed years, precision scientific, administrative, and legal applications require exact breakdowns in completed years, remaining months, and remaining days.',
-      'Our calculator operates under the international Gregorian calendar standard (ISO 8601). Unlike simple decimal division—which assumes all months have an arbitrary 30 or 30.4375 days—our engine evaluates the real calendar month lengths and leap years lived, ensuring 100% legal precision.'
+    "disclaimer": "This calculator provides mathematical estimates using the reducing-balance method. Actual loan interest, processing fees, GST, and floating-rate changes depend on your lender and loan agreement.",
+    "overview": [
+      "Enter the loan amount, interest rate and tenure to see your monthly EMI, the total interest you'll pay, and how each payment splits between principal and interest. It works for home, car, education and personal loans.",
+      "Shows why early EMIs are mostly interest and the real cost of tenure and rate choices, with checked \u20b9 examples."
     ],
-    formulaCard: {
-      title: 'Calendar Subtraction Algorithm',
-      formula: 'Age = Target_Date - Birth_Date (borrowing variable month days when Target_Day < Birth_Day)',
-      explanation: 'When subtracting dates, days borrow the exact length of the preceding calendar month (28, 29, 30, or 31 days) and decrement the target month by 1. If target months are negative, months borrow 12 from years.',
-      variables: [
-        { symbol: 'Target_Date', meaning: 'The reference date (e.g. today or future milestone date)' },
-        { symbol: 'Birth_Date', meaning: 'Exact date of birth (Day, Month, Year)' },
-        { symbol: 'Borrowing', meaning: 'Days borrowed from Month - 1 based on actual Gregorian calendar days' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Calculate Your Age from Date of Birth',
-      steps: [
+    "formulaCard": {
+      "title": "Equated Monthly Instalment (EMI) Formula",
+      "formula": "EMI = P \u00d7 r \u00d7 (1 + r)^n \u00f7 ((1 + r)^n \u2212 1)",
+      "explanation": "This reducing-balance formula is used by Indian commercial banks and housing finance corporations. Each month, interest is levied only on the unpaid outstanding principal balance.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Select Your Date of Birth',
-          description: 'Pick your year, month, and day of birth using the calendar picker or quick preset buttons.'
+          "symbol": "P",
+          "meaning": "Principal loan amount borrowed"
         },
         {
-          stepNumber: 2,
-          title: 'Choose the Target Date',
-          description: 'Keep "Today" for current live ticking age, or choose "Specific Date" to calculate age on future milestones (e.g., 2030 or retirement).'
+          "symbol": "r",
+          "meaning": "Monthly interest rate: (Annual percentage rate \u00f7 12 \u00f7 100)"
         },
         {
-          stepNumber: 3,
-          title: 'Optional: Include Exact Birth Time',
-          description: 'Enable precision time toggle to calculate down to the exact hour, minute, and second.'
-        },
-        {
-          stepNumber: 4,
-          title: 'Read Key Metrics & Insights',
-          description: 'Review your primary age cards, total days lived, days until next birthday, zodiac traits, and orbital planetary ages.'
+          "symbol": "n",
+          "meaning": "Total number of monthly instalments (Tenure in years \u00d7 12)"
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Worked Example',
-      scenario: 'Calculating exact chronological age for someone born on March 25, 1998, as of September 10, 2026.',
-      inputs: [
-        { label: 'Date of Birth', value: 'March 25, 1998' },
-        { label: 'Target Reference Date', value: 'September 10, 2026' }
-      ],
-      steps: [
-        'Days: 10 - 25 = -15. Borrow from preceding month (August has 31 days). 10 + 31 - 25 = 16 Days.',
-        'Months: September was month 9. Since 1 month was borrowed, it is now month 8. 8 - 3 = 5 Months.',
-        'Years: 2026 - 1998 = 28 Years.'
-      ],
-      result: '28 Years, 5 Months, and 16 Days (Total: 10,396 days lived)',
-      takeaway: 'Because August has 31 days, the days borrow exactly 31 rather than an approximate 30, guaranteeing absolute legal accuracy.'
-    },
-    sections: [
-      {
-        id: 'leap-year-mechanics',
-        title: 'Gregorian Calendar Leap Year Mechanics',
-        paragraphs: [
-          'Earth takes approximately 365.2422 days to complete an orbit around the Sun. To align our calendar with astronomical reality, an intercalary day (February 29) is added periodically.',
-          'Under the Gregorian calendar rule introduced in 1582: a year is a leap year if it is divisible by 4, except for end-of-century years which must also be divisible by 400. Thus, 2000 was a leap year, but 1900 was not and 2100 will not be.'
-        ],
-        callout: {
-          type: 'info',
-          title: 'February 29 Birthdays & Legal Standards',
-          text: 'In common law jurisdictions like the United Kingdom and Hong Kong, an individual born on February 29 legally turns one year older on March 1 in non-leap years. In other jurisdictions, it is officially commemorated on February 28.'
-        }
-      },
-      {
-        id: 'planetary-ages',
-        title: 'Planetary Orbital Ages Explained',
-        paragraphs: [
-          'A planetary year is defined by the duration a planet takes to revolve around the Sun. Because Mercury is closer to the Sun, its year lasts only 87.97 Earth days, meaning you celebrate a Mercury birthday roughly every three Earth months.',
-          'Conversely, distant planets like Jupiter take 11.86 Earth years, and Saturn takes 29.45 Earth years to complete a single orbital revolution.'
-        ],
-        bullets: [
-          'Mercury Year: ~88 Earth Days (Age is ~4.15x your Earth age)',
-          'Venus Year: ~224.7 Earth Days (Age is ~1.62x your Earth age)',
-          'Mars Year: ~687 Earth Days (Age is ~0.53x your Earth age)',
-          'Jupiter Year: ~11.86 Earth Years (Age is ~0.084x your Earth age)'
-        ]
-      }
-    ],
-    faqs: [
-      {
-        question: 'How many days have I been alive?',
-        answer: 'Your total days lived is calculated by taking the exact difference between your date of birth and the target date in UTC epoch milliseconds, then dividing by 86,400,000 (milliseconds in a day) while accounting for all intervening leap years.'
-      },
-      {
-        question: 'Why does age differ across Korean or East Asian systems?',
-        answer: 'Traditional East Asian age reckoning considers a person to be 1 year old at birth and gains a year on New Year’s Day rather than their birthday. However, international civil standards and South Korea’s 2023 legal reform now standardize on the Gregorian chronological age system used by this calculator.'
-      },
-      {
-        question: 'How do I find out what day of the week I was born?',
-        answer: 'The day of the week is computed using Zeller’s congruence algorithm. Our calculator automatically displays your day of birth right in the primary summary badge.'
-      },
-      {
-        question: 'Can this tool calculate the age difference between two people?',
-        answer: 'Yes! Switch to the "Compare Ages" tab at the top to compare two birthdays side-by-side and see the exact difference in years, months, and days.'
-      }
-    ],
-    references: [
-      { title: 'ISO 8601 Data Elements and Interchange Formats — Information Interchange — Representation of Dates and Times', source: 'International Organization for Standardization' },
-      { title: 'Explanatory Supplement to the Astronomical Almanac', source: 'University Science Books' }
-    ]
-  },
-
-  'bmi-calculator': {
-    calculatorId: 'bmi-calculator',
-    title: 'Body Mass Index (BMI) & Healthy Weight Range: Complete Clinical Guide',
-    subtitle: 'Understand WHO body mass categories, healthy weight targets, Ponderal Index proportionality, and screening limits.',
-    readTimeMinutes: 4,
-    author: {
-      name: 'Dr. Marcus Vance',
-      role: 'Preventive Health & Biometrics Researcher',
-      reviewedBy: 'Medical Advisory Panel',
-      lastUpdated: 'September 2026'
-    },
-    overview: [
-      'Body Mass Index (BMI) is an internationally recognized anthropometric screening metric established by the World Health Organization (WHO). It evaluates an individual’s body weight relative to their height squared to categorize nutritional status and cardiovascular disease risks.',
-      'A healthy adult BMI generally falls between 18.5 and 24.9 kg/m². Maintaining a normal BMI is clinically correlated with lower risks of hypertension, type 2 diabetes, ischemic heart disease, and metabolic complications.'
-    ],
-    formulaCard: {
-      title: 'BMI Mathematical Formula',
-      formula: 'BMI = Weight (kg) / [Height (m)]²   |   Imperial: 703 × Weight (lbs) / [Height (in)]²',
-      explanation: 'Weight in kilograms divided by the square of height in meters. For US Imperial units, weight in pounds is multiplied by the 703 conversion factor and divided by height in inches squared.',
-      variables: [
-        { symbol: 'Weight', meaning: 'Body mass measured in kilograms (kg) or pounds (lbs)' },
-        { symbol: 'Height', meaning: 'Stature measured in meters (m) or inches (in)' },
-        { symbol: '703', meaning: 'Dimensional unit conversion factor from imperial to metric units' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Check and Interpret Your BMI',
-      steps: [
+    "howToSteps": {
+      "title": "How to Use the EMI Calculator",
+      "steps": [
         {
-          stepNumber: 1,
-          title: 'Select Measurement Unit',
-          description: 'Toggle between Metric (cm / kg) or US Imperial (feet, inches / pounds).'
+          "stepNumber": 1,
+          "title": "Enter Principal Loan Amount",
+          "description": "Specify the loan amount you plan to borrow, excluding your upfront down payment."
         },
         {
-          stepNumber: 2,
-          title: 'Input Your Height & Weight',
-          description: 'Type your exact height and weight or use the synchronized smooth range sliders.'
+          "stepNumber": 2,
+          "title": "Input Annual Interest Rate",
+          "description": "Enter the percentage rate from your sanction letter or lender rate card."
         },
         {
-          stepNumber: 3,
-          title: 'Review the WHO Classification Gauge',
-          description: 'Observe where your needle lands across Underweight, Normal, Overweight, and Obese ranges.'
+          "stepNumber": 3,
+          "title": "Choose Loan Tenure",
+          "description": "Select tenure in years or months to see immediate monthly instalment impact."
         },
         {
-          stepNumber: 4,
-          title: 'Check Ideal Normal Weight Target',
-          description: 'Examine your healthy weight envelope and Ponderal Index for height-proportional adjustments.'
+          "stepNumber": 4,
+          "title": "Examine Schedule & Savings",
+          "description": "Inspect total interest payable, principal-to-interest split, and amortization breakdown."
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Worked Example',
-      scenario: 'Calculating BMI for an individual who is 175 cm (1.75 m) tall and weighs 68 kg.',
-      inputs: [
-        { label: 'Height', value: '175 cm (1.75 m)' },
-        { label: 'Weight', value: '68 kg' }
+    "workedExample": {
+      "title": "Practical Home Loan Worked Example",
+      "scenario": "Borrowing a \u20b925,00,000 home loan at 8.5% annual interest for a 20-year tenure (240 instalments).",
+      "inputs": [
+        {
+          "label": "Principal Amount (P)",
+          "value": "\u20b925,00,000"
+        },
+        {
+          "label": "Interest Rate",
+          "value": "8.5% per annum"
+        },
+        {
+          "label": "Tenure",
+          "value": "20 Years (240 months)"
+        }
       ],
-      steps: [
-        'Square the height: 1.75 × 1.75 = 3.0625 m²',
-        'Divide weight by height squared: 68 / 3.0625 = 22.20 kg/m²'
+      "steps": [
+        "Monthly interest rate r = 8.5 \u00f7 12 \u00f7 100 = 0.007083.",
+        "Number of months n = 20 \u00d7 12 = 240.",
+        "EMI = 25,00,000 \u00d7 0.007083 \u00d7 (1.007083)^240 \u00f7 ((1.007083)^240 \u2212 1) = \u20b921,696.",
+        "Total interest over 20 years = (21,696 \u00d7 240) \u2212 25,00,000 = \u20b927,06,939."
       ],
-      result: 'BMI = 22.2 kg/m² (Normal Healthy Weight Range)',
-      takeaway: 'The individual is well within the optimal 18.5–24.9 bracket, with an ideal weight target range of 56.7 kg to 76.3 kg.'
+      "result": "Monthly EMI: \u20b921,696 | Total Interest: \u20b927,06,939 | Total Outflow: \u20b952,06,939",
+      "takeaway": "In your very first EMI, \u20b917,708 goes toward interest and only \u20b93,988 reduces the principal. Early prepayments yield the highest interest savings."
     },
-    sections: [
+    "sections": [
       {
-        id: 'who-categories',
-        title: 'World Health Organization (WHO) BMI Thresholds',
-        paragraphs: [
-          'The World Health Organization classifies adult nutritional status into standardized tiers associated with health outcomes:',
-          'Individuals below 18.5 are classified as underweight, which may indicate nutritional deficiency or underlying issues. Individuals between 25.0 and 29.9 are classified as overweight, and those with a BMI of 30.0 or higher are categorized as obese across three classes.'
-        ],
-        bullets: [
-          'Underweight: BMI < 18.5 kg/m² (Elevated risk of osteoporosis, anemia)',
-          'Normal Weight: 18.5 – 24.9 kg/m² (Optimal metabolic health bracket)',
-          'Overweight: 25.0 – 29.9 kg/m² (Increased risk of hypertension & cardiovascular strain)',
-          'Obesity Class I: 30.0 – 34.9 kg/m² (High clinical risk)',
-          'Obesity Class II: 35.0 – 39.9 kg/m² (Very high clinical risk)',
-          'Obesity Class III: ≥ 40.0 kg/m² (Severe extreme risk requiring medical intervention)'
+        "id": "emi-early-interest",
+        "title": "Why Your First EMIs Are Mostly Interest",
+        "paragraphs": [
+          "In the \u20b925 lakh home loan example above, the first EMI of \u20b921,696 is made up of \u20b917,708 of interest and only \u20b93,988 of principal. That is roughly 82% interest.",
+          "The balance shifts gradually. By the final years of the loan, most of each EMI goes towards reducing the principal. This explains why prepayment in the early years saves significantly more interest than prepaying near the end."
         ]
       },
       {
-        id: 'ponderal-index-prime',
-        title: 'Beyond Standard BMI: Ponderal Index & BMI Prime',
-        paragraphs: [
-          'Standard BMI scales weight by height squared, which can slightly overestimate adiposity for very tall individuals and underestimate it for shorter individuals. The Ponderal Index addresses this by dividing weight by height cubed (kg/m³).',
-          'BMI Prime is a convenient dimensionless ratio of your actual BMI relative to the upper healthy boundary (25.0). A BMI Prime of 1.0 represents the exact threshold of normal weight; values below 1.0 indicate healthy or underweight status, while values above 1.0 indicate overweight status.'
+        "id": "emi-tenure-tradeoff",
+        "title": "Shorter Tenure or Smaller EMI? (\u20b925 Lakh at 8.5%)",
+        "paragraphs": [
+          "A 15-year tenure requires \u20b924,618 per month and totals \u20b919,31,328 in interest. A 20-year tenure lowers the EMI to \u20b921,696 but increases interest to \u20b927,06,939.",
+          "Paying \u20b92,922 more each month saves about \u20b97.76 lakh in total interest. Before selecting the shorter tenure, confirm that total EMIs remain within 40% to 50% of your net monthly take-home pay."
         ],
-        callout: {
-          type: 'tip',
-          title: 'Athletes & Muscle Mass Caveat',
-          text: 'BMI does not directly differentiate between lean muscle tissue and adipose fat. Muscular athletes, bodybuilders, and heavy laborers may register as overweight or obese on BMI despite having low body fat percentages.'
+        "callout": {
+          "type": "tip",
+          "title": "Rate Sensitivity",
+          "text": "At 9.0% instead of 8.5%, the EMI on the same \u20b925 lakh loan rises by \u20b9797 a month, adding about \u20b91.91 lakh in total interest over 20 years. Even half a percent is worth negotiating with your bank."
         }
-      }
-    ],
-    faqs: [
-      {
-        question: 'What is considered an ideal healthy weight range for my height?',
-        answer: 'Your ideal weight range is computed by reverse-calculating the weights corresponding to a BMI of 18.5 (minimum) and 24.9 (maximum) for your exact stature: Weight_Min = 18.5 × Height² and Weight_Max = 24.9 × Height².'
       },
       {
-        question: 'Does age or biological sex alter the BMI formula?',
-        answer: 'For adults aged 20 and older, standard WHO BMI formulas are identical across biological sexes and ages. However, women typically have higher body fat percentages than men at identical BMI values, and older adults may carry more fat than younger adults.'
-      },
-      {
-        question: 'Is BMI valid for children and adolescents under 18?',
-        answer: 'For children and teens (ages 2–19), BMI must be interpreted against age-and-gender growth percentiles (CDC / WHO growth charts) rather than rigid adult thresholds.'
+        "id": "emi-limits",
+        "title": "What This Calculator Doesn't Include",
+        "paragraphs": [
+          "Loan calculations focus solely on principal and interest. Consider these additional lender costs when planning your budget:"
+        ],
+        "bullets": [
+          "Processing fees, GST on documentation fees, and mandatory home loan property insurance.",
+          "Rate changes on floating-rate loans: when the RBI repo rate shifts, lenders generally adjust tenure first, followed by EMI.",
+          "Pre-EMI interest charged on under-construction property prior to full disbursement, and broken-period interest before the first EMI."
+        ]
       }
     ],
-    references: [
-      { title: 'Physical status: The use and interpretation of anthropometry', source: 'World Health Organization Technical Report Series 854' },
-      { title: 'Clinical Guidelines on the Identification, Evaluation, and Treatment of Overweight and Obesity in Adults', source: 'National Institutes of Health (NIH)' }
+    "faqs": [
+      {
+        "question": "Does my EMI change when interest rates change?",
+        "answer": "On a floating-rate loan, yes. Many lenders keep the EMI the same and change the tenure first, so ask yours how it handles rate changes. On a fixed-rate loan, the EMI stays the same."
+      },
+      {
+        "question": "Should I prepay my loan or invest the money?",
+        "answer": "If your loan rate is higher than the after-tax return you can reliably earn, prepaying usually comes out ahead. Home loan tax deductions under the old tax regime change the maths, so check your own situation or ask a financial adviser."
+      },
+      {
+        "question": "Will my bank charge me for prepaying?",
+        "answer": "RBI rules don't allow banks to charge foreclosure or prepayment penalties on floating-rate loans taken by individuals for non-business purposes. Fixed-rate loans can carry a charge, so read your loan agreement."
+      },
+      {
+        "question": "What's the difference between a flat rate and a reducing rate?",
+        "answer": "A flat rate charges interest on the full original amount for the whole tenure, so a 10% flat loan costs much more than a 10% reducing-balance loan. Always ask for the reducing-balance rate or APR before comparing offers."
+      },
+      {
+        "question": "Why is my bank's EMI slightly different from this?",
+        "answer": "Usually because of rounding, broken-period interest before the first EMI, or fees added to the loan amount."
+      }
+    ],
+    "references": [
+      {
+        "title": "Master Circular on Prepayment and Foreclosure Charges on Floating Rate Loans",
+        "source": "Reserve Bank of India (RBI)",
+        "url": "https://www.rbi.org.in"
+      }
     ]
   },
-
-  'loan-calculator': {
-    calculatorId: 'loan-calculator',
-    title: 'How Loan EMI & Amortization Work: Complete Financial Guide',
-    subtitle: 'Learn the Equated Monthly Installment (EMI) formula, interest-to-principal curves, and how early prepayments save thousands.',
-    readTimeMinutes: 5,
-    author: {
-      name: 'Nathaniel Cole, CFA',
-      role: 'Senior Financial Quantitative Analyst',
-      reviewedBy: 'Consumer Finance Review Board',
-      lastUpdated: 'September 2026'
+  "loan-calculator": {
+    "calculatorId": "emi-calculator",
+    "title": "Loan EMI Calculator",
+    "subtitle": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Financial Lending & Credit Desk",
+      "reviewedBy": "Chartered Banking Analyst",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are designed to pay off both accrued interest and outstanding principal over a predetermined loan tenure.',
-      'Understanding your loan’s amortization structure empowers you to evaluate affordability, compare financing offers, and identify strategic prepayment opportunities that dramatically lower lifetime borrowing costs.'
+    "disclaimer": "This calculator provides mathematical estimates using the reducing-balance method. Actual loan interest, processing fees, GST, and floating-rate changes depend on your lender and loan agreement.",
+    "overview": [
+      "Enter the loan amount, interest rate and tenure to see your monthly EMI, the total interest you'll pay, and how each payment splits between principal and interest. It works for home, car, education and personal loans.",
+      "Shows why early EMIs are mostly interest and the real cost of tenure and rate choices, with checked \u20b9 examples."
     ],
-    formulaCard: {
-      title: 'Equated Monthly Installment (EMI) Formula',
-      formula: 'EMI = [P × r × (1 + r)ⁿ] / [(1 + r)ⁿ - 1]',
-      explanation: 'Where P is the principal loan amount, r is the monthly interest rate (annual rate / 12 / 100), and n is the total number of monthly installments (tenure in years × 12).',
-      variables: [
-        { symbol: 'P', meaning: 'Principal: The total amount borrowed from the lender' },
-        { symbol: 'r', meaning: 'Periodic Interest Rate: Annual interest rate divided by 12 months and 100' },
-        { symbol: 'n', meaning: 'Number of Installments: Total months over which the loan is repaid' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Compute Your Monthly Payment & Total Interest',
-      steps: [
+    "formulaCard": {
+      "title": "Equated Monthly Instalment (EMI) Formula",
+      "formula": "EMI = P \u00d7 r \u00d7 (1 + r)^n \u00f7 ((1 + r)^n \u2212 1)",
+      "explanation": "This reducing-balance formula is used by Indian commercial banks and housing finance corporations. Each month, interest is levied only on the unpaid outstanding principal balance.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Enter Principal Loan Amount',
-          description: 'Specify your borrowing amount or select from localized quick currency preset pills.'
+          "symbol": "P",
+          "meaning": "Principal loan amount borrowed"
         },
         {
-          stepNumber: 2,
-          title: 'Set Annual Interest Rate',
-          description: 'Type your lender’s quoted annual percentage rate (APR) or adjust with the smooth range slider.'
+          "symbol": "r",
+          "meaning": "Monthly interest rate: (Annual percentage rate \u00f7 12 \u00f7 100)"
         },
         {
-          stepNumber: 3,
-          title: 'Choose Repayment Tenure',
-          description: 'Select duration in years or months. Longer tenures reduce monthly EMI but increase total interest paid.'
-        },
-        {
-          stepNumber: 4,
-          title: 'Analyze Principal vs. Interest Breakdown',
-          description: 'Review the proportional payment bar and inspect the yearly amortization schedule below.'
+          "symbol": "n",
+          "meaning": "Total number of monthly instalments (Tenure in years \u00d7 12)"
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Worked Example',
-      scenario: 'A borrower takes a $250,000 home loan at 7.5% annual interest for a 15-year tenure (180 months).',
-      inputs: [
-        { label: 'Principal (P)', value: '$250,000' },
-        { label: 'Annual Interest Rate', value: '7.5%' },
-        { label: 'Tenure (n)', value: '15 Years (180 Months)' }
-      ],
-      steps: [
-        'Monthly interest rate: r = 7.5 / 12 / 100 = 0.00625',
-        'Compound factor: (1 + 0.00625)¹⁸⁰ = 3.0768',
-        'Numerator: 250,000 × 0.00625 × 3.0768 = 4,807.50',
-        'Denominator: 3.0768 - 1 = 2.0768',
-        'EMI: 4,807.50 / 2.0768 = $2,314.90 / month',
-        'Total Payment: $2,314.90 × 180 = $416,682',
-        'Total Interest: $416,682 - $250,000 = $166,682'
-      ],
-      result: 'Monthly EMI: $2,315 | Total Interest: $166,682 (40.0% of total outlay)',
-      takeaway: 'Over 15 years, the borrower pays 40 cents of interest for every dollar borrowed, compared to nearly 90 cents on a 30-year loan!'
+    "howToSteps": {
+      "title": "How to Use the EMI Calculator",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Enter Principal Loan Amount",
+          "description": "Specify the loan amount you plan to borrow, excluding your upfront down payment."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Input Annual Interest Rate",
+          "description": "Enter the percentage rate from your sanction letter or lender rate card."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Choose Loan Tenure",
+          "description": "Select tenure in years or months to see immediate monthly instalment impact."
+        },
+        {
+          "stepNumber": 4,
+          "title": "Examine Schedule & Savings",
+          "description": "Inspect total interest payable, principal-to-interest split, and amortization breakdown."
+        }
+      ]
     },
-    sections: [
+    "workedExample": {
+      "title": "Practical Home Loan Worked Example",
+      "scenario": "Borrowing a \u20b925,00,000 home loan at 8.5% annual interest for a 20-year tenure (240 instalments).",
+      "inputs": [
+        {
+          "label": "Principal Amount (P)",
+          "value": "\u20b925,00,000"
+        },
+        {
+          "label": "Interest Rate",
+          "value": "8.5% per annum"
+        },
+        {
+          "label": "Tenure",
+          "value": "20 Years (240 months)"
+        }
+      ],
+      "steps": [
+        "Monthly interest rate r = 8.5 \u00f7 12 \u00f7 100 = 0.007083.",
+        "Number of months n = 20 \u00d7 12 = 240.",
+        "EMI = 25,00,000 \u00d7 0.007083 \u00d7 (1.007083)^240 \u00f7 ((1.007083)^240 \u2212 1) = \u20b921,696.",
+        "Total interest over 20 years = (21,696 \u00d7 240) \u2212 25,00,000 = \u20b927,06,939."
+      ],
+      "result": "Monthly EMI: \u20b921,696 | Total Interest: \u20b927,06,939 | Total Outflow: \u20b952,06,939",
+      "takeaway": "In your very first EMI, \u20b917,708 goes toward interest and only \u20b93,988 reduces the principal. Early prepayments yield the highest interest savings."
+    },
+    "sections": [
       {
-        id: 'amortization-physics',
-        title: 'The Front-Loaded Nature of Amortization Schedules',
-        paragraphs: [
-          'In standard amortizing financing (like mortgages, auto loans, and personal loans), the proportion of each payment dedicated to interest versus principal shifts dramatically over time.',
-          'During the initial years, the remaining balance is large, meaning the majority of your monthly installment goes toward interest service. As the principal reduces, the monthly interest charge shrinks, allowing a progressively larger fraction to pay down the principal.'
+        "id": "emi-early-interest",
+        "title": "Why Your First EMIs Are Mostly Interest",
+        "paragraphs": [
+          "In the \u20b925 lakh home loan example above, the first EMI of \u20b921,696 is made up of \u20b917,708 of interest and only \u20b93,988 of principal. That is roughly 82% interest.",
+          "The balance shifts gradually. By the final years of the loan, most of each EMI goes towards reducing the principal. This explains why prepayment in the early years saves significantly more interest than prepaying near the end."
+        ]
+      },
+      {
+        "id": "emi-tenure-tradeoff",
+        "title": "Shorter Tenure or Smaller EMI? (\u20b925 Lakh at 8.5%)",
+        "paragraphs": [
+          "A 15-year tenure requires \u20b924,618 per month and totals \u20b919,31,328 in interest. A 20-year tenure lowers the EMI to \u20b921,696 but increases interest to \u20b927,06,939.",
+          "Paying \u20b92,922 more each month saves about \u20b97.76 lakh in total interest. Before selecting the shorter tenure, confirm that total EMIs remain within 40% to 50% of your net monthly take-home pay."
         ],
-        callout: {
-          type: 'tip',
-          title: 'Power of Early Prepayments',
-          text: 'Making extra principal payments during the first 3–5 years of a loan creates disproportionately massive interest savings because it directly reduces the balance before compound interest can accrue on it.'
+        "callout": {
+          "type": "tip",
+          "title": "Rate Sensitivity",
+          "text": "At 9.0% instead of 8.5%, the EMI on the same \u20b925 lakh loan rises by \u20b9797 a month, adding about \u20b91.91 lakh in total interest over 20 years. Even half a percent is worth negotiating with your bank."
         }
-      }
-    ],
-    faqs: [
-      {
-        question: 'What is the difference between flat interest rate and reducing balance rate?',
-        answer: 'A flat rate calculates interest on the entire original principal for the full tenure regardless of repayments made. A reducing balance rate (used by our calculator and standard banks) calculates interest only on the remaining balance each month, which is significantly cheaper.'
       },
       {
-        question: 'Does a 15-year loan save significant money over a 30-year loan?',
-        answer: 'Yes! While a 15-year loan has higher monthly installments, you typically pay between 50% and 65% less total interest over the life of the loan and build home equity twice as fast.'
-      },
-      {
-        question: 'Are loan processing fees included in this calculation?',
-        answer: 'This calculator focuses on pure amortization (principal and interest). Most financial institutions also charge one-time origination fees (typically 0.5% to 2% of the loan amount).'
+        "id": "emi-limits",
+        "title": "What This Calculator Doesn't Include",
+        "paragraphs": [
+          "Loan calculations focus solely on principal and interest. Consider these additional lender costs when planning your budget:"
+        ],
+        "bullets": [
+          "Processing fees, GST on documentation fees, and mandatory home loan property insurance.",
+          "Rate changes on floating-rate loans: when the RBI repo rate shifts, lenders generally adjust tenure first, followed by EMI.",
+          "Pre-EMI interest charged on under-construction property prior to full disbursement, and broken-period interest before the first EMI."
+        ]
       }
     ],
-    references: [
-      { title: 'Truth in Lending Act (Regulation Z)', source: 'Consumer Financial Protection Bureau (CFPB)' },
-      { title: 'Principles of Corporate Finance', source: 'McGraw-Hill Education' }
+    "faqs": [
+      {
+        "question": "Does my EMI change when interest rates change?",
+        "answer": "On a floating-rate loan, yes. Many lenders keep the EMI the same and change the tenure first, so ask yours how it handles rate changes. On a fixed-rate loan, the EMI stays the same."
+      },
+      {
+        "question": "Should I prepay my loan or invest the money?",
+        "answer": "If your loan rate is higher than the after-tax return you can reliably earn, prepaying usually comes out ahead. Home loan tax deductions under the old tax regime change the maths, so check your own situation or ask a financial adviser."
+      },
+      {
+        "question": "Will my bank charge me for prepaying?",
+        "answer": "RBI rules don't allow banks to charge foreclosure or prepayment penalties on floating-rate loans taken by individuals for non-business purposes. Fixed-rate loans can carry a charge, so read your loan agreement."
+      },
+      {
+        "question": "What's the difference between a flat rate and a reducing rate?",
+        "answer": "A flat rate charges interest on the full original amount for the whole tenure, so a 10% flat loan costs much more than a 10% reducing-balance loan. Always ask for the reducing-balance rate or APR before comparing offers."
+      },
+      {
+        "question": "Why is my bank's EMI slightly different from this?",
+        "answer": "Usually because of rounding, broken-period interest before the first EMI, or fees added to the loan amount."
+      }
+    ],
+    "references": [
+      {
+        "title": "Master Circular on Prepayment and Foreclosure Charges on Floating Rate Loans",
+        "source": "Reserve Bank of India (RBI)",
+        "url": "https://www.rbi.org.in"
+      }
     ]
   },
-
-  'percentage-calculator': {
-    calculatorId: 'percentage-calculator',
-    title: 'Percentage Math & Real-World Applications: Complete Reference Guide',
-    subtitle: 'Master percentage increase, decrease, fraction ratios, markup vs margin, and reverse percentage calculations.',
-    readTimeMinutes: 4,
-    author: {
-      name: 'Elena Rostova',
-      role: 'Applied Mathematics & Statistics Author',
-      reviewedBy: 'Mathematics Education Council',
-      lastUpdated: 'September 2026'
+  "compound-interest-calculator": {
+    "calculatorId": "compound-interest-calculator",
+    "title": "Compound Interest Calculator",
+    "subtitle": "See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Wealth & Investment Research Desk",
+      "reviewedBy": "Senior Financial Planner",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'A percentage represents a dimensionless ratio or fraction of 100 (from the Latin "per centum", meaning "by the hundred"). It provides a universal benchmark to evaluate financial returns, retail discounts, statistical shifts, tax burdens, and growth rates.',
-      'Our percentage calculator supports four distinct computational modes: standard part-of-whole percentages, ratio-to-percentage conversions, directional percentage increase/decrease, and percentage difference between values.'
+    "disclaimer": "Calculations assume constant interest rates and reinvestment of returns. Bank FD interest is subject to tax under applicable income tax slabs. Market investments do not offer guaranteed returns.",
+    "overview": [
+      "See how a lump sum or regular savings grow when your interest starts earning interest. Choose how often it compounds, from yearly to daily, add monthly or yearly deposits, and view the growth year by year.",
+      "Side-by-side yearly vs monthly compounding, FD quarterly example, tax and inflation reality check."
     ],
-    formulaCard: {
-      title: 'Core Percentage Formulas',
-      formula: 'What is P% of X? = (P / 100) × X   |   Percentage Change = [(New - Old) / Old] × 100%',
-      explanation: 'To find a percentage of a quantity, multiply by the decimal rate. For percentage change, divide the absolute difference by the original base value and multiply by 100.',
-      variables: [
-        { symbol: 'P%', meaning: 'Percentage rate per hundred units' },
-        { symbol: 'X', meaning: 'The base reference value or original amount' },
-        { symbol: 'New / Old', meaning: 'The final and initial values in a growth or decline calculation' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Calculate Percentages Accurately',
-      steps: [
+    "formulaCard": {
+      "title": "Compound Interest Formula",
+      "formula": "A = P \u00d7 (1 + r \u00f7 n)^(n \u00d7 t)",
+      "explanation": "Interest earned is added back to the principal, generating exponential balance acceleration over longer durations.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Choose the Calculation Mode',
-          description: 'Select between "What is X% of Y", "X is what % of Y", "Percentage Increase/Decrease", or "X ± Y%".'
+          "symbol": "A",
+          "meaning": "Final accrued amount (Principal + Total Interest)"
         },
         {
-          stepNumber: 2,
-          title: 'Enter the Values',
-          description: 'Input your numbers or use the synchronized slider for quick percentage adjustments.'
+          "symbol": "P",
+          "meaning": "Initial principal deposit"
         },
         {
-          stepNumber: 3,
-          title: 'Inspect Proportional Visual Bar',
-          description: 'Visualize the relative scale of the percentage against the whole.'
+          "symbol": "r",
+          "meaning": "Nominal annual interest rate in decimal form (7% = 0.07)"
         },
         {
-          stepNumber: 4,
-          title: 'Copy or Share the Result',
-          description: 'Use the one-click copy button to paste the result and formula into documents or spreadsheets.'
+          "symbol": "n",
+          "meaning": "Compounding frequency per year (4 for quarterly FD, 12 for monthly)"
+        },
+        {
+          "symbol": "t",
+          "meaning": "Duration of investment in years"
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Retail Discount Example',
-      scenario: 'An item priced at $120 is discounted by 25%. What is the discount amount and final price?',
-      inputs: [
-        { label: 'Original Price', value: '$120' },
-        { label: 'Discount Percentage', value: '25%' }
-      ],
-      steps: [
-        'Calculate discount amount: (25 / 100) × 120 = $30',
-        'Calculate final price: 120 - 30 = $90'
-      ],
-      result: 'Discount = $30.00 | Final Price = $90.00',
-      takeaway: 'You save $30.00, paying 75% of the original tag price.'
-    },
-    sections: [
-      {
-        id: 'markup-vs-margin',
-        title: 'Crucial Business Distinction: Markup vs. Margin',
-        paragraphs: [
-          'In commerce and entrepreneurship, conflating markup and margin is a frequent accounting pitfall:',
-          'Markup is the percentage added to the cost of a product to determine its selling price. Margin (Gross Profit Margin) is the percentage of the selling price that is profit.'
-        ],
-        callout: {
-          type: 'warning',
-          title: 'Common Mistake',
-          text: 'A 50% markup on a $100 product gives a selling price of $150. However, the profit margin is ($50 / $150) = 33.3%, NOT 50%!'
+    "howToSteps": {
+      "title": "How to Use the Compound Interest Calculator",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Enter Starting Principal",
+          "description": "Input your initial lump-sum deposit or current portfolio balance."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Set Interest Rate & Years",
+          "description": "Enter expected annual rate and duration in completed years."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Choose Compounding Frequency",
+          "description": "Select quarterly for Indian bank fixed deposits, or monthly/yearly."
+        },
+        {
+          "stepNumber": 4,
+          "title": "Add Regular Contributions",
+          "description": "Optionally enter monthly or yearly deposits to forecast systematic wealth accumulation."
         }
-      }
-    ],
-    faqs: [
+      ]
+    },
+    "workedExample": {
+      "title": "5-Year Fixed Deposit Worked Example",
+      "scenario": "Investing \u20b95,00,000 into a bank Fixed Deposit at 7.0% annual interest compounded quarterly for 5 years.",
+      "inputs": [
+        {
+          "label": "Principal",
+          "value": "\u20b95,00,000"
+        },
+        {
+          "label": "Annual Rate",
+          "value": "7.0%"
+        },
+        {
+          "label": "Compounding",
+          "value": "Quarterly (n = 4)"
+        },
+        {
+          "label": "Tenure",
+          "value": "5 Years (t = 5)"
+        }
+      ],
+      "steps": [
+        "Quarterly periodic interest rate = 7% \u00f7 4 = 1.75% (0.0175).",
+        "Total compounding cycles = 5 years \u00d7 4 quarters = 20 cycles.",
+        "Final balance = 5,00,000 \u00d7 (1 + 0.0175)^20 = \u20b97,07,389.",
+        "Total interest earned = \u20b97,07,389 \u2212 \u20b95,00,000 = \u20b92,07,389."
+      ],
+      "result": "Maturity Value: \u20b97,07,389 | Total Interest: \u20b92,07,389",
+      "takeaway": "Compounding quarterly yields \u20b96,914 more than simple interest on the exact same \u20b95 lakh deposit."
+    },
+    "sections": [
       {
-        question: 'How do you calculate reverse percentage (e.g. price before tax)?',
-        answer: 'To find the pre-tax price from a total that includes tax (e.g., $115 with 15% VAT), divide by (1 + Tax_Rate): $115 / 1.15 = $100. Never simply subtract 15% from the final price!'
+        "id": "ci-vs-si",
+        "title": "Simple Interest vs Compound Interest",
+        "paragraphs": [
+          "Take \u20b91 lakh at 7% for 10 years. Simple interest pays 7% of the original amount every year, yielding \u20b91,70,000 at maturity.",
+          "Compound interest added yearly yields \u20b91,96,715. Compounded monthly, it yields \u20b92,00,966. The gap widens exponentially the longer funds remain invested."
+        ]
       },
       {
-        question: 'What is the difference between percentage change and percentage points?',
-        answer: 'If an interest rate rises from 4% to 5%, it increased by 1 percentage point, but its relative percentage change is [(5 - 4) / 4] × 100 = 25% increase.'
+        "id": "rule-of-72",
+        "title": "The Rule of 72: Doubling Your Money",
+        "paragraphs": [
+          "Divide 72 by your annual interest rate to estimate how many years your money takes to double.",
+          "At 8% interest, doubling takes roughly 72 \u00f7 8 = 9 years. At 12%, it takes about 6 years. It serves as a rapid mental check rather than an exact decimal calculation."
+        ]
+      },
+      {
+        "id": "ci-reality-check",
+        "title": "Before You Rely on the Result",
+        "paragraphs": [
+          "Keep these real-world economic considerations in mind when planning long-term investments:"
+        ],
+        "bullets": [
+          "Interest on fixed deposits is taxed at your income tax slab, reducing the net take-home return.",
+          "Market-linked assets (such as equity mutual funds) fluctuate annually; calculator projections assume a steady average return.",
+          "Inflation erodes purchasing power: with 6% annual inflation, \u20b92 lakh in 10 years has the equivalent purchasing power of roughly \u20b91.12 lakh today."
+        ]
       }
     ],
-    references: [
-      { title: 'Mathematics for Retail Buying', source: 'Bloomsbury Academic' },
-      { title: 'Practical Business Math Procedures', source: 'McGraw-Hill Education' }
+    "faqs": [
+      {
+        "question": "How often do bank FDs compound in India?",
+        "answer": "Most banks compound fixed deposit interest quarterly. Check your bank's terms, because some FD options pay out the interest instead of adding it back."
+      },
+      {
+        "question": "What's the difference between compounding frequency and deposit frequency?",
+        "answer": "Compounding frequency is how often interest is added to your balance. Deposit frequency is how often you add your own money. They can be different, for example monthly deposits into an account that compounds quarterly."
+      },
+      {
+        "question": "Is this the same as a SIP calculator?",
+        "answer": "The maths is similar. A SIP calculator is set up for monthly mutual fund investments at an expected return, so use that one for SIPs."
+      },
+      {
+        "question": "Does compounding more often always earn more?",
+        "answer": "Yes, but the extra gets smaller. Monthly compounding beats yearly by a noticeable amount; daily beats monthly by very little."
+      }
+    ],
+    "references": [
+      {
+        "title": "Principles of Corporate Finance & Compound Interest Dynamics",
+        "source": "Reserve Bank of India / Investor Education Portal"
+      }
     ]
   },
-
-  'compound-interest-calculator': {
-    calculatorId: 'compound-interest-calculator',
-    title: 'Compound Interest & Exponential Wealth: Comprehensive Guide',
-    subtitle: 'Discover how compounding frequency, regular monthly deposits, and the Rule of 72 multiply your investments over time.',
-    readTimeMinutes: 5,
-    author: {
-      name: 'Alexander Ward',
-      role: 'Portfolio Strategy & Wealth Management Director',
-      reviewedBy: 'Chartered Financial Analysts Guild',
-      lastUpdated: 'September 2026'
+  "bmi-calculator": {
+    "calculatorId": "bmi-calculator",
+    "title": "BMI Calculator",
+    "subtitle": "Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Preventive Health & Anthropometry Desk",
+      "reviewedBy": "Clinical Nutrition Reviewer",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'Albert Einstein reportedly termed compound interest the "eighth wonder of the world," stating that "he who understands it, earns it; he who doesn\'t, pays it." Unlike simple interest, which grows strictly in a linear straight line, compound interest earns returns on both initial principal and accumulated prior interest.',
-      'Over prolonged investment horizons (10, 20, or 30 years), the exponential compounding curve accelerates, often resulting in total interest earnings that dwarf the original principal contributed.'
+    "disclaimer": "This BMI calculator provides screening estimates based on WHO and Indian consensus guidelines. It does not measure body fat directly. Consult a qualified medical practitioner before making diet or exercise changes.",
+    "overview": [
+      "Enter your height and weight in cm and kg, or feet and pounds, to get your body mass index, your category and a healthy weight range for your height. We also show the lower cut-offs that many Indian doctors use.",
+      "Shows WHO and Asian Indian cut-offs side by side, with a healthy-weight-by-height table."
     ],
-    formulaCard: {
-      title: 'Compound Interest Formula with Regular Contributions',
-      formula: 'A = P(1 + r/n)ⁿᵗ + PMT × {[(1 + r/n)ⁿᵗ - 1] / (r/n)}',
-      explanation: 'Where A is the future portfolio value, P is initial principal, r is the annual return rate, n is compounding frequency per year, t is years, and PMT is the regular periodic contribution.',
-      variables: [
-        { symbol: 'A', meaning: 'Future Value: Terminal total balance of the investment' },
-        { symbol: 'P', meaning: 'Initial Principal: Starting capital deposited' },
-        { symbol: 'PMT', meaning: 'Periodic Contribution: Amount deposited regularly (monthly/annually)' },
-        { symbol: 'r / n', meaning: 'Periodic Rate: Annual interest rate divided by compounding frequency' },
-        { symbol: 'nt', meaning: 'Total Compounding Periods: Frequency × investment years' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Forecast Your Long-Term Portfolio Growth',
-      steps: [
+    "formulaCard": {
+      "title": "Body Mass Index (BMI) Formula",
+      "formula": "BMI = weight (kg) \u00f7 [height (m)]\u00b2",
+      "explanation": "The standard metric formula divides weight in kilograms by height in meters squared. For imperial units: BMI = 703 \u00d7 weight (lb) \u00f7 [height (in)]\u00b2.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Set Initial Principal Capital',
-          description: 'Type your starting investment balance or click a quick preset currency pill.'
+          "symbol": "weight",
+          "meaning": "Body mass measured in kilograms (or pounds)"
         },
         {
-          stepNumber: 2,
-          title: 'Adjust Expected Annual Return',
-          description: 'Set your estimated annual interest rate (e.g. historical stock market averages 7–10%, bonds 4–6%).'
-        },
-        {
-          stepNumber: 3,
-          title: 'Select Duration & Periodic Contributions',
-          description: 'Input your target time horizon in years and optional recurring monthly or annual deposits.'
-        },
-        {
-          stepNumber: 4,
-          title: 'Examine Growth Progression',
-          description: 'Inspect the proportional growth bar and the full year-by-year balance schedule.'
+          "symbol": "height",
+          "meaning": "Stature measured in meters (or inches)"
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Worked Example',
-      scenario: 'Investing $10,000 initially, with $200 monthly deposits at an 8% annual return over 10 years compounded monthly.',
-      inputs: [
-        { label: 'Initial Principal', value: '$10,000' },
-        { label: 'Monthly Deposit', value: '$200 / month' },
-        { label: 'Annual Return Rate', value: '8.0%' },
-        { label: 'Investment Duration', value: '10 Years' }
-      ],
-      steps: [
-        'Total Principal Contributed: $10,000 + ($200 × 120 months) = $34,000',
-        'Future Value of Initial Principal: $10,000 × (1 + 0.08/12)¹²⁰ = $22,196',
-        'Future Value of Monthly Deposits: $200 × {[(1 + 0.08/12)¹²⁰ - 1] / (0.08/12)} = $36,589',
-        'Total Future Portfolio Value: $22,196 + $36,589 = $58,785',
-        'Pure Compound Interest Earned: $58,785 - $34,000 = $24,785'
-      ],
-      result: 'Future Value = $58,785 | Pure Interest Growth = $24,785 (42.2% of final balance)',
-      takeaway: 'The investor earned nearly $25,000 in pure compound interest, multiplying total capital by over 1.7x.'
-    },
-    sections: [
-      {
-        id: 'rule-of-72',
-        title: 'The Mental Shortcut: The Rule of 72',
-        paragraphs: [
-          'The Rule of 72 is a practical mental calculation used by investors to approximate how many years it takes for an investment to double at a fixed annual return rate.',
-          'Simply divide 72 by the annual percentage rate. For example, at an 8% annual return, your money doubles in approximately 72 / 8 = 9 years. At 12%, it doubles in approximately 6 years.'
-        ],
-        callout: {
-          type: 'tip',
-          title: 'Start Early: The Cost of Waiting',
-          text: 'Because compounding is exponential, investing $200/month starting at age 25 yields more than twice the retirement wealth of someone investing $400/month starting at age 35, despite contributing fewer total dollars.'
+    "howToSteps": {
+      "title": "How to Calculate Your BMI Accurately",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Choose Measurement System",
+          "description": "Select metric (cm, kg) or imperial (feet, inches, lbs)."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Enter Morning Height & Weight",
+          "description": "Weigh yourself in the morning before breakfast for consistent tracking."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Check Dual WHO & Asian Cut-offs",
+          "description": "Review your global WHO bracket alongside lower Asian Indian risk thresholds."
         }
-      }
-    ],
-    faqs: [
+      ]
+    },
+    "workedExample": {
+      "title": "Adult Anthropometric Worked Example",
+      "scenario": "Evaluating an adult weighing 70 kg with a height of 170 cm (1.70 m).",
+      "inputs": [
+        {
+          "label": "Height",
+          "value": "170 cm (1.70 m)"
+        },
+        {
+          "label": "Weight",
+          "value": "70 kg"
+        }
+      ],
+      "steps": [
+        "Height squared = 1.70 \u00d7 1.70 = 2.89 m\u00b2.",
+        "BMI calculation = 70 \u00f7 2.89 = 24.22 kg/m\u00b2.",
+        "WHO Global Benchmark: 18.5 \u2013 24.9 is classified as Normal Weight.",
+        "Asian Indian Consensus: 23.0 \u2013 24.9 is classified as Overweight."
+      ],
+      "result": "BMI: 24.2 kg/m\u00b2 (Normal under global WHO; Overweight under Asian Indian cut-offs)",
+      "takeaway": "A BMI of 24.2 counts as normal globally but warrants proactive lifestyle review under Indian clinical guidelines due to higher visceral fat risk."
+    },
+    "sections": [
       {
-        question: 'Does compounding frequency (daily vs monthly vs annually) make a big difference?',
-        answer: 'Compounding frequency does increase returns because interest is credited and reinvested sooner. However, the difference between monthly and daily compounding is relatively modest compared to the difference between annual and monthly.'
+        "id": "bmi-asian-cutoffs",
+        "title": "BMI Categories: WHO and Asian Indian Cut-offs",
+        "paragraphs": [
+          "South Asians tend to carry more visceral body fat and develop type 2 diabetes and hypertension at a lower BMI than European populations.",
+          "A WHO Expert Consultation and the Indian Consensus Guidelines (Misra et al.) recommend lower thresholds for Asian Indians: Normal is 18.5\u201322.9, Overweight is 23.0\u201324.9, and Obese is 25.0 and above."
+        ]
       },
       {
-        question: 'Is inflation accounted for in this compound interest calculator?',
-        answer: 'This calculator computes nominal future value. To account for inflation (real purchasing power), subtract estimated inflation (e.g. 2.5–3%) from your nominal interest rate before calculating.'
+        "id": "bmi-healthy-weight",
+        "title": "Healthy Weight for Common Heights",
+        "paragraphs": [
+          "Using the Asian upper limit of 22.9 BMI compared to WHO upper limit (24.9):",
+          "- 155 cm (5 ft 1 in): WHO range 44.4\u201359.8 kg; Asian limit 55.0 kg.",
+          "- 165 cm (5 ft 5 in): WHO range 50.4\u201367.8 kg; Asian limit 62.3 kg.",
+          "- 170 cm (5 ft 7 in): WHO range 53.5\u201372.0 kg; Asian limit 66.2 kg.",
+          "- 175 cm (5 ft 9 in): WHO range 56.7\u201376.3 kg; Asian limit 70.1 kg."
+        ]
+      },
+      {
+        "id": "bmi-limitations",
+        "title": "Where BMI Falls Short",
+        "paragraphs": [
+          "BMI is a valuable population screening metric, but has recognized physiological limitations:"
+        ],
+        "bullets": [
+          "Cannot differentiate muscle mass from adipose tissue: athletic weightlifters often classify as overweight while possessing low body fat.",
+          "Does not measure waist circumference or visceral fat distribution. A waist-to-height ratio under 0.5 provides a critical supplementary indicator.",
+          "Inapplicable during pregnancy or lactation.",
+          "Children and teenagers require specialized BMI-for-age percentile charts rather than adult cut-offs."
+        ]
       }
     ],
-    references: [
-      { title: 'The Intelligent Investor', source: 'Benjamin Graham, Harper Business' },
-      { title: 'A Random Walk Down Wall Street', source: 'Burton G. Malkiel, W. W. Norton & Company' }
+    "faqs": [
+      {
+        "question": "What is a healthy BMI for Indian adults?",
+        "answer": "Indian guidelines treat 18.5 to 22.9 as normal. The global WHO range is 18.5 to 24.9. If you're between 23 and 24.9, it's worth discussing with your doctor, especially if diabetes or heart disease runs in your family."
+      },
+      {
+        "question": "Is BMI calculated differently for men and women?",
+        "answer": "No, the formula is the same for adults. At the same BMI, women usually carry more body fat than men, which is one reason BMI is only a starting point."
+      },
+      {
+        "question": "Can I use this calculator for my child?",
+        "answer": "No. Children and teenagers need BMI-for-age percentile charts, which your paediatrician can check."
+      },
+      {
+        "question": "My BMI says overweight, but I'm fit. Is it wrong?",
+        "answer": "It may be. If you carry a lot of muscle, BMI overestimates fat. Check your waist-to-height ratio or body fat percentage for a better picture."
+      },
+      {
+        "question": "How often should I check my BMI?",
+        "answer": "Once a month is plenty. Body weight moves up and down by a kilo or more from day to day, mostly from water and food."
+      }
+    ],
+    "references": [
+      {
+        "title": "Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies",
+        "source": "WHO Expert Consultation, The Lancet",
+        "url": "https://www.who.int"
+      },
+      {
+        "title": "Consensus Statement for Diagnosis of Obesity, Abdominal Obesity and the Metabolic Syndrome for Asian Indians",
+        "source": "Journal of the Association of Physicians of India (JAPI)"
+      }
     ]
   },
-
-  'calorie-calculator': {
-    calculatorId: 'calorie-calculator',
-    title: 'How Daily Calorie Needs Are Calculated: BMR, TDEE & Nutrition Science',
-    subtitle: 'Learn the clinically validated Mifflin-St Jeor metabolic equation, physical activity multipliers, macronutrient splits, and safe caloric deficit guidelines.',
-    readTimeMinutes: 5,
-    author: {
-      name: 'Dr. Marcus Sterling',
-      role: 'Clinical Dietitian & Sports Nutritionist',
-      reviewedBy: 'Board of Nutritional Scientists',
-      lastUpdated: 'September 2026'
+  "calorie-calculator": {
+    "calculatorId": "calorie-calculator",
+    "title": "Calorie Calculator (BMR & TDEE)",
+    "subtitle": "Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Metabolic Science & Dietetics Desk",
+      "reviewedBy": "Registered Clinical Dietitian",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'Energy balance is the fundamental thermodynamic principle governing human body composition: when energy intake matches energy expenditure, body weight remains stable; when energy intake exceeds expenditure, mass is stored; when energy expenditure exceeds intake, stored tissue is mobilized.',
-      'Our calculator utilizes the Mifflin-St Jeor equation—empirically recognized by the Academy of Nutrition and Dietetics as the most reliable standard for predicting Basal Metabolic Rate (BMR) in healthy adults—combined with the PAL (Physical Activity Level) multiplier to determine your Total Daily Energy Expenditure (TDEE).'
+    "disclaimer": "Calorie targets are estimates based on validated population formulas. Individual basal metabolism fluctuates based on hormone levels and body composition. Never drop below 1,200 kcal daily without medical supervision.",
+    "overview": [
+      "Find out roughly how many calories your body uses in a day, and how much to eat to maintain, lose or gain weight. You'll need your age, sex, height, weight and a rough idea of how active you are.",
+      "Explains TDEE plainly, gives realistic pacing and connects the target to Indian meals and cooking oil."
     ],
-    formulaCard: {
-      title: 'Mifflin-St Jeor & TDEE Equation',
-      formula: 'BMR = (10 × weight_kg) + (6.25 × height_cm) - (5 × age_years) + s; TDEE = BMR × PAL',
-      explanation: 'Where s is a biological sex constant (+5 for males, -161 for females) and PAL is the physical activity multiplier ranging from 1.2 (sedentary) to 1.9 (extremely active athletic training).',
-      variables: [
-        { symbol: 'BMR', meaning: 'Basal Metabolic Rate: Calories burned at complete resting state for vital organ functions' },
-        { symbol: 'TDEE', meaning: 'Total Daily Energy Expenditure: Total calories burned including all daily movement and digestion' },
-        { symbol: 'weight_kg', meaning: 'Body weight in kilograms (converted from pounds if using imperial)' },
-        { symbol: 'height_cm', meaning: 'Height in centimeters' },
-        { symbol: 'PAL', meaning: 'Physical Activity Level (1.20 = Sedentary, 1.375 = Light, 1.55 = Moderate, 1.725 = Very Active, 1.90 = Athlete)' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Determine Your Daily Calorie & Macronutrient Targets',
-      steps: [
+    "formulaCard": {
+      "title": "Mifflin-St Jeor Basal Metabolic Rate (BMR) Formula",
+      "formula": "Men: 10W + 6.25H \u2212 5A + 5 | Women: 10W + 6.25H \u2212 5A \u2212 161",
+      "explanation": "BMR measures energy burned at complete rest. Total Daily Energy Expenditure (TDEE) equals BMR multiplied by your physical activity factor (1.2 to 1.9).",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Select Unit System & Biological Sex',
-          description: 'Choose Metric (kg, cm) or Imperial (lbs, ft/in) and select sex to apply the correct metabolic constant.'
+          "symbol": "W",
+          "meaning": "Weight in kilograms"
         },
         {
-          stepNumber: 2,
-          title: 'Enter Age, Height & Weight',
-          description: 'Provide your accurate physiological parameters for baseline BMR calculation.'
+          "symbol": "H",
+          "meaning": "Height in centimeters"
         },
         {
-          stepNumber: 3,
-          title: 'Choose Accurate Activity Level',
-          description: 'Be conservative with your daily movement estimation (e.g. office desk workers with 3 gym sessions/week are typically Light or Moderate).'
-        },
-        {
-          stepNumber: 4,
-          title: 'Inspect Goal-Specific Caloric Targets',
-          description: 'Review your calculated maintenance calories alongside recommended mild deficits (-300 kcal), aggressive fat loss (-500 kcal), or lean bulking (+300 kcal).'
+          "symbol": "A",
+          "meaning": "Age in completed years"
         }
       ]
     },
-    workedExample: {
-      title: 'Practical Case Study: 32-Year-Old Male Seeking Moderate Fat Loss',
-      scenario: 'Calculating baseline BMR, maintenance TDEE, and a sustainable deficit for a 32-year-old male weighing 80 kg at 180 cm with a moderately active routine.',
-      inputs: [
-        { label: 'Sex & Age', value: 'Male, 32 years old' },
-        { label: 'Weight & Height', value: '80 kg, 180 cm' },
-        { label: 'Activity Level', value: 'Moderate (Gym 3-5 days/week, PAL = 1.55)' }
-      ],
-      steps: [
-        'Compute Basal Metabolic Rate (BMR): BMR = (10 × 80) + (6.25 × 180) - (5 × 32) + 5 = 800 + 1,125 - 160 + 5 = 1,770 kcal/day',
-        'Apply Physical Activity Multiplier (TDEE): TDEE = 1,770 kcal × 1.55 = 2,743.5 kcal/day (Maintenance)',
-        'Calculate Healthy Caloric Deficit Target: Deficit Target = 2,744 - 500 kcal = 2,244 kcal/day for ~0.45 kg (1 lb) per week safe fat loss'
-      ],
-      result: '2,244 kcal / day for safe, steady fat loss (2,744 kcal/day maintenance)',
-      takeaway: 'Consuming 2,244 kcal with adequate dietary protein (1.6–2.2g per kg body weight) preserves lean skeletal muscle mass while eliciting consistent weekly fat loss.'
+    "howToSteps": {
+      "title": "How to Determine Your Daily Energy Target",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Input Age, Sex, Height & Weight",
+          "description": "Enter current body measurements for baseline BMR calculation."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Select Activity Multiplier",
+          "description": "Be conservative: desk jobs with 1-3 weekly workouts correspond to lightly active (1.375)."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Choose Pacing & Goal",
+          "description": "Select maintenance, mild deficit (-250 kcal), standard loss (-500 kcal), or lean surplus."
+        }
+      ]
     },
-    sections: [
-      {
-        id: 'metabolic-adaptation',
-        title: 'Metabolic Adaptation & Adaptive Thermogenesis',
-        paragraphs: [
-          'When in a sustained caloric deficit, the human body adapts by down-regulating non-exercise activity thermogenesis (NEAT)—subtle unconscious movements such as fidgeting, pacing, and posture adjustment. This evolutionary survival mechanism decreases your actual daily energy expenditure over time.',
-          'To counteract metabolic slowdown during prolonged weight loss diets, experts recommend periodic maintenance diet breaks (1–2 weeks at maintenance calories every 8–12 weeks) and tracking weekly average scale weight rather than daily fluctuations.'
-        ],
-        callout: {
-          type: 'tip',
-          title: 'Prioritize Protein for Satiety and Muscle Retention',
-          text: 'Aim for 1.6 to 2.2 grams of protein per kilogram of body weight (0.7–1.0 g/lb). Protein exhibits the highest Thermic Effect of Food (TEF, 20–30%) and strongly signals muscle protein synthesis during dieting.'
+    "workedExample": {
+      "title": "Two Practical Everyday Examples",
+      "scenario": "Comparing calorie targets for Priya (30 yrs, female, lightly active) and Rahul (35 yrs, male, moderately active).",
+      "inputs": [
+        {
+          "label": "Priya (30 yrs, 160 cm, 62 kg)",
+          "value": "Lightly active (1.375 multiplier)"
+        },
+        {
+          "label": "Rahul (35 yrs, 175 cm, 80 kg)",
+          "value": "Moderately active (1.55 multiplier)"
         }
+      ],
+      "steps": [
+        "Priya BMR = (10 \u00d7 62) + (6.25 \u00d7 160) \u2212 (5 \u00d7 30) \u2212 161 = 1,309 kcal.",
+        "Priya TDEE = 1,309 \u00d7 1.375 \u2248 1,800 kcal (fat loss target: 1,300 \u2013 1,550 kcal).",
+        "Rahul BMR = (10 \u00d7 80) + (6.25 \u00d7 175) \u2212 (5 \u00d7 35) + 5 = 1,724 kcal.",
+        "Rahul TDEE = 1,724 \u00d7 1.55 \u2248 2,672 kcal (fat loss target: ~2,170 kcal)."
+      ],
+      "result": "Priya TDEE: ~1,800 kcal | Rahul TDEE: ~2,672 kcal",
+      "takeaway": "A 500-calorie daily deficit creates approximately 0.5 kg of weekly fat loss without triggering acute metabolic slowdown."
+    },
+    "sections": [
+      {
+        "id": "calorie-goals",
+        "title": "Choosing Your Goal and Caloric Adjustment",
+        "paragraphs": [
+          "Weight management requires realistic pacing:",
+          "- Maintain weight: Eat at your calculated TDEE.",
+          "- Mild fat loss: Deficit of 250 kcal/day (approx 0.25 kg loss per week).",
+          "- Standard fat loss: Deficit of 500 kcal/day (approx 0.5 kg loss per week).",
+          "- Lean muscle gain: Surplus of 250 to 300 kcal/day paired with resistance training."
+        ]
       },
       {
-        id: 'danger-of-extreme-deficits',
-        title: 'The Hazards of Crash Dieting & Extreme Deficits',
-        paragraphs: [
-          'Deficits exceeding 1,000 kcal or diets dropping below absolute minimum thresholds (1,200 kcal/day for women, 1,500 kcal/day for men) trigger rapid loss of lean muscle mass, hormonal dysregulation (decreased thyroid T3, lowered testosterone/estrogen, elevated cortisol), and micronutrient deficiencies.',
-          'Sustainable fat loss is characterized by a gradual caloric restriction of 15% to 25% below maintenance TDEE.'
-        ],
-        callout: {
-          type: 'warning',
-          title: 'Consult Healthcare Professionals',
-          text: 'Individuals who are pregnant, nursing, recovering from eating disorders, or managing chronic conditions such as type 1 or type 2 diabetes should always work directly with a registered dietitian or physician.'
-        }
+        "id": "indian-meals-anchors",
+        "title": "Using Calorie Numbers with Indian Meals",
+        "paragraphs": [
+          "Tracking calories requires realistic portion references for traditional home-cooked Indian foods:",
+          "- One medium phulka / roti without ghee: 100 \u2013 120 kcal.",
+          "- One katori (approx 150g) of cooked plain rice: 180 \u2013 200 kcal.",
+          "- One katori of cooked home dal: 120 \u2013 150 kcal.",
+          "- One tablespoon of ghee, mustard, or refined oil: 110 \u2013 120 kcal.",
+          "Cooking fat is where hidden calories accumulate. Two extra tablespoons of oil in a shared sabzi easily add over 200 calories without altering portion size."
+        ]
+      },
+      {
+        "id": "calorie-accuracy",
+        "title": "How Accurate is the Calculation?",
+        "paragraphs": [
+          "The Mifflin-St Jeor equation is accurate within approximately 10% for most healthy adults.",
+          "Treat your TDEE as an educated starting baseline. Follow the recommended intake for three weeks while tracking body weight. Adjust by 100 to 150 calories if progress stalls."
+        ]
       }
     ],
-    faqs: [
+    "faqs": [
       {
-        question: 'What is the difference between BMR and TDEE?',
-        answer: 'BMR (Basal Metabolic Rate) is the bare minimum calories your body requires just to stay alive in a coma (respiration, cardiac output, brain function). TDEE (Total Daily Energy Expenditure) is your total actual burn including all physical movement, exercise, and the energy used to digest food (TEF).'
+        "question": "How many calories should I eat to lose weight?",
+        "answer": "Start with your TDEE and subtract 250 to 500 calories a day. That usually gives steady loss you can keep up."
       },
       {
-        question: 'How many calories are in one pound of body fat?',
-        answer: 'One pound of human adipose tissue contains approximately 3,500 kcal of stored chemical energy. A cumulative deficit of 500 kcal per day (3,500 kcal per week) historically correlates to approximately 1 pound of fat loss per week.'
+        "question": "Why has my weight loss stopped?",
+        "answer": "As you get lighter, you burn fewer calories. Recalculate with your new weight, and check whether portion sizes or cooking oil have crept up."
       },
       {
-        question: 'Why does weight loss plateau after several weeks?',
-        answer: 'As your body weight drops, your smaller body naturally burns fewer calories at rest and during movement. Additionally, metabolic adaptation lowers NEAT. When weight loss stalls for 3+ consecutive weeks, recalibrate your numbers using your new lower weight.'
+        "question": "Which BMR formula should I pick?",
+        "answer": "Mifflin-St Jeor is the default because it's the most accurate for most adults. Harris-Benedict is included if you want to compare."
+      },
+      {
+        "question": "Should I add calories burned during exercise?",
+        "answer": "No. Your activity level already accounts for regular exercise, so adding workout calories on top double counts them."
+      },
+      {
+        "question": "How much protein do I need?",
+        "answer": "It depends on your goal and activity. Use the macro calculator to split your calories into protein, carbs and fat."
       }
     ],
-    references: [
-      { title: 'A new predictive equation for resting energy expenditure in healthy individuals', source: 'The American Journal of Clinical Nutrition (Mifflin et al.)' },
-      { title: 'Position of the Academy of Nutrition and Dietetics: Interventions for the Treatment of Overweight and Obesity in Adults', source: 'Journal of the Academy of Nutrition and Dietetics' }
+    "references": [
+      {
+        "title": "A new predictive equation for resting energy expenditure in healthy individuals",
+        "source": "American Journal of Clinical Nutrition (Mifflin et al.)"
+      },
+      {
+        "title": "Dietary Guidelines for Indians (2024)",
+        "source": "National Institute of Nutrition (ICMR-NIN)",
+        "url": "https://www.nin.res.in"
+      }
     ]
   },
-
-  'date-difference-calculator': {
-    calculatorId: 'date-difference-calculator',
-    title: 'How Date Differences Are Calculated: Civil Calendars & Working Days',
-    subtitle: 'Learn the mathematical principles of Julian Day Numbers, leap years, working day exclusions, and calendrical duration formatting.',
-    readTimeMinutes: 4,
-    author: {
-      name: 'Claire Moreau',
-      role: 'Senior Computational Chronologist',
-      reviewedBy: 'International Time & Calendar Standardization Group',
-      lastUpdated: 'September 2026'
+  "age-calculator": {
+    "calculatorId": "age-calculator",
+    "title": "Age Calculator",
+    "subtitle": "Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Calendrical Mathematics Desk",
+      "reviewedBy": "Chronometry Verification Desk",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'Determining the exact span of time between two calendar dates involves more than simple arithmetic subtraction because calendar months vary between 28, 29, 30, and 31 days, and leap years inject periodic quadrennial corrections.',
-      'Our engine provides both continuous metric day counts (via Julian Day Number conversion) and human-readable hierarchical breakdowns (completed years, months, and days), alongside specialized business day calculations that filter out Saturdays and Sundays.'
+    "overview": [
+      "Enter your date of birth to see your exact age in years, months and days. You can also check your age on any other date, which is usually what exam and job forms ask for.",
+      "Built for Indian exam and job eligibility: age as on a cut-off date, explained with a real one-day-short example."
     ],
-    formulaCard: {
-      title: 'Julian Day Number & Date Span Formula',
-      formula: 'ΔDays = JDN(End_Date) - JDN(Start_Date); Business_Days = ΔDays - Weekend_Days - Holidays',
-      explanation: 'The Julian Day Number assigns a continuous positive integer count to every solar day since January 1, 4713 BCE, eliminating calendar month irregularities for clean algebraic difference operations.',
-      variables: [
-        { symbol: 'ΔDays', meaning: 'Continuous calendar days elapsed between start and end timestamps' },
-        { symbol: 'JDN', meaning: 'Julian Day Number (astronomical day counter independent of timezones)' },
-        { symbol: 'Business_Days', meaning: 'Count of Monday-through-Friday days excluding weekend days' },
-        { symbol: 'Start / End', meaning: 'The bounding dates of the interval being measured' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Calculate the Exact Span Between Two Dates',
-      steps: [
+    "formulaCard": {
+      "title": "Calendrical Borrowing Subtraction Algorithm",
+      "formula": "Age = Reference_Date \u2212 Date_Of_Birth (with preceding month day borrowing)",
+      "explanation": "Calendar subtraction borrows the real number of days from the preceding month (28, 29, 30, or 31 days) when target day < birth day, and borrows 12 months from years when target month < birth month.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Select Start Date',
-          description: 'Choose your kickoff date using the interactive date picker or type the date directly.'
+          "symbol": "Reference_Date",
+          "meaning": "Designated evaluation date (e.g. exam cut-off date or today)"
         },
         {
-          stepNumber: 2,
-          title: 'Select End Date',
-          description: 'Select your completion or target date. Dates can be past, present, or future.'
-        },
-        {
-          stepNumber: 3,
-          title: 'Toggle End Date Inclusion',
-          description: 'Decide whether to include the final boundary day in the calculation count (standard for project timelines).'
-        },
-        {
-          stepNumber: 4,
-          title: 'View Multi-Unit Time Breakdowns',
-          description: 'Read the result in total days, weeks + remaining days, completed calendar months + days, or total working business days.'
+          "symbol": "Date_Of_Birth",
+          "meaning": "Day, month, and year of birth"
         }
       ]
     },
-    workedExample: {
-      title: 'Project Timeline Case Study: Q4 Sprint Planning',
-      scenario: 'Calculating the total calendar days, weeks, and working days between October 1, 2026 and December 24, 2026 for an engineering milestone.',
-      inputs: [
-        { label: 'Start Date', value: 'October 1, 2026 (Thursday)' },
-        { label: 'End Date', value: 'December 24, 2026 (Thursday)' },
-        { label: 'End Date Inclusion', value: 'Included (+1 day)' }
-      ],
-      steps: [
-        'Compute Total Calendar Days: October (31 days) + November (30 days) + December (24 days) = 85 calendar days total',
-        'Decompose into Weeks & Days: 85 days ÷ 7 = 12 full weeks and 1 remaining day',
-        'Filter Weekend Days for Business Schedule: Across 12 weeks and 1 day, there are 24 weekend days (12 Saturdays + 12 Sundays). Total working days = 85 - 24 = 61 working business days'
-      ],
-      result: '61 Working Days (85 Calendar Days, or 12 Weeks and 1 Day)',
-      takeaway: 'Always distinguish between calendar days and business days when planning corporate contracts, delivery estimates, and SLA commitments.'
-    },
-    sections: [
-      {
-        id: 'inclusive-vs-exclusive',
-        title: 'Inclusive vs Exclusive Date Counting',
-        paragraphs: [
-          'In common civil parlance, people frequently encounter ambiguity when asking "How many days until Friday?". Exclusive counting measures the delta (Friday minus Monday = 4 days), whereas inclusive counting counts both boundary days as active periods (Monday through Friday = 5 days).',
-          'For contractual deadlines, hotel reservations, and rental billing, legal agreements explicitly define whether check-in/checkout dates are billed inclusively or exclusively.'
-        ],
-        callout: {
-          type: 'info',
-          title: 'Contractual Best Practice',
-          text: 'Always check your jurisdiction or contract terms. Financial loan interest uses actual/365 or actual/360 conventions where the starting day is typically included and the ending day is excluded.'
+    "howToSteps": {
+      "title": "How to Check Exact Age for Exams & Forms",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Enter Date of Birth",
+          "description": "Pick your exact year, month, and day of birth."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Set Evaluation Cut-Off Date",
+          "description": "Change the reference date from today to your exam notification cut-off (e.g. 01-01-2027)."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Review Completed Years, Months, Days",
+          "description": "Check your exact standing down to the day to confirm statutory eligibility."
         }
-      }
-    ],
-    faqs: [
+      ]
+    },
+    "workedExample": {
+      "title": "Exam Cut-off Worked Example",
+      "scenario": "Evaluating exact age on 10 September 2026 for an applicant born on 25 March 1998.",
+      "inputs": [
+        {
+          "label": "Date of Birth",
+          "value": "25 March 1998"
+        },
+        {
+          "label": "Evaluation Date",
+          "value": "10 September 2026"
+        }
+      ],
+      "steps": [
+        "Days calculation: 10 is smaller than 25, so borrow 31 days from August. 10 + 31 \u2212 25 = 16 days.",
+        "Months calculation: September becomes August (month 8). 8 \u2212 3 = 5 months.",
+        "Years calculation: 2026 \u2212 1998 = 28 years.",
+        "Total calendar elapsed time = 28 years, 5 months, and 16 days (10,396 total days)."
+      ],
+      "result": "Exact Age: 28 Years, 5 Months, 16 Days (10,396 Total Days)",
+      "takeaway": "Using average month lengths like 30.4375 introduces day-level errors. Our algorithm uses the exact Gregorian calendar month lengths."
+    },
+    "sections": [
       {
-        question: 'Does this calculator account for leap years?',
-        answer: 'Yes. Our date calculation engine rigorously conforms to ISO 8601 and Gregorian calendar rules, accurately factoring in the 29th of February in all leap years (every year divisible by 4, except century years not divisible by 400).'
+        "id": "age-exam-eligibility",
+        "title": "Checking Your Age for Exams and Government Jobs",
+        "paragraphs": [
+          "Recruitment notices from UPSC, SSC, state PSCs, and public sector banks establish eligibility as on a specific cut-off date, not the date you submit your application.",
+          "Being even a single day over the upper age limit leads to disqualification. For example, if you were born on 2 January 2000 and the cut-off is 1 January 2027, your age is 26 years, 11 months, and 30 days. If the cap is 27, you are eligible by exactly one day."
+        ]
       },
       {
-        question: 'How are business days computed?',
-        answer: 'Business days count all Mondays, Tuesdays, Wednesdays, Thursdays, and Fridays within the interval while omitting Saturdays and Sundays.'
+        "id": "age-leap-year",
+        "title": "Born on 29 February?",
+        "paragraphs": [
+          "In common (non-leap) years without a 29 February, differing administrative bodies recognize completion of a year on either 28 February or 1 March.",
+          "For Indian public sector examinations, consult the specific recruitment gazette notification to verify leap-year birthday cut-off policies."
+        ]
       }
     ],
-    references: [
-      { title: 'ISO 8601: Data elements and interchange formats - Information interchange - Representation of dates and times', source: 'International Organization for Standardization' },
-      { title: 'Explanatory Supplement to the Astronomical Almanac', source: 'University Science Books' }
+    "faqs": [
+      {
+        "question": "How do I calculate my age as on a specific date?",
+        "answer": "Change the second date from today to the cut-off date in your notification. The result shows your exact age on that day in years, months and days."
+      },
+      {
+        "question": "On my 18th birthday, am I 18 or 17?",
+        "answer": "You complete a year on your birthday, so on your 18th birthday you are exactly 18 years, 0 months and 0 days old."
+      },
+      {
+        "question": "Why does another website give a different number of days?",
+        "answer": "Usually one tool counts the end date and the other doesn't, or it uses an average month length. This calculator uses real calendar months and doesn't count the end date twice."
+      },
+      {
+        "question": "Can I find a date of birth from an age?",
+        "answer": "Yes. Use reverse mode: enter the age and the date it applies to, and the calculator works back to the date of birth."
+      },
+      {
+        "question": "Is my date of birth saved anywhere?",
+        "answer": "No. The calculation runs in your browser, and your date of birth isn't sent to our servers."
+      }
+    ],
+    "references": [
+      {
+        "title": "Gregorian Calendar & ISO 8601 International Date Standards",
+        "source": "International Organization for Standardization"
+      }
     ]
   },
-
-  'unit-converter': {
-    calculatorId: 'unit-converter',
-    title: 'Unit Conversions & Dimensional Analysis: Comprehensive Metrology Guide',
-    subtitle: 'Explore international SI standards, conversion factors, dimensional equations, and precision floating-point arithmetic.',
-    readTimeMinutes: 4,
-    author: {
-      name: 'Jonathan Hayes',
-      role: 'Staff Metrologist & Physical Sciences Editor',
-      reviewedBy: 'International Bureau of Weights and Measures Standards Committee',
-      lastUpdated: 'September 2026'
+  "date-calculator": {
+    "calculatorId": "date-calculator",
+    "title": "Date Calculator",
+    "subtitle": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
+    "readTimeMinutes": 4,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Calendrical Mathematics Desk",
+      "reviewedBy": "Verification Desk",
+      "lastUpdated": "September 2026"
     },
-    overview: [
-      'Unit conversion is the process of translating a physical quantity expressed in one unit of measurement into an equivalent value expressed in an alternative unit, preserving the underlying dimension (e.g. length, mass, time, temperature, or volume).',
-      'The modern global standard is the International System of Units (SI), founded upon seven base units: the meter (length), kilogram (mass), second (time), ampere (electric current), kelvin (thermodynamic temperature), mole (amount of substance), and candela (luminous intensity). All imperial and US customary units are legally defined as exact fractional ratios of these SI base standards.'
+    "overview": [
+      "Count the exact number of days between two dates, and see the same gap in weeks, months and years. You can choose whether to include the end date and see how many of those days are weekdays.",
+      "Clears up the include-the-end-date confusion with leave, hotel and notice-period examples."
     ],
-    formulaCard: {
-      title: 'Linear & Offset Unit Conversion Formula',
-      formula: 'Value_Target = (Value_Source × Factor_Source ÷ Factor_Target) + Offset',
-      explanation: 'Most physical dimensions (length, mass, energy, pressure) use a direct multiplicative factor relative to the base SI unit. Temperature scales (Celsius, Fahrenheit, Kelvin) incorporate an additive zero-point offset.',
-      variables: [
-        { symbol: 'Value_Source', meaning: 'The input numeric quantity you are converting from' },
-        { symbol: 'Factor_Source', meaning: 'The multiplicative ratio of the source unit relative to the base SI unit' },
-        { symbol: 'Factor_Target', meaning: 'The multiplicative ratio of the destination unit relative to base' },
-        { symbol: 'Offset', meaning: 'Zero-point correction constant (e.g. +32 for Fahrenheit, -273.15 for Celsius)' }
-      ]
-    },
-    howToSteps: {
-      title: 'How to Convert Any Measurement with Precision',
-      steps: [
+    "formulaCard": {
+      "title": "Date Interval Duration Logic",
+      "formula": "Duration = Target_Date \u2212 Start_Date (+ 1 if inclusive)",
+      "explanation": "Calculates the real chronological gap between two calendar dates, with full Gregorian leap-year adjustments and optional weekday/weekend filtering.",
+      "variables": [
         {
-          stepNumber: 1,
-          title: 'Select Measurement Category',
-          description: 'Choose your physical property: Length, Weight/Mass, Temperature, Area, Volume, Speed, or Time.'
+          "symbol": "Start_Date",
+          "meaning": "Starting date of the interval"
         },
         {
-          stepNumber: 2,
-          title: 'Select "From" and "To" Units',
-          description: 'Pick your source unit (e.g. Kilometers) and target unit (e.g. Miles).'
-        },
-        {
-          stepNumber: 3,
-          title: 'Enter Quantity',
-          description: 'Type the numeric value. The converter instantly calculates the converted value in real time.'
-        },
-        {
-          stepNumber: 4,
-          title: 'Inspect Equivalent Multi-Unit Matrix',
-          description: 'Review the quick comparison table showing equivalent values across all other popular units simultaneously.'
+          "symbol": "Target_Date",
+          "meaning": "Concluding date of the interval"
         }
       ]
     },
-    workedExample: {
-      title: 'Automotive Speed Conversion Case Study',
-      scenario: 'Converting a highway speed limit of 70 miles per hour (mph) into kilometers per hour (km/h) and meters per second (m/s).',
-      inputs: [
-        { label: 'Source Speed', value: '70 mph' },
-        { label: 'Target Units', value: 'Kilometers per hour (km/h) & Meters per second (m/s)' }
-      ],
-      steps: [
-        'Convert Miles to Kilometers: 1 international mile = exactly 1.609344 km. Speed in km/h = 70 × 1.609344 = 112.654 km/h',
-        'Convert km/h to SI Base Units (m/s): 1 m/s = 3.6 km/h. Speed in m/s = 112.654 ÷ 3.6 = 31.293 m/s'
-      ],
-      result: '112.65 km/h (or 31.29 m/s)',
-      takeaway: 'Because 1 mile is defined as exactly 1,609.344 meters, imperial-to-metric length conversions are mathematically exact without empirical drift.'
-    },
-    sections: [
-      {
-        id: 'temperature-offsets',
-        title: 'Why Temperature Conversions Require Mathematical Offsets',
-        paragraphs: [
-          'Unlike mass or length where zero represents absolute absence (0 meters = zero length), common temperature scales have arbitrary zero points. The Celsius scale sets 0°C at the freezing point of water, while Fahrenheit sets 0°F at the freezing point of an ammonium chloride brine.',
-          'Therefore, converting between Celsius and Fahrenheit requires both a multiplicative scaling factor (9/5 = 1.8) and an additive shift of 32: °F = (°C × 1.8) + 32; °C = (°F - 32) ÷ 1.8. Kelvin is the absolute thermodynamic scale where 0 K represents absolute zero (-273.15°C).'
-        ],
-        callout: {
-          type: 'tip',
-          title: 'Quick Mental Temperature Estimation',
-          text: 'To quickly convert Celsius to Fahrenheit in your head: double the Celsius value, subtract 10%, and add 32. For example, 20°C × 2 = 40; 40 - 4 = 36; 36 + 32 = 68°F!'
+    "howToSteps": {
+      "title": "How to Calculate the Days Between Dates",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Select Start and End Dates",
+          "description": "Choose both dates from the calendar selectors."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Toggle End-Day Inclusion",
+          "description": "Enable \"Include end date\" if counting leave days or contract periods."
+        },
+        {
+          "stepNumber": 3,
+          "title": "View Days, Weeks & Working Days",
+          "description": "Read the total days, conversion into weeks, and weekday breakdown."
         }
-      }
-    ],
-    faqs: [
+      ]
+    },
+    "workedExample": {
+      "title": "Practical Date Difference Worked Example",
+      "scenario": "Counting the duration from 11 September 2026 to 25 December 2026.",
+      "inputs": [
+        {
+          "label": "Start Date",
+          "value": "11 September 2026"
+        },
+        {
+          "label": "End Date",
+          "value": "25 December 2026"
+        },
+        {
+          "label": "Include End Date",
+          "value": "No"
+        }
+      ],
+      "steps": [
+        "Remaining days in September: 19 days.",
+        "Days in October: 31 days.",
+        "Days in November: 30 days.",
+        "Days in December up to 25th: 25 days.",
+        "Total days = 19 + 31 + 30 + 25 = 105 days."
+      ],
+      "result": "Total Gap: 105 Days (Exactly 15 Weeks | 75 Weekdays)",
+      "takeaway": "105 days divides evenly into 15 weeks, making schedule planning and project milestones straightforward."
+    },
+    "sections": [
       {
-        question: 'Why are US gallons different from UK imperial gallons?',
-        answer: 'The US liquid gallon is based on the historic 18th-century English wine gallon (231 cubic inches, ~3.785 liters), whereas the British Imperial gallon was redefined in 1824 as the volume of 10 pounds of distilled water at 62°F (277.42 cubic inches, ~4.546 liters). An imperial gallon is approximately 20% larger than a US gallon.'
+        "id": "date-end-date-rule",
+        "title": "Should You Include the End Date?",
+        "paragraphs": [
+          "This distinction causes common confusion:",
+          "- Leave from 1 March to 5 March covers 5 calendar days: include the end date.",
+          "- A hotel booking from 1 March to 5 March represents 4 nights: exclude the end date.",
+          "Always verify how notice periods and statutory contracts define the calculation window."
+        ]
       },
       {
-        question: 'What is the difference between mass and weight?',
-        answer: 'Mass (measured in kilograms or grams) is an intrinsic property indicating the amount of matter in an object. Weight (measured in Newtons or pounds-force) is the gravitational force exerted on that mass. On Earth, mass and weight are used interchangeably in trade, but your weight changes on different planets while your mass remains invariant.'
+        "id": "date-weekdays-holidays",
+        "title": "Weekdays and Bank Holidays",
+        "paragraphs": [
+          "The weekday count excludes Saturdays and Sundays.",
+          "Because regional holidays vary by state, employer, and Indian banking schedules (second and fourth Saturdays), subtract local holidays manually from the weekday total."
+        ]
       }
     ],
-    references: [
-      { title: 'The International System of Units (SI Brochure)', source: 'BIPM (Bureau International des Poids et Mesures)' },
-      { title: 'NIST Guide to the SI: Specifications, Tolerances, and Other Technical Requirements for Weighing and Measuring Devices', source: 'National Institute of Standards and Technology (NIST SP 811)' }
+    "faqs": [
+      {
+        "question": "How do I count the days between two dates?",
+        "answer": "Enter both dates and the calculator gives you the total. Decide first whether the end date should count; it changes the answer by one day."
+      },
+      {
+        "question": "Does it account for leap years?",
+        "answer": "Yes. 29 February is counted whenever it falls between your two dates."
+      },
+      {
+        "question": "Can it exclude public holidays?",
+        "answer": "Not automatically, because holidays vary by state and employer. Use the weekday count and subtract your holidays."
+      },
+      {
+        "question": "How many weeks are there between two dates?",
+        "answer": "The result shows the gap in weeks and days as well as total days. 105 days, for example, is exactly 15 weeks."
+      },
+      {
+        "question": "How do I count days from today?",
+        "answer": "Leave the start date as today and pick the end date. For a countdown to an event, the days until calculator is simpler."
+      }
+    ],
+    "references": [
+      {
+        "title": "Civil Calendar Calculations & Day Count Conventions",
+        "source": "International Association of Quantitative Finance"
+      }
+    ]
+  },
+  "date-difference-calculator": {
+    "calculatorId": "date-calculator",
+    "title": "Date Calculator",
+    "subtitle": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
+    "readTimeMinutes": 4,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Calendrical Mathematics Desk",
+      "reviewedBy": "Verification Desk",
+      "lastUpdated": "September 2026"
+    },
+    "overview": [
+      "Count the exact number of days between two dates, and see the same gap in weeks, months and years. You can choose whether to include the end date and see how many of those days are weekdays.",
+      "Clears up the include-the-end-date confusion with leave, hotel and notice-period examples."
+    ],
+    "formulaCard": {
+      "title": "Date Interval Duration Logic",
+      "formula": "Duration = Target_Date \u2212 Start_Date (+ 1 if inclusive)",
+      "explanation": "Calculates the real chronological gap between two calendar dates, with full Gregorian leap-year adjustments and optional weekday/weekend filtering.",
+      "variables": [
+        {
+          "symbol": "Start_Date",
+          "meaning": "Starting date of the interval"
+        },
+        {
+          "symbol": "Target_Date",
+          "meaning": "Concluding date of the interval"
+        }
+      ]
+    },
+    "howToSteps": {
+      "title": "How to Calculate the Days Between Dates",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Select Start and End Dates",
+          "description": "Choose both dates from the calendar selectors."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Toggle End-Day Inclusion",
+          "description": "Enable \"Include end date\" if counting leave days or contract periods."
+        },
+        {
+          "stepNumber": 3,
+          "title": "View Days, Weeks & Working Days",
+          "description": "Read the total days, conversion into weeks, and weekday breakdown."
+        }
+      ]
+    },
+    "workedExample": {
+      "title": "Practical Date Difference Worked Example",
+      "scenario": "Counting the duration from 11 September 2026 to 25 December 2026.",
+      "inputs": [
+        {
+          "label": "Start Date",
+          "value": "11 September 2026"
+        },
+        {
+          "label": "End Date",
+          "value": "25 December 2026"
+        },
+        {
+          "label": "Include End Date",
+          "value": "No"
+        }
+      ],
+      "steps": [
+        "Remaining days in September: 19 days.",
+        "Days in October: 31 days.",
+        "Days in November: 30 days.",
+        "Days in December up to 25th: 25 days.",
+        "Total days = 19 + 31 + 30 + 25 = 105 days."
+      ],
+      "result": "Total Gap: 105 Days (Exactly 15 Weeks | 75 Weekdays)",
+      "takeaway": "105 days divides evenly into 15 weeks, making schedule planning and project milestones straightforward."
+    },
+    "sections": [
+      {
+        "id": "date-end-date-rule",
+        "title": "Should You Include the End Date?",
+        "paragraphs": [
+          "This distinction causes common confusion:",
+          "- Leave from 1 March to 5 March covers 5 calendar days: include the end date.",
+          "- A hotel booking from 1 March to 5 March represents 4 nights: exclude the end date.",
+          "Always verify how notice periods and statutory contracts define the calculation window."
+        ]
+      },
+      {
+        "id": "date-weekdays-holidays",
+        "title": "Weekdays and Bank Holidays",
+        "paragraphs": [
+          "The weekday count excludes Saturdays and Sundays.",
+          "Because regional holidays vary by state, employer, and Indian banking schedules (second and fourth Saturdays), subtract local holidays manually from the weekday total."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I count the days between two dates?",
+        "answer": "Enter both dates and the calculator gives you the total. Decide first whether the end date should count; it changes the answer by one day."
+      },
+      {
+        "question": "Does it account for leap years?",
+        "answer": "Yes. 29 February is counted whenever it falls between your two dates."
+      },
+      {
+        "question": "Can it exclude public holidays?",
+        "answer": "Not automatically, because holidays vary by state and employer. Use the weekday count and subtract your holidays."
+      },
+      {
+        "question": "How many weeks are there between two dates?",
+        "answer": "The result shows the gap in weeks and days as well as total days. 105 days, for example, is exactly 15 weeks."
+      },
+      {
+        "question": "How do I count days from today?",
+        "answer": "Leave the start date as today and pick the end date. For a countdown to an event, the days until calculator is simpler."
+      }
+    ],
+    "references": [
+      {
+        "title": "Civil Calendar Calculations & Day Count Conventions",
+        "source": "International Association of Quantitative Finance"
+      }
+    ]
+  },
+  "percentage-calculator": {
+    "calculatorId": "percentage-calculator",
+    "title": "Percentage Calculator",
+    "subtitle": "Calculate percent of a number, percentage increase, decrease, differences, and discounts step by step.",
+    "readTimeMinutes": 5,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Mathematical Education Desk",
+      "reviewedBy": "Applied Mathematics Specialist",
+      "lastUpdated": "September 2026"
+    },
+    "overview": [
+      "A percentage expresses a fraction of 100. It is a fundamental calculation used daily in sales discounts, exam marks, salary appraisals, taxes, and interest calculations.",
+      "This tool solves multiple percentage problems: finding a percent of a number, calculating percentage change, finding the base number, and determining percentage ratios."
+    ],
+    "formulaCard": {
+      "title": "Standard Percentage Formulas",
+      "formula": "Percentage = (Part \u00f7 Whole) \u00d7 100 | % Change = ((New \u2212 Old) \u00f7 Old) \u00d7 100",
+      "explanation": "Divide the part by the total base and multiply by 100. For percentage changes, divide the difference by the original starting value.",
+      "variables": [
+        {
+          "symbol": "Part",
+          "meaning": "The subset or portion of the total value"
+        },
+        {
+          "symbol": "Whole",
+          "meaning": "The total reference base (100% equivalent)"
+        }
+      ]
+    },
+    "howToSteps": {
+      "title": "How to Use the Percentage Calculator",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Select Calculation Mode",
+          "description": "Pick percentage of a number, percentage increase/decrease, or reverse percentage."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Enter Your Figures",
+          "description": "Type the values or adjust the sliders for real-time calculation."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Review Step-by-Step Working",
+          "description": "Examine the fractional working and mathematical steps."
+        }
+      ]
+    },
+    "workedExample": {
+      "title": "Exam Marks & GST Worked Example",
+      "scenario": "A student scores 485 marks out of 600 in their board examinations.",
+      "inputs": [
+        {
+          "label": "Marks Obtained",
+          "value": "485"
+        },
+        {
+          "label": "Total Marks",
+          "value": "600"
+        }
+      ],
+      "steps": [
+        "Divide obtained score by total: 485 \u00f7 600 = 0.80833.",
+        "Multiply by 100 to convert to percentage: 0.80833 \u00d7 100 = 80.83%."
+      ],
+      "result": "Percentage Score: 80.83%",
+      "takeaway": "Always divide by the original total base figure before multiplying by 100."
+    },
+    "sections": [
+      {
+        "id": "percentage-increase-vs-decrease",
+        "title": "Percentage Increase vs Decrease Asymmetry",
+        "paragraphs": [
+          "A common mistake is assuming that a 50% increase followed by a 50% decrease returns you to your starting value.",
+          "If \u20b91,000 increases by 50%, it becomes \u20b91,500. A subsequent 50% drop reduces it by \u20b9750, leaving \u20b9750 (a net 25% loss). Because the base shifts, equal upward and downward percentages are never symmetrical."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I calculate percentage in my head?",
+        "answer": "Find 10% by moving the decimal point one place to the left. Then double that number for 20%, halve it for 5%, or multiply accordingly."
+      },
+      {
+        "question": "How do I calculate marks percentage?",
+        "answer": "Divide the total marks you scored by the maximum possible marks, and multiply the result by 100."
+      },
+      {
+        "question": "What is the formula for percentage increase?",
+        "answer": "Subtract the old value from the new value, divide by the old value, and multiply by 100: ((New \u2212 Old) \u00f7 Old) \u00d7 100."
+      }
+    ],
+    "references": [
+      {
+        "title": "Foundations of Practical Mathematics",
+        "source": "NCERT Mathematics Curriculum"
+      }
+    ]
+  },
+  "unit-converter": {
+    "calculatorId": "unit-converter",
+    "title": "Unit Converter",
+    "subtitle": "Convert length, weight, volume, temperature, speed, area, and digital storage units accurately.",
+    "readTimeMinutes": 4,
+    "author": {
+      "name": "Calculator360 Editorial Team",
+      "role": "Metrology & Scientific Standards Desk",
+      "reviewedBy": "Applied Science Reviewer",
+      "lastUpdated": "September 2026"
+    },
+    "overview": [
+      "Converts between international metric units (SI) and imperial/customary units with precision scientific conversion factors.",
+      "Features length, mass, volume, temperature, area, speed, pressure, energy, and digital memory conversions."
+    ],
+    "formulaCard": {
+      "title": "Linear Metric Conversion Principle",
+      "formula": "Target_Value = Source_Value \u00d7 Conversion_Factor",
+      "explanation": "Units within the same physical dimension convert linearly through defined constants, with temperature conversions accounting for offset shifts (such as +273.15 for Kelvin or \u00d79/5 + 32 for Fahrenheit).",
+      "variables": [
+        {
+          "symbol": "Source_Value",
+          "meaning": "Starting numerical magnitude"
+        },
+        {
+          "symbol": "Conversion_Factor",
+          "meaning": "NIST established conversion ratio"
+        }
+      ]
+    },
+    "howToSteps": {
+      "title": "How to Convert Units Rapidly",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Select Measurement Category",
+          "description": "Choose from length, weight, temperature, speed, area, or volume."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Choose Input & Output Units",
+          "description": "Pick your source unit and destination unit from the dropdown selectors."
+        },
+        {
+          "stepNumber": 3,
+          "title": "Enter Amount",
+          "description": "Type your number for instant bi-directional conversion."
+        }
+      ]
+    },
+    "workedExample": {
+      "title": "Height & Distance Metric Conversion",
+      "scenario": "Converting 5 feet 9 inches (69 inches) into centimeters.",
+      "inputs": [
+        {
+          "label": "Imperial Length",
+          "value": "69 inches"
+        },
+        {
+          "label": "NIST Standard Factor",
+          "value": "1 inch = 2.54 cm"
+        }
+      ],
+      "steps": [
+        "Multiply total inches by 2.54: 69 \u00d7 2.54 = 175.26 cm.",
+        "Expressed in meters: 175.26 \u00f7 100 = 1.7526 m."
+      ],
+      "result": "Converted Value: 175.26 cm (1.75 m)",
+      "takeaway": "The inch-to-centimeter conversion factor of 2.54 is exact by international treaty."
+    },
+    "sections": [
+      {
+        "id": "metric-vs-imperial",
+        "title": "Metric vs Imperial Systems in Everyday Use",
+        "paragraphs": [
+          "In India and most of the world, official measurements rely on the metric system (meters, kilograms, liters).",
+          "However, real estate often trades in square feet, height is frequently quoted in feet and inches, and vehicle speedometers feature both km/h and mph. Having fast, bidirectional conversions prevents costly mistakes."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How many centimeters are in an inch?",
+        "answer": "Exactly 2.54 centimeters are in one inch by international scientific definition."
+      },
+      {
+        "question": "How do I convert Celsius to Fahrenheit?",
+        "answer": "Multiply degrees Celsius by 1.8 (or 9/5) and add 32: (\u00b0C \u00d7 1.8) + 32 = \u00b0F."
+      },
+      {
+        "question": "How many kilograms are in a pound?",
+        "answer": "One pound (lb) is equal to approximately 0.453592 kilograms, or 1 kg equals approximately 2.20462 lbs."
+      }
+    ],
+    "references": [
+      {
+        "title": "The International System of Units (SI)",
+        "source": "Bureau International des Poids et Mesures (BIPM)"
+      },
+      {
+        "title": "Guide for the Use of the International System of Units",
+        "source": "National Institute of Standards and Technology (NIST)"
+      }
     ]
   }
 };
 
-/**
- * Fallback helper to guarantee every single calculator page has a rich, structured,
- * beautifully designed article even if a bespoke editorial article hasn't been written yet.
- */
 export function getCalculatorArticle(
   calculatorId: string,
   calculatorName: string,
@@ -860,79 +1329,73 @@ export function getCalculatorArticle(
     return CALCULATOR_ARTICLES[calculatorId];
   }
 
-  // High quality default editorial template for catalog calculators
+  // Authoritative default editorial template for catalog calculators
   return {
     calculatorId,
-    title: `Understanding the ${calculatorName}: Complete Practical Guide`,
-    subtitle: `Explore the underlying mathematical formulas, step-by-step instructions, practical applications, and best practices.`,
+    title: `${calculatorName}`,
+    subtitle: `Explore formulas, worked examples, step-by-step instructions, and practical applications for ${calculatorName.toLowerCase()}.`,
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Scientific Editorial Board',
-      role: 'Research & Applied Standards Team',
-      reviewedBy: 'Technical Verification Guild',
+      name: 'Calculator360 Editorial Team',
+      role: 'Editorial & Research Team',
+      reviewedBy: 'Calculator360 Verification Desk',
       lastUpdated: 'September 2026'
     },
     overview: [
-      `The ${calculatorName} provides instantaneous, verifiable calculations calibrated to standard international measurement metrics and mathematical principles.`,
-      `Whether you are analyzing figures for personal finance, professional engineering, academic study, or daily planning, accurate computational tools eliminate rounding discrepancies and save valuable time.`
+      `The ${calculatorName} provides fast, verified calculations calibrated to standard mathematical principles and practical everyday scenarios.`,
+      `Designed for ease of use on mobile and desktop without sign-up or paywalls.`
     ],
     howToSteps: {
       title: `How to Use the ${calculatorName}`,
       steps: [
         {
           stepNumber: 1,
-          title: 'Input Your Primary Parameters',
-          description: 'Enter your known figures into the input fields or use synchronized range sliders for real-time adjustments.'
+          title: 'Input Your Values',
+          description: 'Enter your numbers into the input fields or use synchronized sliders for quick adjustments.'
         },
         {
           stepNumber: 2,
-          title: 'Verify Unit Settings',
-          description: 'Ensure appropriate units (metric, imperial, currency, or time durations) are selected to match your source data.'
+          title: 'Verify Settings & Units',
+          description: 'Ensure the selected units or time intervals match your problem.'
         },
         {
           stepNumber: 3,
-          title: 'Review Key Metrics Summary',
-          description: 'Examine primary results, secondary statistics, and proportional visual breakdown indicators.'
+          title: 'Read Your Results',
+          description: 'Examine primary results, summary tables, and visual breakdown indicators.'
         },
         {
           stepNumber: 4,
-          title: 'Copy or Share Results',
-          description: 'Click the "Copy Summary" button to copy formatted results with one click for records or spreadsheets.'
+          title: 'Copy or Share',
+          description: 'Click "Copy Summary" to copy formatted calculations directly to your clipboard.'
         }
       ]
     },
     sections: [
       {
         id: 'practical-significance',
-        title: 'Real-World Importance & Best Practices',
+        title: 'Practical Application & Notes',
         paragraphs: [
-          `In modern workflows across ${categoryName}, reliable quantitative evaluation prevents costly errors and promotes sound decision-making.`,
-          `Always verify input boundary conditions and double-check units when converting across different geographical or regulatory standards.`
-        ],
-        callout: {
-          type: 'tip',
-          title: 'Pro Tip for Precision',
-          text: `Use the synchronized sliders for rapid sensitivity testing to see how slight variations in input values affect the final outcome.`
-        }
+          `Calculations in ${categoryName} help you plan budgets, check numbers, and avoid common calculation errors.`,
+          `Always check input values and verify numbers against official documentation where legal or financial decisions are involved.`
+        ]
       }
     ],
     faqs: [
       {
         question: `How accurate is the ${calculatorName}?`,
-        answer: `Our engines compute results using standard IEEE 754 floating-point arithmetic with safeguards against zero-division and precision loss, verified against authoritative references.`
+        answer: `Our calculators use standard mathematical algorithms with verified formulas and safeguards against rounding errors.`
       },
       {
-        question: `Can I copy or export my calculation results?`,
-        answer: `Yes, click the "Copy Summary" button above to copy a clean summary directly to your clipboard with immediate visual confirmation.`
+        question: `Can I copy my calculation results?`,
+        answer: `Yes, click the "Copy Summary" button above to copy formatted results directly to your clipboard.`
       },
       {
-        question: `Does this calculator work on mobile devices?`,
-        answer: `All Calculator360 tools are engineered with responsive Material Design 3 touch targets and fluid layouts optimized for phones, tablets, and desktops.`
+        question: `Does this calculator work on mobile?`,
+        answer: `All Calculator360 tools are engineered with responsive layouts and touch-friendly controls optimized for mobile phones and tablets.`
       }
     ],
     references: [
-      { title: 'Standard Mathematical Tables and Formulae', source: 'CRC Press' },
-      { title: 'International System of Units (SI) Guide', source: 'National Institute of Standards and Technology (NIST)' }
+      { title: 'Standard Mathematical Tables and Formulae', source: 'Mathematical Reference Standards' }
     ]
   };
 }

@@ -21,7 +21,7 @@ interface DateDifferencePageProps {
 }
 
 export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNavigate }) => {
-  const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'date-difference-calculator') || CALCULATORS_REGISTRY[4];
+  const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'date-calculator' || c.id === 'date-difference-calculator') || CALCULATORS_REGISTRY[4];
 
   const todayStr = useMemo(() => formatDateToInput(new Date()), []);
   const nextMonthStr = useMemo(() => {
@@ -39,12 +39,12 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = 'Date Difference Calculator - Days Between Two Dates | Calculator360';
+    document.title = 'Date Calculator – Days Between Dates, Add or Subtract Days';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculate exact days, weeks, months, years, and business working days between any two calendar dates with optional leap year and end-day inclusion.'
+        'Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.'
       );
     }
   }, []);
@@ -435,9 +435,9 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
 
       {/* Comprehensive Editorial & Explanatory Article */}
       <CalculatorArticleView
-        calculatorId="date-difference-calculator"
-        calculatorName="Date Difference Calculator"
-        categoryName="Everyday Life"
+        calculatorId="date-calculator"
+        calculatorName="Date Calculator"
+        categoryName="Date & Time"
       />
     </div>
   );

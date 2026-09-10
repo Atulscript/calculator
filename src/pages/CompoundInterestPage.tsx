@@ -39,12 +39,12 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = 'Compound Interest Calculator - Future Value & Growth Forecast | Calculator360';
+    document.title = 'Compound Interest Calculator – With Monthly Deposits';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculate compound interest, investment returns, future portfolio value, and explore year-by-year compound growth schedules with regular deposits.'
+        'See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.'
       );
     }
   }, []);

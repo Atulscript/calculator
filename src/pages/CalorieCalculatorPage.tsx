@@ -35,12 +35,12 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = 'Calorie & TDEE Calculator - BMR, Weight Loss & Macros | Calculator360';
+    document.title = 'Calorie Calculator – Daily Calories, BMR & TDEE';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculate Total Daily Energy Expenditure (TDEE), Basal Metabolic Rate (BMR), daily calorie deficit for weight loss, and macronutrient targets.'
+        'Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.'
       );
     }
   }, []);

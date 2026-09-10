@@ -72,4 +72,6 @@ export interface CalculatorArticle {
   sections?: ArticleSectionItem[];
   faqs: ArticleFaqItem[];
   references?: ArticleReference[];
+  disclaimer?: string;
+  canonicalUrl?: string;
 }

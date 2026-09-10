@@ -15,12 +15,12 @@ export const AgeCalculatorPage: React.FC<AgeCalculatorPageProps> = ({ onNavigate
 
   // Dynamic World-Class SEO title and meta description
   useEffect(() => {
-    document.title = 'Age Calculator - Calculate Exact Chronological Age Online';
+    document.title = 'Age Calculator – Exact Age in Years, Months & Days';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Free online Age Calculator. Calculate your exact chronological age in years, months, weeks, days, hours, and seconds with live ticking, next birthday countdown, and zodiac signs.'
+        'Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.'
       );
     }
   }, []);

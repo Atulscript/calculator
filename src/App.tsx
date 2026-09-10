@@ -21,8 +21,10 @@ const CALCULATOR_PAGES: Record<string, React.FC<{ onNavigate: (path: string) => 
   'age-calculator': AgeCalculatorPage,
   'bmi-calculator': BMICalculatorPage,
   'percentage-calculator': PercentageCalculatorPage,
+  'emi-calculator': LoanCalculatorPage,
   'loan-calculator': LoanCalculatorPage,
   'compound-interest-calculator': CompoundInterestPage,
+  'date-calculator': DateDifferencePage,
   'date-difference-calculator': DateDifferencePage,
   'calorie-calculator': CalorieCalculatorPage,
   'unit-converter': UnitConverterPage

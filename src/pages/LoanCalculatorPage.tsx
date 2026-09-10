@@ -27,7 +27,7 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
     t 
   } = useLocalization();
 
-  const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'loan-calculator') || CALCULATORS_REGISTRY[2];
+  const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'emi-calculator' || c.id === 'loan-calculator') || CALCULATORS_REGISTRY[0];
 
   const [input, setInput] = useState<LoanInput>(() => ({
     principal: currentCurrency.defaultPresets[2] || 250000,
@@ -40,12 +40,12 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = 'Loan & EMI Calculator - Monthly Payments & Amortization Schedule | Calculator360';
+    document.title = 'EMI Calculator – Loan EMI, Interest & Amortization Schedule';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Calculate monthly loan EMI payments, total interest payable, principal-to-interest ratios, and view year-by-year amortization schedules for mortgages, auto loans, and personal financing.'
+        'Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.'
       );
     }
   }, []);
@@ -510,8 +510,8 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
 
           {/* Material Design 3 Comprehensive Educational Article & Guide */}
           <CalculatorArticleView
-            calculatorId="loan-calculator"
-            calculatorName="Loan & EMI Calculator"
+            calculatorId="emi-calculator"
+            calculatorName="Loan EMI Calculator"
             categoryName="Finance"
           />
         </div>
