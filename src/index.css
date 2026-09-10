@@ -3,6 +3,7 @@
    ========================================================= */
 
 :root {
+  color-scheme: light;
   /* Google Material Typography */
   --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -84,6 +85,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg-primary: #0f141c;
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
@@ -1519,6 +1521,52 @@ strong, b {
   padding-top: 1rem;
   margin-top: 0.25rem;
 }
+
+/* =========================================================
+   MODERN DATE PICKER & CALENDAR COMPONENT
+   ========================================================= */
+
+.modern-datepicker-field:hover {
+  border-color: var(--primary-500) !important;
+}
+
+.calendar-nav-btn {
+  background: var(--surface-hover);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: var(--primary-glow);
+  color: var(--primary-500);
+  border-color: var(--primary-500);
+}
+
+.datepicker-day-cell:hover:not(.selected) {
+  background: var(--surface-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.datepicker-selector-cell:hover:not(:disabled) {
+  background: var(--primary-glow) !important;
+  border-color: var(--primary-500) !important;
+  color: var(--primary-500) !important;
+}
+
+/* WebKit Native Datepicker Theme Alignment Fallback */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) hue-rotate(180deg);
+  cursor: pointer;
+}
+
 
 
 

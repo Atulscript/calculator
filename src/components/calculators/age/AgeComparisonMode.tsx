@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { compareAges } from '../../../utils/ageEngine';
 import { formatDateToInput, formatNumber, parseLocalDate } from '../../../utils/dateUtils';
 import { Users, Sparkles } from 'lucide-react';
+import { ModernDatePicker } from '../../common/ModernDatePicker';
 
 export const AgeComparisonMode: React.FC = () => {
   const todayStr = formatDateToInput(new Date());
@@ -51,17 +52,11 @@ export const AgeComparisonMode: React.FC = () => {
                 placeholder="Person 1 Name"
               />
             </div>
-            <div>
-              <label style={{ fontSize: '0.825rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '0.35rem' }}>
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                value={p1Dob}
-                onChange={e => setP1Dob(e.target.value)}
-                className="input-field"
-              />
-            </div>
+            <ModernDatePicker
+              label="Date of Birth"
+              value={p1Dob}
+              onChange={setP1Dob}
+            />
           </div>
         </div>
 
@@ -87,17 +82,11 @@ export const AgeComparisonMode: React.FC = () => {
                 placeholder="Person 2 Name"
               />
             </div>
-            <div>
-              <label style={{ fontSize: '0.825rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '0.35rem' }}>
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                value={p2Dob}
-                onChange={e => setP2Dob(e.target.value)}
-                className="input-field"
-              />
-            </div>
+            <ModernDatePicker
+              label="Date of Birth"
+              value={p2Dob}
+              onChange={setP2Dob}
+            />
           </div>
         </div>
       </div>

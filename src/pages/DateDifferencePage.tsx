@@ -5,6 +5,7 @@ import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { calculateDateDifference, DateDifferenceInput } from '../utils/dateDifferenceEngine';
 import { formatDateToInput } from '../utils/dateUtils';
 import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
+import { ModernDatePicker } from '../components/common/ModernDatePicker';
 import {
   CalendarRange,
   Share2,
@@ -124,67 +125,19 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
           <div className="m3-card-elevated" style={{ padding: '1.5rem', marginBottom: '1.75rem' }}>
             {/* Start Date */}
             <div style={{ marginBottom: '1.25rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Start Date
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setInput(prev => ({ ...prev, startDate: todayStr }))}
-                  style={{
-                    padding: '0.2rem 0.5rem',
-                    fontSize: '0.725rem',
-                    fontWeight: 700,
-                    borderRadius: '4px',
-                    background: 'var(--surface-subtle)',
-                    border: '1px solid var(--border-subtle)',
-                    color: 'var(--primary-600)',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Set to Today
-                </button>
-              </div>
-              <input
-                type="date"
+              <ModernDatePicker
+                label="Start Date"
                 value={input.startDate}
-                onChange={e => setInput({ ...input, startDate: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  border: '1.5px solid var(--border-subtle)',
-                  background: 'var(--surface-solid)',
-                  color: 'var(--text-primary)',
-                  outline: 'none'
-                }}
+                onChange={val => setInput(prev => ({ ...prev, startDate: val }))}
               />
             </div>
 
             {/* End Date */}
             <div style={{ marginBottom: '1.25rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  End Date
-                </label>
-              </div>
-              <input
-                type="date"
+              <ModernDatePicker
+                label="End Date"
                 value={input.endDate}
-                onChange={e => setInput({ ...input, endDate: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--md-sys-shape-md)',
-                  border: '1.5px solid var(--border-subtle)',
-                  background: 'var(--surface-solid)',
-                  color: 'var(--text-primary)',
-                  outline: 'none'
-                }}
+                onChange={val => setInput(prev => ({ ...prev, endDate: val }))}
               />
 
               {/* Quick Presets for End Date */}

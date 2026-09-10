@@ -10,6 +10,7 @@ import { AgeComparisonMode } from './AgeComparisonMode';
 import { ReverseDobMode } from './ReverseDobMode';
 import { ShareModal } from './ShareModal';
 import { CalculatorArticleView } from '../../common/CalculatorArticleView';
+import { ModernDatePicker } from '../../common/ModernDatePicker';
 import {
   Calendar,
   CalendarDays,
@@ -177,59 +178,27 @@ export const AgeCalculator: React.FC = () => {
             marginBottom: '1.25rem'
           }}>
             {/* DOB Picker */}
-            <div>
-              <label style={{
-                fontSize: '0.85rem',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                display: 'block',
-                marginBottom: '0.45rem'
-              }}>
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                value={birthDateStr}
-                onChange={e => setBirthDateStr(e.target.value)}
-                className="input-field"
-                style={{
-                  fontSize: '1.05rem',
-                  fontWeight: 600,
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: '1.5px solid var(--border-subtle)',
-                  background: 'var(--surface-subtle)'
-                }}
-              />
-            </div>
+            <ModernDatePicker
+              label="Date of Birth"
+              value={birthDateStr}
+              onChange={setBirthDateStr}
+              presets={[
+                { label: '18 yrs ago', yearsAgo: 18 },
+                { label: '21 yrs ago', yearsAgo: 21 },
+                { label: '25 yrs ago', yearsAgo: 25 },
+                { label: '30 yrs ago', yearsAgo: 30 },
+                { label: '40 yrs ago', yearsAgo: 40 },
+                { label: '50 yrs ago', yearsAgo: 50 }
+              ]}
+            />
 
             {/* Target Date Picker (in specific mode) or Indicator */}
             {mode === 'specific' ? (
-              <div>
-                <label style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  display: 'block',
-                  marginBottom: '0.45rem'
-                }}>
-                  Age as of Target Date
-                </label>
-                <input
-                  type="date"
-                  value={targetDateStr}
-                  onChange={e => setTargetDateStr(e.target.value)}
-                  className="input-field"
-                  style={{
-                    fontSize: '1.05rem',
-                    fontWeight: 600,
-                    padding: '0.75rem 1rem',
-                    borderRadius: '12px',
-                    border: '1.5px solid var(--border-subtle)',
-                    background: 'var(--surface-subtle)'
-                  }}
-                />
-              </div>
+              <ModernDatePicker
+                label="Age as of Target Date"
+                value={targetDateStr}
+                onChange={setTargetDateStr}
+              />
             ) : (
               <div>
                 <label style={{

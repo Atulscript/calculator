@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { findReverseDob } from '../../../utils/ageEngine';
 import { formatDateToInput, formatFriendlyDate, parseLocalDate } from '../../../utils/dateUtils';
 import { Sparkles } from 'lucide-react';
+import { ModernDatePicker } from '../../common/ModernDatePicker';
 
 export const ReverseDobMode: React.FC = () => {
   const todayStr = formatDateToInput(new Date());
@@ -71,17 +72,11 @@ export const ReverseDobMode: React.FC = () => {
             />
           </div>
 
-          <div>
-            <label style={{ fontSize: '0.825rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '0.35rem' }}>
-              As of Reference Date
-            </label>
-            <input
-              type="date"
-              value={asOfDate}
-              onChange={e => setAsOfDate(e.target.value)}
-              className="input-field"
-            />
-          </div>
+          <ModernDatePicker
+            label="As of Reference Date"
+            value={asOfDate}
+            onChange={setAsOfDate}
+          />
         </div>
       </div>
 
