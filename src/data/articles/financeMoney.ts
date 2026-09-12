@@ -7,7 +7,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Simple Interest Calculator',
     subtitle: 'Calculate simple interest and the final balance, and see how it differs from compound interest over the same period.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     overview: [
       'Simple interest is charged only on the original principal. Nothing is added back, so the interest earned each year is identical — which makes it predictable, and almost always worse for a saver than compound interest.',
       'It still appears in car finance, some personal loans, short-term notes and most bond coupon payments.'
@@ -74,7 +74,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Tip Calculator',
     subtitle: 'Work out the tip and split a bill between any number of people, with uneven splits and rounding handled.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     overview: [
       'Tipping maths is simple until the bill has to be split unevenly, or the group wants a round number per person. This handles both.',
       'Tipping norms vary enormously by country, and applying one country\'s expectations in another is a common source of awkwardness.'
@@ -141,7 +141,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Discount Calculator',
     subtitle: 'Find the sale price and what you actually save, including stacked discounts and percentage-off-then-extra deals.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     overview: [
       'A single discount is easy. Stacked discounts are where retail maths gets misleading — "50% off then an extra 20% off" is not 70% off, and the difference is worth knowing at the till.'
     ],
@@ -202,7 +202,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'GST Calculator',
     subtitle: 'Add GST to a net price or strip it out of a gross one, with the tax amount shown separately.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     disclaimer: 'GST rates and slab structures are set by government and change. Verify the current rate for your goods or services category with the relevant tax authority before relying on a figure.',
     overview: [
       'Goods and Services Tax is a consumption tax added at the point of sale. The two calculations people need are opposite directions: adding tax to a net price, and extracting tax from a price that already includes it.',
@@ -263,7 +263,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'VAT Calculator',
     subtitle: 'Add VAT to a net figure or work backwards from a VAT-inclusive price, at any rate you enter.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     disclaimer: 'VAT rates and the categories they apply to are set by each country and change. Check the current rate and category with your national tax authority.',
     overview: [
       'Value Added Tax works the same way as GST — added at the point of sale, and awkward to extract from a total once included.',
@@ -324,7 +324,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Capital Gains Tax Calculator',
     subtitle: 'Estimate tax on a sale, with short-term and long-term rates applied separately and losses offset against gains.',
     readTimeMinutes: 5,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     disclaimer: 'Capital gains rules, rates, allowances and holding-period definitions vary by country and change frequently. This is a general estimate, not tax advice. Confirm with your tax authority or an accountant.',
     overview: [
       'Capital gains tax applies to the profit on a sale, not the sale price. The single biggest factor in most systems is how long you held the asset — short-term gains are typically taxed as ordinary income, long-term gains at lower preferential rates.',
@@ -395,7 +395,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Sales Commission Calculator',
     subtitle: 'Work out commission on flat, tiered or split rates, and total earnings once base salary is included.',
     readTimeMinutes: 3,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     overview: [
       'Commission structures range from a single percentage to tiered schedules that pay more once a threshold is passed. Tiered plans are where manual calculation usually goes wrong, because higher rates apply only to the portion above each threshold.'
     ],
@@ -447,7 +447,7 @@ export const FINANCE_MONEY_ARTICLES: Record<string, CalculatorArticle> = {
     title: 'Margin & Markup Calculator',
     subtitle: 'Calculate margin, markup, profit and selling price from any two values. Margin and markup are not the same number.',
     readTimeMinutes: 4,
-    author: { name: 'Calculator360 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
+    author: { name: 'Calculator11 Editorial Team', role: 'Personal Finance Desk', lastUpdated: 'September 2026' },
     overview: [
       'Margin and markup describe the same profit from different angles, and confusing them is one of the most expensive mistakes in small-business pricing. A 50% markup is a 33.3% margin — a business pricing for "50% profit" using markup is earning a third less than it thinks.'
     ],

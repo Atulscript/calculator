@@ -21,7 +21,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error in Calculator360 component:', error, errorInfo);
+    console.error('Uncaught error in Calculator11 component:', error, errorInfo);
   }
 
   private handleReset = () => {

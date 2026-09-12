@@ -1,8 +1,8 @@
 import { CalculatorArticle } from '../../types/article';
 
-const CONV = { name: 'Calculator360 Editorial Team', role: 'Education & Mathematics Desk', lastUpdated: 'September 2026' };
-const BUILD = { name: 'Calculator360 Editorial Team', role: 'Construction & DIY Desk', lastUpdated: 'September 2026' };
-const FOOD = { name: 'Calculator360 Editorial Team', role: 'Food & Kitchen Desk', lastUpdated: 'September 2026' };
+const CONV = { name: 'Calculator11 Editorial Team', role: 'Education & Mathematics Desk', lastUpdated: 'September 2026' };
+const BUILD = { name: 'Calculator11 Editorial Team', role: 'Construction & DIY Desk', lastUpdated: 'September 2026' };
+const FOOD = { name: 'Calculator11 Editorial Team', role: 'Food & Kitchen Desk', lastUpdated: 'September 2026' };
 
 const MATERIAL_DISC = 'Coverage rates vary by product, surface and application method. Confirm figures with the manufacturer and buy from a single batch where colour matching matters.';
 

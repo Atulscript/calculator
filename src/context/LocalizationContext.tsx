@@ -39,6 +39,9 @@ interface LocalizationContextType {
 
 const LocalizationContext = createContext<LocalizationContextType | undefined>(undefined);
 
+// These keep the pre-rename prefix on purpose. They are localStorage keys, never
+// shown to anyone, and renaming them would silently discard the saved language
+// and currency of every returning visitor for no visible gain.
 const STORAGE_LANG_KEY = 'calc360_language';
 const STORAGE_CURR_KEY = 'calc360_currency';
 const STORAGE_CURR_MODE_KEY = 'calc360_currency_mode'; // 'auto' | 'manual'

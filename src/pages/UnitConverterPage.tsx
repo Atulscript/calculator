@@ -74,7 +74,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
   const toDef = currentCategoryData.units.find(u => u.id === toUnit) || currentCategoryData.units[1];
 
   const handleCopy = () => {
-    const text = `${inputValue} ${fromDef.symbol} = ${conversion.formatted} ${toDef.symbol} (${fromDef.name} to ${toDef.name})\nCalculated via Calculator360.com`;
+    const text = `${inputValue} ${fromDef.symbol} = ${conversion.formatted} ${toDef.symbol} (${fromDef.name} to ${toDef.name})\nCalculated via Calculator11.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -84,7 +84,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Unit Conversion - Calculator360',
+          title: 'Unit Conversion - Calculator11',
           text: `${inputValue} ${fromDef.symbol} = ${conversion.formatted} ${toDef.symbol}`,
           url: window.location.href
         });

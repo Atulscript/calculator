@@ -9,7 +9,7 @@ export const FINANCE_EXTRA_ARTICLES: Record<string, CalculatorArticle> = {
       'Compare your current mortgage against a new rate, and find how many months it takes for the savings to cover the cost of refinancing.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -143,7 +143,7 @@ export const FINANCE_EXTRA_ARTICLES: Record<string, CalculatorArticle> = {
       'Find the monthly amount needed to hit a savings target by a set date, or see what your current contributions will grow into.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -251,7 +251,7 @@ export const FINANCE_EXTRA_ARTICLES: Record<string, CalculatorArticle> = {
       'Estimate income tax, see which band each part of your income falls into, and find your effective rate as against your marginal rate.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },

@@ -726,7 +726,7 @@ export const FinanceToolsPage: React.FC<FinanceToolsPageProps> = ({ slug, onNavi
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
               <button
                 type="button"
-                onClick={() => handleCopy(`Calculation results from Calculator360: ${calcMeta.title}`)}
+                onClick={() => handleCopy(`Calculation results from Calculator11: ${calcMeta.title}`)}
                 className="btn-secondary"
                 style={{ padding: '0.5rem 1rem', fontSize: '0.825rem' }}
               >

@@ -65,7 +65,7 @@ export const MortgageCalculatorPage: React.FC<MortgageCalculatorPageProps> = ({ 
   };
 
   const handleCopy = () => {
-    const text = `Mortgage Calculation Summary:\nHome Price: ${currentCurrency.symbol}${input.homePrice.toLocaleString()}\nDown Payment: ${currentCurrency.symbol}${input.downPayment.toLocaleString()} (${input.downPaymentPercent}%)\nLoan Amount: ${currentCurrency.symbol}${result.loanAmount.toLocaleString()}\nTotal Monthly Payment: ${currentCurrency.symbol}${result.totalMonthlyPayment.toLocaleString()}\n- Principal & Interest: ${currentCurrency.symbol}${result.monthlyPrincipalInterest.toLocaleString()}\n- Property Taxes: ${currentCurrency.symbol}${result.monthlyPropertyTax.toLocaleString()}\n- Home Insurance: ${currentCurrency.symbol}${result.monthlyHomeInsurance.toLocaleString()}\n- PMI: ${currentCurrency.symbol}${result.monthlyPMI.toLocaleString()}\n- HOA: ${currentCurrency.symbol}${result.monthlyHOA.toLocaleString()}\nCalculated via Calculator360.com (${currency})`;
+    const text = `Mortgage Calculation Summary:\nHome Price: ${currentCurrency.symbol}${input.homePrice.toLocaleString()}\nDown Payment: ${currentCurrency.symbol}${input.downPayment.toLocaleString()} (${input.downPaymentPercent}%)\nLoan Amount: ${currentCurrency.symbol}${result.loanAmount.toLocaleString()}\nTotal Monthly Payment: ${currentCurrency.symbol}${result.totalMonthlyPayment.toLocaleString()}\n- Principal & Interest: ${currentCurrency.symbol}${result.monthlyPrincipalInterest.toLocaleString()}\n- Property Taxes: ${currentCurrency.symbol}${result.monthlyPropertyTax.toLocaleString()}\n- Home Insurance: ${currentCurrency.symbol}${result.monthlyHomeInsurance.toLocaleString()}\n- PMI: ${currentCurrency.symbol}${result.monthlyPMI.toLocaleString()}\n- HOA: ${currentCurrency.symbol}${result.monthlyHOA.toLocaleString()}\nCalculated via Calculator11.com (${currency})`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -74,7 +74,7 @@ export const MortgageCalculatorPage: React.FC<MortgageCalculatorPageProps> = ({ 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Mortgage Calculation - Calculator360',
+        title: 'Mortgage Calculation - Calculator11',
         text: `Estimated monthly mortgage on ${currentCurrency.symbol}${input.homePrice.toLocaleString()} home: ${currentCurrency.symbol}${result.totalMonthlyPayment.toLocaleString()}/mo.`,
         url: window.location.href
       }).catch(() => {});

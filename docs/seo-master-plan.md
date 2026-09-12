@@ -1,4 +1,4 @@
-# Calculator360 — Master SEO Plan
+# Calculator11 — Master SEO Plan
 
 **Status:** Content complete — 150/150 articles, 150/150 metadata
 **Scope:** 150 calculators + homepage + 6 informational pages + 8 proposed category hubs
@@ -45,7 +45,7 @@ targets. The plan below deliberately sequences hubs and depth over volume. See �
 
 ### Open item requiring a human answer
 
-Articles carry `author: "Calculator360 Editorial Team"` and
+Articles carry `author: "Calculator11 Editorial Team"` and
 `reviewedBy: "Subject Matter Verification Desk"`. Organisation-level authorship is legitimate.
 "Verification Desk" asserts a review process. **If no such review actually happens, this must be
 softened** — an unsupportable E-E-A-T claim is worse than no claim. Flagged, not changed.
@@ -469,7 +469,7 @@ targets are verified to produce matching canonical, sitemap and robots URLs.
 ### Migration checklist
 
 1. Point DNS at the VPS and issue certificates for the apex and `www`.
-2. `npm run build:vps`, deploy `dist/` to `/var/www/calculator360`.
+2. `npm run build:vps`, deploy `dist/` to `/var/www/calculator11`.
 3. Install `deploy/nginx.conf`, run `sudo nginx -t`, reload.
 4. Verify the four 301s return `301` and land on the right target.
 5. Add the new property in Search Console and submit
@@ -1193,11 +1193,11 @@ Absorb each redirected page's query targets as an H2 on the destination:
 
 | URL | Schema | Title · Meta |
 |---|---|---|
-| `/about/` | AboutPage | **About Calculator360**<br>`Who builds these calculators, how the formulas are chosen and verified, and why everything runs in your browser rather than on a server.` |
-| `/contact/` | ContactPage | **Contact Calculator360**<br>`Report an error in a calculation, suggest a tool or ask a question. Corrections are the fastest way to improve the site.` |
-| `/privacy/` | WebPage | **Privacy Policy**<br>`What Calculator360 does and does not collect. Calculations run locally in your browser and the values you enter are never transmitted.` |
-| `/terms/` | WebPage | **Terms of Service**<br>`The terms covering use of Calculator360's calculators and content, including limits on reliance for financial or medical decisions.` |
-| `/disclaimer/` | WebPage | **Disclaimer**<br>`Calculator360's tools provide estimates for general information. They are not financial, medical, legal or engineering advice.` |
+| `/about/` | AboutPage | **About Calculator11**<br>`Who builds these calculators, how the formulas are chosen and verified, and why everything runs in your browser rather than on a server.` |
+| `/contact/` | ContactPage | **Contact Calculator11**<br>`Report an error in a calculation, suggest a tool or ask a question. Corrections are the fastest way to improve the site.` |
+| `/privacy/` | WebPage | **Privacy Policy**<br>`What Calculator11 does and does not collect. Calculations run locally in your browser and the values you enter are never transmitted.` |
+| `/terms/` | WebPage | **Terms of Service**<br>`The terms covering use of Calculator11's calculators and content, including limits on reliance for financial or medical decisions.` |
+| `/disclaimer/` | WebPage | **Disclaimer**<br>`Calculator11's tools provide estimates for general information. They are not financial, medical, legal or engineering advice.` |
 
 > The About page carries real E-E-A-T weight and is currently generic. It should state plainly: which
 > published standard each health calculator implements, that calculations are client-side, how

@@ -24,7 +24,7 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
   const [copied, setCopied] = useState(false);
 
   const handleCopySummary = () => {
-    const text = `Chronological Age: ${exactAge.years} Years, ${exactAge.months} Months, ${exactAge.days} Days (${totals.totalDays.toLocaleString()} days lived)\nBorn on a ${dayOfWeekBorn}${isLeapYearBorn ? ' (Leap Year)' : ''}\nCalculated via Calculator360.com`;
+    const text = `Chronological Age: ${exactAge.years} Years, ${exactAge.months} Months, ${exactAge.days} Days (${totals.totalDays.toLocaleString()} days lived)\nBorn on a ${dayOfWeekBorn}${isLeapYearBorn ? ' (Leap Year)' : ''}\nCalculated via Calculator11.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

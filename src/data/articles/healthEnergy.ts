@@ -16,7 +16,7 @@ export const HEALTH_ENERGY_ARTICLES: Record<string, CalculatorArticle> = {
       'Calculate the calories your body burns at complete rest, using the Mifflin-St Jeor equation preferred in clinical practice.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -140,7 +140,7 @@ export const HEALTH_ENERGY_ARTICLES: Record<string, CalculatorArticle> = {
       'Find the calories you burn across a full day including activity. This is your maintenance level — the number every diet target is built from.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -279,7 +279,7 @@ export const HEALTH_ENERGY_ARTICLES: Record<string, CalculatorArticle> = {
       'Estimate body fat from tape measurements using the US Navy circumference method — no calipers or scales required.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -423,7 +423,7 @@ export const HEALTH_ENERGY_ARTICLES: Record<string, CalculatorArticle> = {
       'Turn a calorie target into daily protein, carbohydrate and fat in grams, with splits for fat loss, maintenance or muscle gain.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -564,7 +564,7 @@ export const HEALTH_ENERGY_ARTICLES: Record<string, CalculatorArticle> = {
       'Find your daily protein target from body weight and training load, with the research ranges shown rather than one arbitrary number.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },

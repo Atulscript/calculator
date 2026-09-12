@@ -13,7 +13,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Calculate semester and cumulative GPA on a 4.0 scale, with credit hours weighted and AP or honours courses handled.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Education & Mathematics Desk',
       lastUpdated: 'September 2026'
     },
@@ -125,7 +125,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Add, subtract, multiply and divide fractions and mixed numbers, with every result simplified and the steps shown.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Education & Mathematics Desk',
       lastUpdated: 'September 2026'
     },
@@ -230,7 +230,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Measure square footage for rooms of any shape, add a waste allowance, and get the material quantity to actually order.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Construction & DIY Desk',
       lastUpdated: 'September 2026'
     },
@@ -341,7 +341,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Work out cubic yards or metres of concrete for slabs, footings and columns, and how many bags that translates to.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Construction & DIY Desk',
       lastUpdated: 'September 2026'
     },
@@ -449,7 +449,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Work out real fuel economy from your odometer and fill-up, in MPG (US or UK) or litres per 100 km.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Automotive Desk',
       lastUpdated: 'September 2026'
     },
@@ -552,7 +552,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Total a week of clock-in and clock-out times, deduct breaks, and split regular hours from overtime.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -660,7 +660,7 @@ export const PRACTICAL_ARTICLES: Record<string, CalculatorArticle> = {
       'Convert between Celsius, Fahrenheit and Kelvin, with the conversion formula shown alongside the answer.',
     readTimeMinutes: 3,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Education & Mathematics Desk',
       lastUpdated: 'September 2026'
     },

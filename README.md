@@ -1,8 +1,8 @@
-# Calculator360
+# Calculator11
 
 > **All-Around Online Calculators for Everyday Life, Health, Finance, & Mathematics**
 
-Calculator360 is a fast, responsive, and privacy-first web application designed with Google Material Design 3 principles. It provides verified computational tools spanning multiple domains with zero external tracking, client-side execution, and full mobile app-like experiences.
+Calculator11 is a fast, responsive, and privacy-first web application designed with Google Material Design 3 principles. It provides verified computational tools spanning multiple domains with zero external tracking, client-side execution, and full mobile app-like experiences.
 
 ---
 

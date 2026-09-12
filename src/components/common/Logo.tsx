@@ -19,7 +19,7 @@ export const Logo: React.FC<LogoProps> = ({
       iconSize: 28,
       fontSize: '1.05rem',
       badgeFontSize: '0.825rem',
-      badgePadding: '0.12rem 0.4rem',
+      badgePadding: '0.12rem 0.46rem',
       subtitleSize: '0.65rem',
       gap: '0.5rem'
     },
@@ -27,7 +27,7 @@ export const Logo: React.FC<LogoProps> = ({
       iconSize: 36,
       fontSize: '1.3rem',
       badgeFontSize: '0.95rem',
-      badgePadding: '0.15rem 0.45rem',
+      badgePadding: '0.15rem 0.52rem',
       subtitleSize: '0.72rem',
       gap: '0.65rem'
     },
@@ -35,7 +35,7 @@ export const Logo: React.FC<LogoProps> = ({
       iconSize: 44,
       fontSize: '1.65rem',
       badgeFontSize: '1.15rem',
-      badgePadding: '0.2rem 0.55rem',
+      badgePadding: '0.2rem 0.62rem',
       subtitleSize: '0.8rem',
       gap: '0.85rem'
     }
@@ -44,7 +44,7 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`calculator360-logo ${className}`}
+      className={`calculator11-logo ${className}`}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -54,10 +54,11 @@ export const Logo: React.FC<LogoProps> = ({
         textDecoration: 'none'
       }}
       role={onClick ? 'button' : undefined}
-      aria-label="Calculator360"
+      aria-label="Calculator11"
     >
       {/* Precision Geometric Emblem (Pure SVG - No raster images) */}
       <div
+        className="logo-emblem"
         style={{
           width: `${config.iconSize}px`,
           height: `${config.iconSize}px`,
@@ -78,7 +79,7 @@ export const Logo: React.FC<LogoProps> = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Outer 360° Orbital Compass Arc */}
+          {/* Precision ring */}
           <circle
             cx="12"
             cy="12"
@@ -86,7 +87,6 @@ export const Logo: React.FC<LogoProps> = ({
             stroke="#ffffff"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeDasharray="45 15"
             opacity="0.95"
           />
           {/* Internal Minimal Calculation Operators (+ & =) */}
@@ -103,6 +103,7 @@ export const Logo: React.FC<LogoProps> = ({
       <div className="logo-wordmark" style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', whiteSpace: 'nowrap' }}>
           <span
+            className="logo-brand-name"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: config.fontSize,
@@ -114,14 +115,14 @@ export const Logo: React.FC<LogoProps> = ({
             Calculator
           </span>
 
-          {/* 360 High-Contrast Material Badge with 360° Degree Mark */}
+          {/* High-contrast Material badge carrying the numeral */}
           <span
-            className="logo-degree-badge"
+            className="logo-brand-badge"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: config.badgeFontSize,
               fontWeight: 800,
-              letterSpacing: '-0.02em',
+              letterSpacing: '0.015em',
               background: 'var(--md-sys-color-primary)',
               color: 'var(--md-sys-color-on-primary)',
               padding: config.badgePadding,
@@ -132,18 +133,7 @@ export const Logo: React.FC<LogoProps> = ({
               marginLeft: '0.15rem'
             }}
           >
-            360
-            <span
-              style={{
-                fontSize: '0.75em',
-                fontWeight: 900,
-                marginLeft: '1px',
-                transform: 'translateY(-2px)',
-                display: 'inline-block'
-              }}
-            >
-              °
-            </span>
+            11
           </span>
         </div>
 

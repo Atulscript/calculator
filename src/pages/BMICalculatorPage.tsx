@@ -36,7 +36,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
   const result = useMemo(() => calculateBMI(input), [input]);
 
   const handleCopy = () => {
-    const text = `BMI: ${result.bmi} (${result.categoryLabel})\nHealthy Weight: ${result.idealWeightMinKg} - ${result.idealWeightMaxKg} kg\nCalculated via Calculator360.com`;
+    const text = `BMI: ${result.bmi} (${result.categoryLabel})\nHealthy Weight: ${result.idealWeightMinKg} - ${result.idealWeightMaxKg} kg\nCalculated via Calculator11.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -45,8 +45,8 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'My BMI Result - Calculator360',
-        text: `My BMI is ${result.bmi} (${result.categoryLabel}). Check yours at Calculator360!`,
+        title: 'My BMI Result - Calculator11',
+        text: `My BMI is ${result.bmi} (${result.categoryLabel}). Check yours at Calculator11!`,
         url: window.location.href
       }).catch(() => {});
     } else {

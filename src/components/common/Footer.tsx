@@ -202,7 +202,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) 
         fontSize: '0.825rem',
         color: 'var(--text-muted)'
       }}>
-        <p>© 2026 Calculator360. {t('all_rights_reserved')}</p>
+        <p>© 2026 Calculator11. {t('all_rights_reserved')}</p>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <a

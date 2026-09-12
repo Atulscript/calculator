@@ -393,7 +393,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Finance'
   },
   'mortgage-calculator': {
-    title: 'Mortgage Calculator – Monthly Payment & PITI | Calculator360',
+    title: 'Mortgage Calculator – Monthly Payment & PITI | Calculator11',
     description: 'Calculate monthly mortgage payments with principal, interest, taxes, insurance & PMI. Compare 15 vs 30-year terms with complete amortization schedule.',
     keywords: [
       'mortgage calculator',
@@ -412,7 +412,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Finance'
   },
   'loan-calculator': {
-    title: 'Loan Calculator – Monthly Payment & Schedule | Calculator360',
+    title: 'Loan Calculator – Monthly Payment & Schedule | Calculator11',
     description: 'Calculate monthly loan payments, total interest, and principal amortization schedule. Test extra prepayment savings for home, auto, and personal loans.',
     keywords: [
       'loan calculator',
@@ -430,7 +430,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Finance'
   },
   'emi-calculator': {
-    title: 'Loan EMI Calculator – Monthly Payment & Schedule | Calc360',
+    title: 'Loan EMI Calculator – Monthly Payment & Schedule | Calc11',
     description: 'Free loan EMI calculator using the reducing-balance method. View month-by-month principal vs interest breakdown and calculate interest saved on prepayments.',
     keywords: [
       'emi calculator',
@@ -466,7 +466,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Finance'
   },
   'compound-interest-calculator': {
-    title: 'Compound Interest Calculator – Growth & Balance | Calc360',
+    title: 'Compound Interest Calculator – Growth & Balance | Calc11',
     description: 'Calculate compound interest growth with initial principal and monthly deposits. Compare daily, monthly, and annual compounding frequencies.',
     keywords: [
       'compound interest calculator',
@@ -484,7 +484,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Finance'
   },
   'bmi-calculator': {
-    title: 'BMI Calculator – Body Mass Index & Healthy Weight | Calc360',
+    title: 'BMI Calculator – Body Mass Index & Healthy Weight | Calc11',
     description: 'Check your Body Mass Index (BMI) in kg/cm or lbs/in. View official WHO healthy weight categories, prime index, and personalized target weight ranges.',
     keywords: [
       'bmi calculator',
@@ -502,7 +502,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Health'
   },
   'calorie-calculator': {
-    title: 'Calorie Calculator – Daily BMR, TDEE & Targets | Calc360',
+    title: 'Calorie Calculator – Daily BMR, TDEE & Targets | Calc11',
     description: 'Calculate your Daily Energy Expenditure (TDEE) and BMR with Mifflin-St Jeor formula. Get custom calorie and macro targets for fat loss or muscle gain.',
     keywords: [
       'calorie calculator',
@@ -521,7 +521,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Health'
   },
   'age-calculator': {
-    title: 'Age Calculator – Exact Chronological Age & DOB | Calc360',
+    title: 'Age Calculator – Exact Chronological Age & DOB | Calc11',
     description: 'Calculate your exact chronological age in years, months, and days from date of birth. Check statutory cut-off dates and birthday countdowns instantly.',
     keywords: [
       'age calculator',
@@ -539,7 +539,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Everyday'
   },
   'date-calculator': {
-    title: 'Date Calculator – Days Between Dates & Work Days | Calc360',
+    title: 'Date Calculator – Days Between Dates & Work Days | Calc11',
     description: 'Calculate exact calendar days, business working days, weeks, and months between any two dates. Plan notice periods, lease durations, and deadlines.',
     keywords: [
       'date calculator',
@@ -556,7 +556,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Everyday'
   },
   'date-difference-calculator': {
-    title: 'Date Difference Calculator – Days Between Dates | Calc360',
+    title: 'Date Difference Calculator – Days Between Dates | Calc11',
     description: 'Calculate exact calendar days, business working days, weeks, and months between any two dates. Plan notice periods, lease durations, and deadlines.',
     keywords: [
       'date difference calculator',
@@ -588,7 +588,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Math'
   },
   'scientific-calculator': {
-    title: 'Scientific Calculator – Free Math & Trig Online | Calc360',
+    title: 'Scientific Calculator – Free Math & Trig Online | Calc11',
     description: 'Free online scientific calculator with trigonometric functions (sin, cos, tan), logarithms, square roots, powers, parentheses, and radian/degree modes.',
     keywords: [
       'scientific calculator',
@@ -606,7 +606,7 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
     category: 'Math'
   },
   'unit-converter': {
-    title: 'Unit Converter – Metric & Imperial Conversion | Calc360',
+    title: 'Unit Converter – Metric & Imperial Conversion | Calc11',
     description: 'Instant unit converter for metric and imperial units: length (cm, inches, feet), mass (kg, lbs), temperature (C, F), speed, area, and digital data.',
     keywords: [
       'unit converter',
@@ -626,50 +626,50 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
   },
   // Core Platform & AdSense Compliance Pages
   about: {
-    title: 'About Calculator360 – Mission & Editorial Standards',
-    description: 'Learn about Calculator360: our editorial math accuracy standards, client-side zero-knowledge architecture, and suite of 150+ free online calculators.',
-    keywords: ['about calculator360', 'online calculators', 'calculator accuracy', 'private calculators', 'financial tools'],
+    title: 'About Calculator11 – Mission & Editorial Standards',
+    description: 'Learn about Calculator11: our editorial math accuracy standards, client-side zero-knowledge architecture, and suite of 150+ free online calculators.',
+    keywords: ['about calculator11', 'online calculators', 'calculator accuracy', 'private calculators', 'financial tools'],
     canonicalPath: '/about',
     schemaType: 'AboutPage'
   },
   contact: {
-    title: 'Contact & Feedback – Support & Inquiries | Calculator360',
-    description: 'Contact the Calculator360 engineering and editorial team. Request custom calculators, report formula discrepancies, or submit user feedback.',
-    keywords: ['contact calculator360', 'calculator feedback', 'report formula bug', 'calculator support'],
+    title: 'Contact & Feedback – Support & Inquiries | Calculator11',
+    description: 'Contact the Calculator11 engineering and editorial team. Request custom calculators, report formula discrepancies, or submit user feedback.',
+    keywords: ['contact calculator11', 'calculator feedback', 'report formula bug', 'calculator support'],
     canonicalPath: '/contact',
     schemaType: 'ContactPage'
   },
   privacy: {
-    title: 'Privacy Policy – 100% Client-Side Protection | Calc360',
-    description: 'Calculator360 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
+    title: 'Privacy Policy – 100% Client-Side Protection | Calc11',
+    description: 'Calculator11 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
     keywords: ['privacy policy', 'calculator privacy', 'gdpr compliant', 'client side privacy', 'no tracking calculator'],
     canonicalPath: '/privacy',
     schemaType: 'WebPage'
   },
   'privacy-policy': {
-    title: 'Privacy Policy – 100% Client-Side Protection | Calc360',
-    description: 'Calculator360 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
+    title: 'Privacy Policy – 100% Client-Side Protection | Calc11',
+    description: 'Calculator11 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
     keywords: ['privacy policy', 'calculator privacy', 'gdpr compliant'],
     canonicalPath: '/privacy',
     schemaType: 'WebPage'
   },
   terms: {
-    title: 'Terms of Service – Usage Guidelines | Calculator360',
-    description: 'Calculator360 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
+    title: 'Terms of Service – Usage Guidelines | Calculator11',
+    description: 'Calculator11 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
     keywords: ['terms of service', 'terms of use', 'calculator terms', 'disclaimer guidelines'],
     canonicalPath: '/terms',
     schemaType: 'WebPage'
   },
   'terms-of-service': {
-    title: 'Terms of Service – Usage Guidelines | Calculator360',
-    description: 'Calculator360 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
+    title: 'Terms of Service – Usage Guidelines | Calculator11',
+    description: 'Calculator11 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
     keywords: ['terms of service', 'terms of use'],
     canonicalPath: '/terms',
     schemaType: 'WebPage'
   },
   disclaimer: {
-    title: 'Legal, Financial & Medical Disclaimer | Calculator360',
-    description: 'Calculator360 Legal, Financial and Medical Disclaimer: Numerical estimations for educational use. Consult certified professionals for formal advice.',
+    title: 'Legal, Financial & Medical Disclaimer | Calculator11',
+    description: 'Calculator11 Legal, Financial and Medical Disclaimer: Numerical estimations for educational use. Consult certified professionals for formal advice.',
     keywords: ['disclaimer', 'financial disclaimer', 'medical disclaimer', 'legal notice'],
     canonicalPath: '/disclaimer',
     schemaType: 'WebPage'
@@ -680,13 +680,13 @@ export const FLAGSHIP_SEO: Record<string, PageSeoData> = {
  * Intelligent SEO title formatter ensuring 50-60 characters
  */
 function formatSeoTitle(rawTitle: string): string {
-  const brand = 'Calculator360';
+  const brand = 'Calculator11';
   const clean = rawTitle.trim();
 
   if (clean.length > 40) {
     if (`${clean} | ${brand}`.length <= 60) return `${clean} | ${brand}`;
-    if (`${clean} | Calc360`.length <= 60) return `${clean} | Calc360`;
-    return `${clean.slice(0, 48).trim()}… | Calc360`;
+    if (`${clean} | Calc11`.length <= 60) return `${clean} | Calc11`;
+    return `${clean.slice(0, 48).trim()}… | Calc11`;
   }
 
   const hasCalcOrConv = /calculator|converter|generator/i.test(clean);
@@ -790,9 +790,9 @@ export function getSeoForPath(path: string): PageSeoData {
 
   // Generic fallback
   return {
-    title: 'Calculator360 – Free Online Calculators for Everything',
+    title: 'Calculator11 – Free Online Calculators for Everything',
     description: '150+ free, fast, private online calculators for finance, health, math, conversion, and everyday life. 100% on-device calculations.',
-    keywords: ['free online calculator', 'calculator360', 'math calculators', 'finance calculators'],
+    keywords: ['free online calculator', 'calculator11', 'math calculators', 'finance calculators'],
     canonicalPath: `/${cleanPath}`
   };
 }
@@ -838,14 +838,14 @@ export function updateDocumentSeo(data: PageSeoData): void {
   setMeta('property', 'og:description', data.ogDescription || data.description);
   setMeta('property', 'og:url', fullCanonical);
   setMeta('property', 'og:type', 'website');
-  setMeta('property', 'og:site_name', 'Calculator360');
+  setMeta('property', 'og:site_name', 'Calculator11');
   setMeta('property', 'og:locale', 'en_US');
   const ogImageUrl = `${origin}/assets/og-image.jpg`;
   setMeta('property', 'og:image', ogImageUrl);
   setMeta('property', 'og:image:width', '1200');
   setMeta('property', 'og:image:height', '630');
   setMeta('property', 'og:image:type', 'image/jpeg');
-  setMeta('property', 'og:image:alt', 'Calculator360 – Precision Free Online Calculators');
+  setMeta('property', 'og:image:alt', 'Calculator11 – Precision Free Online Calculators');
 
   // 6. Twitter Card Meta Tags
   setMeta('name', 'twitter:card', 'summary_large_image');
@@ -898,7 +898,7 @@ export function updateDocumentSeo(data: PageSeoData): void {
   const organizationEntity = {
     '@type': 'Organization',
     '@id': `${origin}/#organization`,
-    'name': 'Calculator360',
+    'name': 'Calculator11',
     'url': origin,
     'logo': `${origin}/assets/icon-512.svg`,
     'description': 'Free client-side online calculator platform with 150+ verified calculation tools.',
@@ -914,7 +914,7 @@ export function updateDocumentSeo(data: PageSeoData): void {
     graphEntities.push({
       '@type': 'WebSite',
       '@id': `${origin}/#website`,
-      'name': 'Calculator360',
+      'name': 'Calculator11',
       'url': origin,
       'description': data.description,
       'keywords': keywordsStr,
@@ -1021,7 +1021,7 @@ export function updateDocumentSeo(data: PageSeoData): void {
       'inLanguage': 'en-US',
       'author': {
         '@type': 'Organization',
-        'name': article.author?.name || 'Calculator360 Editorial Team'
+        'name': article.author?.name || 'Calculator11 Editorial Team'
       },
       'publisher': organizationEntity,
       'datePublished': '2026-01-01',

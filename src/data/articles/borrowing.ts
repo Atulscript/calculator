@@ -15,7 +15,7 @@ export const BORROWING_ARTICLES: Record<string, CalculatorArticle> = {
       'See how long minimum payments really take, what they cost in interest, and how much sooner a fixed monthly amount clears the balance.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -155,7 +155,7 @@ export const BORROWING_ARTICLES: Record<string, CalculatorArticle> = {
       'Compare both payoff strategies across all your debts and see the real difference in time and interest — not just the theory.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -282,7 +282,7 @@ export const BORROWING_ARTICLES: Record<string, CalculatorArticle> = {
       'Find the price range lenders will realistically approve, based on your income, deposit and existing debts — not on what you would like to afford.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },

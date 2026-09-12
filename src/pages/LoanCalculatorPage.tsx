@@ -118,11 +118,11 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
   const handleCopy = () => {
     let text = '';
     if (activeMode === 'standard') {
-      text = `Loan Amount: ${currentCurrency.symbol}${result.principal.toLocaleString()}\nMonthly EMI: ${currentCurrency.symbol}${result.monthlyEmi.toLocaleString()}\nTotal Interest: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nTotal Payment: ${currentCurrency.symbol}${result.totalPayment.toLocaleString()}\nCalculated via Calculator360.com (${currency})`;
+      text = `Loan Amount: ${currentCurrency.symbol}${result.principal.toLocaleString()}\nMonthly EMI: ${currentCurrency.symbol}${result.monthlyEmi.toLocaleString()}\nTotal Interest: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nTotal Payment: ${currentCurrency.symbol}${result.totalPayment.toLocaleString()}\nCalculated via Calculator11.com (${currency})`;
     } else if (activeMode === 'prepayment') {
-      text = `Loan Prepayment Analysis:\nExtra Monthly: ${currentCurrency.symbol}${extraMonthly.toLocaleString()}\nTime Saved: ${prepaymentResult.yearsSaved} Years (${prepaymentResult.monthsSaved} Months)\nInterest Saved: ${currentCurrency.symbol}${prepaymentResult.interestSaved.toLocaleString()}\nCalculated via Calculator360.com (${currency})`;
+      text = `Loan Prepayment Analysis:\nExtra Monthly: ${currentCurrency.symbol}${extraMonthly.toLocaleString()}\nTime Saved: ${prepaymentResult.yearsSaved} Years (${prepaymentResult.monthsSaved} Months)\nInterest Saved: ${currentCurrency.symbol}${prepaymentResult.interestSaved.toLocaleString()}\nCalculated via Calculator11.com (${currency})`;
     } else {
-      text = `Loan Comparison:\nLoan A: EMI ${currentCurrency.symbol}${comparisonResult.loanA.monthlyEmi.toLocaleString()} | Interest ${currentCurrency.symbol}${comparisonResult.loanA.totalInterest.toLocaleString()}\nLoan B: EMI ${currentCurrency.symbol}${comparisonResult.loanB.monthlyEmi.toLocaleString()} | Interest ${currentCurrency.symbol}${comparisonResult.loanB.totalInterest.toLocaleString()}\nCheaper Option: Loan ${comparisonResult.cheaperLoan}\nCalculated via Calculator360.com (${currency})`;
+      text = `Loan Comparison:\nLoan A: EMI ${currentCurrency.symbol}${comparisonResult.loanA.monthlyEmi.toLocaleString()} | Interest ${currentCurrency.symbol}${comparisonResult.loanA.totalInterest.toLocaleString()}\nLoan B: EMI ${currentCurrency.symbol}${comparisonResult.loanB.monthlyEmi.toLocaleString()} | Interest ${currentCurrency.symbol}${comparisonResult.loanB.totalInterest.toLocaleString()}\nCheaper Option: Loan ${comparisonResult.cheaperLoan}\nCalculated via Calculator11.com (${currency})`;
     }
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -132,7 +132,7 @@ export const LoanCalculatorPage: React.FC<LoanCalculatorPageProps> = ({ onNaviga
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Loan EMI Calculation - Calculator360',
+        title: 'Loan EMI Calculation - Calculator11',
         text: `Estimated Monthly EMI: ${currentCurrency.symbol}${result.monthlyEmi.toLocaleString()} on a ${currentCurrency.symbol}${result.principal.toLocaleString()} loan at ${input.annualInterestRate}%.`,
         url: window.location.href
       }).catch(() => {});

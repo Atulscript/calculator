@@ -1648,10 +1648,29 @@ strong, b {
   }
 }
 
-/* Smallest phones: drop the badge so the wordmark itself still fits */
-@media (max-width: 380px) {
-  .mobile-app-header .logo-degree-badge {
-    display: none !important;
+/* The badge carries the distinguishing half of the name — "Calculator" on its
+   own is generic — so it stays visible at every width. The brand group has
+   flex-shrink: 0, so on the narrowest phones the mark is scaled down as a whole
+   to keep the header actions on-screen, rather than dropping the numeral. */
+@media (max-width: 360px) {
+  .mobile-app-header .logo-brand-name {
+    font-size: 1.05rem !important;
+  }
+
+  .mobile-app-header .logo-brand-badge {
+    font-size: 0.8rem !important;
+    padding: 0.1rem 0.36rem !important;
+  }
+
+  .mobile-app-header .logo-emblem {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+  }
+
+  .mobile-app-header .logo-emblem svg {
+    width: 19px;
+    height: 19px;
   }
 }
 

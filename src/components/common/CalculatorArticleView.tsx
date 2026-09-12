@@ -69,7 +69,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
           <div className="m3-meta-item">
             <UserCheck size={16} color="var(--md-sys-color-primary)" />
             <span>
-              Author: <strong>{article.author?.name || 'Calculator360 Editorial Team'}</strong>
+              Author: <strong>{article.author?.name || 'Calculator11 Editorial Team'}</strong>
               {article.author?.role && ` (${article.author.role})`}
             </span>
           </div>

@@ -12,7 +12,7 @@ export const FINANCE_CORE_ARTICLES: Record<string, CalculatorArticle> = {
       'Work out monthly car payments with trade-in, down payment and sales tax included, and see the total interest before you sign.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -135,7 +135,7 @@ export const FINANCE_CORE_ARTICLES: Record<string, CalculatorArticle> = {
       'Convert between hourly, weekly, monthly and annual pay, and see gross against take-home for any pay period.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -251,7 +251,7 @@ export const FINANCE_CORE_ARTICLES: Record<string, CalculatorArticle> = {
       'See what an amount from a past year is worth today, or what today\'s money will buy in future at a given inflation rate.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -366,7 +366,7 @@ export const FINANCE_CORE_ARTICLES: Record<string, CalculatorArticle> = {
       'Calculate return on investment as a percentage and annualised, so returns over different holding periods can be compared fairly.',
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },

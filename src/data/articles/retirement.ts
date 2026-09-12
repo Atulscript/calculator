@@ -15,7 +15,7 @@ export const RETIREMENT_ARTICLES: Record<string, CalculatorArticle> = {
       'Project what your savings will be worth at retirement, how long they will last, and what you would need to put aside each month to close any shortfall.',
     readTimeMinutes: 7,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },
@@ -187,7 +187,7 @@ export const RETIREMENT_ARTICLES: Record<string, CalculatorArticle> = {
       'Project your 401(k) balance at retirement, and see exactly how much of it comes from your employer rather than from you.',
     readTimeMinutes: 6,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Personal Finance Desk',
       lastUpdated: 'September 2026'
     },

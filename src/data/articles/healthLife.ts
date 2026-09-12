@@ -14,7 +14,7 @@ export const HEALTH_LIFE_ARTICLES: Record<string, CalculatorArticle> = {
       'Compare four established ideal-weight formulas side by side. They disagree with each other — seeing the spread is more useful than any single number.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -131,7 +131,7 @@ export const HEALTH_LIFE_ARTICLES: Record<string, CalculatorArticle> = {
       'Estimate your due date from your last period, conception date or IVF transfer, with current week and trimester shown.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -266,7 +266,7 @@ export const HEALTH_LIFE_ARTICLES: Record<string, CalculatorArticle> = {
       'Estimate your fertile window and likely ovulation date from your cycle length and the first day of your last period.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },
@@ -391,7 +391,7 @@ export const HEALTH_LIFE_ARTICLES: Record<string, CalculatorArticle> = {
       'Estimate your 1RM from any set you have completed, and get the full percentage table for programming your working sets.',
     readTimeMinutes: 5,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Health & Nutrition Desk',
       lastUpdated: 'September 2026'
     },

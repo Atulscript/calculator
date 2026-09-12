@@ -1,6 +1,6 @@
 {
-  "name": "Calculator360",
-  "short_name": "Calc360",
+  "name": "Calculator11",
+  "short_name": "Calc11",
   "description": "Fast, private, client-side calculators for finance, health, math, and daily life.",
   "start_url": ".",
   "display": "standalone",

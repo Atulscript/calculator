@@ -28,7 +28,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Financial Lending & Credit Desk",
       "lastUpdated": "September 2026"
     },
@@ -171,7 +171,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate your true monthly housing payment including principal, interest, local property taxes, homeowners insurance, and private mortgage insurance (PMI).",
     "readTimeMinutes": 6,
     "author": {
-      "name": "Calculator360 Real Estate & Lending Desk",
+      "name": "Calculator11 Real Estate & Lending Desk",
       "role": "Mortgage Underwriting & Housing Finance",
       "lastUpdated": "September 2026"
     },
@@ -285,8 +285,8 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
         "answer": "Escrow itself does not cost extra interest. Lenders simply hold 1/12th of your annual property taxes and homeowners insurance in an escrow account each month, then pay the bills on your behalf when due. Lenders typically maintain a 2-month cushion in your escrow account to guard against annual tax reassessments."
       },
       {
-        "question": "Does checking my payments on Calculator360 affect my credit score?",
-        "answer": "Not at all. Calculator360 is a 100% private, client-side calculator. We do not pull credit reports, ask for your Social Security number, or share your figures with lenders or mortgage brokers."
+        "question": "Does checking my payments on Calculator11 affect my credit score?",
+        "answer": "Not at all. Calculator11 is a 100% private, client-side calculator. We do not pull credit reports, ask for your Social Security number, or share your figures with lenders or mortgage brokers."
       },
       {
         "question": "How does an extra $100/month in principal impact my mortgage?",
@@ -304,7 +304,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate future returns, wealth accumulation, and the compounding power of disciplined monthly mutual fund & ETF investing.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Wealth & Investment Desk",
+      "name": "Calculator11 Wealth & Investment Desk",
       "role": "Personal Finance & Portfolio Strategy",
       "lastUpdated": "September 2026"
     },
@@ -424,7 +424,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate your monthly EMI for home, car or personal loans. See total interest, the principal vs interest split and a month-by-month schedule.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Financial Lending & Credit Desk",
       "lastUpdated": "September 2026"
     },
@@ -574,7 +574,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Wealth & Investment Research Desk",
       "lastUpdated": "September 2026"
     },
@@ -726,7 +726,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Preventive Health & Anthropometry Desk",
       "lastUpdated": "September 2026"
     },
@@ -866,7 +866,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Metabolic Science & Dietetics Desk",
       "lastUpdated": "September 2026"
     },
@@ -1009,7 +1009,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Calendrical Mathematics Desk",
       "lastUpdated": "September 2026"
     },
@@ -1127,7 +1127,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
     "readTimeMinutes": 4,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Calendrical Mathematics Desk",
       "lastUpdated": "September 2026"
     },
@@ -1252,7 +1252,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.",
     "readTimeMinutes": 4,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Calendrical Mathematics Desk",
       "lastUpdated": "September 2026"
     },
@@ -1377,7 +1377,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Calculate percent of a number, percentage increase, decrease, differences, and discounts step by step.",
     "readTimeMinutes": 5,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Mathematical Education Desk",
       "lastUpdated": "September 2026"
     },
@@ -1477,7 +1477,7 @@ const FLAGSHIP_ARTICLES: Record<string, CalculatorArticle> = {
     "subtitle": "Convert length, weight, volume, temperature, speed, area, and digital storage units accurately.",
     "readTimeMinutes": 4,
     "author": {
-      "name": "Calculator360 Editorial Team",
+      "name": "Calculator11 Editorial Team",
       "role": "Metrology & Scientific Standards Desk",
       "lastUpdated": "September 2026"
     },
@@ -1614,7 +1614,7 @@ export function getCalculatorArticle(
     subtitle: `Formulas, clear instructions, and practical guidance for ${calculatorName.toLowerCase()}.`,
     readTimeMinutes: 4,
     author: {
-      name: 'Calculator360 Editorial Team',
+      name: 'Calculator11 Editorial Team',
       role: 'Editorial Team',
       lastUpdated: 'September 2026'
     },
@@ -1665,7 +1665,7 @@ export function getCalculatorArticle(
       },
       {
         question: `Do I need an account or email to use this tool?`,
-        answer: `No. All 150+ calculators on Calculator360 are 100% free and open to everyone without creating an account or providing personal details.`
+        answer: `No. All 150+ calculators on Calculator11 are 100% free and open to everyone without creating an account or providing personal details.`
       },
       {
         question: `Is my personal or financial data kept private?`,

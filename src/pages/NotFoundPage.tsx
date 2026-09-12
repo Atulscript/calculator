@@ -9,9 +9,9 @@ interface NotFoundPageProps {
 
 export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate, onOpenSearch }) => {
   usePageSeo({
-    title: '404 – Page Not Found | Calculator360',
-    description: 'The calculator or page you requested could not be found. Search 150+ free online calculators on Calculator360.',
-    keywords: ['404', 'not found', 'calculator360', 'calculators search'],
+    title: '404 – Page Not Found | Calculator11',
+    description: 'The calculator or page you requested could not be found. Search 150+ free online calculators on Calculator11.',
+    keywords: ['404', 'not found', 'calculator11', 'calculators search'],
     canonicalPath: '/404'
   });
 

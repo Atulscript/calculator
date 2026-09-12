@@ -11,24 +11,24 @@ interface InfoPolicyPageProps {
 
 export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate }) => {
   const titles: Record<PolicyType, string> = {
-    about: 'About Calculator360 – Mission & Precision Standards',
-    contact: 'Contact & Feedback – Support & Inquiries | Calculator360',
-    privacy: 'Privacy Policy – 100% Client-Side Protection | Calculator360',
-    terms: 'Terms of Service – Usage Guidelines | Calculator360',
-    disclaimer: 'Legal, Financial & Medical Disclaimer | Calculator360'
+    about: 'About Calculator11 – Mission & Precision Standards',
+    contact: 'Contact & Feedback – Support & Inquiries | Calculator11',
+    privacy: 'Privacy Policy – 100% Client-Side Protection | Calculator11',
+    terms: 'Terms of Service – Usage Guidelines | Calculator11',
+    disclaimer: 'Legal, Financial & Medical Disclaimer | Calculator11'
   };
 
   const descriptions: Record<PolicyType, string> = {
-    about: 'Learn about Calculator360, our editorial accuracy standards, client-side zero-knowledge architecture, and suite of 150+ free online calculators.',
-    contact: 'Contact the Calculator360 engineering and editorial team. Request custom calculators, report formula discrepancies, or submit user feedback.',
-    privacy: 'Calculator360 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
-    terms: 'Calculator360 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
-    disclaimer: 'Calculator360 Legal, Financial and Medical Disclaimer: Numerical estimations for educational use. Consult certified professionals for formal advice.'
+    about: 'Learn about Calculator11, our editorial accuracy standards, client-side zero-knowledge architecture, and suite of 150+ free online calculators.',
+    contact: 'Contact the Calculator11 engineering and editorial team. Request custom calculators, report formula discrepancies, or submit user feedback.',
+    privacy: 'Calculator11 Privacy Policy: Zero data transmission, zero server tracking, and 100% local in-browser computation. Fully AdSense & GDPR compliant.',
+    terms: 'Calculator11 Terms of Service: Guidelines, educational disclaimers, and programmatic advertising policies for using our 150+ free web calculators.',
+    disclaimer: 'Calculator11 Legal, Financial and Medical Disclaimer: Numerical estimations for educational use. Consult certified professionals for formal advice.'
   };
 
   usePageSeo({
-    title: titles[type] || 'Information – Calculator360',
-    description: descriptions[type] || 'Calculator360 information and policies.',
+    title: titles[type] || 'Information – Calculator11',
+    description: descriptions[type] || 'Calculator11 information and policies.',
     canonicalPath: `/${type}`
   });
 
@@ -150,7 +150,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               {type === 'privacy' && 'Privacy Policy'}
               {type === 'terms' && 'Terms of Service'}
               {type === 'disclaimer' && 'Legal & Medical Disclaimer'}
-              {type === 'about' && 'About Calculator360'}
+              {type === 'about' && 'About Calculator11'}
               {type === 'contact' && 'Contact Us & Feedback'}
             </h1>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -168,7 +168,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
           {type === 'about' && (
             <div>
               <p>
-                <strong>Calculator360</strong> is an open web suite of over 150 high-precision online calculators engineered for speed, accuracy, and absolute user privacy. Whether evaluating mortgage refinance options, monitoring cardiovascular health indicators, calculating compound investment trajectories, or solving complex geometry, Calculator360 provides instant results directly in your browser.
+                <strong>Calculator11</strong> is an open web suite of over 150 high-precision online calculators engineered for speed, accuracy, and absolute user privacy. Whether evaluating mortgage refinance options, monitoring cardiovascular health indicators, calculating compound investment trajectories, or solving complex geometry, Calculator11 provides instant results directly in your browser.
               </p>
 
               <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '2rem', marginBottom: '0.6rem' }}>
@@ -234,7 +234,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               <p>
                 If a calculation looks wrong, telling us is the single most useful thing you can do. Send
                 the calculator name, the values you entered and the result you expected, and we will check
-                the formula against its source. Content is written and maintained by the Calculator360
+                the formula against its source. Content is written and maintained by the Calculator11
                 editorial team; where a page implements a published standard, that standard is named on
                 the page so you can verify it independently rather than take our word for it.
               </p>
@@ -285,14 +285,14 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               </p>
 
               <p>
-                At <strong>Calculator360</strong> (accessible from <a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information collected and recorded by Calculator360 and how we use it, with particular focus on our zero-server calculation model and compliance with third-party display advertising networks including Google AdSense.
+                At <strong>Calculator11</strong> (accessible from <a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information collected and recorded by Calculator11 and how we use it, with particular focus on our zero-server calculation model and compliance with third-party display advertising networks including Google AdSense.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 1. 100% Client-Side In-Browser Computation Guarantee
               </h2>
               <p>
-                Calculator360 is engineered as a client-side web application. All calculation algorithms—including mortgage loan amortization, salary deductions, age chronologies, BMI and body fat metrics, scientific arithmetic, and unit conversions—execute locally within your web browser using HTML5 and JavaScript.
+                Calculator11 is engineered as a client-side web application. All calculation algorithms—including mortgage loan amortization, salary deductions, age chronologies, BMI and body fat metrics, scientific arithmetic, and unit conversions—execute locally within your web browser using HTML5 and JavaScript.
               </p>
               <p style={{ marginTop: '0.5rem', fontWeight: 600, color: 'var(--accent-emerald)' }}>
                 ✓ We do NOT send, transmit, intercept, log, or store your numbers, salaries, loan terms, birth dates, or health metrics on our servers or databases.
@@ -302,14 +302,14 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 2. Log Files
               </h2>
               <p>
-                Calculator360 follows a standard procedure of using log files through our hosting and CDN infrastructure (e.g. Cloudflare / Vercel / GitHub Pages). The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamps, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement around the website, and gathering demographic information to ensure network security and optimal server load balancing.
+                Calculator11 follows a standard procedure of using log files through our hosting and CDN infrastructure (e.g. Cloudflare / Vercel / GitHub Pages). The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamps, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement around the website, and gathering demographic information to ensure network security and optimal server load balancing.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 3. Cookies and Web Beacons
               </h2>
               <p>
-                Like any other website, Calculator360 uses 'cookies' and browser local storage. These cookies are used to store information including visitors' preferences (such as Light or Dark theme mode and your chosen world currency), and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and device capabilities.
+                Like any other website, Calculator11 uses 'cookies' and browser local storage. These cookies are used to store information including visitors' preferences (such as Light or Dark theme mode and your chosen world currency), and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and device capabilities.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -343,7 +343,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 <li><strong>Google AdSense / Google Ad Manager:</strong> <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-500)' }}>https://policies.google.com/technologies/ads</a></li>
               </ul>
               <p>
-                These third-party ad servers or ad networks use technology in their respective advertisements and links that appear on Calculator360, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit. Note that Calculator360 has no access to or control over these cookies that are used by third-party advertisers.
+                These third-party ad servers or ad networks use technology in their respective advertisements and links that appear on Calculator11, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit. Note that Calculator11 has no access to or control over these cookies that are used by third-party advertisers.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -358,7 +358,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 <li>Request that a business that sells or shares a consumer's personal data, not sell or share the consumer's personal data.</li>
               </ul>
               <p>
-                Because Calculator360 does not collect, store, or sell user personal calculation data, we never monetize your inputs. If you make a request regarding any technical log data, we have one month to respond to you. Please contact us at <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator11.com</a>.
+                Because Calculator11 does not collect, store, or sell user personal calculation data, we never monetize your inputs. If you make a request regarding any technical log data, we have one month to respond to you. Please contact us at <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator11.com</a>.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -372,7 +372,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 8. Children's Online Privacy Protection (COPPA Compliance)
               </h2>
               <p>
-                Another part of our priority is adding protection for children while using the internet. Calculator360 does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.
+                Another part of our priority is adding protection for children while using the internet. Calculator11 does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -387,29 +387,29 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
           {type === 'terms' && (
             <div>
               <p style={{ marginBottom: '1.25rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                <strong>Effective Date:</strong> September 11, 2026 • <strong>Publisher:</strong> Calculator360 Platform
+                <strong>Effective Date:</strong> September 11, 2026 • <strong>Publisher:</strong> Calculator11 Platform
               </p>
 
               <p>
-                Welcome to Calculator360! By accessing and using our website (<a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>) and our suite of over 150 calculators, you accept and agree to be bound by these Terms of Service.
+                Welcome to Calculator11! By accessing and using our website (<a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>) and our suite of over 150 calculators, you accept and agree to be bound by these Terms of Service.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 1. Nature of Service & Educational Use
               </h2>
               <p>
-                Calculator360 provides free, interactive web calculators designed to assist users with everyday numerical estimations across finance, health, arithmetic, construction, and conversions. All calculations are provided strictly for informational and educational purposes. No output from this site constitutes certified financial underwriting, bank sanction, formal tax filing advice, legal opinion, structural engineering approval, or clinical medical diagnosis.
+                Calculator11 provides free, interactive web calculators designed to assist users with everyday numerical estimations across finance, health, arithmetic, construction, and conversions. All calculations are provided strictly for informational and educational purposes. No output from this site constitutes certified financial underwriting, bank sanction, formal tax filing advice, legal opinion, structural engineering approval, or clinical medical diagnosis.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 2. Advertising and Commercial Disclosures (Google AdSense Friendly)
               </h2>
               <p>
-                To provide free access to all calculators without requiring mandatory paid subscriptions or gated accounts, Calculator360 displays third-party programmatic advertisements (including Google AdSense, display banners, and sponsored placements).
+                To provide free access to all calculators without requiring mandatory paid subscriptions or gated accounts, Calculator11 displays third-party programmatic advertisements (including Google AdSense, display banners, and sponsored placements).
               </p>
               <ul style={{ paddingLeft: '1.25rem', margin: '0.65rem 0', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                 <li>
-                  Advertisements are automatically selected and served by third-party ad networks. Calculator360 does not explicitly endorse, guarantee, or underwrite any products, mortgage lenders, loan offerings, health supplements, or software advertised in these commercial banners.
+                  Advertisements are automatically selected and served by third-party ad networks. Calculator11 does not explicitly endorse, guarantee, or underwrite any products, mortgage lenders, loan offerings, health supplements, or software advertised in these commercial banners.
                 </li>
                 <li>
                   Our editorial calculation algorithms are completely independent of advertiser influence. Formulas adhere strictly to established mathematical and clinical standards.
@@ -423,7 +423,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 3. Acceptable Use Policy
               </h2>
               <p>
-                You agree to use Calculator360 only for lawful personal, professional, or educational purposes. You agree not to:
+                You agree to use Calculator11 only for lawful personal, professional, or educational purposes. You agree not to:
               </p>
               <ul style={{ paddingLeft: '1.25rem', margin: '0.65rem 0', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                 <li>Engage in automated scraping, bot crawling, or denial-of-service activities that degrade site availability for other users.</li>
@@ -435,14 +435,14 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 4. Intellectual Property Rights
               </h2>
               <p>
-                The Calculator360 logo, branding, custom UI components, responsive layout styling, documentation, and tailored algorithmic code are the intellectual property of Calculator360. Mathematical equations and universally recognized formulas (such as the Pythagorean theorem, standard compound interest, and BMI formulas) belong to the public domain.
+                The Calculator11 logo, branding, custom UI components, responsive layout styling, documentation, and tailored algorithmic code are the intellectual property of Calculator11. Mathematical equations and universally recognized formulas (such as the Pythagorean theorem, standard compound interest, and BMI formulas) belong to the public domain.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 5. Disclaimer of Warranties & Limitation of Liability
               </h2>
               <p>
-                Calculator360 is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, either express or implied. Under no circumstances shall Calculator360, its authors, or affiliates be held liable for any financial decisions, loan contracts, penalties, medical consequences, or missed calculations resulting from your use of this platform.
+                Calculator11 is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, either express or implied. Under no circumstances shall Calculator11, its authors, or affiliates be held liable for any financial decisions, loan contracts, penalties, medical consequences, or missed calculations resulting from your use of this platform.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -468,7 +468,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               </p>
               <ul style={{ paddingLeft: '1.25rem', margin: '0.65rem 0', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
                 <li>
-                  Calculator360 participates in digital display advertising programs, including <strong>Google AdSense</strong>, which provides compensation to fund ongoing development, server infrastructure, and mathematical research.
+                  Calculator11 participates in digital display advertising programs, including <strong>Google AdSense</strong>, which provides compensation to fund ongoing development, server infrastructure, and mathematical research.
                 </li>
                 <li>
                   The display of advertisements, sponsored links, or contextual banners on this site does not constitute an endorsement, recommendation, or warranty of the third-party goods or services advertised.
@@ -489,7 +489,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 3. Health, Diet & Medical Disclaimer
               </h2>
               <p>
-                Health calculators including Body Mass Index (BMI), Total Daily Energy Expenditure (TDEE), target heart rate zones, and pregnancy due dates are educational tools grounded in public statistical formulas (such as World Health Organization criteria and the Mifflin-St Jeor equation). These estimations do not consider individual medical conditions, prescription medications, body composition variations, or acute illnesses. <strong>Nothing on Calculator360 should be used as a substitute for professional medical advice, clinical diagnosis, or medical treatment.</strong> Always seek the advice of your physician with any questions regarding health conditions.
+                Health calculators including Body Mass Index (BMI), Total Daily Energy Expenditure (TDEE), target heart rate zones, and pregnancy due dates are educational tools grounded in public statistical formulas (such as World Health Organization criteria and the Mifflin-St Jeor equation). These estimations do not consider individual medical conditions, prescription medications, body composition variations, or acute illnesses. <strong>Nothing on Calculator11 should be used as a substitute for professional medical advice, clinical diagnosis, or medical treatment.</strong> Always seek the advice of your physician with any questions regarding health conditions.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -503,7 +503,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 5. Mathematical Accuracy & Error Reporting
               </h2>
               <p>
-                While our engineering team works diligently to verify algorithm integrity, Calculator360 makes no guarantee of 100% error-free operation across all browser combinations or extreme floating-point edge cases. If you discover a discrepancy, please alert our team at <a href="mailto:support@calculator11.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>support@calculator11.com</a>.
+                While our engineering team works diligently to verify algorithm integrity, Calculator11 makes no guarantee of 100% error-free operation across all browser combinations or extreme floating-point edge cases. If you discover a discrepancy, please alert our team at <a href="mailto:support@calculator11.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>support@calculator11.com</a>.
               </p>
             </div>
           )}

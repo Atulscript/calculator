@@ -74,7 +74,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               {type === 'privacy' && 'Privacy Policy'}
               {type === 'terms' && 'Terms of Service'}
               {type === 'disclaimer' && 'Legal & Medical Disclaimer'}
-              {type === 'about' && 'About Calculator360'}
+              {type === 'about' && 'About Calculator11'}
               {type === 'contact' && 'Contact Us & Feedback'}
             </h3>
           </div>
@@ -114,7 +114,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>1. 100% Client-Side Privacy Guarantee</h4>
               <p>
-                At Calculator360, every calculation executes locally inside your web browser using HTML5 and client-side JavaScript. We do not transmit, log, store, or sell any salaries, loan balances, birth dates, or health measurements you enter.
+                At Calculator11, every calculation executes locally inside your web browser using HTML5 and client-side JavaScript. We do not transmit, log, store, or sell any salaries, loan balances, birth dates, or health measurements you enter.
               </p>
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>2. Google AdSense & DoubleClick DART Cookies</h4>
@@ -139,7 +139,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>5. COPPA (Children's Privacy)</h4>
               <p>
-                Calculator360 is not directed to children under 13 and does not knowingly collect personal data from minors.
+                Calculator11 is not directed to children under 13 and does not knowingly collect personal data from minors.
               </p>
             </div>
           )}
@@ -157,7 +157,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>2. Display Advertising Disclosures (AdSense Compliant)</h4>
               <p>
-                To maintain free access, Calculator360 displays third-party programmatic advertisements (such as Google AdSense). Ads are clearly segregated from calculator calculation controls in accordance with Google Publisher Policies. Advertising content does not constitute endorsement by Calculator360.
+                To maintain free access, Calculator11 displays third-party programmatic advertisements (such as Google AdSense). Ads are clearly segregated from calculator calculation controls in accordance with Google Publisher Policies. Advertising content does not constitute endorsement by Calculator11.
               </p>
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>3. Acceptable Use</h4>
@@ -167,7 +167,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>4. Limitation of Liability</h4>
               <p>
-                Calculator360 is provided on an "AS IS" basis. The platform is not liable for financial, tax, or health decisions made based on estimations.
+                Calculator11 is provided on an "AS IS" basis. The platform is not liable for financial, tax, or health decisions made based on estimations.
               </p>
             </div>
           )}
@@ -180,7 +180,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>1. FTC Advertising Disclosure</h4>
               <p>
-                Calculator360 is funded through digital display advertising programs including <strong>Google AdSense</strong>. Third-party advertising partners serve commercial banners that help keep all tools 100% free. Advertising relationships have zero influence on our calculation models or formulas.
+                Calculator11 is funded through digital display advertising programs including <strong>Google AdSense</strong>. Third-party advertising partners serve commercial banners that help keep all tools 100% free. Advertising relationships have zero influence on our calculation models or formulas.
               </p>
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>2. Financial & Mortgage Disclaimer</h4>
@@ -203,16 +203,16 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
           {type === 'about' && (
             <div>
               <p style={{ marginBottom: '1rem' }}>
-                <strong>Calculator360 — Precision Mathematics for Everyday Life</strong>
+                <strong>Calculator11 — Precision Mathematics for Everyday Life</strong>
               </p>
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>1. Our Core Mission</h4>
               <p>
-                Calculator360 was built to replace bloated, ad-cluttered, and privacy-invasive calculator tools with high-speed, 100% private, client-side precision software. We offer over 150 verified calculators spanning personal finance, health biomarkers, construction estimations, mathematical geometry, and everyday life.
+                Calculator11 was built to replace bloated, ad-cluttered, and privacy-invasive calculator tools with high-speed, 100% private, client-side precision software. We offer over 150 verified calculators spanning personal finance, health biomarkers, construction estimations, mathematical geometry, and everyday life.
               </p>
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>2. Rigorous Verification & Editorial Integrity</h4>
               <p>
-                Every algorithm on Calculator360 is audited against peer-reviewed formulas and institutional benchmarks:
+                Every algorithm on Calculator11 is audited against peer-reviewed formulas and institutional benchmarks:
               </p>
               <ul style={{ paddingLeft: '1.25rem', marginTop: '0.4rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                 <li><strong>Financial Models:</strong> Standard amortization schedules, compound frequency compounding, and real APR physics.</li>
@@ -223,7 +223,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>3. Zero-Knowledge Architecture</h4>
               <p>
-                Unlike conventional financial platforms, Calculator360 never requires an account, email sign-up, or cloud synchronization. Your financial salaries, loan debt, birth dates, and weight metrics never leave your computer or phone.
+                Unlike conventional financial platforms, Calculator11 never requires an account, email sign-up, or cloud synchronization. Your financial salaries, loan debt, birth dates, and weight metrics never leave your computer or phone.
               </p>
             </div>
           )}

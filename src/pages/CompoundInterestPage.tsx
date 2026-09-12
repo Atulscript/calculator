@@ -41,7 +41,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
   const result = useMemo(() => calculateCompoundInterest(input), [input]);
 
   const handleCopy = () => {
-    const text = `Compound Interest Projection:\nInitial Principal: ${currentCurrency.symbol}${input.principal.toLocaleString()}\nFuture Value (${input.tenureYears} Years @ ${input.annualInterestRate}%): ${currentCurrency.symbol}${result.futureValue.toLocaleString()}\nTotal Interest Earned: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nCalculated via Calculator360.com (${currency})`;
+    const text = `Compound Interest Projection:\nInitial Principal: ${currentCurrency.symbol}${input.principal.toLocaleString()}\nFuture Value (${input.tenureYears} Years @ ${input.annualInterestRate}%): ${currentCurrency.symbol}${result.futureValue.toLocaleString()}\nTotal Interest Earned: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nCalculated via Calculator11.com (${currency})`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -51,7 +51,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Compound Interest Calculation - Calculator360',
+          title: 'Compound Interest Calculation - Calculator11',
           text: `Future Value: ${currentCurrency.symbol}${result.futureValue.toLocaleString()} in ${input.tenureYears} years.`,
           url: window.location.href
         });

@@ -42,7 +42,7 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
   const result = useMemo(() => calculateDateDifference(input), [input]);
 
   const handleCopy = () => {
-    const text = `Date Difference:\nFrom: ${input.startDate} to ${input.endDate}\nTotal Days: ${result.totalDays.toLocaleString()} days\nBreakdown: ${result.years} years, ${result.months} months, ${result.days} days\nBusiness Days: ${result.businessDays.toLocaleString()} days\nCalculated via Calculator360.com`;
+    const text = `Date Difference:\nFrom: ${input.startDate} to ${input.endDate}\nTotal Days: ${result.totalDays.toLocaleString()} days\nBreakdown: ${result.years} years, ${result.months} months, ${result.days} days\nBusiness Days: ${result.businessDays.toLocaleString()} days\nCalculated via Calculator11.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -52,7 +52,7 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Date Difference Calculation - Calculator360',
+          title: 'Date Difference Calculation - Calculator11',
           text: `Difference between ${input.startDate} and ${input.endDate}: ${result.totalDays} days (${result.years}y, ${result.months}m, ${result.days}d).`,
           url: window.location.href
         });

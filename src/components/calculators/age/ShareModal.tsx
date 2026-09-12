@@ -116,7 +116,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
                 <Calculator size={18} color="#fff" />
               </div>
               <span style={{ fontWeight: 800, letterSpacing: '-0.02em', fontSize: '1.1rem' }}>
-                Calculator360
+                Calculator11
               </span>
             </div>
 

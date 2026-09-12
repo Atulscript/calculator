@@ -48,7 +48,7 @@ export const SIPCalculatorPage: React.FC<SIPCalculatorPageProps> = ({ onNavigate
   }, [input, stepUpEnabled]);
 
   const handleCopy = () => {
-    const text = `SIP Investment Summary:\nMonthly Investment: ${currentCurrency.symbol}${input.monthlyInvestment.toLocaleString()}\nExpected Return: ${input.annualRate}% p.a.\nTime Horizon: ${input.tenureYears} Years\nTotal Invested: ${currentCurrency.symbol}${result.totalInvested.toLocaleString()}\nEstimated Returns: ${currentCurrency.symbol}${result.estimatedReturns.toLocaleString()}\nFuture Value: ${currentCurrency.symbol}${result.futureValue.toLocaleString()} (${result.wealthRatio}x growth)\nCalculated via Calculator360.com (${currency})`;
+    const text = `SIP Investment Summary:\nMonthly Investment: ${currentCurrency.symbol}${input.monthlyInvestment.toLocaleString()}\nExpected Return: ${input.annualRate}% p.a.\nTime Horizon: ${input.tenureYears} Years\nTotal Invested: ${currentCurrency.symbol}${result.totalInvested.toLocaleString()}\nEstimated Returns: ${currentCurrency.symbol}${result.estimatedReturns.toLocaleString()}\nFuture Value: ${currentCurrency.symbol}${result.futureValue.toLocaleString()} (${result.wealthRatio}x growth)\nCalculated via Calculator11.com (${currency})`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -57,7 +57,7 @@ export const SIPCalculatorPage: React.FC<SIPCalculatorPageProps> = ({ onNavigate
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'SIP Return Calculation - Calculator360',
+        title: 'SIP Return Calculation - Calculator11',
         text: `My SIP of ${currentCurrency.symbol}${input.monthlyInvestment.toLocaleString()}/mo grows to ${currentCurrency.symbol}${result.futureValue.toLocaleString()} in ${input.tenureYears} years!`,
         url: window.location.href
       }).catch(() => {});

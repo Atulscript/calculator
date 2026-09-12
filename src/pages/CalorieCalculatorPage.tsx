@@ -38,7 +38,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
   const activeGoal = result.targets[selectedGoalKey];
 
   const handleCopy = () => {
-    const text = `Daily Calorie & TDEE Target:\nMaintenance (TDEE): ${result.tdee.toLocaleString()} kcal/day\nBasal Metabolic Rate (BMR): ${result.bmr.toLocaleString()} kcal/day\nTarget for ${activeGoal.name}: ${activeGoal.calories.toLocaleString()} kcal/day\nMacros: ${activeGoal.macros.proteinGrams}g Protein, ${activeGoal.macros.carbGrams}g Carbs, ${activeGoal.macros.fatGrams}g Fat\nCalculated via Calculator360.com`;
+    const text = `Daily Calorie & TDEE Target:\nMaintenance (TDEE): ${result.tdee.toLocaleString()} kcal/day\nBasal Metabolic Rate (BMR): ${result.bmr.toLocaleString()} kcal/day\nTarget for ${activeGoal.name}: ${activeGoal.calories.toLocaleString()} kcal/day\nMacros: ${activeGoal.macros.proteinGrams}g Protein, ${activeGoal.macros.carbGrams}g Carbs, ${activeGoal.macros.fatGrams}g Fat\nCalculated via Calculator11.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -48,7 +48,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Calorie & TDEE Target - Calculator360',
+          title: 'Calorie & TDEE Target - Calculator11',
           text: `My TDEE is ${result.tdee} kcal. Target for ${activeGoal.name}: ${activeGoal.calories} kcal/day.`,
           url: window.location.href
         });

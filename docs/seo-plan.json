@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Calculator360 SEO plan and page specifications",
+    "name": "Calculator11 SEO plan and page specifications",
     "version": "1.0",
     "generated": "2026-09-11",
     "purpose": "Single source of truth for SEO, content and schema. Designed to be given to AI tools as context.",
@@ -12,7 +12,7 @@
     ]
   },
   "site": {
-    "brand": "Calculator360",
+    "brand": "Calculator11",
     "domain": "https://yourdomain.com",
     "current_url": "https://atulscript.github.io/calculator/",
     "stack": "React 18 + Vite; to add React Router + vite-react-ssg pre-rendering",
@@ -216,7 +216,7 @@
       {
         "@type": "Organization",
         "@id": "https://yourdomain.com/#organization",
-        "name": "Calculator360",
+        "name": "Calculator11",
         "url": "https://yourdomain.com/",
         "logo": {
           "@type": "ImageObject",
@@ -231,7 +231,7 @@
       {
         "@type": "WebSite",
         "@id": "https://yourdomain.com/#website",
-        "name": "Calculator360",
+        "name": "Calculator11",
         "alternateName": [
           "Calculator 360"
         ],
@@ -244,8 +244,8 @@
     ]
   },
   "prompt_templates": {
-    "write_calculator_page": "You are writing the landing page content for {{page.seo.h1}} on Calculator360 ({{page.seo.canonical}}). Follow site.audience, writing_rules and seo_rules exactly. Primary keyword: {{page.keywords.primary}}. Use these secondary keywords naturally: {{page.keywords.secondary}}. Answer these questions: {{page.keywords.long_tail}}. Unique angle: {{page.content.unique_angle}}. Use this H2 outline as a starting point, adjusting it if the topic needs: {{page.content.outline}}. Write FAQs for: {{page.content.faq_questions}}. Link to: {{page.content.related}}. Only describe features the live tool actually has; if unsure, list the features you assumed so a person can confirm them. Show your working for every number and list any number you could not verify. Output HTML using h2, h3, p, ul, ol and table only, starting with the intro paragraph (the H1 is added separately).",
-    "review_page": "Review this Calculator360 page draft against writing_rules and seo_rules. List: (1) any number that is wrong, with the correct calculation; (2) any claim the tool can't support; (3) any avoid_phrases found; (4) sentences that sound generic or padded, with rewrites; (5) missing items from writing_rules.must_include; (6) whether title, meta description and H1 match page.seo exactly.",
+    "write_calculator_page": "You are writing the landing page content for {{page.seo.h1}} on Calculator11 ({{page.seo.canonical}}). Follow site.audience, writing_rules and seo_rules exactly. Primary keyword: {{page.keywords.primary}}. Use these secondary keywords naturally: {{page.keywords.secondary}}. Answer these questions: {{page.keywords.long_tail}}. Unique angle: {{page.content.unique_angle}}. Use this H2 outline as a starting point, adjusting it if the topic needs: {{page.content.outline}}. Write FAQs for: {{page.content.faq_questions}}. Link to: {{page.content.related}}. Only describe features the live tool actually has; if unsure, list the features you assumed so a person can confirm them. Show your working for every number and list any number you could not verify. Output HTML using h2, h3, p, ul, ol and table only, starting with the intro paragraph (the H1 is added separately).",
+    "review_page": "Review this Calculator11 page draft against writing_rules and seo_rules. List: (1) any number that is wrong, with the correct calculation; (2) any claim the tool can't support; (3) any avoid_phrases found; (4) sentences that sound generic or padded, with rewrites; (5) missing items from writing_rules.must_include; (6) whether title, meta description and H1 match page.seo exactly.",
     "write_meta_variants": "Write 3 alternative title tags (max 60 characters) and 3 meta descriptions (120\u2013155 characters) for {{page.url}} targeting {{page.keywords.primary}}, following seo_rules. Count characters and show the count for each.",
     "fill_schema": "Take page.schema_jsonld, replace YYYY-MM-DD with the real publish and modified dates, replace the author @id with the real author's page, and if FAQs are on the page, make the FAQPage entries match the visible questions and answers word for word. Return valid JSON-LD only."
   },
@@ -260,7 +260,7 @@
         "target_date": "2026-10-19"
       },
       "seo": {
-        "title": "Calculator360: Free EMI, BMI, Age & Percentage Calculators",
+        "title": "Calculator11: Free EMI, BMI, Age & Percentage Calculators",
         "title_chars": 58,
         "meta_description": "Fast, free calculators for EMI, SIP, BMI, age, percentages and unit conversions. Clear formulas, worked examples and no sign-up. Works on any phone.",
         "meta_chars": 148,

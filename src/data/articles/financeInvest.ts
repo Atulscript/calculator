@@ -1,7 +1,7 @@
 import { CalculatorArticle } from '../../types/article';
 
 const AUTHOR = {
-  name: 'Calculator360 Editorial Team',
+  name: 'Calculator11 Editorial Team',
   role: 'Personal Finance Desk',
   lastUpdated: 'September 2026'
 };

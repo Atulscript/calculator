@@ -152,10 +152,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
   const faqs = [
     {
       q: 'Do I need to create an account or provide an email to use these calculators?',
-      a: 'Never. Every tool on Calculator360 is completely free, open-access, and requires zero registration. We will never ask for your email, phone number, or payment details just to show you your math.'
+      a: 'Never. Every tool on Calculator11 is completely free, open-access, and requires zero registration. We will never ask for your email, phone number, or payment details just to show you your math.'
     },
     {
-      q: 'Does Calculator360 store or track the financial and personal numbers I enter?',
+      q: 'Does Calculator11 store or track the financial and personal numbers I enter?',
       a: 'No. Your calculations run 100% locally inside your web browser via client-side JavaScript. Your income, loan balances, birth dates, and health figures stay strictly on your device and are never sent to external servers or logged in any database.'
     },
     {
@@ -164,11 +164,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
     },
     {
       q: 'Does the calculator automatically adapt to my currency and country?',
-      a: 'Yes. Based on your location, Calculator360 automatically configures the appropriate currency symbol, localized formatting, and realistic price presets (e.g., Lakhs/Crores in India, Millions in the US/UK/Europe). You can also click the currency button in the header to switch to any of 35+ supported world currencies anytime.'
+      a: 'Yes. Based on your location, Calculator11 automatically configures the appropriate currency symbol, localized formatting, and realistic price presets (e.g., Lakhs/Crores in India, Millions in the US/UK/Europe). You can also click the currency button in the header to switch to any of 35+ supported world currencies anytime.'
     },
     {
       q: 'Can I use these calculators on my phone or tablet?',
-      a: 'Yes. Calculator360 is built as a fast, responsive progressive web application. You get instant slider reactivity, clean touch controls, and zero sluggish pop-ups on any mobile browser.'
+      a: 'Yes. Calculator11 is built as a fast, responsive progressive web application. You get instant slider reactivity, clean touch controls, and zero sluggish pop-ups on any mobile browser.'
     }
   ];
 
@@ -566,10 +566,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
         >
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2.25rem' }}>
             <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
-              Why People Trust Calculator360
+              Why People Trust Calculator11
             </h2>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-              Most calculator websites are covered in intrusive ads and exist solely to capture your phone number for brokers. We built Calculator360 on three different rules.
+              Most calculator websites are covered in intrusive ads and exist solely to capture your phone number for brokers. We built Calculator11 on three different rules.
             </p>
           </div>
 
@@ -656,7 +656,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSearch }) 
               Whether you are shopping for a home loan, comparing investment compounding schedules, tracking calorie deficits, or calculating exact dates for a visa application, accurate numbers give you confidence. A small error in compounding frequency or a missed property tax estimate can throw off your budget by thousands of dollars.
             </p>
             <p>
-              Calculator360 was designed to provide complete formula transparency. Every calculator shows the exact mathematical formulas used, step-by-step calculation breakdowns, and real-world considerations—without paywalls, email gates, or sales follow-ups.
+              Calculator11 was designed to provide complete formula transparency. Every calculator shows the exact mathematical formulas used, step-by-step calculation breakdowns, and real-world considerations—without paywalls, email gates, or sales follow-ups.
             </p>
           </div>
 

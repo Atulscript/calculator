@@ -1,7 +1,7 @@
 import { CalculatorArticle } from '../../types/article';
 
 const TIME_AUTHOR = {
-  name: 'Calculator360 Editorial Team',
+  name: 'Calculator11 Editorial Team',
   role: 'Everyday Tools Desk',
   lastUpdated: 'September 2026'
 };
