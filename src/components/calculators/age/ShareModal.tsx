@@ -181,7 +181,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
             opacity: 0.75,
             marginTop: '1.25rem'
           }}>
-            Born on {formatFriendlyDate(result.birthDate)} • Generated via calculator360.com
+            Born on {formatFriendlyDate(result.birthDate)} • Generated via calculator11.com
           </div>
         </div>
 

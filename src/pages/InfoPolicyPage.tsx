@@ -260,14 +260,14 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 <div>
                   <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>General Feedback & Formula Requests</span>
                   <p style={{ margin: '0.25rem 0 0', fontSize: '1.1rem', fontWeight: 700, color: 'var(--primary-500)' }}>
-                    <a href="mailto:feedback@calculator360.com" style={{ color: 'inherit', textDecoration: 'none' }}>feedback@calculator360.com</a>
+                    <a href="mailto:feedback@calculator11.com" style={{ color: 'inherit', textDecoration: 'none' }}>feedback@calculator11.com</a>
                   </p>
                 </div>
 
                 <div>
                   <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Technical Assistance & Corrections</span>
                   <p style={{ margin: '0.25rem 0 0', fontSize: '1.1rem', fontWeight: 700, color: 'var(--primary-500)' }}>
-                    <a href="mailto:support@calculator360.com" style={{ color: 'inherit', textDecoration: 'none' }}>support@calculator360.com</a>
+                    <a href="mailto:support@calculator11.com" style={{ color: 'inherit', textDecoration: 'none' }}>support@calculator11.com</a>
                   </p>
                 </div>
               </div>
@@ -285,7 +285,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               </p>
 
               <p>
-                At <strong>Calculator360</strong> (accessible from <a href="https://calculator360.com" style={{ color: 'var(--primary-500)' }}>https://calculator360.com</a>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information collected and recorded by Calculator360 and how we use it, with particular focus on our zero-server calculation model and compliance with third-party display advertising networks including Google AdSense.
+                At <strong>Calculator360</strong> (accessible from <a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information collected and recorded by Calculator360 and how we use it, with particular focus on our zero-server calculation model and compliance with third-party display advertising networks including Google AdSense.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -316,7 +316,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 4. Google AdSense & DoubleClick DART Cookies
               </h2>
               <p>
-                Google is a third-party vendor on our site. It uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to <a href="https://calculator360.com" style={{ color: 'var(--primary-500)' }}>www.calculator360.com</a> and other sites on the internet.
+                Google is a third-party vendor on our site. It uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to <a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>www.calculator11.com</a> and other sites on the internet.
               </p>
               <ul style={{ paddingLeft: '1.25rem', margin: '0.65rem 0', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
                 <li>
@@ -358,14 +358,14 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 <li>Request that a business that sells or shares a consumer's personal data, not sell or share the consumer's personal data.</li>
               </ul>
               <p>
-                Because Calculator360 does not collect, store, or sell user personal calculation data, we never monetize your inputs. If you make a request regarding any technical log data, we have one month to respond to you. Please contact us at <a href="mailto:privacy@calculator360.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator360.com</a>.
+                Because Calculator360 does not collect, store, or sell user personal calculation data, we never monetize your inputs. If you make a request regarding any technical log data, we have one month to respond to you. Please contact us at <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator11.com</a>.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
                 7. GDPR Data Protection Rights
               </h2>
               <p>
-                We want to make sure you are fully aware of all of your data protection rights. Every user in the European Economic Area (EEA) and the United Kingdom is entitled to the right to access, the right to rectification, the right to erasure, the right to restrict processing, the right to object to processing, and the right to data portability. Contact our Data Protection Officer at <a href="mailto:privacy@calculator360.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator360.com</a>.
+                We want to make sure you are fully aware of all of your data protection rights. Every user in the European Economic Area (EEA) and the United Kingdom is entitled to the right to access, the right to rectification, the right to erasure, the right to restrict processing, the right to object to processing, and the right to data portability. Contact our Data Protection Officer at <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator11.com</a>.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -379,7 +379,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 9. Contact Us
               </h2>
               <p>
-                If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:privacy@calculator360.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>privacy@calculator360.com</a>.
+                If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>privacy@calculator11.com</a>.
               </p>
             </div>
           )}
@@ -391,7 +391,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
               </p>
 
               <p>
-                Welcome to Calculator360! By accessing and using our website (<a href="https://calculator360.com" style={{ color: 'var(--primary-500)' }}>https://calculator360.com</a>) and our suite of over 150 calculators, you accept and agree to be bound by these Terms of Service.
+                Welcome to Calculator360! By accessing and using our website (<a href="https://calculator11.com" style={{ color: 'var(--primary-500)' }}>https://calculator11.com</a>) and our suite of over 150 calculators, you accept and agree to be bound by these Terms of Service.
               </p>
 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1.75rem', marginBottom: '0.5rem' }}>
@@ -503,7 +503,7 @@ export const InfoPolicyPage: React.FC<InfoPolicyPageProps> = ({ type, onNavigate
                 5. Mathematical Accuracy & Error Reporting
               </h2>
               <p>
-                While our engineering team works diligently to verify algorithm integrity, Calculator360 makes no guarantee of 100% error-free operation across all browser combinations or extreme floating-point edge cases. If you discover a discrepancy, please alert our team at <a href="mailto:support@calculator360.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>support@calculator360.com</a>.
+                While our engineering team works diligently to verify algorithm integrity, Calculator360 makes no guarantee of 100% error-free operation across all browser combinations or extreme floating-point edge cases. If you discover a discrepancy, please alert our team at <a href="mailto:support@calculator11.com" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>support@calculator11.com</a>.
               </p>
             </div>
           )}

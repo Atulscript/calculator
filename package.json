@@ -1,13 +1,13 @@
 {
-  "name": "calculator360",
+  "name": "calculator11",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "VITE_SITE_URL=http://localhost:5173 vite",
     "build": "npm run build:pages",
     "build:pages": "SITE_URL=https://atulscript.github.io/calculator VITE_SITE_URL=https://atulscript.github.io/calculator VITE_BASE_PATH=/calculator/ npm run build:run && cp dist/index.html dist/404.html",
-    "build:vps": "SITE_URL=https://calculator360.com VITE_SITE_URL=https://calculator360.com VITE_BASE_PATH=/ npm run build:run",
+    "build:vps": "SITE_URL=https://calculator11.com VITE_SITE_URL=https://calculator11.com VITE_BASE_PATH=/ npm run build:run",
     "build:run": "node scripts/generateSitemap.js && tsc && vite build",
     "preview": "vite preview"
   },

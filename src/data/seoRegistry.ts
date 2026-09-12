@@ -39,7 +39,7 @@ export function getSiteOrigin(): string {
   const origin =
     typeof window !== 'undefined' && window.location.origin
       ? window.location.origin
-      : 'https://calculator360.com';
+      : 'https://calculator11.com';
   const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
   return `${origin}${base}`;
 }
@@ -904,7 +904,7 @@ export function updateDocumentSeo(data: PageSeoData): void {
     'description': 'Free client-side online calculator platform with 150+ verified calculation tools.',
     'contactPoint': {
       '@type': 'ContactPoint',
-      'email': 'support@calculator360.com',
+      'email': 'support@calculator11.com',
       'contactType': 'Customer Support'
     }
   };

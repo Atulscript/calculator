@@ -458,7 +458,7 @@ and a single canonical host. Validate with `sudo nginx -t` before reloading.
 The production build serves from `/calculator/`, but canonicals were built as
 `window.location.origin + canonicalPath`, omitting the base path. **Every canonical on the
 live GitHub Pages site pointed at a URL that does not exist.** Meanwhile `sitemap.xml` and
-`robots.txt` hardcoded `https://calculator360.com`, a domain the site is not served from — so
+`robots.txt` hardcoded `https://calculator11.com`, a domain the site is not served from — so
 the sitemap listed 160 URLs on the wrong host.
 
 Fixed by introducing `getSiteOrigin()` in `seoRegistry.ts`, which respects `BASE_URL` and can
@@ -473,7 +473,7 @@ targets are verified to produce matching canonical, sitemap and robots URLs.
 3. Install `deploy/nginx.conf`, run `sudo nginx -t`, reload.
 4. Verify the four 301s return `301` and land on the right target.
 5. Add the new property in Search Console and submit
-   `https://calculator360.com/sitemap.xml`.
+   `https://calculator11.com/sitemap.xml`.
 6. Use the Change of Address tool if the GitHub Pages URL has accrued any indexing.
 7. Spot-check that canonicals no longer contain `/calculator/`.
 

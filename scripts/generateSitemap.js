@@ -16,8 +16,8 @@ const uniqueSlugs = Array.from(new Set(slugMatches.map(m => m[1])));
 // served from. Must match VITE_SITE_URL used for canonicals, or Google will see
 // a sitemap listing URLs that differ from the pages' own canonical tags.
 //   GitHub Pages : SITE_URL=https://atulscript.github.io/calculator
-//   Production   : SITE_URL=https://calculator360.com
-const BASE_URL = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://calculator360.com').replace(/\/$/, '');
+//   Production   : SITE_URL=https://calculator11.com
+const BASE_URL = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://calculator11.com').replace(/\/$/, '');
 const currentDate = new Date().toISOString().split('T')[0];
 
 const flagships = [

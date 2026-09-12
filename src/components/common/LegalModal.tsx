@@ -134,7 +134,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>4. CCPA/CPRA & GDPR Data Rights</h4>
               <p>
-                We do not sell personal calculation information. European and California residents retain full statutory rights regarding data access, deletion, and opt-outs. For inquiries, email <a href="mailto:privacy@calculator360.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator360.com</a>.
+                We do not sell personal calculation information. European and California residents retain full statutory rights regarding data access, deletion, and opt-outs. For inquiries, email <a href="mailto:privacy@calculator11.com" style={{ color: 'var(--primary-500)' }}>privacy@calculator11.com</a>.
               </p>
 
               <h4 style={{ color: 'var(--text-primary)', fontWeight: 700, margin: '1rem 0 0.4rem' }}>5. COPPA (Children's Privacy)</h4>
@@ -251,13 +251,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
                 <div>
                   <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)' }}>Formula Suggestions & General Feedback</span>
                   <div style={{ fontWeight: 700, color: 'var(--primary-500)', fontSize: '0.95rem' }}>
-                    <a href="mailto:feedback@calculator360.com" style={{ color: 'inherit', textDecoration: 'none' }}>feedback@calculator360.com</a>
+                    <a href="mailto:feedback@calculator11.com" style={{ color: 'inherit', textDecoration: 'none' }}>feedback@calculator11.com</a>
                   </div>
                 </div>
                 <div>
                   <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)' }}>Technical Support & Bug Reports</span>
                   <div style={{ fontWeight: 700, color: 'var(--primary-500)', fontSize: '0.95rem' }}>
-                    <a href="mailto:support@calculator360.com" style={{ color: 'inherit', textDecoration: 'none' }}>support@calculator360.com</a>
+                    <a href="mailto:support@calculator11.com" style={{ color: 'inherit', textDecoration: 'none' }}>support@calculator11.com</a>
                   </div>
                 </div>
               </div>
