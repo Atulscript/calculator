@@ -189,7 +189,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) 
       </div>
 
       {/* Bottom Bar: Copyright & Platform Meta */}
-      <div style={{
+      <div className="footer-bottom-bar" style={{
         maxWidth: '1280px',
         margin: '0 auto',
         borderTop: '1.5px solid var(--border-subtle)',
@@ -204,7 +204,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) 
       }}>
         <p>© 2026 Calculator11. {t('all_rights_reserved')}</p>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+        <div className="footer-legal-links" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <a
             href="/about"
             onClick={(e) => handleLegalClick(e, 'about')}
@@ -240,7 +240,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) 
           >
             Disclaimer
           </a>
-          <span>Privacy & Security Guaranteed</span>
         </div>
       </div>
 

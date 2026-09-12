@@ -1693,6 +1693,14 @@ strong, b {
     min-height: 44px;
   }
 
+  /* The 44px target height is itself the separation between these rows, so the
+     container's 1.25rem row-gap stacked on top of it and padded the footer out
+     by 20px per wrapped row. Keep the column gap, drop the row gap. */
+  .footer-legal-links {
+    row-gap: 0 !important;
+    column-gap: 1.15rem !important;
+  }
+
   .hero-trending-pill,
   .m3-chip {
     min-height: 36px;
@@ -1920,11 +1928,22 @@ strong, b {
   .footer-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
+    /* 3rem of clearance above the bottom bar reads as a gap on a phone, where
+       the bar's own border-top is already doing the separating. */
+    margin-bottom: 1.75rem !important;
   }
 
   .footer-categories-col {
     min-width: 0 !important;
     width: 100% !important;
+  }
+
+  /* The links below stack rather than sitting beside the copyright, and each
+     already carries 44px of its own height — the 1rem flex gap only added to
+     that. */
+  .footer-bottom-bar {
+    padding-top: 1.15rem !important;
+    gap: 0.35rem !important;
   }
 }
 
