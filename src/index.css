@@ -1791,9 +1791,13 @@ strong, b {
     }
   }
 
-  /* Bottom content buffer so fixed bottom nav never overlaps UI */
+  /* The footer always follows this element and carries the same
+     5.5rem + safe-area buffer on its own bottom padding, which is what
+     actually keeps content clear of the fixed bottom nav. Repeating the
+     buffer here only opened a dead band between the last section and the
+     footer's top border. What is left is ordinary end-of-content spacing. */
   .main-content {
-    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 20px)) !important;
+    padding-bottom: 1.3rem !important;
   }
 
   /* Native horizontal scrolling for category chips */
