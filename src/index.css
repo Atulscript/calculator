@@ -1791,13 +1791,27 @@ strong, b {
     }
   }
 
-  /* The footer always follows this element and carries the same
-     5.5rem + safe-area buffer on its own bottom padding, which is what
-     actually keeps content clear of the fixed bottom nav. Repeating the
-     buffer here only opened a dead band between the last section and the
-     footer's top border. What is left is ordinary end-of-content spacing. */
+  /* Trailing space above the footer is owned by one rule.
+  
+     Page roots set their own bottom padding inline and disagree about it —
+     3rem on calculator and hub pages, 4rem on the legal pages, none at all on
+     the homepage — and whatever they set stacked on top of main-content's own
+     padding. Zeroing both the root's padding and its last child's margin means
+     the seam no longer depends on which page is rendered.
+  
+     The footer always follows this element and carries a 5.5rem + safe-area
+     buffer on its own bottom padding, which is what actually keeps content
+     clear of the fixed bottom nav; this padding is only the seam. */
+  .main-content > *:last-child {
+    padding-bottom: 0 !important;
+  }
+
+  .main-content > *:last-child > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
   .main-content {
-    padding-bottom: 1.3rem !important;
+    padding-bottom: 2.8rem !important;
   }
 
   /* Native horizontal scrolling for category chips */
