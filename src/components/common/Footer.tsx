@@ -12,6 +12,16 @@ interface FooterProps {
   onNavigate?: (path: string) => void;
 }
 
+type LegalLink = { type: 'about' | 'contact' | 'privacy' | 'terms' | 'disclaimer'; label: string; short: string };
+
+const LEGAL_LINKS: LegalLink[] = [
+  { type: 'about', label: 'About Us', short: 'About' },
+  { type: 'contact', label: 'Contact & Feedback', short: 'Contact' },
+  { type: 'privacy', label: 'Privacy Policy', short: 'Privacy' },
+  { type: 'terms', label: 'Terms of Service', short: 'Terms' },
+  { type: 'disclaimer', label: 'Disclaimer', short: 'Disclaimer' }
+];
+
 export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) => {
   const { t } = useLocalization();
   const [activeLegalModal, setActiveLegalModal] = useState<LegalModalType>(null);
@@ -205,41 +215,17 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) 
         <p>© 2026 Calculator11. {t('all_rights_reserved')}</p>
 
         <div className="footer-legal-links" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-          <a
-            href="/about"
-            onClick={(e) => handleLegalClick(e, 'about')}
-            className="footer-legal-link"
-          >
-            About Us
-          </a>
-          <a
-            href="/contact"
-            onClick={(e) => handleLegalClick(e, 'contact')}
-            className="footer-legal-link"
-          >
-            Contact & Feedback
-          </a>
-          <a
-            href="/privacy"
-            onClick={(e) => handleLegalClick(e, 'privacy')}
-            className="footer-legal-link"
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="/terms"
-            onClick={(e) => handleLegalClick(e, 'terms')}
-            className="footer-legal-link"
-          >
-            Terms of Service
-          </a>
-          <a
-            href="/disclaimer"
-            onClick={(e) => handleLegalClick(e, 'disclaimer')}
-            className="footer-legal-link"
-          >
-            Disclaimer
-          </a>
+          {LEGAL_LINKS.map(link => (
+            <a
+              key={link.type}
+              href={`/${link.type}`}
+              onClick={(e) => handleLegalClick(e, link.type)}
+              className="footer-legal-link"
+            >
+              <span className="legal-label-full">{link.label}</span>
+              <span className="legal-label-short">{link.short}</span>
+            </a>
+          ))}
         </div>
       </div>
 

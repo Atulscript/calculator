@@ -1674,6 +1674,13 @@ strong, b {
   }
 }
 
+/* The bar shows long labels where there is room and short ones on phones,
+   where the full set has to fit on one row — two wrapped rows of 44px targets
+   is most of the bar's height. */
+.legal-label-short {
+  display: none;
+}
+
 .footer-legal-link {
   color: inherit;
   text-decoration: underline;
@@ -1942,8 +1949,39 @@ strong, b {
      already carries 44px of its own height — the 1rem flex gap only added to
      that. */
   .footer-bottom-bar {
-    padding-top: 1.15rem !important;
-    gap: 0.35rem !important;
+    padding-top: 0.85rem !important;
+    gap: 0.2rem !important;
+  }
+
+  .legal-label-full {
+    display: none;
+  }
+
+  .legal-label-short {
+    display: inline;
+  }
+
+  /* Short labels fit one row down to 320px, so the gap can carry the visual
+     separation the second row used to. */
+  .footer-legal-links {
+    column-gap: 0.95rem !important;
+  }
+
+  /* At 320px the five labels are 11px wider than the row at that gap. They stay
+     far above the 24px minimum target width, so the closer spacing costs
+     nothing in tap accuracy. A wider fallback font degrades to two rows rather
+     than overflowing. */
+  @media (max-width: 360px) {
+    .footer-legal-links {
+      column-gap: 0.7rem !important;
+    }
+
+    /* Gap alone leaves the row fitting by a fraction of a pixel. Dropping the
+       label a step gives it real slack so ordinary font variation does not
+       tip it back onto two rows. */
+    .footer-legal-link {
+      font-size: 0.78rem;
+    }
   }
 }
 
