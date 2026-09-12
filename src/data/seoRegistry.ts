@@ -798,6 +798,28 @@ export function getSeoForPath(path: string): PageSeoData {
 }
 
 /**
+ * Calculators whose page exists and carries an article, but whose tool is not
+ * built yet — the page renders a placeholder card instead of inputs.
+ *
+ * While a slug is listed here the page is kept out of the index and does not
+ * claim to be a working application: no WebApplication entity and no HowTo
+ * steps describing how to use a tool that is not there. The article, FAQ and
+ * breadcrumb schema still describe content that is genuinely on the page.
+ *
+ * Remove a slug from this list in the same change that ships its calculator.
+ * scripts/generateSitemap.js reads this list, so a page cannot be indexed and
+ * unbuilt at the same time.
+ */
+export const UNBUILT_TOOLS = new Set<string>([
+  'tdee-calculator',
+  'protein-calculator',
+  'carbohydrate-calculator',
+  'fat-intake-calculator',
+  'lean-body-mass-calculator',
+  'army-body-fat-calculator'
+]);
+
+/**
  * Dynamically updates document title, meta tags, keywords, canonical link, and JSON-LD schema
  */
 export function updateDocumentSeo(data: PageSeoData): void {
@@ -821,6 +843,13 @@ export function updateDocumentSeo(data: PageSeoData): void {
   // 3. Meta Keywords (Focused Keywords List)
   const keywordsStr = data.keywords.join(', ');
   setMeta('name', 'keywords', keywordsStr);
+
+  // 3b. Robots. This must be written on every navigation, not only on the
+  // pages being withheld: the SPA reuses one <head>, so a noindex left behind
+  // by a previous route would silently suppress the next page.
+  const seoSlug = (data.canonicalPath || '/').replace(/^\//, '').replace(/\/$/, '');
+  const isUnbuilt = UNBUILT_TOOLS.has(seoSlug);
+  setMeta('name', 'robots', isUnbuilt ? 'noindex, follow' : 'index, follow');
 
   // 4. Canonical URL
   const origin = getSiteOrigin();
@@ -983,6 +1012,17 @@ export function updateDocumentSeo(data: PageSeoData): void {
       'publisher': organizationEntity
     });
     graphEntities.push(organizationEntity);
+  } else if (isUnbuilt) {
+    // No WebApplication entity: there is no application on the page yet.
+    graphEntities.push({
+      '@type': 'WebPage',
+      '@id': `${fullCanonical}/#webpage`,
+      'url': fullCanonical,
+      'name': data.title,
+      'description': data.description,
+      'publisher': organizationEntity
+    });
+    graphEntities.push(organizationEntity);
   } else {
     // WebApplication Entity for all calculator tools
     graphEntities.push({
@@ -1046,8 +1086,10 @@ export function updateDocumentSeo(data: PageSeoData): void {
     });
   }
 
-  // If HowTo steps are available, include HowTo schema
-  if (article && article.howToSteps && article.howToSteps.steps) {
+  // If HowTo steps are available, include HowTo schema. Withheld while the tool
+  // is unbuilt, since the steps describe operating a calculator that the page
+  // does not yet render.
+  if (!isUnbuilt && article && article.howToSteps && article.howToSteps.steps) {
     graphEntities.push({
       '@type': 'HowTo',
       '@id': `${fullCanonical}/#howto`,

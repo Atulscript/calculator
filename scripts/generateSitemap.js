@@ -83,8 +83,23 @@ const canonicalisedAway = [
   'engine-horsepower-calculator'
 ];
 
+// Calculators whose tool is not built yet. Parsed from seoRegistry.ts rather
+// than repeated here, so a page cannot be noindexed by the app and still
+// submitted for indexing by the sitemap.
+const seoRegistrySource = fs.readFileSync(
+  path.resolve(__dirname, '../src/data/seoRegistry.ts'), 'utf-8'
+);
+const unbuiltBlock = seoRegistrySource.match(
+  /export const UNBUILT_TOOLS = new Set<string>\(\[([\s\S]*?)\]\)/
+);
+if (!unbuiltBlock) {
+  throw new Error('Could not read UNBUILT_TOOLS from seoRegistry.ts — the sitemap would list noindexed pages.');
+}
+const unbuilt = [...unbuiltBlock[1].matchAll(/'([a-z0-9-]+)'/g)].map(m => m[1]);
+
 for (const slug of uniqueSlugs) {
   if (canonicalisedAway.includes(slug)) continue;
+  if (unbuilt.includes(slug)) continue;
   const isFlagship = flagships.includes(slug);
   const priority = isFlagship ? '0.9' : '0.8';
   const changefreq = isFlagship ? 'weekly' : 'monthly';
@@ -110,10 +125,11 @@ Sitemap: ${BASE_URL}/sitemap.xml
 `;
 fs.writeFileSync(path.resolve(__dirname, '../public/robots.txt'), robots, 'utf-8');
 
-const indexableCalcs = uniqueSlugs.length - canonicalisedAway.length;
+const excluded = new Set([...canonicalisedAway, ...unbuilt].filter(s => uniqueSlugs.includes(s)));
+const indexableCalcs = uniqueSlugs.length - excluded.size;
 const total = 1 + staticPages.length + hubSlugs.length + indexableCalcs;
 console.log(
   `Generated sitemap.xml — ${total} URLs ` +
     `(${indexableCalcs} calculators, ${hubSlugs.length} hubs, ${staticPages.length} static; ` +
-    `${canonicalisedAway.length} excluded as canonicalised) at: ${outputPath}`
+    `${canonicalisedAway.length} excluded as canonicalised, ${unbuilt.length} as unbuilt) at: ${outputPath}`
 );

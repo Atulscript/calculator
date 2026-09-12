@@ -257,3 +257,181 @@ export function convertBase(value: string, fromBase: 2 | 8 | 10 | 16): BaseConve
     octal: dec.toString(8)
   };
 }
+
+// ---------------------------------------------------------------------------
+// Number theory: GCF / LCM, prime factorisation, powers and logarithms.
+// ---------------------------------------------------------------------------
+
+export interface PrimeFactorisation {
+  n: number;
+  factors: { prime: number; exponent: number }[];
+  expanded: string;
+  exponentForm: string;
+  isPrime: boolean;
+  divisorCount: number;
+  valid: boolean;
+}
+
+/**
+ * Trial division up to sqrt(n), which is ample for the integers a person types
+ * into a web form. Values above MAX_FACTORABLE are rejected rather than left to
+ * spin, since the worst case is a large prime.
+ */
+const MAX_FACTORABLE = 1e12;
+
+export function primeFactorise(input: number): PrimeFactorisation {
+  const n = Math.floor(Math.abs(input));
+  const empty: PrimeFactorisation = {
+    n, factors: [], expanded: '', exponentForm: '', isPrime: false,
+    divisorCount: 0, valid: false
+  };
+  if (!Number.isFinite(n) || n < 2 || n > MAX_FACTORABLE) return empty;
+
+  const factors: { prime: number; exponent: number }[] = [];
+  let remaining = n;
+  for (let d = 2; d * d <= remaining; d += d === 2 ? 1 : 2) {
+    let exponent = 0;
+    while (remaining % d === 0) { remaining /= d; exponent++; }
+    if (exponent) factors.push({ prime: d, exponent });
+  }
+  // Whatever survives the loop is itself prime.
+  if (remaining > 1) factors.push({ prime: remaining, exponent: 1 });
+
+  const expanded = factors
+    .flatMap(f => Array(f.exponent).fill(f.prime))
+    .join(' × ');
+  const exponentForm = factors
+    .map(f => (f.exponent === 1 ? `${f.prime}` : `${f.prime}^${f.exponent}`))
+    .join(' × ');
+  // d(n) = product of (exponent + 1) over the distinct primes.
+  const divisorCount = factors.reduce((acc, f) => acc * (f.exponent + 1), 1);
+
+  return {
+    n, factors, expanded, exponentForm,
+    isPrime: factors.length === 1 && factors[0].exponent === 1,
+    divisorCount, valid: true
+  };
+}
+
+export interface GcfLcmResult {
+  numbers: number[];
+  gcf: number;
+  lcm: number;
+  euclidSteps: string[];
+  factorisations: { n: number; exponentForm: string }[];
+  coprime: boolean;
+  valid: boolean;
+}
+
+export function calculateGcfLcm(input: number[]): GcfLcmResult {
+  const numbers = input
+    .map(n => Math.floor(Math.abs(n)))
+    .filter(n => Number.isFinite(n) && n > 0);
+  const empty: GcfLcmResult = {
+    numbers, gcf: 0, lcm: 0, euclidSteps: [], factorisations: [],
+    coprime: false, valid: false
+  };
+  if (numbers.length < 2) return empty;
+
+  const gcdPair = (a: number, b: number): number => (b === 0 ? a : gcdPair(b, a % b));
+  const gcf = numbers.reduce((a, b) => gcdPair(a, b));
+  // Divide before multiplying so the intermediate value cannot overflow.
+  const lcm = numbers.reduce((a, b) => (a / gcdPair(a, b)) * b);
+
+  // Euclid's algorithm on the first pair, shown so the answer is checkable.
+  const euclidSteps: string[] = [];
+  let [x, y] = [Math.max(numbers[0], numbers[1]), Math.min(numbers[0], numbers[1])];
+  while (y !== 0 && euclidSteps.length < 20) {
+    const q = Math.floor(x / y);
+    const r = x % y;
+    euclidSteps.push(`${x} = ${q} × ${y} + ${r}`);
+    [x, y] = [y, r];
+  }
+
+  return {
+    numbers, gcf, lcm, euclidSteps,
+    factorisations: numbers.map(n => ({ n, exponentForm: primeFactorise(n).exponentForm || `${n}` })),
+    coprime: gcf === 1,
+    valid: Number.isFinite(lcm)
+  };
+}
+
+export interface ExponentResult {
+  base: number;
+  exponent: number;
+  result: number;
+  display: string;
+  scientific: string;
+  expansion: string;
+  valid: boolean;
+  note: string;
+}
+
+export function calculatePower(base: number, exponent: number): ExponentResult {
+  const empty = (note: string): ExponentResult => ({
+    base, exponent, result: NaN, display: '—', scientific: '—',
+    expansion: '', valid: false, note
+  });
+  // 0^0 has no agreed value in this context, and a negative base with a
+  // fractional exponent leaves the reals.
+  if (base === 0 && exponent === 0) return empty('0⁰ is undefined.');
+  if (base === 0 && exponent < 0) return empty('Division by zero: 0 to a negative power is undefined.');
+  if (base < 0 && !Number.isInteger(exponent)) {
+    return empty('A negative base with a fractional exponent has no real result.');
+  }
+
+  const result = Math.pow(base, exponent);
+  if (!Number.isFinite(result)) return empty('Result is too large to represent.');
+
+  const display = Number.isInteger(result) && Math.abs(result) < 1e15
+    ? result.toLocaleString()
+    : result.toPrecision(10).replace(/\.?0+$/, '');
+
+  let expansion = '';
+  if (Number.isInteger(exponent) && exponent > 1 && exponent <= 8) {
+    expansion = Array(exponent).fill(base).join(' × ') + ` = ${display}`;
+  } else if (Number.isInteger(exponent) && exponent < 0 && exponent >= -8) {
+    expansion = `1 ÷ (${Array(-exponent).fill(base).join(' × ')})`;
+  }
+
+  return {
+    base, exponent, result, display,
+    scientific: result === 0 ? '0' : result.toExponential(6),
+    expansion, valid: true, note: ''
+  };
+}
+
+export interface LogarithmResult {
+  value: number;
+  base: number;
+  log: number;
+  ln: number;
+  log10: number;
+  log2: number;
+  changeOfBase: string;
+  valid: boolean;
+  note: string;
+}
+
+export function calculateLogarithm(value: number, base: number): LogarithmResult {
+  const empty = (note: string): LogarithmResult => ({
+    value, base, log: NaN, ln: NaN, log10: NaN, log2: NaN,
+    changeOfBase: '', valid: false, note
+  });
+  if (!(value > 0)) return empty('The logarithm is only defined for values greater than zero.');
+  if (!(base > 0) || base === 1) return empty('The base must be positive and not equal to 1.');
+
+  const round = (n: number) => Math.round(n * 1e8) / 1e8;
+  const log = Math.log(value) / Math.log(base);
+
+  return {
+    value, base,
+    log: round(log),
+    ln: round(Math.log(value)),
+    log10: round(Math.log10(value)),
+    log2: round(Math.log2(value)),
+    // The identity the result is computed from, so it can be checked by hand.
+    changeOfBase: `log${base}(${value}) = ln(${value}) ÷ ln(${base}) = ${round(Math.log(value))} ÷ ${round(Math.log(base))}`,
+    valid: true, note: ''
+  };
+}

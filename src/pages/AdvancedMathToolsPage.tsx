@@ -8,7 +8,11 @@ import {
   calculateQuadratic,
   calculateStatisticsDataset,
   calculateCombinatorics,
-  convertBase
+  convertBase,
+  calculateGcfLcm,
+  primeFactorise,
+  calculatePower,
+  calculateLogarithm
 } from '../utils/advancedMathEngines';
 import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
 import {
@@ -68,6 +72,20 @@ export const AdvancedMathToolsPage: React.FC<AdvancedMathToolsPageProps> = ({ sl
   const [baseInput, setBaseInput] = useState<string>('255');
   const [fromBase, setFromBase] = useState<2 | 8 | 10 | 16>(10);
 
+  // 7. GCF / LCM State
+  const [gcfInput, setGcfInput] = useState<string>('48, 180');
+
+  // 8. Prime Factorisation State
+  const [primeInput, setPrimeInput] = useState<number>(360);
+
+  // 9. Exponent State
+  const [powBase, setPowBase] = useState<number>(2);
+  const [powExp, setPowExp] = useState<number>(10);
+
+  // 10. Logarithm State
+  const [logValue, setLogValue] = useState<number>(1000);
+  const [logBase, setLogBase] = useState<number>(10);
+
   // Memos
   const resTri = useMemo(() => calculateTriangle(triA, triB, triC), [triA, triB, triC]);
   const resVol = useMemo(() => calculateVolume(volShape, volDim1, volDim2, volDim3), [volShape, volDim1, volDim2, volDim3]);
@@ -83,6 +101,15 @@ export const AdvancedMathToolsPage: React.FC<AdvancedMathToolsPageProps> = ({ sl
 
   const resComb = useMemo(() => calculateCombinatorics(combN, combR), [combN, combR]);
   const resBase = useMemo(() => convertBase(baseInput, fromBase), [baseInput, fromBase]);
+
+  const parsedGcf = useMemo(
+    () => gcfInput.split(/[\s,]+/).map(v => Number(v.trim())).filter(n => !isNaN(n) && n > 0),
+    [gcfInput]
+  );
+  const resGcf = useMemo(() => calculateGcfLcm(parsedGcf), [parsedGcf]);
+  const resPrime = useMemo(() => primeFactorise(primeInput), [primeInput]);
+  const resPow = useMemo(() => calculatePower(powBase, powExp), [powBase, powExp]);
+  const resLog = useMemo(() => calculateLogarithm(logValue, logBase), [logValue, logBase]);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -346,6 +373,219 @@ export const AdvancedMathToolsPage: React.FC<AdvancedMathToolsPageProps> = ({ sl
           </div>
         )}
 
+        {/* 7. GREATEST COMMON FACTOR & LEAST COMMON MULTIPLE */}
+        {(slug === 'gcf-calculator' || slug === 'lcm-calculator') && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ gridColumn: '1 / -1' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Numbers (separate with commas or spaces)</label>
+                <input
+                  type="text"
+                  value={gcfInput}
+                  onChange={e => setGcfInput(e.target.value)}
+                  className="m3-input-field"
+                  style={{ width: '100%', fontFamily: 'monospace', fontWeight: 800 }}
+                  inputMode="numeric"
+                  aria-label="Numbers to find the GCF and LCM of"
+                />
+              </div>
+            </div>
+
+            {!resGcf.valid ? (
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                Enter at least two whole numbers greater than zero.
+              </p>
+            ) : (
+              <>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(160px, 100%), 1fr))', gap: '1rem', textAlign: 'center', marginBottom: '1.25rem' }}>
+                  {(slug === 'lcm-calculator'
+                    ? [
+                        { label: 'Least Common Multiple', value: resGcf.lcm, colour: 'var(--primary-500)' },
+                        { label: 'Greatest Common Factor', value: resGcf.gcf, colour: 'var(--accent-emerald)' }
+                      ]
+                    : [
+                        { label: 'Greatest Common Factor', value: resGcf.gcf, colour: 'var(--accent-emerald)' },
+                        { label: 'Least Common Multiple', value: resGcf.lcm, colour: 'var(--primary-500)' }
+                      ]
+                  ).map(tile => (
+                    <div key={tile.label} style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{tile.label}</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 900, fontFamily: 'monospace', color: tile.colour }}>{tile.value.toLocaleString()}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {resGcf.coprime && (
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                    These numbers are coprime: they share no factor other than 1, so their LCM is simply their product.
+                  </p>
+                )}
+
+                <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.4rem' }}>Prime factorisation</div>
+                  {resGcf.factorisations.map(f => (
+                    <div key={f.n} style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--text-secondary)', overflowWrap: 'anywhere' }}>
+                      {f.n} = {f.exponentForm}
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.4rem' }}>
+                    Euclid's algorithm on {resGcf.numbers[0]} and {resGcf.numbers[1]}
+                  </div>
+                  {resGcf.euclidSteps.map((step, i) => (
+                    <div key={i} style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--text-secondary)', overflowWrap: 'anywhere' }}>{step}</div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* 8. PRIME FACTORISATION */}
+        {slug === 'prime-factorization-calculator' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Integer to factorise</label>
+                <input
+                  type="number"
+                  value={primeInput}
+                  onChange={e => setPrimeInput(Number(e.target.value) || 0)}
+                  className="m3-input-field"
+                  style={{ width: '100%', fontFamily: 'monospace', fontWeight: 800 }}
+                  aria-label="Integer to factorise"
+                />
+              </div>
+            </div>
+
+            {!resPrime.valid ? (
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                Enter a whole number from 2 up to 1,000,000,000,000.
+              </p>
+            ) : (
+              <>
+                <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px', marginBottom: '1.25rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Prime factorisation</div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'monospace', overflowWrap: 'anywhere' }}>
+                    {resPrime.n} = {resPrime.exponentForm}
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(150px, 100%), 1fr))', gap: '1rem', textAlign: 'center' }}>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Expanded</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, fontFamily: 'monospace', overflowWrap: 'anywhere' }}>{resPrime.expanded}</div>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Distinct primes</div>
+                    <div style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'monospace' }}>{resPrime.factors.length}</div>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Total divisors</div>
+                    <div style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'monospace' }}>{resPrime.divisorCount}</div>
+                  </div>
+                </div>
+
+                {resPrime.isPrime && (
+                  <p style={{ fontSize: '0.9rem', color: 'var(--accent-emerald)', fontWeight: 600, marginTop: '1rem' }}>
+                    {resPrime.n.toLocaleString()} is itself prime, so it has no factorisation beyond 1 × itself.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+        {/* 9. EXPONENTS & POWERS */}
+        {slug === 'exponent-calculator' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Base (x)</label>
+                <input type="number" value={powBase} onChange={e => setPowBase(Number(e.target.value))} className="m3-input-field" style={{ width: '100%', fontWeight: 800 }} aria-label="Base" />
+              </div>
+              <div>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Exponent (y)</label>
+                <input type="number" value={powExp} onChange={e => setPowExp(Number(e.target.value))} className="m3-input-field" style={{ width: '100%', fontWeight: 800 }} aria-label="Exponent" />
+              </div>
+            </div>
+
+            {!resPow.valid ? (
+              <p style={{ color: 'var(--accent-red)', fontSize: '0.9rem', fontWeight: 600 }}>{resPow.note}</p>
+            ) : (
+              <>
+                <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px', marginBottom: '1.25rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{powBase} <sup>{powExp}</sup> equals</div>
+                  <div style={{ fontSize: '1.6rem', fontWeight: 900, fontFamily: 'monospace', overflowWrap: 'anywhere' }}>{resPow.display}</div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(180px, 100%), 1fr))', gap: '1rem' }}>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Scientific notation</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, fontFamily: 'monospace', overflowWrap: 'anywhere' }}>{resPow.scientific}</div>
+                  </div>
+                  {resPow.expansion && (
+                    <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Written out</div>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 700, fontFamily: 'monospace', overflowWrap: 'anywhere' }}>{resPow.expansion}</div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* 10. LOGARITHMS */}
+        {slug === 'log-calculator' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Value (x)</label>
+                <input type="number" value={logValue} onChange={e => setLogValue(Number(e.target.value))} className="m3-input-field" style={{ width: '100%', fontWeight: 800 }} aria-label="Value" />
+              </div>
+              <div>
+                <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Base (b)</label>
+                <input type="number" value={logBase} onChange={e => setLogBase(Number(e.target.value))} className="m3-input-field" style={{ width: '100%', fontWeight: 800 }} aria-label="Base" />
+              </div>
+            </div>
+
+            {!resLog.valid ? (
+              <p style={{ color: 'var(--accent-red)', fontSize: '0.9rem', fontWeight: 600 }}>{resLog.note}</p>
+            ) : (
+              <>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(150px, 100%), 1fr))', gap: '1rem', textAlign: 'center', marginBottom: '1.25rem' }}>
+                  {logBase !== 10 && logBase !== 2 && (
+                    <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>log<sub>{logBase}</sub>(x)</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: 'monospace', color: 'var(--primary-500)' }}>{resLog.log}</div>
+                    </div>
+                  )}
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>ln(x)</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: 'monospace' }}>{resLog.ln}</div>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>log<sub>10</sub>(x)</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: 'monospace' }}>{resLog.log10}</div>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>log<sub>2</sub>(x)</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: 'monospace' }}>{resLog.log2}</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.4rem' }}>Change of base</div>
+                  <div style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--text-secondary)', overflowWrap: 'anywhere' }}>{resLog.changeOfBase}</div>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
         {/* DEFAULT FALLBACK - NEVER LEAVE A BLANK CARD */}
         {![
           'triangle-calculator', 'right-triangle-calculator', 'pythagorean-theorem-calculator',
@@ -353,7 +593,9 @@ export const AdvancedMathToolsPage: React.FC<AdvancedMathToolsPageProps> = ({ sl
           'quadratic-formula-calculator', 'slope-calculator',
           'mean-median-mode-range-calculator', 'statistics-calculator', 'standard-deviation-calculator',
           'permutation-and-combination-calculator', 'probability-calculator',
-          'binary-calculator', 'hex-calculator'
+          'binary-calculator', 'hex-calculator',
+          'gcf-calculator', 'lcm-calculator', 'prime-factorization-calculator',
+          'exponent-calculator', 'log-calculator'
         ].includes(slug) && (
           <div style={{ textAlign: 'center', padding: '1.5rem' }}>
             <p style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{calcMeta.title}</p>
