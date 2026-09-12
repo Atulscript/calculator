@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Calendar, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, X, Clock } from 'lucide-react';
 
 interface ModernDatePickerProps {
@@ -88,7 +89,59 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
   const [inputValue, setInputValue] = useState<string>(value);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const fieldRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 99999
+  });
+
+  const updatePosition = useCallback(() => {
+    if (!fieldRef.current) return;
+    const rect = fieldRef.current.getBoundingClientRect();
+    const popoverWidth = Math.min(320, window.innerWidth - 24);
+    const estimatedHeight = 440;
+
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const placeAbove = spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
+
+    let left = rect.left;
+    if (left + popoverWidth > window.innerWidth - 12) {
+      left = Math.max(12, window.innerWidth - popoverWidth - 12);
+    }
+    if (left < 12) {
+      left = 12;
+    }
+
+    if (placeAbove) {
+      setPopoverStyle({
+        position: 'fixed',
+        bottom: `${Math.max(12, window.innerHeight - rect.top + 8)}px`,
+        top: 'auto',
+        left: `${left}px`,
+        width: `${popoverWidth}px`,
+        maxWidth: 'calc(100vw - 24px)',
+        zIndex: 99999,
+        boxSizing: 'border-box'
+      });
+    } else {
+      setPopoverStyle({
+        position: 'fixed',
+        top: `${rect.bottom + 8}px`,
+        bottom: 'auto',
+        left: `${left}px`,
+        width: `${popoverWidth}px`,
+        maxWidth: 'calc(100vw - 24px)',
+        zIndex: 99999,
+        boxSizing: 'border-box'
+      });
+    }
+  }, []);
 
   // Sync internal state if external value changes
   useEffect(() => {
@@ -103,26 +156,52 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
     }
   }, [value]);
 
+  // Keep popover attached on scroll and resize
+  useEffect(() => {
+    if (!isOpen) return;
+
+    updatePosition();
+
+    const handleScrollOrResize = () => {
+      updatePosition();
+    };
+
+    window.addEventListener('scroll', handleScrollOrResize, true);
+    window.addEventListener('resize', handleScrollOrResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize, true);
+      window.removeEventListener('resize', handleScrollOrResize);
+    };
+  }, [isOpen, viewMode, updatePosition]);
+
   // Click outside and escape key listener
   useEffect(() => {
+    if (!isOpen) return;
+
     function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(target) &&
+        popoverRef.current &&
+        !popoverRef.current.contains(target)
+      ) {
         setIsOpen(false);
         setViewMode('days');
       }
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === 'Escape') {
         setIsOpen(false);
         setViewMode('days');
       }
     }
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
-    }
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
@@ -314,6 +393,7 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
 
       {/* Input Field Display */}
       <div
+        ref={fieldRef}
         className="modern-datepicker-field"
         onClick={() => !disabled && setIsOpen(prev => !prev)}
         style={{
@@ -388,22 +468,19 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
         )}
       </div>
 
-      {/* Calendar Popover */}
-      {isOpen && (
+      {/* Calendar Popover rendered via Portal to completely avoid stacking context clipping */}
+      {isOpen && typeof document !== 'undefined' && createPortal(
         <div
+          ref={popoverRef}
           className="modern-datepicker-popover"
           style={{
-            position: 'absolute',
-            top: 'calc(100% + 8px)',
-            left: 0,
-            zIndex: 1000,
-            width: '320px',
-            maxWidth: 'calc(100vw - 32px)',
+            ...popoverStyle,
             background: 'var(--surface-solid)',
             borderRadius: '16px',
             border: '1px solid var(--border-subtle)',
             boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-subtle)',
             backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             padding: '1rem',
             animation: 'm3DropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             userSelect: 'none'
@@ -523,7 +600,7 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(7, 1fr)',
+                  gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
                   textAlign: 'center',
                   marginBottom: '0.45rem'
                 }}
@@ -547,7 +624,7 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(7, 1fr)',
+                  gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
                   gap: '2px'
                 }}
               >
@@ -624,7 +701,7 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
                   gap: '0.5rem',
                   padding: '0.35rem 0'
                 }}
@@ -700,7 +777,7 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
                   gap: '0.5rem',
                   padding: '0.2rem 0'
                 }}
@@ -819,7 +896,8 @@ export const ModernDatePicker: React.FC<ModernDatePickerProps> = ({
               <span>Today</span>
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

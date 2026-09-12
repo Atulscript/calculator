@@ -100,8 +100,8 @@ export const Logo: React.FC<LogoProps> = ({
       </div>
 
       {/* Typographic Wordmark */}
-      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+      <div className="logo-wordmark" style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', whiteSpace: 'nowrap' }}>
           <span
             style={{
               fontFamily: 'var(--font-display)',
@@ -116,13 +116,14 @@ export const Logo: React.FC<LogoProps> = ({
 
           {/* 360 High-Contrast Material Badge with 360° Degree Mark */}
           <span
+            className="logo-degree-badge"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: config.badgeFontSize,
               fontWeight: 800,
               letterSpacing: '-0.02em',
               background: 'var(--md-sys-color-primary)',
-              color: '#ffffff',
+              color: 'var(--md-sys-color-on-primary)',
               padding: config.badgePadding,
               borderRadius: '6px',
               display: 'inline-flex',
@@ -148,13 +149,15 @@ export const Logo: React.FC<LogoProps> = ({
 
         {showSubtitle && (
           <span
+            className="logo-tagline-desktop"
             style={{
               fontSize: config.subtitleSize,
               fontWeight: 600,
               color: 'var(--text-secondary)',
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
-              marginTop: '0.25rem'
+              marginTop: '0.25rem',
+              whiteSpace: 'nowrap'
             }}
           >
             All-Around Online Calculators

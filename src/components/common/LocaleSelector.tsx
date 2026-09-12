@@ -264,7 +264,7 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(min(220px, 100%), 1fr))',
                   gap: '0.6rem'
                 }}
               >
@@ -311,7 +311,7 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
                             height: '24px',
                             borderRadius: '50%',
                             background: 'var(--primary-600)',
-                            color: '#ffffff',
+                            color: 'var(--md-sys-color-on-primary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'
@@ -343,7 +343,7 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(min(220px, 100%), 1fr))',
                   gap: '0.6rem'
                 }}
               >
@@ -408,7 +408,7 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
                             height: '24px',
                             borderRadius: '50%',
                             background: 'var(--primary-600)',
-                            color: '#ffffff',
+                            color: 'var(--md-sys-color-on-primary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'

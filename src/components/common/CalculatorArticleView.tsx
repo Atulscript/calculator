@@ -47,103 +47,13 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
     setTimeout(() => setCopiedFormula(false), 2000);
   };
 
-  // Google JSON-LD Structured Data Schema per Calculator360 SEO Specification
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://atulscript.github.io/calculator';
-  const pageUrl = article.canonicalUrl || `${siteUrl}/${calculatorId}/`;
-
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebPage',
-        '@id': `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: article.title,
-        description: article.subtitle,
-        isPartOf: {
-          '@type': 'WebSite',
-          '@id': `${siteUrl}/#website`,
-          name: 'Calculator360',
-          url: `${siteUrl}/`
-        },
-        breadcrumb: {
-          '@id': `${pageUrl}#breadcrumb`
-        },
-        mainEntity: {
-          '@id': `${pageUrl}#app`
-        },
-        inLanguage: 'en-IN'
-      },
-      {
-        '@type': 'WebApplication',
-        '@id': `${pageUrl}#app`,
-        name: calculatorName,
-        url: pageUrl,
-        applicationCategory: categoryName.toLowerCase().includes('health')
-          ? 'HealthApplication'
-          : categoryName.toLowerCase().includes('finance')
-          ? 'FinanceApplication'
-          : 'UtilitiesApplication',
-        operatingSystem: 'Any',
-        browserRequirements: 'Requires JavaScript',
-        isAccessibleForFree: true,
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'INR'
-        },
-        provider: {
-          '@type': 'Organization',
-          name: 'Calculator360',
-          url: `${siteUrl}/`
-        }
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${pageUrl}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: `${siteUrl}/`
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: categoryName,
-            item: `${siteUrl}/${categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-calculators/`
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: calculatorName
-          }
-        ]
-      },
-      ...(article.faqs && article.faqs.length > 0 ? [{
-        '@type': 'FAQPage',
-        '@id': `${pageUrl}#faq`,
-        mainEntity: article.faqs.map(faq => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer
-          }
-        }))
-      }] : [])
-    ]
-  };
+  // Structured data for this page is emitted centrally by
+  // seoRegistry.updateDocumentSeo(), which already includes Article, FAQPage
+  // and HowTo. Emitting a second graph here produced duplicate @ids, two
+  // WebApplication entities and a breadcrumb pointing at a non-existent hub.
 
   return (
     <article className="m3-article-wrapper">
-      {/* Schema Injection for Google SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-
       {/* Header & Title Section */}
       <header className="m3-article-header">
         <div className="m3-article-eyebrow">
@@ -165,9 +75,9 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
           </div>
 
           <div className="m3-meta-item">
-            <ShieldCheck size={16} color="#10b981" />
-            <span style={{ color: '#10b981', fontWeight: 700 }}>
-              ✓ Fact-Checked & Verified
+            <ShieldCheck size={16} color="var(--accent-emerald)" />
+            <span style={{ color: 'var(--accent-emerald)', fontWeight: 700 }}>
+              Formula &amp; sources shown
             </span>
           </div>
 
@@ -269,7 +179,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                   style={{ cursor: 'pointer', fontSize: '0.75rem', padding: '0.35rem 0.75rem' }}
                   title="Copy Formula"
                 >
-                  {copiedFormula ? <CheckCircle2 size={13} color="#10b981" /> : <Bookmark size={13} />}
+                  {copiedFormula ? <CheckCircle2 size={13} color="var(--accent-emerald)" /> : <Bookmark size={13} />}
                   <span>{copiedFormula ? '✓ Copied Formula' : 'Copy Formula'}</span>
                 </button>
               </div>
@@ -287,13 +197,14 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                   <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
                     Variable Definitions:
                   </span>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.65rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))', gap: '0.65rem' }}>
                     {article.formulaCard.variables.map(v => (
                       <div
                         key={v.symbol}
                         style={{
                           display: 'flex',
                           alignItems: 'baseline',
+                          flexWrap: 'wrap',
                           gap: '0.6rem',
                           padding: '0.55rem 0.85rem',
                           borderRadius: '10px',
@@ -311,11 +222,13 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                           fontFamily: 'var(--font-mono)',
                           fontWeight: 800,
                           fontSize: '0.8rem',
-                          flexShrink: 0
+                          flexShrink: 0,
+                          maxWidth: '100%',
+                          overflowWrap: 'anywhere'
                         }}>
                           {v.symbol}
                         </span>
-                        <span style={{ color: 'var(--text-secondary)' }}>
+                        <span style={{ color: 'var(--text-secondary)', minWidth: 0, flex: '1 1 8rem' }}>
                           {v.meaning}
                         </span>
                       </div>
@@ -373,7 +286,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
               {/* Given Inputs Table / Cards */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
                 gap: '0.75rem',
                 marginBottom: '1.5rem',
                 background: 'var(--surface-subtle)',
@@ -428,7 +341,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                       }}>
                         {i + 1}
                       </span>
-                      <span style={{ fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.65 }}>
+                      <span style={{ fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.65, minWidth: 0, overflowWrap: 'anywhere' }}>
                         {st}
                       </span>
                     </div>
@@ -450,7 +363,7 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                 boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)'
               }}>
                 <CheckCircle2 size={22} color="var(--md-sys-color-primary)" />
-                <span>Calculated Result: <strong>{article.workedExample.result}</strong></span>
+                <span style={{ minWidth: 0, overflowWrap: 'anywhere' }}>Calculated Result: <strong>{article.workedExample.result}</strong></span>
               </div>
 
               {article.workedExample.takeaway && (
@@ -467,9 +380,9 @@ export const CalculatorArticleView: React.FC<CalculatorArticleViewProps> = ({
                   lineHeight: 1.65,
                   color: 'var(--text-primary)'
                 }}>
-                  <Lightbulb size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '0.15rem' }} />
+                  <Lightbulb size={18} color="var(--accent-emerald)" style={{ flexShrink: 0, marginTop: '0.15rem' }} />
                   <div>
-                    <strong style={{ color: '#10b981' }}>Key Insight: </strong>
+                    <strong style={{ color: 'var(--accent-emerald)' }}>Key Insight: </strong>
                     {article.workedExample.takeaway}
                   </div>
                 </div>

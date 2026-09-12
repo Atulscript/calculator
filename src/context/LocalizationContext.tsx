@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { 
   SUPPORTED_LANGUAGES, 
   LanguageInfo, 
@@ -12,7 +12,12 @@ import {
   getCurrency, 
   formatCurrencyAmount 
 } from '../data/currencies';
-import { detectGeoProfile, GeoProfile } from '../utils/geoDetect';
+import { 
+  detectGeoProfile, 
+  fetchLiveGeoProfile, 
+  getGeoProfileForCountry, 
+  GeoProfile 
+} from '../utils/geoDetect';
 
 interface LocalizationContextType {
   language: string;
@@ -20,7 +25,11 @@ interface LocalizationContextType {
   setLanguage: (lang: string) => void;
   currency: string;
   currentCurrency: CurrencyInfo;
-  setCurrency: (curr: string) => void;
+  setCurrency: (curr: string, isManual?: boolean) => void;
+  isAutoLocation: boolean;
+  resetToAutoLocation: () => void;
+  refreshLocation: () => Promise<void>;
+  simulateLocation: (countryCode: string) => void;
   t: (key: TranslationKey) => string;
   formatMoney: (amount: number) => string;
   detectedGeo: GeoProfile;
@@ -32,6 +41,7 @@ const LocalizationContext = createContext<LocalizationContextType | undefined>(u
 
 const STORAGE_LANG_KEY = 'calc360_language';
 const STORAGE_CURR_KEY = 'calc360_currency';
+const STORAGE_CURR_MODE_KEY = 'calc360_currency_mode'; // 'auto' | 'manual'
 
 export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfile): string {
   switch (langCode.toLowerCase()) {
@@ -52,7 +62,6 @@ export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfil
     case 'ar':
       return 'AED';
     case 'en':
-      // For English, use the location-based currency
       return detectedGeo?.detectedCurrency || 'USD';
     default:
       return detectedGeo?.detectedCurrency || 'USD';
@@ -60,10 +69,19 @@ export function getCurrencyForLanguage(langCode: string, detectedGeo?: GeoProfil
 }
 
 export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [detectedGeo] = useState<GeoProfile>(() => detectGeoProfile());
+  const [detectedGeo, setDetectedGeo] = useState<GeoProfile>(() => detectGeoProfile());
 
-  // Language is strictly English across the entire application as requested
+  // Language is strictly English across the entire application
   const language = 'en';
+
+  const [isAutoLocation, setIsAutoLocation] = useState<boolean>(() => {
+    try {
+      const mode = localStorage.getItem(STORAGE_CURR_MODE_KEY);
+      return mode !== 'manual';
+    } catch {
+      return true;
+    }
+  });
 
   const [currency, setCurrencyState] = useState<string>(() => {
     // Purge any legacy saved language to avoid persistent Hindi/other languages
@@ -73,10 +91,18 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       // Ignore storage errors
     }
 
-    const saved = localStorage.getItem(STORAGE_CURR_KEY);
-    if (saved && SUPPORTED_CURRENCIES.some(c => c.code === saved)) {
-      return saved;
+    try {
+      const mode = localStorage.getItem(STORAGE_CURR_MODE_KEY);
+      if (mode === 'manual') {
+        const saved = localStorage.getItem(STORAGE_CURR_KEY);
+        if (saved && SUPPORTED_CURRENCIES.some(c => c.code === saved)) {
+          return saved;
+        }
+      }
+    } catch {
+      // Ignore storage errors
     }
+
     return detectedGeo.detectedCurrency;
   });
 
@@ -87,20 +113,89 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     // Front-end language selection has been removed, app strictly stays in English
   };
 
-  const setCurrency = (newCurr: string) => {
+  const setCurrency = (newCurr: string, isManual: boolean = true) => {
     if (SUPPORTED_CURRENCIES.some(c => c.code === newCurr)) {
       setCurrencyState(newCurr);
-      try {
-        localStorage.setItem(STORAGE_CURR_KEY, newCurr);
-      } catch {
-        // Ignore storage errors
+      if (isManual) {
+        setIsAutoLocation(false);
+        try {
+          localStorage.setItem(STORAGE_CURR_KEY, newCurr);
+          localStorage.setItem(STORAGE_CURR_MODE_KEY, 'manual');
+        } catch {
+          // Ignore storage errors
+        }
       }
     }
   };
 
+  const resetToAutoLocation = useCallback(() => {
+    setIsAutoLocation(true);
+    setCurrencyState(detectedGeo.detectedCurrency);
+    try {
+      localStorage.setItem(STORAGE_CURR_KEY, detectedGeo.detectedCurrency);
+      localStorage.setItem(STORAGE_CURR_MODE_KEY, 'auto');
+    } catch {
+      // Ignore storage errors
+    }
+  }, [detectedGeo]);
+
+  const simulateLocation = useCallback((countryCode: string) => {
+    const newGeo = getGeoProfileForCountry(countryCode, 'manual');
+    setDetectedGeo(newGeo);
+    setCurrencyState(newGeo.detectedCurrency);
+    setIsAutoLocation(true);
+    try {
+      localStorage.setItem(STORAGE_CURR_KEY, newGeo.detectedCurrency);
+      localStorage.setItem(STORAGE_CURR_MODE_KEY, 'auto');
+    } catch {
+      // Ignore storage errors
+    }
+  }, []);
+
+  const refreshLocation = useCallback(async () => {
+    try {
+      const liveGeo = await fetchLiveGeoProfile();
+      if (liveGeo) {
+        setDetectedGeo(liveGeo);
+        if (isAutoLocation) {
+          setCurrencyState(liveGeo.detectedCurrency);
+          try {
+            localStorage.setItem(STORAGE_CURR_KEY, liveGeo.detectedCurrency);
+          } catch {
+            // Ignore
+          }
+        }
+      }
+    } catch {
+      // Fallback
+    }
+  }, [isAutoLocation]);
+
+  // On initial mount, perform async IP-based detection to ensure location accuracy
   useEffect(() => {
     document.documentElement.lang = 'en';
     document.documentElement.dir = 'ltr';
+
+    let isMounted = true;
+    fetchLiveGeoProfile().then(liveGeo => {
+      if (isMounted && liveGeo) {
+        setDetectedGeo(liveGeo);
+        // If user hasn't explicitly set a manual currency lock, update to live detected currency
+        const mode = localStorage.getItem(STORAGE_CURR_MODE_KEY);
+        if (mode !== 'manual') {
+          setCurrencyState(liveGeo.detectedCurrency);
+          try {
+            localStorage.setItem(STORAGE_CURR_KEY, liveGeo.detectedCurrency);
+          } catch {
+            // Ignore
+          }
+        }
+      }
+    }).catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const t = (key: TranslationKey): string => {
@@ -120,6 +215,10 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         currency,
         currentCurrency,
         setCurrency,
+        isAutoLocation,
+        resetToAutoLocation,
+        refreshLocation,
+        simulateLocation,
         t,
         formatMoney,
         detectedGeo,

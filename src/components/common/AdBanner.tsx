@@ -15,16 +15,37 @@ export const AdBanner: React.FC<AdBannerProps> = ({
   adClient,
   adSlotId
 }) => {
+  const effectiveClient = adClient || (import.meta.env.VITE_ADSENSE_CLIENT as string | undefined);
+  const isDev = import.meta.env.DEV;
+
   useEffect(() => {
+    if (!effectiveClient) return;
+
+    // Dynamically ensure Google AdSense script is present
+    const scriptId = 'google-adsense-script';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${effectiveClient}`;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+    }
+
     try {
-      if (typeof window !== 'undefined' && adClient && adSlotId) {
+      if (typeof window !== 'undefined' && adSlotId) {
         // @ts-expect-error - adsbygoogle is loaded via external Google script
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (e) {
       console.warn('AdSense push error:', e);
     }
-  }, [adClient, adSlotId]);
+  }, [effectiveClient, adSlotId]);
+
+  // If no AdSense client is configured and we are in production, don't show empty dummy boxes to AdSense crawlers
+  if (!effectiveClient && !isDev) {
+    return null;
+  }
 
   const getDimensions = () => {
     switch (slotType) {
@@ -73,30 +94,30 @@ export const AdBanner: React.FC<AdBannerProps> = ({
         style={{
           ...dim,
           background: 'var(--surface-subtle)',
-          border: '1px dashed var(--border-subtle)',
+          border: effectiveClient ? 'none' : '1px dashed var(--border-subtle)',
           borderRadius: '8px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '1rem',
+          padding: effectiveClient ? '0' : '1rem',
           position: 'relative',
           overflow: 'hidden',
           transition: 'border-color 0.2s ease'
         }}
       >
-        {adClient && adSlotId ? (
+        {effectiveClient && adSlotId ? (
           <ins
             className="adsbygoogle"
             style={{ display: 'block', width: '100%', height: '100%' }}
-            data-ad-client={adClient}
+            data-ad-client={effectiveClient}
             data-ad-slot={adSlotId}
             data-ad-format="auto"
             data-full-width-responsive="true"
           />
         ) : (
           <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'center' }}>
-            <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>Google Ad Space</span>
+            <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>Display Ad Slot (Development Preview)</span>
             <span>
               {slotType === 'leaderboard' && 'Leaderboard (728x90 / Responsive)'}
               {slotType === 'rectangle' && 'Medium Rectangle (300x250)'}

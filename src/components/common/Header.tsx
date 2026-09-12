@@ -23,11 +23,11 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigateHome
 }) => {
   const [isCurrencyModalOpen, setIsCurrencyModalOpen] = useState(false);
-  const { currentCurrency, t } = useLocalization();
+  const { currentCurrency, detectedGeo, isAutoLocation, t } = useLocalization();
   const isInnerRoute = currentPath !== '/' && currentPath !== '';
 
   return (
-    <header className="mobile-app-header" style={{
+    <header className={`mobile-app-header${isInnerRoute ? ' is-inner-route' : ''}`} style={{
       position: 'sticky',
       top: 0,
       zIndex: 40,
@@ -47,7 +47,7 @@ export const Header: React.FC<HeaderProps> = ({
         gap: '1rem'
       }}>
         {/* Left: Back Button (on inner pages) + Brand Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           {isInnerRoute && (
             <button
               onClick={onNavigateHome}
@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Desktop Docked Search Bar (Hidden on mobile via CSS) */}
-        <div className="desktop-search-bar" style={{ flex: '1', maxWidth: '520px' }}>
+        <div className="desktop-search-bar" style={{ flex: '1', maxWidth: '520px', minWidth: 0 }}>
           <button
             onClick={onOpenSearch}
             style={{
@@ -99,11 +99,13 @@ export const Header: React.FC<HeaderProps> = ({
               e.currentTarget.style.borderColor = 'var(--border-subtle)';
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-              <Search size={16} color="var(--md-sys-color-primary)" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0, overflow: 'hidden' }}>
+              <Search size={16} color="var(--md-sys-color-primary)" style={{ flexShrink: 0 }} />
               <span className="truncate">{t('search_placeholder')}</span>
             </div>
             <kbd style={{
+              flexShrink: 0,
+              marginLeft: '0.75rem',
               background: 'var(--surface-subtle)',
               border: '1px solid var(--border-subtle)',
               borderRadius: '4px',
@@ -118,12 +120,33 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Right Action Icons: Currency Selector + Theme Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* Right Action Icons: Mobile Search (on inner pages) + Currency Selector + Theme Toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
+          {isInnerRoute && (
+            <button
+              onClick={onOpenSearch}
+              className="mobile-header-search-btn"
+              aria-label="Search Calculators"
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: 'var(--md-sys-shape-full)',
+                background: 'var(--surface-solid)',
+                border: '1.5px solid var(--border-subtle)',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-primary)',
+                cursor: 'pointer'
+              }}
+            >
+              <Search size={17} color="var(--md-sys-color-primary)" />
+            </button>
+          )}
+
           <button
             onClick={() => setIsCurrencyModalOpen(true)}
             aria-label="Select Currency"
-            title="Change Currency"
+            title={`Location: ${detectedGeo.countryName} · Currency: ${currentCurrency.code} (${isAutoLocation ? 'Auto-detected' : 'Manual'})`}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -150,7 +173,20 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{currentCurrency.flag}</span>
             <span style={{ color: 'var(--primary-600)', fontWeight: 800 }}>{currentCurrency.symbol}</span>
-            <span>{currentCurrency.code}</span>
+            <span className="header-currency-code">{currentCurrency.code}</span>
+            {isAutoLocation && (
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#10b981',
+                  boxShadow: '0 0 6px #10b981',
+                  marginLeft: '0.1rem'
+                }}
+                title="Location-based Auto Currency Active"
+              />
+            )}
           </button>
 
           <button

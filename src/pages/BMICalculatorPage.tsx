@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -33,21 +33,10 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
 
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    document.title = 'BMI Calculator – Check Your Body Mass Index (kg, cm, ft)';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Calculate your BMI in kg/cm or lbs/feet and see your WHO category, the Asian BMI cut-offs used in India and your healthy weight range.'
-      );
-    }
-  }, []);
-
   const result = useMemo(() => calculateBMI(input), [input]);
 
   const handleCopy = () => {
-    const text = `BMI: ${result.bmi} (${result.categoryLabel})\nHealthy Weight: ${result.idealWeightMinKg} - ${result.idealWeightMaxKg} kg\nCalculated via Calculator360.app`;
+    const text = `BMI: ${result.bmi} (${result.categoryLabel})\nHealthy Weight: ${result.idealWeightMinKg} - ${result.idealWeightMaxKg} kg\nCalculated via Calculator360.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -71,7 +60,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
       {/* Top Breadcrumb Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
         <Breadcrumbs currentCalculator={calcMeta} onHomeClick={() => onNavigate('/')} />
       </div>
 
@@ -95,7 +84,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Calculate your Body Mass Index (BMI), ideal body weight range, and WHO health risk categories with metric and imperial units.
+          Check where your weight falls on official World Health Organization (WHO) and Asian body mass standards. Instant, private, and calculated right in your browser.
         </p>
       </div>
 
@@ -131,7 +120,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
             </div>
 
             {/* Form Inputs Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
               {/* Height Input with Synchronized Range Slider */}
               {input.unit === 'metric' ? (
                 <div>
@@ -447,7 +436,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
             {/* Key Metrics Summary Card */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(180px, 100%), 1fr))',
               gap: '1rem',
               marginBottom: '1.5rem'
             }}>
@@ -460,7 +449,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                     ? `${result.idealWeightMinKg} – ${result.idealWeightMaxKg} kg`
                     : `${result.idealWeightMinLbs} – ${result.idealWeightMaxLbs} lbs`}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#146c2e', fontWeight: 700, marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-tertiary)', fontWeight: 700, marginTop: '0.2rem' }}>
                   BMI 18.5 – 24.9
                 </div>
               </div>
@@ -474,7 +463,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                     ? `${result.idealWeightMinKg} – ${result.asianIdealWeightMaxKg} kg`
                     : `${result.idealWeightMinLbs} – ${result.asianIdealWeightMaxLbs} lbs`}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#b45309', fontWeight: 700, marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--accent-amber)', fontWeight: 700, marginTop: '0.2rem' }}>
                   Upper Limit: 22.9 BMI
                 </div>
               </div>
@@ -498,7 +487,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {result.bmiPrime} <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>(&lt;1.0 optimal)</span>
                 </div>
-                <div style={{ fontSize: '0.75rem', color: result.bmiPrime <= 1.0 ? '#146c2e' : '#b45309', fontWeight: 700, marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '0.75rem', color: result.bmiPrime <= 1.0 ? 'var(--md-sys-color-tertiary)' : 'var(--accent-amber)', fontWeight: 700, marginTop: '0.2rem' }}>
                   {result.bmiPrime <= 1.0 ? 'Optimal Ratio' : 'Elevated Ratio'}
                 </div>
               </div>
@@ -547,13 +536,13 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                 </thead>
                 <tbody>
                   {[
-                    { cat: 'Severe Thinness', range: '< 16.0', risk: 'Substantially Elevated', color: '#b3261e' },
-                    { cat: 'Underweight', range: '16.0 – 18.4', risk: 'Elevated Risk', color: '#0284c7' },
-                    { cat: 'Normal Weight', range: '18.5 – 24.9', risk: 'Lowest Risk (Optimal)', color: '#146c2e' },
-                    { cat: 'Overweight', range: '25.0 – 29.9', risk: 'Increased Risk', color: '#b45309' },
-                    { cat: 'Obese Class I', range: '30.0 – 34.9', risk: 'High Risk', color: '#be123c' },
-                    { cat: 'Obese Class II', range: '35.0 – 39.9', risk: 'Very High Risk', color: '#b3261e' },
-                    { cat: 'Obese Class III', range: '≥ 40.0', risk: 'Extremely High Risk', color: '#7f1d1d' }
+                    { cat: 'Severe Thinness', range: '< 16.0', risk: 'Substantially Elevated', color: 'var(--accent-red)' },
+                    { cat: 'Underweight', range: '16.0 – 18.4', risk: 'Elevated Risk', color: 'var(--accent-cyan)' },
+                    { cat: 'Normal Weight', range: '18.5 – 24.9', risk: 'Lowest Risk (Optimal)', color: 'var(--md-sys-color-tertiary)' },
+                    { cat: 'Overweight', range: '25.0 – 29.9', risk: 'Increased Risk', color: 'var(--accent-amber)' },
+                    { cat: 'Obese Class I', range: '30.0 – 34.9', risk: 'High Risk', color: 'var(--accent-rose)' },
+                    { cat: 'Obese Class II', range: '35.0 – 39.9', risk: 'Very High Risk', color: 'var(--accent-red)' },
+                    { cat: 'Obese Class III', range: '≥ 40.0', risk: 'Extremely High Risk', color: 'var(--accent-red-deep)' }
                   ].map((row, i) => (
                     <tr
                       key={i}
@@ -630,7 +619,7 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
                       </td>
                       <td style={{ padding: '0.65rem 0.75rem' }}>
                         {row.isAsianMatch ? (
-                          <span style={{ fontSize: '0.78rem', color: '#146c2e', fontWeight: 800, padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'color-mix(in srgb, #146c2e 14%, transparent)' }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--md-sys-color-tertiary)', fontWeight: 800, padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'color-mix(in srgb, #146c2e 14%, transparent)' }}>
                             Active Category
                           </span>
                         ) : '—'}
@@ -659,20 +648,20 @@ export const BMICalculatorPage: React.FC<BMICalculatorPageProps> = ({ onNavigate
           <div className="m3-card-filled" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', marginTop: '1.5rem' }}>
             <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
               <ShieldCheck size={18} color="var(--accent-emerald)" />
-              <span>WHO Formula Verification</span>
+              <span>Clinical Standards & Privacy</span>
             </h4>
             <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '0.85rem' }}>
-              BMI formula standard: <code>weight (kg) / [height (m)]²</code>. All conversions between metric and US customary units adhere to National Institute of Standards (NIST).
+              Standard formula: <code>weight (kg) / [height (m)]²</code>. All unit conversions adhere strictly to National Institute of Standards (NIST) conventions.
             </p>
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-              Data remains 100% private in your browser.
+              100% private: Your height and weight figures never leave your device.
             </div>
           </div>
 
           {/* Other Health Calculators */}
           <div className="m3-card-filled" style={{ padding: '1.25rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', marginTop: '1.5rem' }}>
             <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-              Related Computational Tools
+              Related Health & Daily Tools
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <button

@@ -2,7 +2,7 @@ import React from 'react';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { CalculatorArticleView } from '../components/common/CalculatorArticleView';
-import { Sparkles, ArrowLeft, ArrowRight, Construction, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ArrowLeft, ArrowRight, Compass, CheckCircle2 } from 'lucide-react';
 
 interface GenericCalculatorPageProps {
   slug: string;
@@ -14,7 +14,7 @@ export const GenericCalculatorPage: React.FC<GenericCalculatorPageProps> = ({ sl
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
         <Breadcrumbs
           currentCalculator={calc}
           onHomeClick={() => onNavigate('/')}
@@ -36,14 +36,14 @@ export const GenericCalculatorPage: React.FC<GenericCalculatorPageProps> = ({ sl
           height: '64px',
           borderRadius: '16px',
           background: 'var(--gradient-primary)',
-          color: '#fff',
+          color: 'var(--md-sys-color-on-primary)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           margin: '0 auto 1.25rem',
           boxShadow: 'var(--shadow-glow)'
         }}>
-          <Construction size={32} />
+          <Compass size={32} />
         </div>
 
         <div style={{
@@ -83,15 +83,15 @@ export const GenericCalculatorPage: React.FC<GenericCalculatorPageProps> = ({ sl
           </div>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.825rem', color: 'var(--text-secondary)' }}>
             <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <CheckCircle2 size={14} color="#10b981" />
+              <CheckCircle2 size={14} color="var(--accent-emerald)" />
               <span>Full formula breakdown and mathematical explanations</span>
             </li>
             <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <CheckCircle2 size={14} color="#10b981" />
+              <CheckCircle2 size={14} color="var(--accent-emerald)" />
               <span>Instant reactive computations with metric & imperial units</span>
             </li>
             <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <CheckCircle2 size={14} color="#10b981" />
+              <CheckCircle2 size={14} color="var(--accent-emerald)" />
               <span>Downloadable summaries and shareable URLs</span>
             </li>
           </ul>

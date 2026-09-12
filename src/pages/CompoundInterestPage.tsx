@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -38,21 +38,10 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
 
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    document.title = 'Compound Interest Calculator – With Monthly Deposits';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'See how your money grows with compound interest. Add monthly deposits, choose daily to yearly compounding and view a year-by-year growth table.'
-      );
-    }
-  }, []);
-
   const result = useMemo(() => calculateCompoundInterest(input), [input]);
 
   const handleCopy = () => {
-    const text = `Compound Interest Projection:\nInitial Principal: ${currentCurrency.symbol}${input.principal.toLocaleString()}\nFuture Value (${input.tenureYears} Years @ ${input.annualInterestRate}%): ${currentCurrency.symbol}${result.futureValue.toLocaleString()}\nTotal Interest Earned: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nCalculated via Calculator360.app (${currency})`;
+    const text = `Compound Interest Projection:\nInitial Principal: ${currentCurrency.symbol}${input.principal.toLocaleString()}\nFuture Value (${input.tenureYears} Years @ ${input.annualInterestRate}%): ${currentCurrency.symbol}${result.futureValue.toLocaleString()}\nTotal Interest Earned: ${currentCurrency.symbol}${result.totalInterest.toLocaleString()}\nCalculated via Calculator360.com (${currency})`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -101,7 +90,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Forecast your long-term wealth growth, compare compounding frequencies, and see the exponential power of regular monthly contributions over time.
+          See how your savings and investments grow with the power of compounding. Compare daily, monthly, and annual compounding frequencies with optional regular contributions.
         </p>
       </div>
 
@@ -253,7 +242,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
             </div>
 
             {/* Additional Regular Contribution & Frequency */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
               <div>
                 <label htmlFor="additional-contrib-input" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
                   Regular Periodic Deposit
@@ -329,7 +318,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
         <div>
           {/* Main Elevated Results Card */}
           <div className="m3-card-elevated" style={{ padding: '1.75rem', marginBottom: '1.75rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-tertiary)' }}>
                 Forecast Summary
               </span>
@@ -378,7 +367,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
             </div>
 
             {/* Key Metric Blocks */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
               <div className="m3-card-filled" style={{ padding: '1rem', background: 'var(--surface-subtle)', border: '1.5px solid var(--border-subtle)' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
                   Total Principal Invested
@@ -392,13 +381,13 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
               </div>
 
               <div className="m3-card-filled" style={{ padding: '1rem', background: 'rgba(20, 108, 46, 0.08)', border: '1.5px solid rgba(20, 108, 46, 0.25)' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#146c2e' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-tertiary)' }}>
                   Total Compound Growth
                 </span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#146c2e', marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--md-sys-color-tertiary)', marginTop: '0.2rem' }}>
                   +{currentCurrency.symbol}{result.totalInterest.toLocaleString()}
                 </div>
-                <div style={{ fontSize: '0.725rem', color: '#146c2e', opacity: 0.9, marginTop: '0.2rem', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.725rem', color: 'var(--md-sys-color-tertiary)', opacity: 0.9, marginTop: '0.2rem', fontWeight: 700 }}>
                   {result.interestPercentage}% pure growth
                 </div>
               </div>
@@ -411,7 +400,7 @@ export const CompoundInterestPage: React.FC<CompoundInterestPageProps> = ({ onNa
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--md-sys-color-primary)' }} />
                   Principal ({result.principalPercentage}%)
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#146c2e' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--md-sys-color-tertiary)' }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#146c2e' }} />
                   Interest ({result.interestPercentage}%)
                 </span>

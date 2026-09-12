@@ -80,7 +80,7 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
       {activeTab === 'astrology' && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
           gap: '1rem'
         }}>
           {/* Western Zodiac */}
@@ -192,7 +192,7 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
       {activeTab === 'planets' && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(135px, 100%), 1fr))',
           gap: '0.9rem'
         }}>
           {planetaryAges.map(p => (
@@ -235,7 +235,7 @@ export const FunInsightsSection: React.FC<FunInsightsSectionProps> = ({
       {activeTab === 'bio' && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(230px, 100%), 1fr))',
           gap: '1rem'
         }}>
           <div className="glass-card" style={{ padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>

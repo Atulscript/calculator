@@ -92,7 +92,7 @@ export const TimeBreakdownGrid: React.FC<TimeBreakdownGridProps> = ({ totals }) 
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(175px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(175px, 100%), 1fr))',
         gap: '0.9rem'
       }}>
         {cards.map(card => {

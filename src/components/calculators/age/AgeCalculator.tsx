@@ -90,7 +90,7 @@ export const AgeCalculator: React.FC = () => {
   return (
     <div>
       {/* Title & Short Description */}
-      <div style={{ marginBottom: '1.75rem', textAlign: 'center' }}>
+      <div style={{ marginBottom: '1.75rem' }}>
         <h1 style={{
           fontSize: 'clamp(1.85rem, 4vw, 2.4rem)',
           fontWeight: 800,
@@ -99,22 +99,21 @@ export const AgeCalculator: React.FC = () => {
           color: 'var(--text-primary)',
           lineHeight: 1.2
         }}>
-          Chronological Age Calculator
+          Age Calculator
         </h1>
 
         <p style={{
           fontSize: '1.025rem',
           color: 'var(--text-secondary)',
           maxWidth: '680px',
-          margin: '0 auto',
           lineHeight: 1.65
         }}>
-          Calculate your exact age in years, months, days, hours, and seconds with birthday countdown, zodiac sign, and planetary orbital ages.
+          Find your exact age in completed years, months, and days. Check official eligibility cut-offs for exams, passports, or legal documents, and track your next birthday countdown.
         </p>
       </div>
 
       {/* Mode Switcher Tabs with M3 Segmented Control */}
-      <div style={{ marginBottom: '1.75rem', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ marginBottom: '1.75rem', display: 'flex', justifyContent: 'flex-start' }}>
         <div className="m3-segmented-control" style={{ maxWidth: '680px', width: '100%', overflowX: 'auto' }}>
           <button
             type="button"
@@ -173,7 +172,7 @@ export const AgeCalculator: React.FC = () => {
         >
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(250px, 100%), 1fr))',
             gap: '1.25rem',
             marginBottom: '1.25rem'
           }}>

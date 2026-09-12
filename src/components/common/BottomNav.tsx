@@ -56,6 +56,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         }}
         className={`bottom-nav-item ${isHome ? 'active' : ''}`}
         aria-label={t('home')}
+        aria-current={isHome ? 'page' : undefined}
       >
         <div className="nav-icon-pill">
           <Home size={20} />

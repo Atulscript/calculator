@@ -41,6 +41,7 @@
   --md-sys-color-outline-variant: #cbd5e1;   /* Crisp, visible borders */
 
   --primary-500: #0b57d0;
+  --primary-600: #0842a0;
   --primary-glow: rgba(11, 87, 208, 0.15);
   --border-subtle: #cbd5e1;
   --border-accent: rgba(11, 87, 208, 0.4);
@@ -49,10 +50,13 @@
 
   /* High Contrast Accent Colors (WCAG AAA compliant on white) */
   --accent-purple: #6750a4;
-  --accent-amber: #b45309;
-  --accent-cyan: #0284c7;
+  --accent-amber: #a3490a;
+  --accent-cyan: #0369a1;
   --accent-rose: #be123c;
   --accent-emerald: #047857;
+  --accent-red: #b3261e;
+  --accent-red-deep: #7f1d1d;
+  --accent-pink: #be185d;
 
   --gradient-primary: linear-gradient(135deg, #0b57d0 0%, #6750a4 100%);
   --shadow-glow: 0 4px 14px rgba(11, 87, 208, 0.15);
@@ -117,6 +121,7 @@
   --md-sys-color-outline-variant: #334155;
 
   --primary-500: #a8c7fa;
+  --primary-600: #c7dbfd;
   --primary-glow: rgba(168, 199, 250, 0.2);
   --border-subtle: #334155;
   --border-accent: rgba(168, 199, 250, 0.4);
@@ -128,6 +133,9 @@
   --accent-cyan: #38bdf8;
   --accent-rose: #fb7185;
   --accent-emerald: #34d399;
+  --accent-red: #f2b8b5;
+  --accent-red-deep: #ffb4ab;
+  --accent-pink: #f472b6;
 
   --gradient-primary: linear-gradient(135deg, #a8c7fa 0%, #d0bcff 100%);
   --shadow-glow: 0 4px 14px rgba(168, 199, 250, 0.2);
@@ -154,6 +162,12 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
@@ -164,6 +178,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
+}
+
+#root,
+.app-container {
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -200,13 +224,32 @@ strong, b {
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
+  padding: 1rem 1.25rem 4rem;
 }
 
 @media (min-width: 768px) {
   .main-content {
-    padding: 2rem 1.5rem 5rem;
+    padding: 1.4rem 1.5rem 5rem;
   }
+}
+
+/* Single-line ellipsis. Requires the flex parent to allow shrinking. */
+.truncate {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Keyboard-only focus ring (M3 accessibility) */
+:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--md-sys-shape-xs);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* =========================================================
@@ -215,32 +258,16 @@ strong, b {
 
 .m3-card-elevated {
   background: var(--surface-solid);
-  border-radius: var(--md-sys-shape-lg);
-  box-shadow: var(--md-sys-elevation-1);
   border: 1px solid var(--border-subtle);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  border-radius: var(--md-sys-shape-lg);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .m3-card-elevated:hover {
   box-shadow: var(--md-sys-elevation-2);
   border-color: var(--primary-500);
   transform: translateY(-2px);
-}
-
-.m3-card-filled {
-  background: var(--surface-solid);
-  border-radius: var(--md-sys-shape-lg);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--md-sys-elevation-1);
-  transition: all 0.2s ease;
-}
-
-.m3-card-elevated {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--md-sys-shape-lg);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 [data-theme="dark"] .m3-card-elevated {
@@ -355,9 +382,11 @@ strong, b {
    BUTTONS & HIGH CONTRAST INPUTS
    ========================================================= */
 
+/* Paired with --md-sys-color-primary, which is light in the dark theme —
+   a hardcoded white here drops to ~1.7:1 contrast. */
 .btn-primary,
 .btn-primary * {
-  color: #ffffff !important;
+  color: var(--md-sys-color-on-primary) !important;
 }
 
 .btn-primary {
@@ -524,22 +553,22 @@ strong, b {
    NATIVE MOBILE APP-LIKE EXPERIENCE (M3 & iOS Standards)
    ========================================================= */
 
-/* Mobile Bottom Navigation Bar */
+/* Mobile Bottom Navigation Bar (Google Material Design 3 Spec) */
 .mobile-bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  background: var(--bottom-nav-bg);
+  background: var(--md-sys-color-surface-container-low);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1.5px solid var(--border-subtle);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  padding: 0.4rem 0.5rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
   user-select: none;
   -webkit-user-select: none;
 }
@@ -549,7 +578,7 @@ strong, b {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   background: none;
   border: none;
   cursor: pointer;
@@ -557,62 +586,62 @@ strong, b {
   color: var(--text-muted);
   -webkit-tap-highlight-color: transparent;
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  min-width: 56px;
+  min-width: 58px;
 }
 
 .bottom-nav-item:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 .bottom-nav-item .nav-icon-pill {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 28px;
-  border-radius: 14px;
+  width: 52px;
+  height: 30px;
+  border-radius: 15px;
   color: var(--text-secondary);
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .bottom-nav-item.active .nav-icon-pill {
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  box-shadow: 0 1px 3px rgba(11, 87, 208, 0.2);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
 }
 
 .bottom-nav-item.active {
-  color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-surface);
 }
 
 .bottom-nav-item.active .nav-label {
-  color: var(--md-sys-color-primary);
-  font-weight: 800;
+  color: var(--md-sys-color-on-surface);
+  font-weight: 700;
 }
 
 .bottom-nav-item .nav-label {
-  font-size: 0.68rem;
+  font-size: 0.685rem;
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  letter-spacing: 0.015em;
   color: var(--text-muted);
   transition: color 0.15s ease, font-weight 0.15s ease;
 }
 
 .bottom-nav-item.search-item .search-pill {
   background: var(--md-sys-color-primary);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(11, 87, 208, 0.35);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: 0 2px 6px rgba(11, 87, 208, 0.3);
 }
 
 .bottom-nav-item.search-item:active .search-pill {
-  transform: scale(0.94);
+  transform: scale(0.93);
 }
 
 /* Native Back Button (Header) */
 .native-back-btn {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--surface-hover);
   border: 1.5px solid var(--border-subtle);
@@ -633,15 +662,765 @@ strong, b {
 /* Card Grids & Layouts */
 .category-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 1rem;
 }
 
 .popular-calculators-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.25rem;
 }
+
+/* =========================================================
+   MODERN FLAGSHIP HERO SECTION (Everyday Precision)
+   ========================================================= */
+.hero-modern-section {
+  position: relative;
+  text-align: center;
+  padding: clamp(1.65rem, 3.8vw, 2.95rem) 0 clamp(1.75rem, 3.5vw, 2.5rem);
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Atmospheric Ambient Lighting Glow */
+.hero-ambient-glow-container {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 780px);
+  height: 400px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.hero-ambient-glow-blob {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.16) 45%, rgba(168, 85, 247, 0.08) 70%, transparent 80%);
+  filter: blur(60px);
+}
+
+[data-theme="dark"] .hero-ambient-glow-blob {
+  background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.24), rgba(99, 102, 241, 0.2) 45%, rgba(192, 132, 252, 0.12) 70%, transparent 80%);
+  filter: blur(75px);
+}
+
+/* Subtle Geometric Grid Matrix */
+.hero-grid-matrix {
+  position: absolute;
+  inset: -20px -20px 0 -20px;
+  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 85%);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="dark"] .hero-grid-matrix {
+  opacity: 0.35;
+}
+
+.hero-content-relative {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Top Feature Status Pill */
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.38rem 1rem;
+  border-radius: var(--md-sys-shape-full);
+  background: var(--surface-solid);
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  font-size: 0.815rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  white-space: nowrap;
+  max-width: 100%;
+  transition: all 0.2s ease;
+}
+
+.hero-pill-text-desktop {
+  display: inline;
+}
+
+.hero-pill-text-mobile {
+  display: none;
+}
+
+@media (max-width: 540px) {
+  .hero-status-pill {
+    font-size: 0.76rem;
+    padding: 0.32rem 0.85rem;
+    gap: 0.45rem;
+  }
+  .hero-pill-text-desktop {
+    display: none;
+  }
+  .hero-pill-text-mobile {
+    display: inline;
+  }
+}
+
+.hero-status-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 6px 18px var(--primary-glow);
+}
+
+.hero-pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.hero-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.45);
+  animation: pulseDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+/* Main Hero Title (Exact wording preserved) */
+.hero-main-title {
+  font-size: clamp(2.1rem, 4.8vw, 3.85rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: 0.95rem;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-title-line-1 {
+  display: block;
+}
+
+.hero-title-line-2 {
+  display: block;
+}
+
+.hero-gradient-text-accent {
+  background: linear-gradient(135deg, #0284c7 0%, #0b57d0 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+[data-theme="dark"] .hero-gradient-text-accent {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .hero-main-title {
+    /* Sized so "Calculators designed for" still sits on one line down to
+       320px, but wraps gracefully instead of shrinking below the H2 scale. */
+    font-size: clamp(1.55rem, 6.5vw, 2.3rem);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.75rem;
+    text-wrap: balance;
+  }
+  .hero-title-line-1,
+  .hero-title-line-2 {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* Subtitle */
+.hero-main-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 1.85rem;
+  text-wrap: balance;
+}
+
+/* Master Search Dock Wrapper */
+.hero-search-wrapper {
+  max-width: 660px;
+  margin: 0 auto 1.85rem;
+  position: relative;
+}
+
+.hero-search-dock {
+  display: flex;
+  align-items: center;
+  background: var(--surface-solid);
+  border-radius: var(--md-sys-shape-full);
+  padding: 0.45rem 0.55rem 0.45rem 1.25rem;
+  border: 1.5px solid var(--border-subtle);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  gap: 0.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.hero-search-dock:focus-within,
+.hero-search-dock:hover {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 4px var(--primary-glow), 0 12px 32px -4px rgba(11, 87, 208, 0.2);
+}
+
+.hero-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.hero-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.hero-search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.hero-search-clear-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.hero-search-kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.hero-search-kbd:hover {
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-primary);
+}
+
+.hero-search-submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.45rem;
+  border-radius: var(--md-sys-shape-full);
+  background: var(--gradient-primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.885rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+/* --gradient-primary inverts to light tints in the dark theme */
+[data-theme="dark"] .hero-search-submit-btn {
+  color: var(--md-sys-color-on-primary);
+}
+
+.hero-search-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--primary-glow);
+  filter: brightness(1.05);
+}
+
+.hero-search-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Live Floating Dropdown Results */
+.hero-live-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--surface-solid);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--md-sys-shape-lg);
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.28);
+  padding: 0.5rem;
+  z-index: 50;
+  text-align: left;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-live-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--md-sys-shape-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.hero-live-item:hover {
+  background: var(--surface-hover);
+  transform: translateX(3px);
+}
+
+.hero-live-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.hero-live-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--md-sys-shape-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-live-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.hero-live-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 380px;
+}
+
+/* Trending Shortcuts (Always Single Line on Desktop & Mobile) */
+.hero-trending-strip {
+  display: flex;
+  align-items: center;
+  /* Not `center`: a centred flex row that overflows puts its first items in
+     negative scroll space, where they can never be scrolled back into view.
+     Auto margins on the edge children centre the group only while it fits. */
+  justify-content: flex-start;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: 100%;
+  margin-bottom: 2.25rem;
+  padding: 0.35rem 0.75rem 0.65rem;
+  scroll-snap-type: x proximity;
+  mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+.hero-trending-strip > :first-child {
+  margin-left: auto;
+}
+
+.hero-trending-strip > :last-child {
+  margin-right: auto;
+}
+
+.hero-trending-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-trending-label {
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.25rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  /* Without a snap point of its own the strip snaps past the label,
+     leaving it scrolled out of view on load. */
+  scroll-snap-align: start;
+}
+
+.hero-trending-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--md-sys-shape-full);
+  background: var(--surface-solid);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: all 0.18s ease;
+}
+
+.hero-trending-pill:hover {
+  border-color: var(--border-accent);
+  color: var(--md-sys-color-primary);
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 820px) {
+  .hero-trending-strip {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Trust Proof Matrix Strip */
+.hero-trust-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface-solid);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--md-sys-shape-xl);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-trust-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.hero-trust-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--md-sys-shape-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-trust-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.hero-trust-card-desc {
+  font-size: 0.735rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 900px) {
+  .hero-trust-matrix {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+/* Mobile App Optimization for Hero Section & Widgets */
+@media (max-width: 640px) {
+  .main-content {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 0.5rem !important;
+    max-width: 100% !important;
+    overflow-x: clip !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-modern-section {
+    padding-top: 0.75rem;
+    padding-bottom: 1.25rem;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-main-subtitle {
+    font-size: 0.865rem;
+    line-height: 1.45;
+    margin-bottom: 1.15rem;
+    padding: 0;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-secondary);
+  }
+
+  .hero-search-wrapper {
+    margin-bottom: 1.15rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Google Material 3 Mobile Search Pill */
+  .hero-search-dock {
+    padding: 0.35rem 0.4rem 0.35rem 1rem;
+    border-radius: var(--md-sys-shape-full);
+    gap: 0.5rem;
+    background: var(--surface-solid);
+    border: 1.5px solid var(--md-sys-color-outline-variant);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  [data-theme="dark"] .hero-search-dock {
+    background: var(--md-sys-color-surface-container-high);
+    border-color: var(--md-sys-color-outline-variant);
+  }
+
+  .hero-search-dock:focus-within {
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 3px var(--primary-glow), 0 4px 16px rgba(11, 87, 208, 0.16);
+  }
+
+  /* Hide ⌘K keyboard shortcut tag on touch mobile screens */
+  .hero-search-kbd {
+    display: none !important;
+  }
+
+  .hero-search-input {
+    font-size: 16px !important; /* Essential to prevent iOS Safari auto-zoom */
+    min-width: 0;
+    text-overflow: ellipsis;
+  }
+
+  /* Google M3 Pill Action Button */
+  .hero-search-submit-btn {
+    padding: 0.52rem 1.05rem;
+    font-size: 0.825rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: var(--md-sys-shape-full);
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    gap: 0.35rem;
+    border: none;
+    box-shadow: 0 2px 6px rgba(11, 87, 208, 0.28);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero-search-submit-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Below ~430px the label leaves no readable room for the query text,
+     so the action collapses to a circular icon button. */
+  @media (max-width: 430px) {
+    .hero-search-dock {
+      padding-left: 0.85rem;
+      gap: 0.4rem;
+    }
+    .hero-search-submit-btn {
+      padding: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      justify-content: center;
+    }
+    .hero-search-submit-btn span {
+      display: none;
+    }
+  }
+
+  /* Google M3 Suggestion Chips (Trending) */
+  .hero-trending-strip {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-bottom: 1.35rem;
+    padding: 0.2rem 0 0.45rem 0;
+    gap: 0.5rem;
+    mask-image: linear-gradient(to right, black calc(100% - 32px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 32px), transparent 100%);
+    box-sizing: border-box;
+  }
+
+  .hero-trending-pill {
+    padding: 0.36rem 0.85rem;
+    font-size: 0.79rem;
+    font-weight: 600;
+    border-radius: var(--md-sys-shape-full);
+    background: var(--md-sys-color-surface-container);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .hero-trending-pill:active {
+    transform: scale(0.94);
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-color: var(--md-sys-color-primary);
+  }
+
+  /* Google Material 3 Bento Cards (Trust Matrix) - Vertical Stacked on Mobile */
+  .hero-trust-matrix {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+    padding: 0.75rem !important;
+    border-radius: 20px !important;
+    background: var(--md-sys-color-surface-container-low) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .hero-trust-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 0.85rem 0.75rem !important;
+    gap: 0.45rem !important;
+    background: var(--surface-solid) !important;
+    border-radius: 14px !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    -webkit-tap-highlight-color: transparent !important;
+    transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.12s ease !important;
+  }
+
+  .hero-trust-card > div:last-child {
+    min-width: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .hero-trust-card:active {
+    transform: scale(0.96) !important;
+    background: var(--surface-hover) !important;
+  }
+
+  .hero-trust-icon-wrap {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 9px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-trust-icon-wrap svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .hero-trust-card-title {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    color: var(--md-sys-color-on-surface) !important;
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 2px !important;
+  }
+
+  .hero-trust-card-desc {
+    font-size: 0.69rem !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    color: var(--text-muted) !important;
+  }
+}
+
 
 .category-matrix-card {
   padding: 1.4rem;
@@ -656,9 +1435,17 @@ strong, b {
 }
 
 .category-matrix-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: var(--primary-500);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 20px -5px rgba(11, 87, 208, 0.12);
+}
+
+.category-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
 }
 
 .category-card-icon {
@@ -668,7 +1455,17 @@ strong, b {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.category-card-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--md-sys-shape-full);
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
 }
 
 .category-card-title {
@@ -696,6 +1493,11 @@ strong, b {
   padding-top: 0.85rem;
 }
 
+.category-matrix-card:hover .category-card-action svg {
+  transform: translateX(4px);
+  transition: transform 0.2s ease;
+}
+
 .popular-calc-card {
   padding: 1.4rem;
   cursor: pointer;
@@ -710,38 +1512,79 @@ strong, b {
 }
 
 .popular-calc-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: var(--primary-500);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 24px -8px rgba(11, 87, 208, 0.16);
 }
 
 .popular-calc-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 0.6rem;
   margin-bottom: 0.9rem;
 }
 
+.popular-calc-badges {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
 .popular-calc-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--md-sys-shape-sm);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--md-sys-shape-md);
   background: var(--md-sys-color-primary-container);
   color: var(--md-sys-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.popular-calc-card:hover .popular-calc-icon {
+  transform: scale(1.05);
 }
 
 .popular-calc-badge {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: capitalize;
-  padding: 0.25rem 0.65rem;
+  padding: 0.22rem 0.65rem;
   border-radius: var(--md-sys-shape-xs);
-  background: var(--surface-subtle);
-  color: var(--text-primary);
-  border: 1.5px solid var(--border-subtle);
+  white-space: nowrap;
+  background: var(--badge-bg, var(--surface-subtle));
+  color: var(--badge-fg, var(--text-primary));
+  border: 1.5px solid var(--badge-border, var(--border-subtle));
+}
+
+/* The category hues are tuned for a white card; on a dark card the same
+   value drops under 3:1, so each category ships a light counterpart. */
+[data-theme="dark"] .popular-calc-badge {
+  color: var(--badge-fg-dark, var(--text-secondary));
+}
+
+.popular-calc-special-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--md-sys-shape-full);
+  background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 100%);
+  color: #4338ca;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .popular-calc-special-badge {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(217, 70, 239, 0.25) 100%);
+  color: #c7d2fe;
+  border-color: rgba(165, 180, 252, 0.35);
 }
 
 .popular-calc-title {
@@ -770,6 +1613,14 @@ strong, b {
   font-weight: 700;
 }
 
+.popular-calc-action .action-arrow {
+  transition: transform 0.2s ease;
+}
+
+.popular-calc-card:hover .action-arrow {
+  transform: translateX(4px);
+}
+
 /* Category Filter Chips Bar */
 .home-category-chips-bar {
   display: flex;
@@ -781,14 +1632,77 @@ strong, b {
   max-width: 960px;
 }
 
+/* Tablet: the tagline competes with the search bar for the same header row */
+@media (max-width: 900px) {
+  .logo-tagline-desktop {
+    display: none !important;
+  }
+}
+
+/* Inner routes add a back button and a search button to the app bar, which
+   together with the wordmark exceed a small phone's width. The icon alone
+   still navigates home. */
+@media (max-width: 480px) {
+  .mobile-app-header.is-inner-route .logo-wordmark {
+    display: none !important;
+  }
+}
+
+/* Smallest phones: drop the badge so the wordmark itself still fits */
+@media (max-width: 380px) {
+  .mobile-app-header .logo-degree-badge {
+    display: none !important;
+  }
+}
+
+.footer-legal-link {
+  color: inherit;
+  text-decoration: underline;
+  font-size: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-legal-link:hover {
+  color: var(--md-sys-color-primary);
+}
+
+/* Touch targets: M3 asks for 48dp, 44px is the practical floor */
+@media (pointer: coarse) {
+  .footer-legal-link {
+    min-height: 44px;
+  }
+
+  .hero-trending-pill,
+  .m3-chip {
+    min-height: 36px;
+  }
+
+  .mobile-app-header button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .hero-search-submit-btn {
+    min-height: 44px;
+  }
+}
+
 /* Desktop vs Mobile Breakpoints */
 @media (min-width: 769px) {
   .mobile-bottom-nav {
     display: none !important;
   }
+  .mobile-header-search-btn {
+    display: none !important;
+  }
 }
 
 @media (max-width: 768px) {
+  .mobile-header-search-btn {
+    display: flex !important;
+  }
   /* Fast tap feedback */
   * {
     -webkit-tap-highlight-color: transparent;
@@ -819,11 +1733,23 @@ strong, b {
     display: none !important;
   }
 
-  /* Header adjustments on mobile */
+
+  /* Header adjustments on mobile (Google M3 Top App Bar) */
   .mobile-app-header {
-    padding-top: max(0.65rem, env(safe-area-inset-top, 0px)) !important;
+    background: var(--md-sys-color-surface-container-lowest) !important;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+    padding-top: max(0.6rem, env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: 0.6rem !important;
     padding-left: 0.85rem !important;
     padding-right: 0.85rem !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+  }
+
+  @media (max-width: 480px) {
+    .header-currency-code {
+      display: none !important;
+    }
   }
 
   /* Bottom content buffer so fixed bottom nav never overlaps UI */
@@ -875,7 +1801,7 @@ strong, b {
   /* 2-Column Mobile Grid for Categories & Popular Calculators */
   .category-cards-grid,
   .popular-calculators-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 0.65rem !important;
   }
 
@@ -891,7 +1817,6 @@ strong, b {
     width: 32px !important;
     height: 32px !important;
     border-radius: 8px !important;
-    margin-bottom: 0.45rem !important;
   }
 
   .category-card-icon svg,
@@ -908,6 +1833,19 @@ strong, b {
     font-size: 0.62rem !important;
     padding: 0.12rem 0.38rem !important;
     border-radius: 4px !important;
+  }
+
+  .popular-calc-special-badge {
+    font-size: 0.58rem !important;
+    padding: 0.1rem 0.42rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* A two-up card is too narrow for both badges beside the icon; the
+     category is already encoded in the icon colour, so the rarer
+     FLAGSHIP/POPULAR marker wins. */
+  .popular-calc-special-badge + .popular-calc-badge {
+    display: none !important;
   }
 
   .category-card-title,
@@ -941,6 +1879,58 @@ strong, b {
     padding-left: 0;
     padding-right: 0;
   }
+
+  /* Google M3 Platform Principles & FAQ Card Mobile Polish */
+  .home-trust-principles-card,
+  .home-faq-article {
+    padding: 1.25rem 1rem !important;
+    border-radius: var(--md-sys-shape-xl) !important;
+  }
+
+  .home-trust-principles-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.35rem !important;
+  }
+
+  /* Responsive Site Footer for Mobile */
+  .site-footer {
+    padding: 2.25rem 1rem calc(5.5rem + env(safe-area-inset-bottom, 20px)) !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .footer-categories-col {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Base Styles for Trust Principles & Footer */
+.home-trust-principles-card,
+.home-faq-article {
+  padding: 2.25rem 2rem;
+}
+
+.home-trust-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+.site-footer {
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+.footer-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.footer-categories-col {
+  min-width: 280px;
 }
 
 /* =========================================================
@@ -1335,9 +2325,11 @@ strong, b {
   margin-bottom: 0.45rem;
 }
 
-.m3-callout-card.info .m3-callout-title { color: #0284c7; }
-.m3-callout-card.tip .m3-callout-title { color: #10b981; }
-.m3-callout-card.warning .m3-callout-title { color: #f59e0b; }
+/* Titles use the theme-aware accent tokens; the vivid hues above stay on the
+   decorative left border, where the 4.5:1 text rule does not apply. */
+.m3-callout-card.info .m3-callout-title { color: var(--accent-cyan); }
+.m3-callout-card.tip .m3-callout-title { color: var(--accent-emerald); }
+.m3-callout-card.warning .m3-callout-title { color: var(--accent-amber); }
 
 .m3-callout-text {
   font-size: 0.95rem;
@@ -1348,7 +2340,7 @@ strong, b {
 /* Step-by-Step Cards Grid */
 .m3-steps-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 1.25rem;
   margin: 1.5rem 0 2.5rem;
 }
@@ -1526,6 +2518,21 @@ strong, b {
    MODERN DATE PICKER & CALENDAR COMPONENT
    ========================================================= */
 
+@keyframes m3DropdownFade {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modern-datepicker-popover {
+  box-sizing: border-box;
+}
+
 .modern-datepicker-field:hover {
   border-color: var(--primary-500) !important;
 }
@@ -1567,6 +2574,318 @@ strong, b {
   cursor: pointer;
 }
 
+/* =========================================================
+   SCIENTIFIC CALCULATOR KEYPAD & DISPLAY
+   ========================================================= */
+
+.calc-key {
+  min-height: 48px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.12s cubic-bezier(0.2, 0, 0, 1);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calc-key:active {
+  transform: scale(0.93);
+}
+
+.calc-key-num {
+  background: var(--surface-solid);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.calc-key-num:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary-500);
+}
+
+.calc-key-fn {
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.calc-key-fn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.calc-key-op {
+  background: rgba(11, 87, 208, 0.08);
+  color: var(--md-sys-color-primary);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+[data-theme="dark"] .calc-key-op {
+  background: rgba(168, 199, 250, 0.12);
+  color: #a8c7fa;
+}
+
+.calc-key-op:hover {
+  background: rgba(11, 87, 208, 0.18);
+  border-color: var(--primary-500);
+}
+
+.calc-key-primary {
+  background: var(--md-sys-color-primary) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  box-shadow: 0 4px 12px rgba(11, 87, 208, 0.35);
+  border-color: transparent !important;
+}
+
+.calc-key-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(11, 87, 208, 0.45);
+}
+
+.calc-key-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b3261e;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .calc-key-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.calc-key-danger:hover {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: #dc2626;
+}
+
+.calc-key-active {
+  border-color: var(--primary-500) !important;
+  background: rgba(11, 87, 208, 0.15) !important;
+  color: var(--md-sys-color-primary) !important;
+}
+
+/* =========================================================
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   CLEAN HIGH-FIDELITY PRINT STYLESHEET
+   ========================================================= */
+@media print {
+  header,
+  footer,
+  .mobile-bottom-nav,
+  .desktop-search-bar,
+  .mobile-header-search-btn,
+  .btn-secondary,
+  .btn-primary,
+  .search-modal-backdrop,
+  .modern-datepicker-popover {
+    display: none !important;
+  }
+
+  body,
+  .app-container,
+  .main-content {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .m3-card-elevated,
+  .glass-card,
+  .m3-card-filled {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    background: #ffffff !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+  }
+
+  h1, h2, h3, h4, p, span, strong, td, th {
+    color: #000000 !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1px solid #dddddd !important;
+    padding: 6px 10px !important;
+    font-size: 9pt !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+    size: auto;
+  }
+}
 
 
 
+
+
+
+/* =========================================================
+   CATEGORY HUB PAGES
+   ========================================================= */
+
+.hub-tool-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--md-sys-shape-md);
+  background: var(--surface-solid);
+  border: 1.5px solid var(--border-subtle);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hub-tool-link:hover {
+  border-color: var(--primary-500);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -6px rgba(11, 87, 208, 0.2);
+}
+
+.hub-tool-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hub-tool-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.hub-tool-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hub-tool-arrow {
+  flex-shrink: 0;
+  color: var(--md-sys-color-primary);
+  transition: transform 0.15s ease;
+}
+
+.hub-tool-link:hover .hub-tool-arrow {
+  transform: translateX(3px);
+}
+
+.hub-faq-item {
+  padding: 0.95rem 1.15rem;
+  border-radius: var(--md-sys-shape-md);
+}
+
+.hub-faq-item > summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.hub-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.hub-faq-item > summary::after {
+  content: '+';
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--md-sys-color-primary);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.hub-faq-item[open] > summary::after {
+  content: '−';
+}
+
+.hub-faq-item > p {
+  margin-top: 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Several pages wrap .m3-segmented-tab in a plain flex div with no scroll
+   container, so the 130px minimum forces the row past the viewport on phones.
+   Relaxing the minimum lets these short mode-switch labels shrink to fit. */
+@media (max-width: 640px) {
+  .m3-segmented-tab {
+    min-width: 0;
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    font-size: 0.8rem;
+    gap: 0.3rem;
+  }
+}
+
+/* Long unbreakable tokens — URLs, encoded query strings, hashes — overflow
+   narrow viewports because there is no space to wrap at. `break-word` only
+   breaks a word that would otherwise overflow, so normal prose is unaffected. */
+p, li, td, dd, blockquote, figcaption {
+  overflow-wrap: break-word;
+}
+
+/* Narrow phones: four chips in a fixed row exceed 320px at full padding.
+   Tightening the horizontal padding keeps them on one line without clipping. */
+@media (max-width: 360px) {
+  .m3-chip {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* A <select> will not shrink below the width of its widest option, which
+   overflows narrow grid cells. Allowing it to shrink keeps the layout intact;
+   the selected value stays readable. */
+select {
+  min-width: 0;
+  max-width: 100%;
+}

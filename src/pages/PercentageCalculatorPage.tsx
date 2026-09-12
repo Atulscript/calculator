@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -51,17 +51,6 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
 
   const [copied, setCopied] = useState<string | null>(null);
 
-  useEffect(() => {
-    document.title = 'Percentage Calculator - Instant Percentage Increase, Decrease & Ratio | Calculator360';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Free, instant online percentage calculator: calculate percent of a number, percentage increase or decrease, discount, markup, and portion ratios.'
-      );
-    }
-  }, []);
-
   // Compute Real-time Results with edge-case protection
   const res1 = calculatePercentOfNumber(p1, x1);
   const res2 = calculateNumberIsWhatPercentOfTotal(x2, y2);
@@ -85,7 +74,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1rem 1rem 3rem' }}>
       {/* Top Breadcrumb */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
         <Breadcrumbs currentCalculator={calcMeta} onHomeClick={() => onNavigate('/')} />
       </div>
 
@@ -110,7 +99,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Quickly solve common percentage problems: find percentages of numbers, calculate percentage changes, markups, discounts, and portion ratios.
+          Solve everyday percentage questions in seconds: calculate discounts, markups, tips, test scores, and percentage increases or decreases with live reciprocal steps.
         </p>
       </div>
 
@@ -170,7 +159,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
           {/* MODE 1: What is P% of X? */}
           {activeMode === 'percentOf' && (
             <div className="m3-card-elevated" style={{ padding: '1.75rem', animation: 'm3-fade-slide-up 0.25s ease' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   Calculate Percentage of a Value
                 </h2>
@@ -263,7 +252,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
           {/* MODE 2: X is what % of Y? */}
           {activeMode === 'isWhatPercent' && (
             <div className="m3-card-elevated" style={{ padding: '1.75rem', animation: 'm3-fade-slide-up 0.25s ease' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   Portion & Ratio Percentage
                 </h2>
@@ -318,14 +307,14 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
           {/* MODE 3: Percentage Change (Increase / Decrease) */}
           {activeMode === 'percentageChange' && (
             <div className="m3-card-elevated" style={{ padding: '1.75rem', animation: 'm3-fade-slide-up 0.25s ease' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   Percentage Increase or Decrease
                 </h2>
                 <span className="glass-pill" style={{ fontSize: '0.72rem' }}>((New - Old) ÷ Old) × 100</span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(180px, 100%), 1fr))', gap: '1.25rem' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
                     Initial Value (Old)
@@ -373,7 +362,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
           {/* MODE 4: Add / Subtract P% */}
           {activeMode === 'addSubtract' && (
             <div className="m3-card-elevated" style={{ padding: '1.75rem', animation: 'm3-fade-slide-up 0.25s ease' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   Add or Subtract Percentage
                 </h2>
@@ -491,7 +480,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
            ========================================================================= */}
         <div>
           <div className="m3-card-elevated" style={{ padding: '1.75rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-tertiary)' }}>
                 Key Metrics Summary
               </span>
@@ -544,7 +533,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
                 </div>
 
                 {/* Secondary Key Metrics Breakdown */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginTop: '1.25rem' }}>
                   <div style={{ padding: '0.85rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>Decimal Multiplier</div>
                     <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
@@ -591,7 +580,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
                 </div>
 
                 {/* Secondary Metrics */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginTop: '1.25rem' }}>
                   <div style={{ padding: '0.85rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>Simplified Fraction</div>
                     <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
@@ -634,7 +623,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
                 </div>
 
                 {/* Secondary Metrics */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
                   <div style={{ padding: '0.85rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>Growth Multiplier</div>
                     <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
@@ -667,7 +656,7 @@ export const PercentageCalculatorPage: React.FC<PercentageCalculatorPageProps> =
                 </div>
 
                 {/* Secondary Metrics */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
                   <div style={{ padding: '0.85rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>Multiplier Factor</div>
                     <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>

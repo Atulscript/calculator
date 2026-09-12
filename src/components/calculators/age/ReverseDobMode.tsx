@@ -26,7 +26,7 @@ export const ReverseDobMode: React.FC = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(130px, 100%), 1fr))',
           gap: '0.85rem',
           marginBottom: '1rem'
         }}>

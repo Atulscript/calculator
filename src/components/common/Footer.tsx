@@ -1,30 +1,41 @@
-import React from 'react';
-import { Shield, Sparkles, CheckCircle2, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, Sparkles, CheckCircle2 } from 'lucide-react';
 import { CATEGORIES } from '../../data/categories';
 import { CalculatorCategory } from '../../types/calculator';
 import { Logo } from './Logo';
 import { useLocalization } from '../../context/LocalizationContext';
+import { LegalModal, LegalModalType } from './LegalModal';
 
 interface FooterProps {
   onSelectCategory: (cat: CalculatorCategory) => void;
   onSelectCalculator?: (id: string) => void;
+  onNavigate?: (path: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onNavigate }) => {
   const { t } = useLocalization();
+  const [activeLegalModal, setActiveLegalModal] = useState<LegalModalType>(null);
+
+  const handleLegalClick = (e: React.MouseEvent, type: 'about' | 'contact' | 'privacy' | 'terms' | 'disclaimer') => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(`/${type}`);
+    } else {
+      setActiveLegalModal(type);
+    }
+  };
+
   return (
-    <footer style={{
+    <footer className="site-footer" style={{
       background: 'var(--surface-solid)',
       borderTop: '1.5px solid var(--border-subtle)',
-      padding: '3.5rem 1.5rem 2.5rem',
       color: 'var(--text-secondary)',
       marginTop: 'auto'
     }}>
-      <div style={{
+      <div className="footer-grid" style={{
         maxWidth: '1280px',
         margin: '0 auto',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
         gap: '2.5rem',
         marginBottom: '3rem'
       }}>
@@ -70,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         </div>
 
         {/* Col 2: Categories in 2 Columns */}
-        <div style={{ minWidth: '280px' }}>
+        <div className="footer-categories-col">
           <h4 style={{
             fontSize: '0.85rem',
             fontWeight: 800,
@@ -99,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           {/* 2-Column Categories Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, minmax(130px, 1fr))',
+            gridTemplateColumns: 'repeat(2, minmax(min(130px, 100%), 1fr))',
             gap: '0.5rem 1rem'
           }}>
             {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
@@ -194,14 +205,49 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         <p>© 2026 Calculator360. {t('all_rights_reserved')}</p>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <span>Crafted with</span>
-            <Heart size={14} color="#f43f5e" fill="#f43f5e" />
-            <span>for everyday precision</span>
-          </span>
+          <a
+            href="/about"
+            onClick={(e) => handleLegalClick(e, 'about')}
+            className="footer-legal-link"
+          >
+            About Us
+          </a>
+          <a
+            href="/contact"
+            onClick={(e) => handleLegalClick(e, 'contact')}
+            className="footer-legal-link"
+          >
+            Contact & Feedback
+          </a>
+          <a
+            href="/privacy"
+            onClick={(e) => handleLegalClick(e, 'privacy')}
+            className="footer-legal-link"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="/terms"
+            onClick={(e) => handleLegalClick(e, 'terms')}
+            className="footer-legal-link"
+          >
+            Terms of Service
+          </a>
+          <a
+            href="/disclaimer"
+            onClick={(e) => handleLegalClick(e, 'disclaimer')}
+            className="footer-legal-link"
+          >
+            Disclaimer
+          </a>
           <span>Privacy & Security Guaranteed</span>
         </div>
       </div>
+
+      <LegalModal
+        type={activeLegalModal}
+        onClose={() => setActiveLegalModal(null)}
+      />
     </footer>
   );
 };

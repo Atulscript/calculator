@@ -53,7 +53,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
       justifyContent: 'center',
       padding: '1.5rem'
     }}>
-      <div 
+      <div
         className="glass-panel"
         style={{
           width: '100%',
@@ -156,7 +156,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
             borderRadius: '12px',
             padding: '0.85rem 1rem',
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             gap: '0.5rem',
             textAlign: 'center',
             fontSize: '0.8rem'
@@ -181,7 +181,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
             opacity: 0.75,
             marginTop: '1.25rem'
           }}>
-            Born on {formatFriendlyDate(result.birthDate)} • Generated via calculator360.app
+            Born on {formatFriendlyDate(result.birthDate)} • Generated via calculator360.com
           </div>
         </div>
 
@@ -202,7 +202,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, result 
             className="btn-secondary"
             style={{ flex: 1 }}
           >
-            {isCopied ? <Check size={16} color="#10b981" /> : <Share2 size={16} />}
+            {isCopied ? <Check size={16} color="var(--accent-emerald)" /> : <Share2 size={16} />}
             <span>{isCopied ? 'Link Copied!' : 'Copy Share URL'}</span>
           </button>
         </div>

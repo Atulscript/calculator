@@ -157,8 +157,49 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               color: 'var(--text-muted)'
             }}>
               <Calculator size={36} strokeWidth={1.5} style={{ margin: '0 auto 0.75rem', opacity: 0.5 }} />
-              <p style={{ fontWeight: 600, color: 'var(--text-primary)' }}>No calculators found for "{query}"</p>
-              <p style={{ fontSize: '0.85rem', marginTop: '0.25rem' }}>Try searching for "age", "bmi", "date", or "loan"</p>
+              <p style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem' }}>No calculators found for "{query}"</p>
+              <p style={{ fontSize: '0.85rem', marginTop: '0.35rem', marginBottom: '1.25rem' }}>Try one of our popular flagship calculators instead:</p>
+              
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', maxWidth: '380px', margin: '0 auto' }}>
+                {[
+                  { label: '📅 Age Calculator', id: 'age-calculator' },
+                  { label: '🏠 Mortgage', id: 'mortgage-calculator' },
+                  { label: '⚖️ BMI Calculator', id: 'bmi-calculator' },
+                  { label: '📈 SIP Calculator', id: 'sip-calculator' },
+                  { label: '🔥 Calorie Counter', id: 'calorie-calculator' },
+                  { label: '% Percentage', id: 'percentage-calculator' }
+                ].map(chip => (
+                  <button
+                    key={chip.id}
+                    type="button"
+                    onClick={() => {
+                      onSelectCalculator(chip.id);
+                      onClose();
+                    }}
+                    style={{
+                      background: 'var(--surface-hover)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '8px',
+                      padding: '0.4rem 0.75rem',
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      color: 'var(--text-primary)',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'var(--primary-500)';
+                      e.currentTarget.style.background = 'var(--primary-glow)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                      e.currentTarget.style.background = 'var(--surface-hover)';
+                    }}
+                  >
+                    {chip.label}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : (
             filtered.map((calc: CalculatorMeta) => (

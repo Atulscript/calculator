@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AgeCalculator } from '../components/calculators/age/AgeCalculator';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
@@ -13,65 +13,8 @@ export const AgeCalculatorPage: React.FC<AgeCalculatorPageProps> = ({ onNavigate
   const currentCalc = CALCULATORS_REGISTRY.find(c => c.id === 'age-calculator');
   const relatedCalcs = CALCULATORS_REGISTRY.filter(c => c.id !== 'age-calculator' && c.category === 'everyday');
 
-  // Dynamic World-Class SEO title and meta description
-  useEffect(() => {
-    document.title = 'Age Calculator – Exact Age in Years, Months & Days';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Find your exact age from your date of birth in years, months and days. Check your age as on any date, like exam cut-offs, and your next birthday.'
-      );
-    }
-  }, []);
-
-  // WebApplication Structured Data for Google Rich Snippets
-  const webAppSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    'name': 'Calculator360 Age Calculator',
-    'url': `${window.location.origin}/age-calculator`,
-    'description': 'Free online tool to calculate exact age in years, months, days, minutes, and seconds from Date of Birth.',
-    'applicationCategory': 'UtilitiesApplication',
-    'operatingSystem': 'All',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
-    }
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    'itemListElement': [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': 'Home',
-        'item': window.location.origin
-      },
-      {
-        '@type': 'ListItem',
-        'position': 2,
-        'name': 'Everyday Calculators',
-        'item': `${window.location.origin}/#everyday`
-      },
-      {
-        '@type': 'ListItem',
-        'position': 3,
-        'name': 'Age Calculator',
-        'item': `${window.location.origin}/age-calculator`
-      }
-    ]
-  };
-
   return (
     <div>
-      {/* Schema Markup */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-
       {/* Top Breadcrumbs */}
       <Breadcrumbs
         currentCalculator={currentCalc}
@@ -140,15 +83,15 @@ export const AgeCalculatorPage: React.FC<AgeCalculatorPageProps> = ({ onNavigate
                     e.currentTarget.style.transform = 'none';
                   }}
                 >
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                       {calc.title}
                     </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'capitalize' }}>
                       {calc.category}
                     </div>
                   </div>
-                  <ArrowRight size={14} color="var(--primary-500)" />
+                  <ArrowRight size={14} color="var(--primary-500)" style={{ flexShrink: 0, marginLeft: '0.5rem' }} />
                 </div>
               ))}
             </div>

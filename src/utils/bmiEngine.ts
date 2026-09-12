@@ -74,7 +74,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
 
   let category: BMICategory = 'normal';
   let categoryLabel = 'Normal Weight';
-  let categoryColor = '#047857'; // M3 Tertiary Green
+  let categoryColor = 'var(--accent-emerald)'; // M3 Tertiary Green
   let colorToken = 'var(--accent-emerald)';
   let summaryText = 'You have a healthy body weight for your height according to WHO standards.';
   let weightDiffKg = 0;
@@ -99,7 +99,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
   } else if (bmi < 25.0) {
     category = 'normal';
     categoryLabel = 'Healthy Weight';
-    categoryColor = '#047857';
+    categoryColor = 'var(--accent-emerald)';
     colorToken = 'var(--accent-emerald)';
     weightDiffKg = 0;
     weightDiffLbs = 0;
@@ -141,7 +141,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
   // Asian Indian cut-offs: <18.5 Underweight, 18.5-22.9 Normal, 23.0-24.9 Overweight, >=25.0 Obese
   let asianCategory: AsianBMICategory = 'normal';
   let asianCategoryLabel = 'Normal (Asian Cut-off)';
-  let asianCategoryColor = '#047857';
+  let asianCategoryColor = 'var(--accent-emerald)';
   let asianColorToken = 'var(--accent-emerald)';
 
   if (bmi < 18.5) {
@@ -152,7 +152,7 @@ export function calculateBMI(input: BMIInput): BMIResult {
   } else if (bmi < 23.0) {
     asianCategory = 'normal';
     asianCategoryLabel = 'Normal Weight';
-    asianCategoryColor = '#047857';
+    asianCategoryColor = 'var(--accent-emerald)';
     asianColorToken = 'var(--accent-emerald)';
   } else if (bmi < 25.0) {
     asianCategory = 'overweight';

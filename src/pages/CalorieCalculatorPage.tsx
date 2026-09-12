@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -34,22 +34,11 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
   const [selectedGoalKey, setSelectedGoalKey] = useState<'standardLoss' | 'maintenance' | 'mildLoss' | 'extremeLoss' | 'mildGain' | 'muscleGain'>('standardLoss');
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    document.title = 'Calorie Calculator – Daily Calories, BMR & TDEE';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Find how many calories you need per day to maintain, lose or gain weight. Uses the Mifflin-St Jeor equation for BMR and your activity level.'
-      );
-    }
-  }, []);
-
   const result = useMemo(() => calculateCalories(input), [input]);
   const activeGoal = result.targets[selectedGoalKey];
 
   const handleCopy = () => {
-    const text = `Daily Calorie & TDEE Target:\nMaintenance (TDEE): ${result.tdee.toLocaleString()} kcal/day\nBasal Metabolic Rate (BMR): ${result.bmr.toLocaleString()} kcal/day\nTarget for ${activeGoal.name}: ${activeGoal.calories.toLocaleString()} kcal/day\nMacros: ${activeGoal.macros.proteinGrams}g Protein, ${activeGoal.macros.carbGrams}g Carbs, ${activeGoal.macros.fatGrams}g Fat\nCalculated via Calculator360.app`;
+    const text = `Daily Calorie & TDEE Target:\nMaintenance (TDEE): ${result.tdee.toLocaleString()} kcal/day\nBasal Metabolic Rate (BMR): ${result.bmr.toLocaleString()} kcal/day\nTarget for ${activeGoal.name}: ${activeGoal.calories.toLocaleString()} kcal/day\nMacros: ${activeGoal.macros.proteinGrams}g Protein, ${activeGoal.macros.carbGrams}g Carbs, ${activeGoal.macros.fatGrams}g Fat\nCalculated via Calculator360.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -106,7 +95,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Calculate your exact Total Daily Energy Expenditure (TDEE), Basal Metabolic Rate (BMR), and custom caloric targets for fat loss, muscle gain, or maintenance.
+          Estimate your daily calorie and macronutrient targets using the clinically validated Mifflin-St Jeor formula. Find your maintenance baseline (TDEE), plan sustainable fat loss or steady muscle gain, and get realistic starting numbers without guesswork.
         </p>
       </div>
 
@@ -193,7 +182,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
             </div>
 
             {/* Age & Weight Inputs */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>
                   Age (Years)
@@ -369,7 +358,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
         {/* Right Column: Key Energy & Targets Results */}
         <div>
           <div className="m3-card-elevated" style={{ padding: '1.75rem', marginBottom: '1.75rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-tertiary)' }}>
                 Metabolic Output
               </span>
@@ -436,7 +425,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
               <div style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '0.65rem' }}>
                 Select Goal to View Calories & Macros:
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.5rem' }}>
                 {(['maintenance', 'mildLoss', 'standardLoss', 'extremeLoss', 'mildGain', 'muscleGain'] as const).map(key => {
                   const target = result.targets[key];
                   const isSelected = selectedGoalKey === key;
@@ -460,7 +449,7 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
                       <div style={{ fontSize: '1.1rem', fontWeight: 800, color: isSelected ? 'var(--primary-600)' : 'var(--text-primary)', marginTop: '0.2rem' }}>
                         {target.calories.toLocaleString()} <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>kcal</span>
                       </div>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                      <div style={{ fontSize: '0.7rem', color: isSelected ? 'var(--md-sys-color-on-primary-container)' : 'var(--text-muted)' }}>
                         {target.paceDescription}
                       </div>
                     </button>
@@ -480,26 +469,26 @@ export const CalorieCalculatorPage: React.FC<CalorieCalculatorPageProps> = ({ on
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.65rem' }}>
                 <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: 'var(--md-sys-shape-xs)', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ef4444' }}>Protein</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ef4444', marginTop: '0.1rem' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-rose)' }}>Protein</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-rose)', marginTop: '0.1rem' }}>
                     {activeGoal.macros.proteinGrams}g
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>4 kcal / g</div>
                 </div>
 
                 <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: 'var(--md-sys-shape-xs)', background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#3b82f6' }}>Carbs</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#3b82f6', marginTop: '0.1rem' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-primary)' }}>Carbs</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--md-sys-color-primary)', marginTop: '0.1rem' }}>
                     {activeGoal.macros.carbGrams}g
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>4 kcal / g</div>
                 </div>
 
                 <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: 'var(--md-sys-shape-xs)', background: 'rgba(234, 179, 8, 0.08)', border: '1px solid rgba(234, 179, 8, 0.2)' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#eab308' }}>Fats</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#eab308', marginTop: '0.1rem' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-amber)' }}>Fats</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-amber)', marginTop: '0.1rem' }}>
                     {activeGoal.macros.fatGrams}g
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>9 kcal / g</div>

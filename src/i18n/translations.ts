@@ -57,8 +57,8 @@ export type TranslationKey =
 export const TRANSLATIONS: Record<string, Record<TranslationKey, string>> = {
   en: {
     brand_tagline: 'Fast, Free Calculators with Clear Formulas',
-    hero_title: 'Free online calculators for money, health, dates and maths',
-    hero_subtitle: 'Fast, free calculators for EMI, SIP, BMI, age, percentages and unit conversions. Clear formulas, worked examples and no sign-up. Works on any phone.',
+    hero_title: 'Calculators designed for everyday precision',
+    hero_subtitle: 'Search our library of verified computational tools across everyday life, health, finance, food, construction, and mathematics.',
     search_placeholder: 'Search calculators (e.g. age, bmi, loan, percent)...',
     explore_btn: 'Explore',
     categories_title: 'Explore Categories',

@@ -26,7 +26,7 @@ export const AgeComparisonMode: React.FC = () => {
       {/* Inputs for Person 1 and Person 2 */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
         gap: '1.25rem',
         marginBottom: '1.5rem'
       }}>
@@ -150,7 +150,7 @@ export const AgeComparisonMode: React.FC = () => {
         {/* Side by side comparison stats */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
           gap: '1rem',
           marginTop: '1.5rem',
           textAlign: 'left'

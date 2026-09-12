@@ -24,7 +24,7 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
   const [copied, setCopied] = useState(false);
 
   const handleCopySummary = () => {
-    const text = `Chronological Age: ${exactAge.years} Years, ${exactAge.months} Months, ${exactAge.days} Days (${totals.totalDays.toLocaleString()} days lived)\nBorn on a ${dayOfWeekBorn}${isLeapYearBorn ? ' (Leap Year)' : ''}\nCalculated via Calculator360.app`;
+    const text = `Chronological Age: ${exactAge.years} Years, ${exactAge.months} Months, ${exactAge.days} Days (${totals.totalDays.toLocaleString()} days lived)\nBorn on a ${dayOfWeekBorn}${isLeapYearBorn ? ' (Leap Year)' : ''}\nCalculated via Calculator360.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -112,7 +112,7 @@ export const PrimaryResultCard: React.FC<PrimaryResultCardProps> = ({
       {/* Main Age Stat Display: Big High-Contrast Y / M / D Numbers with Value-Pop */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(150px, 100%), 1fr))',
         gap: '1rem',
         marginBottom: '1.5rem'
       }}>

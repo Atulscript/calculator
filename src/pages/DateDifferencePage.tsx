@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -39,21 +39,10 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
 
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    document.title = 'Date Calculator – Days Between Dates, Add or Subtract Days';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Count the days between two dates, with or without weekends, or add and subtract days, weeks and months from any date to find a deadline.'
-      );
-    }
-  }, []);
-
   const result = useMemo(() => calculateDateDifference(input), [input]);
 
   const handleCopy = () => {
-    const text = `Date Difference:\nFrom: ${input.startDate} to ${input.endDate}\nTotal Days: ${result.totalDays.toLocaleString()} days\nBreakdown: ${result.years} years, ${result.months} months, ${result.days} days\nBusiness Days: ${result.businessDays.toLocaleString()} days\nCalculated via Calculator360.app`;
+    const text = `Date Difference:\nFrom: ${input.startDate} to ${input.endDate}\nTotal Days: ${result.totalDays.toLocaleString()} days\nBreakdown: ${result.years} years, ${result.months} months, ${result.days} days\nBusiness Days: ${result.businessDays.toLocaleString()} days\nCalculated via Calculator360.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -114,7 +103,7 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Calculate the exact span of days, weeks, months, and business days between any two calendar dates with instant breakdown.
+          Calculate the exact calendar days, working business days, weeks, and full months between any two dates. Useful for planning notice periods, lease durations, visa validities, and project deadlines.
         </p>
       </div>
 
@@ -257,7 +246,7 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
         {/* Right Column: Calculated Results */}
         <div>
           <div className="m3-card-elevated" style={{ padding: '1.75rem', marginBottom: '1.75rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-tertiary)' }}>
                 Result Summary
               </span>
@@ -322,7 +311,7 @@ export const DateDifferencePage: React.FC<DateDifferencePageProps> = ({ onNaviga
             </div>
 
             {/* Grid of Metric Breakdown Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
               {/* Business Days */}
               <div style={{ padding: '1rem', borderRadius: 'var(--md-sys-shape-md)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700 }}>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { AdBanner } from '../components/common/AdBanner';
 import { CALCULATORS_REGISTRY } from '../data/calculators';
@@ -19,27 +19,36 @@ import {
 
 interface UnitConverterPageProps {
   onNavigate: (path: string) => void;
+  defaultCategory?: UnitCategory;
+  slug?: string;
 }
 
-export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate }) => {
-  const calcMeta = CALCULATORS_REGISTRY.find(c => c.id === 'unit-converter') || CALCULATORS_REGISTRY[10];
+export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate, defaultCategory, slug }) => {
+  const activeSlug = slug || 'unit-converter';
+  const calcMeta = CALCULATORS_REGISTRY.find(c => c.slug === activeSlug || c.id === activeSlug) || CALCULATORS_REGISTRY[10];
 
-  const [category, setCategory] = useState<UnitCategory>('length');
-  const [fromUnit, setFromUnit] = useState<string>('m');
-  const [toUnit, setToUnit] = useState<string>('ft');
+  const getInitialCategory = (): UnitCategory => {
+    if (defaultCategory) return defaultCategory;
+    if (slug === 'temperature-converter') return 'temperature';
+    if (slug === 'length-converter') return 'length';
+    if (slug === 'weight-converter') return 'mass';
+    if (slug === 'speed-converter') return 'speed';
+    if (slug === 'data-storage-converter') return 'digital';
+    if (slug === 'area-converter') return 'area';
+    return 'length';
+  };
+
+  const [category, setCategory] = useState<UnitCategory>(getInitialCategory);
+  const [fromUnit, setFromUnit] = useState<string>(() => {
+    const cat = getInitialCategory();
+    return UNIT_CATEGORIES[cat].units[0].id;
+  });
+  const [toUnit, setToUnit] = useState<string>(() => {
+    const cat = getInitialCategory();
+    return UNIT_CATEGORIES[cat].units[1].id;
+  });
   const [inputValue, setInputValue] = useState<number>(10);
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    document.title = 'Universal Unit Converter - Metric & Imperial Units | Calculator360';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Instant unit converter for length, mass, temperature, speed, area, and digital data storage with live reciprocal conversion tables.'
-      );
-    }
-  }, []);
 
   // When category changes, reset from/to units to first two of that category
   const handleCategoryChange = (newCat: UnitCategory) => {
@@ -65,7 +74,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
   const toDef = currentCategoryData.units.find(u => u.id === toUnit) || currentCategoryData.units[1];
 
   const handleCopy = () => {
-    const text = `${inputValue} ${fromDef.symbol} = ${conversion.formatted} ${toDef.symbol} (${fromDef.name} to ${toDef.name})\nCalculated via Calculator360.app`;
+    const text = `${inputValue} ${fromDef.symbol} = ${conversion.formatted} ${toDef.symbol} (${fromDef.name} to ${toDef.name})\nCalculated via Calculator360.com`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -123,7 +132,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
           </h1>
         </div>
         <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', maxWidth: '780px', lineHeight: 1.5 }}>
-          Convert between metric, imperial, and scientific units for length, mass, temperature, speed, area, and digital memory storage.
+          Convert instantly between metric, imperial, and everyday units for length, weight, temperature, speed, area, and digital data storage.
         </p>
       </div>
 
@@ -189,7 +198,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
             </div>
 
             {/* From & To Selectors with Swap */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.75rem', alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)', gap: '0.75rem', alignItems: 'center' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
                   From
@@ -273,7 +282,7 @@ export const UnitConverterPage: React.FC<UnitConverterPageProps> = ({ onNavigate
         {/* Right Column: Prominent Result Card */}
         <div>
           <div className="m3-card-elevated" style={{ padding: '1.75rem', marginBottom: '1.75rem', background: 'var(--surface-solid)', border: '1.5px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-tertiary)' }}>
                 Conversion Output
               </span>

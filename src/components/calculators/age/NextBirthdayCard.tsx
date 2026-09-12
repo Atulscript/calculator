@@ -67,7 +67,7 @@ export const NextBirthdayCard: React.FC<NextBirthdayCardProps> = ({ nextBirthday
         </div>
 
         {isToday ? (
-          <div className="glass-pill" style={{ background: 'var(--accent-emerald)', color: '#fff', fontWeight: 700, padding: '0.4rem 0.85rem' }}>
+          <div className="glass-pill" style={{ background: 'color-mix(in srgb, var(--accent-emerald) 20%, transparent)', color: 'var(--accent-emerald)', fontWeight: 700, padding: '0.4rem 0.85rem' }}>
             <PartyPopper size={15} />
             <span>Happy Birthday Today! 🎉</span>
           </div>
@@ -88,7 +88,7 @@ export const NextBirthdayCard: React.FC<NextBirthdayCardProps> = ({ nextBirthday
       {/* Countdown Timer Units */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(88px, 100%), 1fr))',
         gap: '0.85rem',
         marginBottom: '1.5rem'
       }}>
@@ -180,7 +180,7 @@ export const NextBirthdayCard: React.FC<NextBirthdayCardProps> = ({ nextBirthday
       {/* Half Birthday & Upcoming Birthdays Table */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
         gap: '1rem',
         borderTop: '1px solid var(--border-subtle)',
         paddingTop: '1.25rem'
